@@ -1,0 +1,19 @@
+{
+  "menu.Home": "front page",
+  "menu.StudyApp": "StudyApp",
+  "menu.StudyApp/Banking": "Bank business",
+  "menu.StudyApp/Calendar": "calendar",
+  "menu.StudyApp/Chat": "information",
+  "menu.StudyApp/Contacts": "address book",
+  "menu.StudyApp/Crypto": "Funding Details",
+  "menu.StudyApp/Dashboard": "workbench",
+  "menu.StudyApp/Email": "Email",
+  "menu.StudyApp/FileManager": "file management",
+  "menu.StudyApp/Invoice": "Invoice management",
+  "menu.StudyApp/Kanban": "Kanban",
+  "menu.StudyApp/LastestActivity": "latest events",
+  "menu.StudyApp/Palette": "Palette",
+  "menu.StudyApp/Ticketing": "Ticketing",
+  "menu.StudyApp/ToDoList": "To Do",
+  "menu.StudyApp/User": "User Center"
+}

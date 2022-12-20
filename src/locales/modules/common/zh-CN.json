@@ -1,0 +1,19 @@
+{
+  "menu.StudyApp": "StudyApp",
+  "menu.Home": "首页",
+  "menu.StudyApp/Banking": "银行业务",
+  "menu.StudyApp/Calendar": "日历",
+  "menu.StudyApp/Chat": "信息",
+  "menu.StudyApp/Contacts": "通讯录",
+  "menu.StudyApp/Crypto": "资金明细",
+  "menu.StudyApp/Dashboard": "工作台",
+  "menu.StudyApp/Email": "Email",
+  "menu.StudyApp/FileManager": "文件管理",
+  "menu.StudyApp/Invoice": "发票管理",
+  "menu.StudyApp/Kanban": "Kanban",
+  "menu.StudyApp/LastestActivity": "最新活动",
+  "menu.StudyApp/Palette": "Palette",
+  "menu.StudyApp/Ticketing": "票务",
+  "menu.StudyApp/ToDoList": "待办事项",
+  "menu.StudyApp/User": "用户中心"
+}
