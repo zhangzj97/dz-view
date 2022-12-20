@@ -1,9 +1,24 @@
 {
   "extends": "./tsconfig.app.json",
+  "include": [
+    "types/env.d.ts",
+    "types/auto-imports.d.ts",
+    "types/shims-vue.d.ts",
+    "types/database.d.ts",
+    "types/core.d.ts",
+    "types/*",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
   "exclude": [],
   "compilerOptions": {
     "composite": true,
     "lib": [],
-    "types": ["node", "jsdom"]
+    "types": [
+      "node",
+      "jsdom",
+      "webpack-env"
+    ],
+    "noImplicitAny": false
   }
 }

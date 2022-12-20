@@ -1,8 +1,30 @@
 {
   "extends": "@vue/tsconfig/tsconfig.node.json",
-  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*"],
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "types/env.d.ts",
+    "types/auto-imports.d.ts",
+    "types/shims-vue.d.ts",
+    "types/database.d.ts",
+    "types/core.d.ts",
+    "types/*",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
+  "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "types": ["node"]
+    "types": [
+      "node",
+      "webpack-env"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "baseUrl": "./"
   }
 }
