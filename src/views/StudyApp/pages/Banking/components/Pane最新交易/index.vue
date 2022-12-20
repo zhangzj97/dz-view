@@ -23,8 +23,8 @@ const logState = reactive({
         <div class="text-lg font-bold">最新交易</div>
       </div>
       <div class="flex justify-end flex-grow h-6">
-        <DDzIcon icon="mdi:filter-outline"></DDzIcon>
-        <DDzIcon icon="mdi:dots-horizontal"></DDzIcon>
+        <DzIcon icon="mdi:filter-outline"></DzIcon>
+        <DzIcon icon="mdi:dots-horizontal"></DzIcon>
       </div>
     </DzFlex>
 
@@ -33,7 +33,7 @@ const logState = reactive({
         <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex items-center flex-grow gap-2">
             <div class="w-12 h-12 bg-pink-300 rounded-lg">
-              <DDzIcon icon="mdi:user"></DDzIcon>
+              <DzIcon icon="mdi:user"></DzIcon>
             </div>
             <div class="flex flex-col">
               <div>{{ item.email }}</div>
@@ -47,7 +47,7 @@ const logState = reactive({
         <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex items-center flex-grow gap-2">
             <div class="w-12 h-12 bg-purple-300 rounded-lg">
-              <DDzIcon icon="mdi:file"></DDzIcon>
+              <DzIcon icon="mdi:file"></DzIcon>
             </div>
             <div class="flex flex-col">
               <div>{{ item.tradeTime }}</div>
@@ -69,8 +69,8 @@ const logState = reactive({
       <DzFlex class="w-12 gap-6">
         <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex justify-end flex-grow h-6">
-            <DDzIcon icon="mdi:printer-outline"></DDzIcon>
-            <DDzIcon icon="mdi:dots-horizontal"></DDzIcon>
+            <DzIcon icon="mdi:printer-outline"></DzIcon>
+            <DzIcon icon="mdi:dots-horizontal"></DzIcon>
           </div>
         </DzFlex>
       </DzFlex>

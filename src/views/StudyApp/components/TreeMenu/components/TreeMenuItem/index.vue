@@ -34,7 +34,7 @@ const handleMouseleave = (ev: Event, entity: MenuDTO): void => {
       @mouseleave="handleMouseleave($event, propsRow)">
       <!-- Avatar -->
       <DzFlex v-if="avatar?.match(/:/)" class="w-5 ml-4 mr-2 menu-item-trigger-avatar">
-        <DDzIcon class="text-slate-600" :icon="avatar" />
+        <DzIcon class="text-slate-600" :icon="avatar" />
       </DzFlex>
 
       <!-- Title -->
@@ -44,7 +44,7 @@ const handleMouseleave = (ev: Event, entity: MenuDTO): void => {
 
       <!-- Right Icon -->
       <DzFlex v-if="isChildren" class="absolute right-2" :class="[isCollapse ? 'scale-0 w-0' : 'scale-1 w-4']">
-        <DDzIcon icon="mdi:chevron-right" />
+        <DzIcon icon="mdi:chevron-right" />
       </DzFlex>
     </DzFlex>
   </DzFlex>
