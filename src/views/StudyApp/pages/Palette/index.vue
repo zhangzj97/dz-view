@@ -277,18 +277,19 @@ const handleClick = (ev: Event, item: GradientsColor) => {
 </script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PagePalette">
-    <FlexContainer class="flex-row h-20 px-8 first-line:"> </FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PagePalette">
+    <DzFlex class="flex-row h-20 px-8 first-line:"> </DzFlex>
 
-    <FlexContainer class="flex-row flex-wrap content-start flex-grow gap-8 px-8 border-spacing-8">
+    <DzFlex class="flex-row flex-wrap content-start flex-grow gap-8 px-8 border-spacing-8">
       <template v-for="(item, index) of paletteState.list" :key="index">
-        <FlexContainer class="w-48 h-48 overflow-hidden shadow-2xl cursor-pointer rounded-2xl" @click="handleClick($event, item)">
-          <FlexContainer class="w-48 h-40 bg-gradient-to-bl" :class="[item.from, item.to]"></FlexContainer>
+        <DzFlex class="w-48 h-48 overflow-hidden shadow-2xl cursor-pointer rounded-2xl"
+          @click="handleClick($event, item)">
+          <DzFlex class="w-48 h-40 bg-gradient-to-bl" :class="[item.from, item.to]"></DzFlex>
           <div class="flex justify-center">
             <div>{{ item.from.replace(/from-/, '') }} {{ item.to.replace(/to-/, '') }}</div>
           </div>
-        </FlexContainer>
+        </DzFlex>
       </template>
-    </FlexContainer>
-  </FlexContainer>
+    </DzFlex>
+  </DzFlex>
 </template>

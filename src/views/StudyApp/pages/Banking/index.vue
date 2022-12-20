@@ -7,29 +7,29 @@ import PaneZuixinjiaoyi from './components/Pane最新交易/index.vue';
 </script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PageBanking">
-    <FlexContainer class="flex-grow bg-PageBanking bg-page"></FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PageBanking">
+    <DzFlex class="flex-grow bg-PageBanking bg-page"></DzFlex>
 
-    <FlexContainer testTitle="Row01" h="100px"></FlexContainer>
+    <DzFlex testTitle="Row01" h="100px"></DzFlex>
 
-    <FlexContainer class="flex-row" :class="['px-10 h-[400px]']">
-      <FlexContainer class="items-start justify-center flex-grow">
+    <DzFlex class="flex-row" :class="['px-10 h-[400px]']">
+      <DzFlex class="items-start justify-center flex-grow">
         <PaneCard01 />
-      </FlexContainer>
-      <FlexContainer class="items-center justify-center flex-grow">
+      </DzFlex>
+      <DzFlex class="items-center justify-center flex-grow">
         <PaneCard02 />
-      </FlexContainer>
-      <FlexContainer class="items-end justify-center" w="380px">
+      </DzFlex>
+      <DzFlex class="items-end justify-center" w="380px">
         <PaneJishiyinhang />
-      </FlexContainer>
-    </FlexContainer>
-    <FlexContainer class="flex-row flex-grow" :class="['px-10 pt-2 pb-4']">
-      <FlexContainer class="flex-grow">
+      </DzFlex>
+    </DzFlex>
+    <DzFlex class="flex-row flex-grow" :class="['px-10 pt-2 pb-4']">
+      <DzFlex class="flex-grow">
         <PaneZuixinjiaoyi />
-      </FlexContainer>
-      <FlexContainer class="items-end" w="420px">
+      </DzFlex>
+      <DzFlex class="items-end" w="420px">
         <PaneShouruleibie />
-      </FlexContainer>
-    </FlexContainer>
-  </FlexContainer>
+      </DzFlex>
+    </DzFlex>
+  </DzFlex>
 </template>

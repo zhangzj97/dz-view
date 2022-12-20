@@ -1,5 +1,5 @@
 <script setup lang="ts" name="PaneCard"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PaneCard"></FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PaneCard"></DzFlex>
 </template>

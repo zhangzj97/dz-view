@@ -1,7 +1,7 @@
 <script setup lang="ts" name="PageLastestActivity"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PageLastestActivity">
-    <FlexContainer class="flex-grow bg-PageLastestActivity bg-page"></FlexContainer>
-  </FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PageLastestActivity">
+    <DzFlex class="flex-grow bg-PageLastestActivity bg-page"></DzFlex>
+  </DzFlex>
 </template>

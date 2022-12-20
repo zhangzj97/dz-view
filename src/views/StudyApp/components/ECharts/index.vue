@@ -56,7 +56,7 @@ onMounted(() => refreshChart());
 </script>
 
 <template>
-  <FlexContainer>
+  <DzFlex>
     <div ref="ECDom" :style="{ width, height }"></div>
-  </FlexContainer>
+  </DzFlex>
 </template>

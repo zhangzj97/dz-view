@@ -37,7 +37,7 @@ const ECOption: EChartsOption = {
 </script>
 
 <template>
-  <FlexContainer>
+  <DzFlex>
     <ECharts ref="ECDom" width="140px" height="80px" :option="ECOption" />
-  </FlexContainer>
+  </DzFlex>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts" name="PageDashboard"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PageDashboard">
-    <FlexContainer class="flex-grow bg-PageDashboard bg-page"></FlexContainer>
-  </FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PageDashboard">
+    <DzFlex class="flex-grow bg-PageDashboard bg-page"></DzFlex>
+  </DzFlex>
 </template>

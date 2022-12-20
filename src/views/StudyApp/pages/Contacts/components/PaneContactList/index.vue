@@ -1,5 +1,5 @@
 <script setup lang="ts" name="PaneContactList"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PaneContactList"></FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PaneContactList"></DzFlex>
 </template>

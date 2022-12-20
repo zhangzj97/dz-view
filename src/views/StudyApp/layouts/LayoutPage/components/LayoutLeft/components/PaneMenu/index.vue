@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TreeMenu from '@/views/StudyApp/components/TreeMenu/index.vue'
 import { routes } from '@/router';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -45,7 +46,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <FlexContainer :style="{ maxHeight: 'calc(100vh - 64px - 64px)' }">
+  <DzFlex :style="{ maxHeight: 'calc(100vh - 64px - 64px)' }">
     <TreeMenu :list="menuState.list" />
-  </FlexContainer>
+  </DzFlex>
 </template>

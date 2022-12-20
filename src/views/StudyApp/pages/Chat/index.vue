@@ -1,7 +1,7 @@
 <script setup lang="ts" name="PageChat"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PageChat">
-    <FlexContainer class="flex-grow bg-PageChat bg-page"></FlexContainer>
-  </FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PageChat">
+    <DzFlex class="flex-grow bg-PageChat bg-page"></DzFlex>
+  </DzFlex>
 </template>

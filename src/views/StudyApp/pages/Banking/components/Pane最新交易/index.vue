@@ -15,63 +15,65 @@ const logState = reactive({
 </script>
 
 <template>
-  <FlexContainer class="flex-grow px-8" testTitle="Pane最新交易">
+  <DzFlex class="flex-grow px-8" testTitle="Pane最新交易">
     <div class="absolute top-0 left-0 flex w-full h-full bg-white rounded-lg shadow-lg -z-10"></div>
 
-    <FlexContainer class="flex-row mt-8 mb-8">
-      <div><div class="text-lg font-bold">最新交易</div></div>
-      <div class="flex justify-end flex-grow h-6">
-        <z-icon icon="mdi:filter-outline"></z-icon>
-        <z-icon icon="mdi:dots-horizontal"></z-icon>
+    <DzFlex class="flex-row mt-8 mb-8">
+      <div>
+        <div class="text-lg font-bold">最新交易</div>
       </div>
-    </FlexContainer>
+      <div class="flex justify-end flex-grow h-6">
+        <DDzIcon icon="mdi:filter-outline"></DDzIcon>
+        <DDzIcon icon="mdi:dots-horizontal"></DDzIcon>
+      </div>
+    </DzFlex>
 
-    <FlexContainer class="flex-row gap-6 mb-8">
-      <FlexContainer class="flex-grow gap-6">
-        <FlexContainer class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
+    <DzFlex class="flex-row gap-6 mb-8">
+      <DzFlex class="flex-grow gap-6">
+        <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex items-center flex-grow gap-2">
             <div class="w-12 h-12 bg-pink-300 rounded-lg">
-              <z-icon icon="mdi:user"></z-icon>
+              <DDzIcon icon="mdi:user"></DDzIcon>
             </div>
             <div class="flex flex-col">
               <div>{{ item.email }}</div>
               <div>{{ item.username }}</div>
             </div>
           </div>
-        </FlexContainer>
-      </FlexContainer>
+        </DzFlex>
+      </DzFlex>
 
-      <FlexContainer class="flex-grow gap-6">
-        <FlexContainer class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
+      <DzFlex class="flex-grow gap-6">
+        <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex items-center flex-grow gap-2">
             <div class="w-12 h-12 bg-purple-300 rounded-lg">
-              <z-icon icon="mdi:file"></z-icon>
+              <DDzIcon icon="mdi:file"></DDzIcon>
             </div>
             <div class="flex flex-col">
               <div>{{ item.tradeTime }}</div>
               <div>{{ item.fileName }}</div>
             </div>
           </div>
-        </FlexContainer>
-      </FlexContainer>
+        </DzFlex>
+      </DzFlex>
 
-      <FlexContainer class="gap-6">
-        <FlexContainer class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
+      <DzFlex class="gap-6">
+        <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex justify-end w-20 gap-2">
             <div class="text-lg font-bold" :class="[item.class01]">{{ item.resultType }}</div>
             <div class="text-lg font-bold" :class="[item.class01]">${{ item.resultCount }}</div>
           </div>
-        </FlexContainer>
-      </FlexContainer>
+        </DzFlex>
+      </DzFlex>
 
-      <FlexContainer class="w-12 gap-6">
-        <FlexContainer class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
+      <DzFlex class="w-12 gap-6">
+        <DzFlex class="flex flex-row items-center h-12" v-for="(item, index) of logState.list" :key="index">
           <div class="flex justify-end flex-grow h-6">
-            <z-icon icon="mdi:printer-outline"></z-icon>
-            <z-icon icon="mdi:dots-horizontal"></z-icon>
+            <DDzIcon icon="mdi:printer-outline"></DDzIcon>
+            <DDzIcon icon="mdi:dots-horizontal"></DDzIcon>
           </div>
-        </FlexContainer>
-      </FlexContainer>
-    </FlexContainer>
-  </FlexContainer>
+        </DzFlex>
+      </DzFlex>
+    </DzFlex>
+  </DzFlex>
 </template>

@@ -3,9 +3,9 @@ import PaneMenu from './components/PaneMenu/index.vue';
 </script>
 
 <template>
-  <FlexContainer class="flex-grow">
-    <FlexContainer class="h-16" testTitle="Logo"></FlexContainer>
+  <DzFlex class="flex-grow">
+    <DzFlex class="h-16" testTitle="Logo"></DzFlex>
     <PaneMenu />
-    <FlexContainer class="h-16" testTitle="Other"></FlexContainer>
-  </FlexContainer>
+    <DzFlex class="h-16" testTitle="Other"></DzFlex>
+  </DzFlex>
 </template>

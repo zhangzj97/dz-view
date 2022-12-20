@@ -1,5 +1,5 @@
 <script setup lang="ts" name="PaneBalance"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="PaneBalance"></FlexContainer>
+  <DzFlex class="flex-grow" testTitle="PaneBalance"></DzFlex>
 </template>

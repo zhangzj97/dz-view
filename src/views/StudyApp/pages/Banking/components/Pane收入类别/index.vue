@@ -11,10 +11,12 @@ const assetState = reactive({
 </script>
 
 <template>
-  <FlexContainer class="flex-shrink-0 px-6" :class="['w-[388px]']">
+  <DzFlex class="flex-shrink-0 px-6" :class="['w-[388px]']">
     <div class="absolute top-0 left-0 flex w-full h-full bg-white rounded-lg shadow-lg -z-10"></div>
 
-    <div class="mt-8 mb-6"><div class="text-lg font-bold">收入类别</div></div>
+    <div class="mt-8 mb-6">
+      <div class="text-lg font-bold">收入类别</div>
+    </div>
 
     <div v-for="(item, index) of assetState.list" :key="index" class="flex flex-col gap-2 mb-8">
       <div>
@@ -23,7 +25,8 @@ const assetState = reactive({
 
       <div class="relative flex w-full h-4">
         <div class="absolute w-full h-4 bg-gray-100 rounded-md"></div>
-        <div class="absolute h-4 transition-all rounded-md" :class="[item.class02]" :style="{ width: `${(100 * Number(item.count)) / Number(item.total)}%` }"></div>
+        <div class="absolute h-4 transition-all rounded-md" :class="[item.class02]"
+          :style="{ width: `${(100 * Number(item.count)) / Number(item.total)}%` }"></div>
       </div>
 
       <div class="flex items-center gap-2">
@@ -32,5 +35,5 @@ const assetState = reactive({
         <div class="text-sm" :class="[item.class01]">form $1000</div>
       </div>
     </div>
-  </FlexContainer>
+  </DzFlex>
 </template>

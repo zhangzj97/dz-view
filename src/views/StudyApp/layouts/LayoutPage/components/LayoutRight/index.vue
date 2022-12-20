@@ -10,6 +10,6 @@ const changeWidth = () => {
 </script>
 
 <template>
-  <FlexContainer v-if="!styleState.hidden" class="flex-grow" w="384px" @click="changeWidth" />
-  <FlexContainer v-else class="flex-grow" w="10px" @click="changeWidth" />
+  <DzFlex v-if="!styleState.hidden" class="flex-grow" w="384px" @click="changeWidth" />
+  <DzFlex v-else class="flex-grow" w="10px" @click="changeWidth" />
 </template>

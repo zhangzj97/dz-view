@@ -28,7 +28,7 @@ const ECOption: EChartsOption = {
 </script>
 
 <template>
-  <FlexContainer>
+  <DzFlex>
     <ECharts ref="ECDom" width="352px" height="200px" :option="ECOption" />
-  </FlexContainer>
+  </DzFlex>
 </template>

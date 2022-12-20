@@ -1,5 +1,5 @@
 <script setup lang="ts" name="HeaderNavbar"></script>
 
 <template>
-  <FlexContainer class="flex-grow" testTitle="HeaderNavbar"></FlexContainer>
+  <DzFlex class="flex-grow" testTitle="HeaderNavbar"></DzFlex>
 </template>
