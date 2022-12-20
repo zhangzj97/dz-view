@@ -12,16 +12,10 @@ declare module '@vue/runtime-core' {
     ConsoleRouterComponentsPaneListSearch: typeof import('./../src/components/ConsoleRouter/components/PaneListSearch/index.vue')['default'];
     ConsoleRouterComponentsPaneSearch: typeof import('./../src/components/ConsoleRouter/components/PaneSearch/index.vue')['default'];
     ContainerDrag: typeof import('./../src/components/ContainerDrag/index.vue')['default'];
-    FlexContainer: typeof import('./../src/components/FlexContainer/index.vue')['default'];
-    LayoutContainer: typeof import('./../src/components/LayoutContainer/index.vue')['default'];
-    PaneListAll: typeof import('./../src/components/ConsoleRouter/components/PaneListAll/index.vue')['default'];
-    PaneListSearch: typeof import('./../src/components/ConsoleRouter/components/PaneListSearch/index.vue')['default'];
-    PaneSearch: typeof import('./../src/components/ConsoleRouter/components/PaneSearch/index.vue')['default'];
+    DzFlex: typeof import('./../src/components/DzFlex/index.vue')['default'];
+    DzIcon: typeof import('./../src/components/DzIcon/index.vue')['default'];
+    DzLayout: typeof import('./../src/components/DzLayout/index.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
-    TreeMenu: typeof import('./../src/components/TreeMenu/index.vue')['default'];
-    TreeMenuComponentsTreeMenuItem: typeof import('./../src/components/TreeMenu/components/TreeMenuItem/index.vue')['default'];
-    TreeMenuItem: typeof import('./../src/components/TreeMenu/components/TreeMenuItem/index.vue')['default'];
-    ZIcon: typeof import('./../src/components/ZIcon/index.vue')['default'];
   }
 }
