@@ -66,3 +66,19 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+
+## How to think the arch
+
+### Base
+
+|||
+|--|--|
+|Vite|| 
+|TypeScript|| 
+|EditorConfig|| 
+|Git|| 
+|Eslint|| 
+|Stylelint|| 
+|Tailwindcss|| 
+|Custom Scripts|| 
