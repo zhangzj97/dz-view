@@ -24,7 +24,7 @@ export default defineConfig({
       extensions: ['vue'],
       deep: true,
       resolvers: [ArcoResolver()],
-      directoryAsNamespace: false,
+      directoryAsNamespace: true,
       globalNamespaces: [],
       directives: true,
       importPathTransform: v => v,
