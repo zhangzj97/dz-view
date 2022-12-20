@@ -82,3 +82,4 @@ npm run lint
 |Stylelint|| 
 |Tailwindcss|| 
 |Custom Scripts|| 
+

@@ -7,6 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    DzFlex: typeof import('./../src/components/DzFlex/index.vue')['default']
+    DzLay: typeof import('./../src/components/DzLay/index.vue')['default']
+    DzLayout: typeof import('./../src/components/DzLayout/index.vue')['default']
+    DzRow: typeof import('./../src/components/DzRow/index.vue')['default']
     FlexRow: typeof import('./../src/components/FlexRow/index.vue')['default']
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./../src/components/icons/IconCommunity.vue')['default']
