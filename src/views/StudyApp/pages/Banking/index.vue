@@ -13,13 +13,23 @@ import PaneZuixinjiaoyi from './components/Pane最新交易/index.vue';
     <FlexContainer testTitle="Row01" h="100px"></FlexContainer>
 
     <FlexContainer class="flex-row" :class="['px-10 h-[400px]']">
-      <FlexContainer class="items-start justify-center flex-grow"><PaneCard01 /></FlexContainer>
-      <FlexContainer class="items-center justify-center flex-grow"><PaneCard02 /></FlexContainer>
-      <FlexContainer class="items-end justify-center" w="380px"><PaneJishiyinhang /></FlexContainer>
+      <FlexContainer class="items-start justify-center flex-grow">
+        <PaneCard01 />
+      </FlexContainer>
+      <FlexContainer class="items-center justify-center flex-grow">
+        <PaneCard02 />
+      </FlexContainer>
+      <FlexContainer class="items-end justify-center" w="380px">
+        <PaneJishiyinhang />
+      </FlexContainer>
     </FlexContainer>
     <FlexContainer class="flex-row flex-grow" :class="['px-10 pt-2 pb-4']">
-      <FlexContainer class="flex-grow"><PaneZuixinjiaoyi /></FlexContainer>
-      <FlexContainer class="items-end" w="420px"><PaneShouruleibie /></FlexContainer>
+      <FlexContainer class="flex-grow">
+        <PaneZuixinjiaoyi />
+      </FlexContainer>
+      <FlexContainer class="items-end" w="420px">
+        <PaneShouruleibie />
+      </FlexContainer>
     </FlexContainer>
   </FlexContainer>
 </template>

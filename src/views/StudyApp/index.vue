@@ -30,6 +30,7 @@ import LayoutPage from './layouts/LayoutPage/index.vue';
 .flex-container {
   /* opacity: 0.5; */
 }
+
 .flex-container:hover {
   /* opacity: 0.5; */
 }

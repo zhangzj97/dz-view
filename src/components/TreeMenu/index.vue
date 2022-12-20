@@ -69,35 +69,31 @@ const handleMouseenter = (ev: Event, entity: MenuDTO) => {
   menuState.activeParentId = parentId as string;
 };
 
-const handleMouseleave = (ev: Event, entity: MenuDTO) => {};
+const handleMouseleave = (ev: Event, entity: MenuDTO) => { };
 
 const hiddenChildrenContainer = () => {
   menuState.activeId = '';
 };
 </script>
 
+<script lang="ts">
+export default {
+  name: 'TreeMenu',
+};
+</script>
+
 <template>
   <FlexContainer @mouseleave="hiddenChildrenContainer" class="h-full">
     <FlexContainer class="h-full overflow-y-auto">
-      <TreeMenuItem
-        class="animate-slide-in-from-right"
-        :style="{ '--index': index }"
-        v-for="(item, index) of menuState.treeList"
-        :key="item.id"
-        :id="item.id"
-        :title="item.title ?? ''"
-        :propsRow="item"
-        :avatar="item.avatar ?? ''"
-        :isChildren="!!(item.children && item.children?.length > 0)"
-        :isActive="!!menuState.activeListMap[item.id]"
-        :isCollapse="menuState.isCollapse"
-        @click="handleClick"
-        @mouseenter="handleMouseenter"
-        @mouseleave="handleMouseleave"
-      />
+      <TreeMenuItem class="animate-slide-in-from-right" :style="{ '--index': index }"
+        v-for="(item, index) of menuState.treeList" :key="item.id" :id="item.id" :title="item.title ?? ''"
+        :propsRow="item" :avatar="item.avatar ?? ''" :isChildren="!!(item.children && item.children?.length > 0)"
+        :isActive="!!menuState.activeListMap[item.id]" :isCollapse="menuState.isCollapse" @click="handleClick"
+        @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" />
     </FlexContainer>
 
-    <FlexContainer class="absolute top-0 shadow-lg left-full" v-show="!!menuState.activeId" v-if="menuState.activeChildrenList?.length > 0" @mouseleave="hiddenChildrenContainer">
+    <FlexContainer class="absolute top-0 shadow-lg left-full" v-show="!!menuState.activeId"
+      v-if="menuState.activeChildrenList?.length > 0" @mouseleave="hiddenChildrenContainer">
       <FlexContainer class="top-0 bg-slate-300" :style="{ height: 'calc(100vh - 128px)' }">
         <TreeMenu :list="menuState.activeChildrenList" :activeParentId="menuState.activeId" />
       </FlexContainer>
@@ -118,10 +114,12 @@ const hiddenChildrenContainer = () => {
     transform: translateX(64px);
     opacity: 0;
   }
+
   20% {
     transform: translateX(16px);
     opacity: 0.5;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
