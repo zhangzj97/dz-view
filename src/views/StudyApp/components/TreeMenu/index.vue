@@ -69,7 +69,9 @@ const handleMouseenter = (ev: Event, entity: MenuDTO) => {
   menuState.activeParentId = parentId as string;
 };
 
-const handleMouseleave = (ev: Event, entity: MenuDTO) => { };
+const handleMouseleave = (ev: Event, entity: MenuDTO) => {
+  // T
+};
 
 const hiddenChildrenContainer = () => {
   menuState.activeId = '';
