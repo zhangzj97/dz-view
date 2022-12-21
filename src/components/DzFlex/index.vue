@@ -21,7 +21,8 @@ onMounted(() => {
 <template>
   <div v-if="testTitle" class="dz-flex-container" :style="{ width: w ?? '', height: h ?? '' }">
     <slot>
-      <div class="absolute flex items-center justify-center w-full h-full bg-stripes-white" :class="[cssState.bgClass]">
+      <div class="absolute flex items-center justify-center w-full h-full overflow-hidden bg-stripes-white"
+        :class="[cssState.bgClass]">
         <div class="text-2xl italic font-bold text-white">{{ testTitle }}</div>
       </div>
     </slot>
@@ -34,7 +35,7 @@ onMounted(() => {
 
 <style lang="scss">
 .dz-flex-container {
-  @apply relative flex flex-col transition-all transform;
+  @apply relative flex flex-col transition-all transform bg-transparent;
 }
 
 .dz-flex-container::-webkit-scrollbar {

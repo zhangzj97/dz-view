@@ -8,7 +8,7 @@
 
 <style lang="scss">
 .dz-layout-container {
-  @apply relative flex flex-col transition-all transform;
+  @apply relative flex flex-col transition-all bg-transparent transform;
 }
 
 .dz-layout-container::-webkit-scrollbar {
