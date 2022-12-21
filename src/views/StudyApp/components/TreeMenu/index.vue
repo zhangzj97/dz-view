@@ -104,7 +104,7 @@ export default {
 <style lang="scss" scoped>
 .animate-slide-in-from-right {
   animation-name: slide-in-from-right;
-  animation-duration: calc(var(--index) * 100ms + 300ms);
+  animation-duration: calc(var(--index) * 50ms + 100ms);
   animation-timing-function: ease-in;
   @apply transition-transform;
 }

@@ -41,7 +41,8 @@ const menuState = reactive<{
 });
 
 onMounted(() => {
-  menuState.list = routeToMenu(routes);
+  const routeList = routes.find(item => item.name == 'StudyApp')
+  menuState.list = routeToMenu(routeList.children);
 });
 </script>
 
