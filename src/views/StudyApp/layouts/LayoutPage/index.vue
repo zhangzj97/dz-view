@@ -1,6 +1,7 @@
 <script setup lang="ts" name="PageLayout">
 import LayoutLeft from './components/LayoutLeft/index.vue';
 import LayoutRight from './components/LayoutRight/index.vue';
+import LayoutTop from './components/LayoutTop/index.vue';
 </script>
 
 <template>
@@ -9,7 +10,13 @@ import LayoutRight from './components/LayoutRight/index.vue';
       <LayoutLeft />
     </DzLayout>
     <DzLayout class="z-10 flex-grow max-h-screen overflow-auto">
-      <slot class="animate__animated animate__fadeInRight"></slot>
+      <DzLayout>
+        <LayoutTop />
+      </DzLayout>
+
+      <DzLayout>
+        <slot></slot>
+      </DzLayout>
     </DzLayout>
     <DzLayout>
       <LayoutRight />
