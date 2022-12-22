@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TreeMenu from '@/views/StudyApp/components/TreeMenu/index.vue'
+import TreeMenu from '@/views/StudyApp/components/TreeMenu/index.vue';
 import { routes } from '@/router';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -41,7 +41,7 @@ const menuState = reactive<{
 });
 
 onMounted(() => {
-  const routeList = routes.find(item => item.name == 'StudyApp')
+  const routeList = routes.find(item => item.name == 'StudyApp');
   menuState.list = routeToMenu(routeList.children);
 });
 </script>

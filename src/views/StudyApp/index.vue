@@ -1,14 +1,5 @@
 <script setup lang="ts" name="App">
 import LayoutPage from './layouts/LayoutPage/index.vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-router.beforeEach((to, from, next) => {
-  // 这个方法在后面会写
-  // store.dispatch('setRouter', { to, from }).then(() => next())
-  console.log('beforeEach');
-  next();
-});
 </script>
 
 <template>
