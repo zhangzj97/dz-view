@@ -4,9 +4,11 @@ import LayoutPage from './layouts/LayoutPage/index.vue';
 
 <template>
   <LayoutPage class="bg-gray-100">
-    <router-view v-slot="{ Component }">
-      <transition name="page-fade">
-        <component :is="Component" />
+    <router-view v-slot="{ Component, route }">
+      <transition name="fade-slide" mode="out-in" appear>
+        <keep-alive :include="[]">
+          <component :is="Component" :key="route.fullPath" />
+        </keep-alive>
       </transition>
     </router-view>
   </LayoutPage>
@@ -42,35 +44,19 @@ import LayoutPage from './layouts/LayoutPage/index.vue';
 </style>
 
 <style>
-.page-fade-enter-active {
-  animation: page-fade 1s;
+/* fade-slide */
+.fade-slide-leave-active,
+.fade-slide-enter-active {
+  transition: all 0.3s;
 }
 
-.page-fade-leave-active {
-  animation: page-fade-out 1s;
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
 }
 
-@keyframes page-fade {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(1px);
-  }
-}
-
-@keyframes page-fade-out {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>
