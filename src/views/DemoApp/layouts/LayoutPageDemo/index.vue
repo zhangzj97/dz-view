@@ -1,35 +1,48 @@
 <script setup lang="ts" name="LayoutPage">
 import DzFlex from '@/components/DzFlex/index.vue';
 
+import Layout010101LoadingBar from './components/Layout010101LoadingBar/index.vue';
+import Layout020101NoticeBar from './components/Layout020101NoticeBar/index.vue';
+import Layout030101SearchBar from './components/Layout030101SearchBar/index.vue';
+import Layout040101AppNavBar from './components/Layout040101AppNavBar/index.vue';
+import Layout050101LeftSider from './components/Layout050101LeftSider/index.vue';
+import Layout050201LeftSider from './components/Layout050201LeftSider/index.vue';
+import Layout050301AvatarBar from './components/Layout050301AvatarBar/index.vue';
+import Layout050302RouteTab from './components/Layout050302RouteTab/index.vue';
+import Layout050303BreadCrumb from './components/Layout050303BreadCrumb/index.vue';
+import Layout050401RightSider from './components/Layout050401RightSider/index.vue';
+import Layout060101Footer from './components/Layout060101Footer/index.vue';
+import Layout070101Copyright from './components/Layout070101Copyright/index.vue';
+
 const layoutState = reactive<{
   rowList: any;
 }>({
   rowList: [
-    { h: 'h-2', children: [{ w: 'w-full', component: DzFlex, props: { testTitle: 'Top01 LoadingBar' } }] },
-    { h: 'h-8', children: [{ w: 'w-full', component: DzFlex, props: { testTitle: 'Top02 NoticeBar' } }] },
-    { h: 'h-16', children: [{ w: 'w-full', component: DzFlex, props: { testTitle: 'Top03 SearchBar' } }] },
-    { h: 'h-16', children: [{ w: 'w-full', component: DzFlex, props: { testTitle: 'Top04 AppNavBar' } }] },
+    { h: 'h-2', children: [{ w: 'w-full', component: Layout010101LoadingBar }] },
+    { h: 'h-8', children: [{ w: 'w-full', component: Layout020101NoticeBar }] },
+    { h: 'h-16', children: [{ w: 'w-full', component: Layout030101SearchBar }] },
+    { h: 'h-16', children: [{ w: 'w-full', component: Layout040101AppNavBar }] },
 
     {
       h: 'h-grow',
       children: [
-        { w: 'w-16', component: DzFlex, props: { testTitle: 'L01' } },
-        { w: 'w-64', component: DzFlex, props: { testTitle: 'L02' } },
+        { w: 'w-16', component: Layout050101LeftSider },
+        { w: 'w-64', component: Layout050201LeftSider },
         {
           w: 'w-grow',
           children: [
-            { h: 'h-16', component: DzFlex, props: { testTitle: 'CTop01 AvatarBar' } },
-            { h: 'h-16', component: DzFlex, props: { testTitle: 'CTop02 RouteTab' } },
-            { h: 'h-16', component: DzFlex, props: { testTitle: 'CTop03 BreadCrumb' } },
-            { h: 'h-grow', type: 'slot', component: DzFlex, props: { testTitle: 'Body' } },
+            { h: 'h-16', component: Layout050301AvatarBar },
+            { h: 'h-16', component: Layout050302RouteTab },
+            { h: 'h-16', component: Layout050303BreadCrumb },
+            { h: 'h-grow', type: 'slot' },
           ],
         },
-        { w: 'w-64', component: DzFlex, props: { testTitle: 'R01' } },
+        { w: 'w-64', component: Layout050401RightSider },
       ],
     },
 
-    { h: 'h-16', children: [{ w: 'w-full', component: DzFlex, props: { testTitle: 'Top05 Footer' } }] },
-    { h: 'h-16', children: [{ w: 'w-full', component: DzFlex, props: { testTitle: 'Top06 Copyright' } }] },
+    { h: 'h-16', children: [{ w: 'w-full', component: Layout060101Footer }] },
+    { h: 'h-16', children: [{ w: 'w-full', component: Layout070101Copyright }] },
   ],
 });
 </script>
