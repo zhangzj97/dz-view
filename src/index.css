@@ -60,3 +60,11 @@
   background-image: linear-gradient(135deg, hsla(0deg, 0%, 100%, 75%) 10%, transparent 0, transparent 50%, hsla(0deg, 0%, 100%, 75%) 0, hsla(0deg, 0%, 100%, 75%) 60%, transparent 0, transparent);
   background-size: 7.07px 7.07px;
 }
+
+.h-grow {
+  flex-grow: 1;
+}
+
+.w-grow {
+  flex-grow: 1;
+}
