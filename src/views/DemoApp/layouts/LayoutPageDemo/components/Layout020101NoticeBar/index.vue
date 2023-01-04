@@ -1,5 +1,11 @@
-<script setup lang="ts" name="Layout020101NoticeBar"></script>
+<script setup lang="ts" name="Layout020101NoticeBar">
+import PaneNotice from './components/PaneNotice/index.vue';
+</script>
 
 <template>
-  <dz-flex testTitle="Layout020101NoticeBar" />
+  <dz-row class="h-full">
+    <dz-row-item class="w-grow">
+      <PaneNotice />
+    </dz-row-item>
+  </dz-row>
 </template>

@@ -1,5 +1,11 @@
-<script setup lang="ts" name="Layout060101Footer"></script>
+<script setup lang="ts" name="Layout060101Footer">
+import PaneFooter from './components/PaneFooter/index.vue';
+</script>
 
 <template>
-  <dz-flex testTitle="Layout060101Footer" />
+  <dz-row class="h-full">
+    <dz-row-item class="w-grow">
+      <PaneFooter />
+    </dz-row-item>
+  </dz-row>
 </template>
