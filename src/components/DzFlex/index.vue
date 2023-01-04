@@ -22,7 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="testTitle" class="dz-flex-container" :style="{ width: w ?? '', height: h ?? '' }" :class="[' h-grow']">
+  <div v-if="testTitle" class="dz-flex-container" :style="{ width: w ?? '', height: h ?? '' }" :class="['h-grow']">
     <slot>
       <div class="absolute flex items-center justify-center w-full h-full overflow-hidden bg-stripes-white" :class="[cssState.bgClass]">
         <div class="text-2xl italic font-bold text-white">{{ testTitle }}</div>
@@ -37,7 +37,8 @@ onMounted(() => {
 
 <style lang="scss">
 .dz-flex-container {
-  @apply relative flex transition-all transform;
+  @apply relative flex;
+  @apply transition-all transform;
   @apply flex-col bg-transparent;
 }
 
