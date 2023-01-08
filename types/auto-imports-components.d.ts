@@ -7,6 +7,10 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AMenu: typeof import('ant-design-vue/es')['Menu'];
+    AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+    AMenuItemGroup: typeof import('ant-design-vue/es')['MenuItemGroup'];
+    ASubMenu: typeof import('ant-design-vue/es')['SubMenu'];
     ConsoleRouter: typeof import('./../src/components/ConsoleRouter/index.vue')['default'];
     ConsoleRouterComponentsPaneListAll: typeof import('./../src/components/ConsoleRouter/components/PaneListAll/index.vue')['default'];
     ConsoleRouterComponentsPaneListSearch: typeof import('./../src/components/ConsoleRouter/components/PaneListSearch/index.vue')['default'];
