@@ -7,4 +7,4 @@ export const routes: RouteRecordRaw[] = [...RemoteRoute, ...LocalRoute, ...Custo
 
 export const router = createRouter({ history: createWebHistory(import.meta.env.BASE_URL), routes });
 
-console.log(routes);
+localStorage.setItem('routes', JSON.stringify(routes || []));
