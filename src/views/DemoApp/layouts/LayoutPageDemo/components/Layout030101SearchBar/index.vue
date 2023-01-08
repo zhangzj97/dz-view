@@ -5,15 +5,15 @@ import PaneToolSet from './components/PaneToolSet/index.vue';
 </script>
 
 <template>
-  <dz-row class="h-full">
-    <dz-row-item>
-      <PaneBack class="w-64" />
+  <dz-row class="flex-grow">
+    <dz-row-item class="w-64">
+      <PaneBack />
     </dz-row-item>
     <dz-row-item class="w-grow">
       <PaneTitle />
     </dz-row-item>
-    <dz-row-item>
-      <PaneToolSet class="w-64" />
+    <dz-row-item class="w-64">
+      <PaneToolSet />
     </dz-row-item>
   </dz-row>
 </template>

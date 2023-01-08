@@ -5,7 +5,7 @@ import PaneAvatar from './components/PaneAvatar/index.vue';
 </script>
 
 <template>
-  <dz-row class="h-full">
+  <dz-row class="flex-grow">
     <dz-row-item class="w-grow">
       <PaneBreadCrumb />
     </dz-row-item>

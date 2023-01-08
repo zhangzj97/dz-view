@@ -6,7 +6,7 @@ import PaneToolSet from './components/PaneToolSet/index.vue';
 </script>
 
 <template>
-  <dz-row class="h-full">
+  <dz-row class="flex-grow">
     <dz-row-item class="w-64">
       <PaneLogo />
     </dz-row-item>

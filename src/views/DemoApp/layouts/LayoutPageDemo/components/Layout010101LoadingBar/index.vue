@@ -3,7 +3,7 @@ import PaneLoading from './components/PaneLoading/index.vue';
 </script>
 
 <template>
-  <dz-row class="h-full">
+  <dz-row class="flex-grow">
     <dz-row-item class="w-grow">
       <PaneLoading />
     </dz-row-item>

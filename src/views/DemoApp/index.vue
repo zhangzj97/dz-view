@@ -14,7 +14,21 @@ import LayoutPage from './layouts/LayoutPageDemo/index.vue';
   </LayoutPage>
 </template>
 
-<style>
+<style lang="scss">
+@import url(./assets/index.scss);
+
+.bg-page {
+  background-position-x: -280px;
+  background-size: calc(100% + 280px);
+  background-repeat: no-repeat;
+
+  position: absolute;
+  width: 100%;
+  height: 1000px;
+}
+</style>
+
+<style lang="scss">
 /* fade-slide */
 .fade-slide-leave-active,
 .fade-slide-enter-active {

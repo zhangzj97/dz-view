@@ -11,15 +11,17 @@ import Layout050303BreadCrumb from './components/Layout050303BreadCrumb/index.vu
 import Layout050401RightSider from './components/Layout050401RightSider/index.vue';
 import Layout060101Footer from './components/Layout060101Footer/index.vue';
 import Layout070101Copyright from './components/Layout070101Copyright/index.vue';
+import Layout080101Scroll from './components/Layout080101Scroll/index.vue';
+import Layout090101Scroll from './components/Layout090101Scroll/index.vue';
 
 const layoutState = reactive<{
   rowList: any;
 }>({
   rowList: [
-    { h: 'h-2', children: [{ w: 'w-full', component: () => Layout010101LoadingBar }] },
-    { h: 'h-8', children: [{ w: 'w-full', component: () => Layout020101NoticeBar }] },
-    { h: 'h-16', children: [{ w: 'w-full', component: () => Layout030101SearchBar }] },
-    { h: 'h-16', children: [{ w: 'w-full', component: () => Layout040101AppNavBar }] },
+    { h: 'h-2', children: [{ w: 'w-grow', component: () => Layout010101LoadingBar }] },
+    { h: 'h-8', children: [{ w: 'w-grow', component: () => Layout020101NoticeBar }] },
+    { h: 'h-16', children: [{ w: 'w-grow', component: () => Layout030101SearchBar }] },
+    { h: 'h-16', children: [{ w: 'w-grow', component: () => Layout040101AppNavBar }] },
 
     {
       h: 'h-grow',
@@ -39,8 +41,11 @@ const layoutState = reactive<{
       ],
     },
 
-    { h: 'h-16', children: [{ w: 'w-full', component: () => Layout060101Footer }] },
-    { h: 'h-16', children: [{ w: 'w-full', component: () => Layout070101Copyright }] },
+    { h: 'h-16', children: [{ w: 'w-grow', component: () => Layout060101Footer }] },
+    { h: 'h-16', children: [{ w: 'w-grow', component: () => Layout070101Copyright }] },
+
+    { h: 'h-16', children: [{ w: 'w-grow', component: () => Layout080101Scroll }] },
+    { h: 'h-16', children: [{ w: 'w-grow', component: () => Layout090101Scroll }] },
   ],
 });
 </script>
@@ -53,6 +58,9 @@ const layoutState = reactive<{
         <template v-else>
           <dz-row class="w-full" :class="[item3.h]" v-for="(item3, index3) of item2.children" :key="index3" row-item>
             <slot v-if="item3.type === 'slot'"></slot>
+            <!-- <dz-row row-item v-if="item3.type === 'slot'" class="h-0 overflow-auto scrollbar-hidden h-grow">
+              <slot></slot>
+            </dz-row> -->
             <component v-else :is="item3.component()" v-bind="item3.props" />
           </dz-row>
         </template>
