@@ -64,21 +64,6 @@ const { handleChangeIndex, optionState, optionListState } = useTool({ optionMap 
         </div>
       </div>
 
-      <div layout row flex-grow-0 class="w-auto h-8">
-        <div wrapper col flex-grow-0 class="w-16 h-full">
-          <div pane flex-grow-0 class="w-auto h-full">2 row 64</div>
-        </div>
-        <div wrapper col flex-grow-1 class="w-0 h-full">
-          <div pane flex-grow-0 class="w-auto h-full">2 row grow</div>
-        </div>
-        <div wrapper col flex-grow-1 class="w-0 h-full">
-          <div pane flex-grow-0 class="w-auto h-full">2 row grow</div>
-        </div>
-        <div wrapper col flex-grow-0 class="w-16 h-full">
-          <div pane flex-grow-0 class="w-auto h-full">2 row 64</div>
-        </div>
-      </div>
-
       <div layout one flex-grow-0 class="w-auto h-8">
         <div wrapper col flex-grow-1 class="w-0 h-full">
           <div layout one flex-grow-0 class="w-auto h-full">
