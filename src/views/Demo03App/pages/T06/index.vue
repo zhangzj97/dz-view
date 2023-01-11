@@ -98,8 +98,8 @@ const { handleChangeIndex, optionState, optionListState } = useTool({ optionMap 
     </dz-view>
 
     <dz-view layout="row" grow="0" size="w-auto h-16">
-      <dz-wrapper layout="col" grow="0" size="w-16 h-full">
-        <div pane flex-grow-0 class="h-full w-[2000px]">2 row 64</div>
+      <dz-wrapper layout="one" grow="0" size="w-16 h-full">
+        <div pane flex-grow-0 class="h-full w-[2000px] shrink-0"></div>
       </dz-wrapper>
       <dz-wrapper layout="col" grow="0" size="w-16 h-full">
         <div pane flex-grow-0 class="h-[200px] w-auto shrink-0">2 row 64</div>
@@ -118,6 +118,30 @@ const { handleChangeIndex, optionState, optionListState } = useTool({ optionMap 
       </dz-wrapper>
       <dz-wrapper layout="col" grow="0" size="w-16 h-full">
         <div pane flex-grow-0 class="w-auto h-full">2 row 64</div>
+      </dz-wrapper>
+    </dz-view>
+
+    <dz-view layout="row" grow="0" size="w-auto h-16">
+      <dz-wrapper layout="one" grow="0" size="w-16 h-full">
+        <div pane flex-grow-0 class="h-full w-[2000px] shrink-0"></div>
+      </dz-wrapper>
+      <dz-wrapper layout="col" grow="0" size="w-16 h-full">
+        <div pane flex-grow-0 class="h-[200px] w-auto shrink-0">2 row 64</div>
+      </dz-wrapper>
+      <dz-wrapper layout="col" grow="0" size="w-16 h-full">
+        <div pane flex-grow-0 class="h-[200px] w-[2000px] shrink-0">2 row 64</div>
+      </dz-wrapper>
+      <dz-wrapper layout="col" grow="0" size="w-16 h-full">
+        <div pane flex-grow-0 class="w-auto h-full">12 row 64</div>
+      </dz-wrapper>
+      <dz-wrapper layout="col" grow="1" size="w-0 h-full">
+        <div pane flex-grow-0 class="w-auto h-full">12 row grow</div>
+      </dz-wrapper>
+      <dz-wrapper layout="col" grow="1" size="w-0 h-full">
+        <div pane flex-grow-0 class="w-auto h-full">12 row grow</div>
+      </dz-wrapper>
+      <dz-wrapper layout="col" grow="0" size="w-16 h-full">
+        <div pane flex-grow-0 class="w-auto h-full">12 row 64</div>
       </dz-wrapper>
     </dz-view>
 
@@ -550,10 +574,6 @@ const { handleChangeIndex, optionState, optionListState } = useTool({ optionMap 
       <dz-wrapper layout="col" grow="0" size="w-16 h-full">
         <div pane flex-grow-0 class="w-auto h-full">2 row 18</div>
       </dz-wrapper>
-    </dz-view>
-
-    <dz-view layout="one" grow="0" size="w-auto h-64">
-      <div pane flex-grow-0 class="w-auto h-full">2 row 64</div>
     </dz-view>
   </dz-view>
 
