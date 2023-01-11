@@ -1,8 +1,12 @@
 <script setup lang="ts" name="DzFlex">
 defineProps<{
-  testTitle?: string;
-  w?: string;
-  h?: string;
+  size?: string;
+  grow?: boolean;
+  row?: boolean;
+  col?: boolean;
+  bg?: boolean;
+  scroll?: boolean;
+  overflowAuto?: boolean;
 }>();
 
 const cssState = reactive<{
@@ -22,44 +26,37 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="testTitle" class="dz-flex-container" :style="{ width: w ?? '', height: h ?? '' }" :class="['h-grow']">
-    <slot>
-      <div class="absolute flex items-center justify-center w-full h-full overflow-hidden bg-stripes-white" :class="[cssState.bgClass]">
-        <div class="text-2xl italic font-bold text-white">{{ testTitle }}</div>
-      </div>
-    </slot>
-  </div>
+  <div
+    :class="[
+      'flex',
+      'flex-col',
+      grow && 'flex-grow',
+      'relative',
+      'bg-stripes-white',
+      bg && cssState.bgClass,
+      size?.match(/w-[^\s]*/)?.[0] || 'w-full',
+      size?.match(/h-[^\s]*/)?.[0] || 'h-full',
+      overflowAuto && 'overflow-auto',
+      // row && overflowAuto ? 'w-0' : ' ',
+    ]"
+  >
+    <div
+      :class="[
+        'flex',
+        row ? 'flex-row' : 'flex-col',
 
-  <div v-else class="dz-flex-container" :style="{ width: w ?? '', height: h ?? '' }">
-    <slot></slot>
+        col && overflowAuto ? 'w-0' : 'w-full',
+        row && overflowAuto ? 'h-0' : 'h-full',
+
+        // !overflowAuto && row && 'h-full',
+        // !overflowAuto && !row && 'w-full',
+
+        // !row && overflowAuto ? 'h-0' : 'h-full',
+        // row && overflowAuto ? 'w-0' : 'w-full',
+        overflowAuto ? 'flex-grow' : '',
+      ]"
+    >
+      <slot></slot>
+    </div>
   </div>
 </template>
-
-<style lang="scss">
-.dz-flex-container {
-  @apply relative flex;
-  @apply transition-all transform;
-  @apply flex-col bg-transparent;
-}
-
-.dz-flex-container::-webkit-scrollbar {
-  height: 0;
-  width: 0;
-}
-
-.dz-flex-container.flex-row {
-  flex-direction: row;
-}
-
-.dz-flex-container.sticky {
-  position: sticky;
-}
-
-.dz-flex-container.absolute {
-  position: absolute;
-}
-
-.dz-flex-container.flex-grow-0 {
-  flex-grow: 0;
-}
-</style>
