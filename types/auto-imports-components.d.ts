@@ -23,6 +23,8 @@ declare module '@vue/runtime-core' {
     DzRow: typeof import('./../src/components/DzRow/index.vue')['default']
     DzRowItem: typeof import('./../src/components/DzRowItem/index.vue')['default']
     DzTest: typeof import('./../src/components/DzTest/index.vue')['default']
+    DzView: typeof import('./../src/components/DzView/index.vue')['default']
+    DzWrapper: typeof import('./../src/components/DzWrapper/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
