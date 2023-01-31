@@ -4,5 +4,9 @@ defineProps<{ layoutData: any }>();
 </script>
 
 <template>
-  <data-layout :layout-data="layoutData" />
+  <data-layout :layout-data="layoutData">
+    <template #default>
+      <slot></slot>
+    </template>
+  </data-layout>
 </template>

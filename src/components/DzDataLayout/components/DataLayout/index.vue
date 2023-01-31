@@ -25,7 +25,11 @@ export default { name: 'DataLayout' };
       </template>
 
       <template v-else-if="item.children">
-        <data-layout :layout-data="item.children" />
+        <data-layout :layout-data="item.children">
+          <template #default>
+            <slot></slot>
+          </template>
+        </data-layout>
       </template>
 
       <template v-else-if="item.slot">
