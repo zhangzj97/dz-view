@@ -76,6 +76,10 @@ const parseSizeClassName = () => {
   @apply flex flex-grow w-0 h-auto;
 }
 
+.dz-view-wrapper::-webkit-scrollbar {
+  @apply w-0 h-0;
+}
+
 .dz-view-wrapper[overflow] {
   @apply overflow-auto;
 }
