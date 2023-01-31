@@ -1,4 +1,4 @@
-<script setup lang="ts" name="DataLayout">
+<script setup lang="ts">
 import DzViewForLayout from './components/DzViewForLayout/index.vue';
 defineProps<{ layoutData: any }>();
 </script>
@@ -8,33 +8,33 @@ export default { name: 'DataLayout' };
 </script>
 
 <template>
-  <template v-for="(item, index) of layoutData" :key="index">
-    <dz-view-for-layout
-      :one="item.option.layout === 'one'"
-      :col="item.option.layout === 'col'"
-      :row="item.option.layout === 'row'"
-      :size="item.option.size"
-      :overflow="item.option.overflow === 'auto'"
-      :overflow-hidden="item.option.overflow === 'hidden'"
-      :fixed="item.option.fixed"
-      :absolute="item.option.absolute"
-      :position="item.option.position"
-    >
-      <template v-if="item.component">
-        <component :is="item.component()" v-bind="item.props" />
-      </template>
+  <dz-view-for-layout
+    :one="layoutData.option.layout === 'one'"
+    :col="layoutData.option.layout === 'col'"
+    :row="layoutData.option.layout === 'row'"
+    :size="layoutData.option.size"
+    :overflow="layoutData.option.overflow === 'auto'"
+    :overflow-hidden="layoutData.option.overflow === 'hidden'"
+    :fixed="layoutData.option.fixed"
+    :absolute="layoutData.option.absolute"
+    :position="layoutData.option.position"
+  >
+    <template v-if="layoutData.component">
+      <component :is="layoutData.component()" v-bind="layoutData.props" />
+    </template>
 
-      <template v-else-if="item.children">
-        <data-layout :layout-data="item.children">
+    <template v-else-if="layoutData.children">
+      <template v-for="(item, index) of layoutData.children" :key="index">
+        <data-layout :layout-data="item">
           <template #default>
             <slot></slot>
           </template>
         </data-layout>
       </template>
+    </template>
 
-      <template v-else-if="item.slot">
-        <slot></slot>
-      </template>
-    </dz-view-for-layout>
-  </template>
+    <template v-else-if="layoutData.slot">
+      <slot></slot>
+    </template>
+  </dz-view-for-layout>
 </template>

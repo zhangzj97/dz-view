@@ -1,4 +1,4 @@
-<script setup lang="ts" name="DzView">
+<script setup lang="ts">
 const props = defineProps<{
   one?: boolean;
   col?: boolean;
@@ -38,6 +38,8 @@ const parseSizeClassName = () => {
       absolute && 'absolute',
       ...parseSizeClassName(),
       'border-2 bg-green-300 border-green-600',
+      // 'border-transparent',
+      // 'bg-transparent',
       position,
     ]"
     :style="{
@@ -58,7 +60,9 @@ const parseSizeClassName = () => {
         overflow && 'overflow-auto',
         overflowHidden && 'overflow-hidden',
         'w-grow h-auto',
-        'border-2 bg-cyan-300 border-cyan-600',
+        // 'border-2 bg-cyan-300 border-cyan-600',
+        'border-transparent',
+        'bg-transparent',
       ]"
       :style="{}"
     >
@@ -67,7 +71,7 @@ const parseSizeClassName = () => {
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .dz-view {
   @apply flex flex-row flex-nowrap;
 }
@@ -89,7 +93,7 @@ const parseSizeClassName = () => {
 }
 </style>
 
-<style>
+<style scoped>
 .h-grow {
   @apply flex-grow h-0;
 }
