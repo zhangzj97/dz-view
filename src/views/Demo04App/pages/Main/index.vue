@@ -1,7 +1,9 @@
-<script setup lang="ts" name="Main"></script>
+<script setup lang="ts">
+import { layoutData } from './layouts/index';
+
+const layoutState = reactive({ data: layoutData });
+</script>
 
 <template>
-  <dz-view>
-    <div class="text-red-500">Main</div>
-  </dz-view>
+  <dz-data-layout :layout-data="layoutState.data" />
 </template>
