@@ -1,6 +1,5 @@
 <script setup lang="ts" name="PaneMenu">
 import MenuAntd from './components/MenuAntd/index.vue';
-import PaneMenuToolSet from './components/PaneMenuToolSet/index.vue';
 import { routes } from '@/router/index';
 import { removeAttrs } from './utils/route';
 import { useRouter } from 'vue-router';
@@ -19,8 +18,5 @@ const handleClick = ({ meta }: any) => {
 </script>
 
 <template>
-  <div class="bg-white h-grow">
-    <PaneMenuToolSet />
-    <MenuAntd :menuList="routeState.menuList" @handleClick="handleClick"></MenuAntd>
-  </div>
+  <MenuAntd :menuList="routeState.menuList" @handleClick="handleClick"></MenuAntd>
 </template>

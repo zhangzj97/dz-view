@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { layoutData } from './layout/index';
+import { layoutData } from './layouts/index';
 
 const layoutState = reactive({ data: layoutData });
 </script>
