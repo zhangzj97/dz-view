@@ -15,10 +15,10 @@ import LayoutPage from './layouts/LayoutPageToBArcoAdmin/index.vue';
 </template>
 
 <style lang="scss">
-@import url(./assets/index.scss);
+@import './assets/index.scss';
 </style>
 
-<style lang="scss">
+<style scoped lang="scss">
 /* fade-slide */
 .fade-slide-leave-active,
 .fade-slide-enter-active {
