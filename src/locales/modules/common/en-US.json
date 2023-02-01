@@ -15,5 +15,11 @@
   "menu.StudyApp/Palette": "Palette",
   "menu.StudyApp/Ticketing": "Ticketing",
   "menu.StudyApp/ToDoList": "To Do",
-  "menu.StudyApp/User": "User Center"
+  "menu.StudyApp/User": "User Center",
+
+  "Demo04App.route.Demo04App": "Demo04App",
+  "Demo04App.route.Demo04App.Main": "Demo04App",
+  "RefAcroAdmin.route.RefAcroAdmin": "ArcoAdmin",
+  "RefAcroAdmin.route.RefAcroAdmin.Main": "ArcoAdmin",
+  "RefAcroAdmin.route.RefAcroAdmin.Exception404": "Exception404"
 }

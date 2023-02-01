@@ -28,5 +28,11 @@
 
   "Demo02App.route.Demo02App": "Demo02App",
   "Demo02App.route.Demo02App.Home": "Demo02AppHome",
-  "Demo02App.route.Demo02App.Todo": "Todo"
+  "Demo02App.route.Demo02App.Todo": "Todo",
+
+  "Demo04App.route.Demo04App": "Demo04App",
+  "Demo04App.route.Demo04App.Main": "Demo04App",
+  "RefAcroAdmin.route.RefAcroAdmin": "ArcoAdmin",
+  "RefAcroAdmin.route.RefAcroAdmin.Main": "ArcoAdmin",
+  "RefAcroAdmin.route.RefAcroAdmin.Exception404": "Exception404"
 }
