@@ -1,4 +1,3 @@
-import Layout100LoadingBar from '../components/Layout100LoadingBar/index.vue';
 import Layout200NoticeBar from '../components/Layout200NoticeBar/index.vue';
 import Layout300AppNavBar from '../components/Layout300AppNavBar/index.vue';
 import Layout301AppNavBar from '../components/Layout301AppNavBar/index.vue';
@@ -13,10 +12,8 @@ import Layout500FooterBar from '../components/Layout500FooterBar/index.vue';
 export const layoutData = {
   option: { layout: 'col', size: 'w-screen h-screen', overflow: 'hidden' },
   children: [
-    // 加载栏
-    { option: { layout: 'one', size: 'h-8' }, component: () => Layout100LoadingBar },
     // 通知栏
-    { option: { layout: 'one', size: 'h-8' }, component: () => Layout200NoticeBar },
+    { option: { layout: 'one', size: 'h-4' }, component: () => Layout200NoticeBar },
     // 应用 Navbar
     { option: { layout: 'one', size: 'h-16' }, component: () => Layout300AppNavBar },
     // 粘性应用 Navbar
@@ -36,7 +33,7 @@ export const layoutData = {
     {
       option: { layout: 'row', size: 'h-grow' },
       children: [
-        { option: { layout: 'one', size: 'w-16' }, component: () => Layout403SlimLeft },
+        { option: { layout: 'one', size: 'w-16', overflow: 'auto' }, component: () => Layout403SlimLeft },
         { option: { layout: 'one', size: 'w-64' }, component: () => Layout404Left },
         {
           option: { layout: 'col', size: 'w-grow' },
