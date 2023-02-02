@@ -18,6 +18,7 @@ export default { name: 'DataLayout' };
     :fixed="layoutData.option.fixed"
     :absolute="layoutData.option.absolute"
     :position="layoutData.option.position"
+    :shadow="layoutData.option.shadow"
   >
     <template v-if="layoutData.component">
       <component :is="layoutData.component()" v-bind="layoutData.props" />

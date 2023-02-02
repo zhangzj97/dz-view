@@ -20,6 +20,7 @@ const props = defineProps<{
   bg?: string;
   transition?: boolean;
   pointer?: boolean;
+  shadow?: string;
 }>();
 
 const parseSizeClassName = () => {
@@ -70,6 +71,7 @@ const parsePositionFlexClassName = () => {
       position,
       transition && 'transition-all',
       pointer && 'cursor-pointer',
+      shadow,
     ]"
     :style="{
       // flexGrow: Number(grow),
