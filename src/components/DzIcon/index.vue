@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { remove } from 'cypress/types/lodash';
 
-const props = defineProps<{ icon: string; assets?: boolean; size?: string }>();
+const props = defineProps<{
+  icon: string;
+  size?: string;
+}>();
 
 const parseSizeClassName = () => {
   const className = {
