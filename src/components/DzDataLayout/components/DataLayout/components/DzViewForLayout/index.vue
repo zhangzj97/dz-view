@@ -26,6 +26,26 @@ const parseSizeClassName = () => {
 
   return [className.width, className.height];
 };
+
+const parsePositionClassName = () => {
+  const className = {
+    top: props.position?.match(/t-[^\s].*/)?.[0] || '',
+    bottom: props.position?.match(/b-[^\s].*/)?.[0] || '',
+    left: props.position?.match(/l-[^\s].*/)?.[0] || '',
+    right: props.position?.match(/r-[^\s].*/)?.[0] || '',
+  };
+
+  return [className.top, className.bottom, className.left, className.right];
+};
+
+const parsePositionFlexClassName = () => {
+  const flexAlignCode = props.position?.match(/^\d+$/)?.[0] || '00';
+  const className = {
+    flexAlign: `flex-align-${flexAlignCode}`,
+  };
+
+  return [className.flexAlign];
+};
 </script>
 
 <template>
@@ -39,6 +59,7 @@ const parseSizeClassName = () => {
       fixed && 'fixed',
       absolute && 'absolute',
       ...parseSizeClassName(),
+      ...parsePositionClassName(),
       // 'border-2 bg-green-300 border-green-600',
       'border-transparent',
       'bg-transparent',
@@ -61,6 +82,7 @@ const parseSizeClassName = () => {
         grid && 'flex-row flex-wrap',
         overflow && 'overflow-auto',
         overflowHidden && 'overflow-hidden',
+        ...parsePositionFlexClassName(),
         'flex-grow',
         'w-auto',
         'h-auto',
