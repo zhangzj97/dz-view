@@ -1,5 +1,7 @@
 <script setup lang="ts" name="App1">
 import LayoutPage from './layouts/LayoutPageToBArcoAdmin/index.vue';
+import { config } from './config';
+provide('config', config);
 </script>
 
 <template>
@@ -15,23 +17,10 @@ import LayoutPage from './layouts/LayoutPageToBArcoAdmin/index.vue';
 </template>
 
 <style lang="scss">
-@import './assets/index.scss';
+@import url(./assets/index.scss);
 </style>
 
-<style scoped lang="scss">
-/* fade-slide */
-.fade-slide-leave-active,
-.fade-slide-enter-active {
-  transition: all 0.3s;
-}
-
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
+<style lang="scss">
+@import url(./assets/images/index.scss);
+@import url(./assets/icons/index.scss);
 </style>
