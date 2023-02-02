@@ -16,6 +16,10 @@ const props = defineProps<{
   grow?: number | boolean | string;
   // shrink?: number | boolean | string;
   size?: string;
+
+  bg?: string;
+  transition?: boolean;
+  pointer?: boolean;
 }>();
 
 const parseSizeClassName = () => {
@@ -64,12 +68,26 @@ const parsePositionFlexClassName = () => {
       'border-transparent',
       'bg-transparent',
       position,
+      transition && 'transition-all',
+      pointer && 'cursor-pointer',
     ]"
     :style="{
       // flexGrow: Number(grow),
       // flexShrink: Number(shrink),
     }"
   >
+    <template v-if="bg">
+      <div
+        :class="[
+          //
+          'absolute',
+          'w-full',
+          'h-full',
+          bg,
+        ]"
+      ></div>
+    </template>
+
     <div
       class="dz-view-wrapper"
       :class="[

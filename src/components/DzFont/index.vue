@@ -15,6 +15,8 @@ const props = defineProps<{
   bold?: boolean;
 
   color?: string;
+
+  pointer?: boolean;
 }>();
 </script>
 
@@ -38,6 +40,8 @@ const props = defineProps<{
 
       size,
       color,
+
+      pointer && 'cursor-pointer',
     ]"
   >
     <slot></slot>
