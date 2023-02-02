@@ -34,7 +34,7 @@ export const layoutData = {
       option: { layout: 'row', size: 'h-grow' },
       children: [
         // { option: { layout: 'one', size: 'w-16', overflow: 'auto' }, component: () => Layout403SlimLeft },
-        { option: { layout: 'one', size: 'w-fit' }, component: () => Layout404Left },
+        { option: { layout: 'one', size: 'w-fit', shadow: 'shadow-sm' }, component: () => Layout404Left },
         {
           option: { layout: 'col', size: 'w-grow' },
           children: [
