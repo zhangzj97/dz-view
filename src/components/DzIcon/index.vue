@@ -4,6 +4,8 @@ import { Icon } from '@iconify/vue';
 const props = defineProps<{
   icon: string;
   size?: string;
+
+  pointer?: boolean;
 }>();
 
 const parseSizeClassName = () => {
@@ -31,7 +33,7 @@ const parseSizeStyle = () => {
 </script>
 
 <template>
-  <div :class="[...parseSizeClassName()]" :style="{ ...parseSizeStyle() }">
+  <div :class="[...parseSizeClassName(), pointer && 'cursor-pointer']" :style="{ ...parseSizeStyle() }">
     <template v-if="!props.icon.match(/:/)">
       <div class="w-full h-full icon-image" :class="[props.icon]"></div>
     </template>
