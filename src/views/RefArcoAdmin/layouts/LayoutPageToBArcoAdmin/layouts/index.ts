@@ -13,7 +13,7 @@ export const layoutData = {
   option: { layout: 'col', size: 'w-screen h-screen', overflow: 'hidden' },
   children: [
     // 通知栏
-    { option: { layout: 'one', size: 'h-4' }, component: () => Layout200NoticeBar },
+    { option: { layout: 'one', size: 'h-fit' }, component: () => Layout200NoticeBar },
     // 应用 Navbar
     { option: { layout: 'one', size: 'h-16' }, component: () => Layout300AppNavBar },
     // 粘性应用 Navbar
@@ -33,8 +33,8 @@ export const layoutData = {
     {
       option: { layout: 'row', size: 'h-grow' },
       children: [
-        { option: { layout: 'one', size: 'w-16', overflow: 'auto' }, component: () => Layout403SlimLeft },
-        { option: { layout: 'one', size: 'w-64' }, component: () => Layout404Left },
+        // { option: { layout: 'one', size: 'w-16', overflow: 'auto' }, component: () => Layout403SlimLeft },
+        { option: { layout: 'one', size: 'w-fit' }, component: () => Layout404Left },
         {
           option: { layout: 'col', size: 'w-grow' },
           children: [
