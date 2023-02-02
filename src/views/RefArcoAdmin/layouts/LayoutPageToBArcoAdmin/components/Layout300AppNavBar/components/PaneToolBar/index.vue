@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { layoutData } from './layouts/index';
+
+const layoutState = reactive({ data: layoutData });
+</script>
 
 <template>
-  <dz-view one size="h-grow">
-    <div class="text-red-500 h-grow">PaneToolBar</div>
-  </dz-view>
+  <dz-data-layout :layout-data="layoutState.data" />
 </template>
