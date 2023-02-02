@@ -60,9 +60,9 @@ const parsePositionFlexClassName = () => {
       absolute && 'absolute',
       ...parseSizeClassName(),
       ...parsePositionClassName(),
-      'border-2 bg-green-300 border-green-600',
-      // 'border-transparent',
-      // 'bg-transparent',
+      // 'border-2 bg-green-300 border-green-600',
+      'border-transparent',
+      'bg-transparent',
       position,
     ]"
     :style="{
