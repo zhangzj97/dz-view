@@ -21,6 +21,8 @@ const props = defineProps<{
   transition?: boolean;
   pointer?: boolean;
   shadow?: string;
+
+  wrapperClass?: string;
 }>();
 
 const parseSizeClassName = () => {
@@ -109,6 +111,7 @@ const parsePositionFlexClassName = () => {
         // 'border-2 bg-cyan-300 border-cyan-600',
         'border-transparent',
         'bg-transparent',
+        wrapperClass,
       ]"
       :style="{}"
     >
