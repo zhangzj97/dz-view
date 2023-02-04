@@ -24,3 +24,9 @@ provide('config', config);
 @import url(./assets/images/index.scss);
 @import url(./assets/icons/index.scss);
 </style>
+
+<style>
+body {
+  overflow: hidden;
+}
+</style>
