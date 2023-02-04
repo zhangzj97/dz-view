@@ -15,6 +15,7 @@ const languageState = reactive({
     <dz-popover placement="bottom" rounded>
       <dz-icon pointer size="6" icon="ic:round-translate" />
       <template #content>
+        <!-- pane-language -->
         <dz-view col size="w-24" bg="bg-white">
           <template v-for="(item, index) of languageState.list" :key="index">
             <dz-view one pointer size="h-8" position="5" class="hover:bg-gray-100">
@@ -22,6 +23,7 @@ const languageState = reactive({
             </dz-view>
           </template>
         </dz-view>
+        <!-- pane-language -->
       </template>
     </dz-popover>
   </dz-view>
