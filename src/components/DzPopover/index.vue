@@ -7,6 +7,8 @@ const props = defineProps<{
 
   rounded?: boolean;
   sharp?: boolean;
+
+  tooltip?: string;
 }>();
 
 const parseOverlayClassName = () => {
@@ -14,13 +16,23 @@ const parseOverlayClassName = () => {
 
   if (props.rounded) result.push('dz-popover-rounded');
   if (props.sharp) result.push('dz-popover-sharp');
+  if (props.tooltip) result.push('dz-popover-tooltip');
 
   return result.join(' ');
 };
 </script>
 
 <template>
-  <PopoverAntd :overlay-class-name="parseOverlayClassName()" :placement="placement">
+  <PopoverAntd v-if="tooltip" :overlay-class-name="parseOverlayClassName()" :placement="placement">
+    <slot></slot>
+    <template #content>
+      <slot name="content">
+        <div class="text-sm text-gray-100">{{ tooltip }}</div>
+      </slot>
+    </template>
+  </PopoverAntd>
+
+  <PopoverAntd v-else :overlay-class-name="parseOverlayClassName()" :placement="placement">
     <slot></slot>
     <template #content>
       <slot name="content"></slot>
@@ -54,5 +66,18 @@ const parseOverlayClassName = () => {
 
 .dz-popover.dz-popover-sharp .ant-popover-inner {
   @apply rounded-lg;
+}
+</style>
+
+<style>
+.dz-popover.dz-popover-tooltip .ant-popover-arrow-content {
+  @apply bg-gray-700;
+}
+
+.dz-popover.dz-popover-tooltip .ant-popover-inner {
+  @apply rounded-sm;
+  @apply bg-gray-700;
+  @apply border-gray-700;
+  @apply py-1 px-2;
 }
 </style>
