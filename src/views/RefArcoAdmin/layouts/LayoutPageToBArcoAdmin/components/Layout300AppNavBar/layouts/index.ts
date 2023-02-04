@@ -11,6 +11,6 @@ export const layoutData = {
     { option: { layout: 'one', size: 'w-grow' }, component: () => PaneAppNav },
     { option: { layout: 'one', size: 'w-64' }, component: () => PaneSearch },
     { option: { layout: 'one', size: 'w-fit' }, component: () => PaneToolBar },
-    { option: { layout: 'one', size: 'w-16' }, component: () => PaneAvatar },
+    { option: { layout: 'one', size: 'w-20' }, component: () => PaneAvatar },
   ],
 };
