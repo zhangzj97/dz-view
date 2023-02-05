@@ -60,6 +60,6 @@ export const layoutData = {
       ],
     },
     // 足部信息
-    { option: { layout: 'one', size: 'h-16' }, component: () => Layout500FooterBar },
+    // { option: { layout: 'one', size: 'h-16' }, component: () => Layout500FooterBar },
   ],
 };
