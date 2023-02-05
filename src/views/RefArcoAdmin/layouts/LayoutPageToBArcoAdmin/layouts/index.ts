@@ -7,6 +7,7 @@ import Layout403SlimLeft from '../components/Layout403SlimLeft/index.vue';
 import Layout404Left from '../components/Layout404Left/index.vue';
 import Layout405AppNavBar from '../components/Layout405AppNavBar/index.vue';
 import Layout406BreadCrumb from '../components/Layout406BreadCrumb/index.vue';
+import Layout407RouteTag from '../components/Layout407RouteTag/index.vue';
 import Layout500FooterBar from '../components/Layout500FooterBar/index.vue';
 
 export const layoutData = {
@@ -38,8 +39,9 @@ export const layoutData = {
         {
           option: { layout: 'col', size: 'w-grow' },
           children: [
-            { option: { layout: 'one', size: 'h-16' }, component: () => Layout405AppNavBar },
-            { option: { layout: 'one', size: 'h-16' }, component: () => Layout406BreadCrumb },
+            { option: { layout: 'one', size: 'h-16', shadow: 'shadow-sm' }, component: () => Layout405AppNavBar },
+            { option: { layout: 'one', size: 'h-12', shadow: 'shadow-sm' }, component: () => Layout406BreadCrumb },
+            { option: { layout: 'one', size: 'h-8', shadow: 'shadow-sm' }, component: () => Layout407RouteTag },
             { option: { layout: 'one', size: 'h-grow' }, slot: 'default' },
           ],
         },
