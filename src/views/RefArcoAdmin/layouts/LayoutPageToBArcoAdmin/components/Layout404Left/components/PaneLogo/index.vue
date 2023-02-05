@@ -8,7 +8,7 @@ const configState = reactive<any>(inject('config') || {});
       <dz-icon size="10" icon="icon-logo-icon" />
     </dz-view>
 
-    <dz-view row size="w-grow" position="4">
+    <dz-view row size="w-48" position="4">
       <dz-font xl bold>{{ configState.logoTitle }}</dz-font>
     </dz-view>
   </dz-view>
