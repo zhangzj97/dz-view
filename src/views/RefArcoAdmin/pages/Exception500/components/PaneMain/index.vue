@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const exceptionState = reactive({
-  icon: 'icon-exception-404',
-  title: '404',
-  description: '页面不存在',
+  icon: 'icon-exception-500',
+  title: '500',
+  description: '网络错误',
 });
 </script>
 
