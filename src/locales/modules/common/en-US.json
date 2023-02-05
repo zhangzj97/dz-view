@@ -21,5 +21,10 @@
   "Demo04App.route.Demo04App.Main": "Demo04App",
   "RefAcroAdmin.route.RefAcroAdmin": "ArcoAdmin",
   "RefAcroAdmin.route.RefAcroAdmin.Main": "ArcoAdmin",
-  "RefAcroAdmin.route.RefAcroAdmin.Exception404": "Exception404"
+  "RefAcroAdmin.route.RefAcroAdmin.Exception403": "Exception403",
+  "RefAcroAdmin.route.RefAcroAdmin.Exception404": "Exception404",
+  "RefAcroAdmin.route.RefAcroAdmin.Exception500": "Exception500",
+  "RefAcroAdmin.route.RefAcroAdmin.ExceptionNetwork": "ExceptionNetwork",
+  "RefAcroAdmin.route.RefAcroAdmin.ExceptionNoData": "ExceptionNoData",
+  "RefAcroAdmin.route.RefAcroAdmin.ExceptionWait": "ExceptionWait"
 }
