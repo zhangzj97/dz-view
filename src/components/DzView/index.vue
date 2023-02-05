@@ -109,8 +109,9 @@ const parsePositionFlexClassName = () => {
         'w-auto',
         'h-auto',
         // 'border-2 bg-cyan-300 border-cyan-600',
-        'border-transparent',
-        'bg-transparent',
+        // 'border-transparent',
+        // 'bg-transparent',
+        transition && 'transition-all',
         wrapperClass,
       ]"
       :style="{}"
