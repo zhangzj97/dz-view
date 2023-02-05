@@ -6,6 +6,8 @@ const props = defineProps<{
   size?: string;
 
   pointer?: boolean;
+
+  color?: string;
 }>();
 
 const parseSizeClassName = () => {
@@ -38,7 +40,7 @@ const parseSizeStyle = () => {
       <div class="w-full h-full icon-image" :class="[props.icon]"></div>
     </template>
     <template v-else>
-      <Icon class="w-full h-full" :icon="props.icon" />
+      <Icon class="w-full h-full" :class="[color]" :icon="props.icon" />
     </template>
   </div>
 </template>
