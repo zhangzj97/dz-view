@@ -13,7 +13,7 @@ const fileHandler = ([key, value]: [string, any]) => {
   };
   result.list.push({ name: routeName, path: `/${routeName}`, component: value?.default, meta });
 };
-const fileMap = import.meta.glob('../pages/*/index.vue', { eager: true });
+const fileMap = import.meta.glob(['../pages/**/*/index.vue', '!../pages/**/*components/**/index.vue'], { eager: true });
 Object.entries(fileMap).forEach(fileHandler);
 
 export const route = [
