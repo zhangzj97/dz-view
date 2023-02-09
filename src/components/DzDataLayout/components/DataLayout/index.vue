@@ -12,6 +12,7 @@ export default { name: 'DataLayout' };
     :one="layoutData.option.layout === 'one'"
     :col="layoutData.option.layout === 'col'"
     :row="layoutData.option.layout === 'row'"
+    :grid="layoutData.option.layout === 'grid'"
     :size="layoutData.option.size"
     :overflow="layoutData.option.overflow === 'auto'"
     :overflow-hidden="layoutData.option.overflow === 'hidden'"
