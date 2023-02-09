@@ -6,23 +6,29 @@ import { useSchemaTable } from './hooks/useSchemaTable';
 const props = defineProps<{
   schema?: any[] | any;
   baseList?: any[];
-  tableConfig?: any;
+  dataModel?: any;
+  option?: any;
   moduleName?: string;
+  className?: string;
 }>();
 
-const { fixSchema } = useSchemaTable({ moduleName: props.moduleName });
+const option = reactive({
+  ...props.option,
+});
 
-const tableSchemaState = reactive<any>({
+const { fixSchema } = useSchemaTable({ moduleName: props.moduleName, option });
+
+const schemaState = reactive<any>({
   raw: null,
   cleaned: [],
 });
 
 onMounted(() => {
-  tableSchemaState.raw = props.schema;
-  tableSchemaState.cleaned = props.schema.map(fixSchema);
+  schemaState.raw = props.schema;
+  schemaState.cleaned = props.schema.map(fixSchema);
 });
 </script>
 
 <template>
-  <TableVxe :schema="tableSchemaState.cleaned" :baseList="baseList" :moduleName="moduleName" :tableConfig="tableConfig" />
+  <TableVxe :schema="schemaState.cleaned" :baseList="baseList" :dataModel="dataModel" :moduleName="moduleName" :option="option" />
 </template>
