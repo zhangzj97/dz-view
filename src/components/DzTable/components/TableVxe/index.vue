@@ -5,8 +5,10 @@ import 'vxe-table/lib/style.css';
 defineProps<{
   schema?: any[] | any;
   baseList?: any[];
-  className?: string;
+  dataModel?: any;
+  option?: any;
   moduleName?: string;
+  className?: string;
 }>();
 </script>
 
