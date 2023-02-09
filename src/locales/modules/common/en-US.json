@@ -27,5 +27,6 @@
   "RefAcroAdmin.route.RefAcroAdmin.Common/ExceptionNetwork": "ExceptionNetwork",
   "RefAcroAdmin.route.RefAcroAdmin.Common/ExceptionNoData": "ExceptionNoData",
   "RefAcroAdmin.route.RefAcroAdmin.Common/ExceptionWait": "ExceptionWait",
+  "RefAcroAdmin.route.RefAcroAdmin.Demo/Form": "Form",
   "RefAcroAdmin.route.RefAcroAdmin.Demo/Table": "Table"
 }
