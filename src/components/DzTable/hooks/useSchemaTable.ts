@@ -1,55 +1,93 @@
 import { isString, isFunction } from '@vue/shared';
 import { componentMap } from '../plugins';
 
-const componentDefault = componentMap.Cell.CellText;
+const componentDefault = 'Text';
+const componentType = 'Cell';
 
-export const useSchemaTable = ({ moduleName }) => {
-  const fixType = ({ component, type }) => {};
+interface SchemaTable {
+  field: string;
+  title?: string;
+  component: string | Function;
+  labalCompoent?: any;
 
-  const fixComponent = ({ component }) => {
-    if (isString(component)) {
-      return () => componentMap.Cell[`Cell${component}`];
-    } else if (isFunction(component)) {
-      return () => component;
-    } else {
-      return () => componentDefault;
+  size?: string;
+  position?: string;
+
+  option: any;
+  labelOption: any;
+}
+
+export const useSchemaTable = ({ moduleName, option }) => {
+  const fixType = ({ component }) => {
+    if (['xxx'].includes(component)) {
+      return component;
     }
   };
 
-  const fixField = ({ field }) => {
-    return field;
+  const fixComponent = ({ component }) => {
+    if (['xxx'].includes(component)) {
+      return '';
+    }
+
+    if (!component) component = componentDefault;
+
+    if (isString(component)) {
+      return () => componentMap[componentType][`${componentType}${component}`];
+    } else if (isFunction(component)) {
+      return component;
+    }
   };
 
-  const fixMaxWidth = ({ width, maxWidth }) => {};
-  const fixPattern = ({ pattern, required, readonly, visible }) => {};
-  const fixCellOption = ({ size, position }) => {
+  const fixRule = ({ pattern, required, readonly, visible, rule }) => {
+    const ruleList = [...rule];
+    if (required === true) {
+      const requiredRule = { pattern: /\w/, message: ({ title }) => `请填入${title}` };
+      ruleList.unshift(requiredRule);
+    }
+    if (pattern === true) {
+      const requiredPattern = { pattern, message: ({ title }) => `不符合规范` };
+      ruleList.unshift(requiredPattern);
+    }
+  };
+
+  // Component
+  const fixOption = ({ size, position }) => {
     return { size, position };
   };
-
-  const fixCustomOption = ({ props }) => {
-    return props || {};
+  const fixLabelOption = ({ labelOption }) => {
+    if (!labelOption) labelOption = {};
+    return {
+      position: labelOption.position || option.labelPosition,
+      size: labelOption.size || option.labelSize,
+    };
   };
 
-  const fixReadonly = ({ readonly }) => {};
-  const fixVisible = ({ visible }) => {};
-  const fixRequired = ({ required }) => {};
-  const fixTitle = ({ title, field }) => {
-    return title;
-  };
-  const fixSource = ({ source }) => {};
-  const fixWidth = ({ width, maxWidth }) => {};
-  const fixTooltip = ({ tooltip }) => {
-    return tooltip;
-  };
+  const fixCustomOption = ({ props }) => props || {};
+
+  const fixVisible = ({ visible }) => visible;
+  const fixSource = ({ source }) => source;
+  const fixWidth = ({ width }) => width;
+  const fixTooltip = ({ tooltip }) => tooltip;
+  const fixField = ({ field }) => field;
+  const fixMaxWidth = ({ maxWidth }) => maxWidth;
+  const fixPattern = ({ pattern }) => pattern;
+  const fixRequired = ({ required }) => required;
+  const fixReadonly = ({ readonly }) => readonly;
+  const fixTitle = ({ title, field }) => title;
 
   const fixSchema = item => {
     return {
+      type: fixType(item),
       field: fixField(item),
       title: fixTitle(item),
       component: fixComponent(item),
-      cellOption: fixCellOption(item),
+
+      option: fixOption(item),
+      labelOption: fixLabelOption(item),
       customOption: fixCustomOption(item),
+
       tooltip: fixTooltip(item),
+      rule: fixRule(item),
     };
   };
 
