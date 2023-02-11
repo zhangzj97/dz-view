@@ -12,23 +12,59 @@ const props = defineProps<{
   className?: string;
 }>();
 
-const option = reactive({
+const schemaOption = reactive({
+  cellOption: {},
+
+  labelOption: {
+    size: 'w-48 h-12',
+  },
+
+  formItemOption: {
+    size: 'h-fit w-full',
+  },
+
+  controlOption: {
+    size: 'w-grow h-12',
+  },
+
+  pluginOption: {
+    name: 'Text',
+    type: 'Cell',
+    scope: '@Dz',
+  },
+
   ...props.option,
 });
 
-const { fixSchema } = useSchemaTable({ moduleName: props.moduleName, option });
+const { fixSchema } = useSchemaTable({
+  moduleName: props.moduleName,
+  option: schemaOption,
+});
 
 const schemaState = reactive<any>({
+  version: new Date().getTime(),
   raw: null,
   cleaned: [],
 });
 
-onMounted(() => {
-  schemaState.raw = props.schema;
+const refreshWhenSchemaUpdate = (value: any) => {
+  schemaState.raw = value;
   schemaState.cleaned = props.schema.map(fixSchema);
-});
+  schemaState.version = new Date().getTime();
+};
+watch(() => props.schema, refreshWhenSchemaUpdate, { immediate: true });
 </script>
 
 <template>
-  <TableVxe :schema="schemaState.cleaned" :baseList="baseList" :dataModel="dataModel" :moduleName="moduleName" :option="option" />
+  <TableVxe
+    :class="[
+      //
+    ]"
+    :schema="schemaState.cleaned"
+    :baseList="baseList"
+    :dataModel="dataModel"
+    :moduleName="moduleName"
+    :option="option"
+    :key="schemaState.version"
+  />
 </template>

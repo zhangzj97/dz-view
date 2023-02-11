@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import PaneLabelCol from './components/PaneLabelCol/index.vue';
+import PaneLabelRow from './components/PaneLabelRow/index.vue';
 import { VxeTable, VxeColumn } from 'vxe-table';
 import 'vxe-table/lib/style.css';
 
@@ -26,29 +28,29 @@ defineProps<{
     show-header-overflow
     show-overflow
   >
-    <vxe-column type="seq" width="60"></vxe-column>
-    <vxe-column type="radio" width="60"></vxe-column>
-    <vxe-column type="checkbox" width="60"></vxe-column>
+    <vxe-column type="seq" width="60" />
+    <vxe-column type="radio" width="60" />
+    <vxe-column type="checkbox" width="60" />
 
     <template v-for="(item, index) of schema" :key="index">
       <vxe-column :field="item.field" :title="item.title">
         <template v-if="item.tooltip" #header>
-          <!-- Todo 由于父级 -->
-          <!-- 存在问题 -->
-          <dz-view row size="h-grow" :position="item.position">
-            <dz-popover :tooltip="item.tooltip">
-              <dz-view one size="w-6" position="5">
-                <dz-icon size="4" icon="ic:outline-info" />
-              </dz-view>
-            </dz-popover>
-            <dz-view one size="w-grow" position="5">
-              <dz-font>{{ item.title }}</dz-font>
-            </dz-view>
-          </dz-view>
+          <!-- Todo 由于父级 布局样式 -->
+          <PaneLabelRow :label="item.label" :tooltip="item.tooltip" :required="item.required" />
           <!-- 存在问题 -->
         </template>
         <template #default="{ row }">
-          <component :is="item.component()" :cellOption="item.cellOption" :customOption="item.customOption" :propsRow="row" :field="item.field"></component>
+          <Component
+            :class="[
+              //
+            ]"
+            :is="item.component()"
+            :conventionOption="item.conventionOption"
+            :customOption="item.customOption"
+            :propsRow="row"
+            :key="item.key"
+            :label="item.label"
+          />
         </template>
       </vxe-column>
     </template>
