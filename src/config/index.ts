@@ -1,10 +1,10 @@
 const RootRoute = {
   name: 'Home',
   path: '/',
-  redirect: '/StudyApp/Dashboard',
+  redirect: '/RefAcroAdmin',
   meta: {
     id: 'root',
-    code: 'StudyApp.route.StudyApp',
+    code: 'RefAcroAdmin.ROUTE',
     url: `/`,
     target: 'self',
   },
