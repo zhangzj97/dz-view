@@ -6,8 +6,8 @@ const fileHandler = ([key, value]: [string, any]) => {
   const routeName = `${config.ViewName}/${pageName}`;
   result.modules[routeName] = value;
   const meta = {
-    id: [config.ViewName, 'route', config.ViewName, pageName].join(config.i18nSeparator),
-    code: [config.ViewName, 'route', config.ViewName, pageName].join(config.i18nSeparator),
+    id: [config.ViewName, 'ROUTE', pageName].join(config.i18nSeparator),
+    code: [config.ViewName, 'ROUTE', pageName].join(config.i18nSeparator),
     url: `/${routeName}`,
     target: 'self',
   };
@@ -24,8 +24,8 @@ export const route = [
     component: () => import('../index.vue'),
     children: result.list,
     meta: {
-      id: [config.ViewName, 'route', config.ViewName].join(config.i18nSeparator),
-      code: [config.ViewName, 'route', config.ViewName].join(config.i18nSeparator),
+      id: [config.ViewName, 'ROUTE', config.ViewName].join(config.i18nSeparator),
+      code: [config.ViewName, 'ROUTE'].join(config.i18nSeparator),
       url: `/${config.ViewName}`,
       target: 'self',
     },
