@@ -12,23 +12,34 @@ const props = defineProps<{
   className?: string;
 }>();
 
-const option = reactive({
-  labelAndFormItemSize: 'h-fit w-full',
-  labelAndFormItemLayout: 'row',
-  labelAndFormItemPosition: '6', // unuseless
+const schemaOption = reactive({
+  cellOption: {},
 
-  labelSize: 'w-48 h-12',
-  labelLayout: 'one', // unuseless
-  labelPosition: '3',
+  labelOption: {
+    size: 'w-48 h-12',
+  },
 
-  formItemSize: 'w-grow h-12',
-  formItemLayout: 'one', // unuseless
-  formItemPosition: '4', // unuseless
+  formItemOption: {
+    size: 'h-fit w-full',
+  },
+
+  controlOption: {
+    size: 'w-grow h-12',
+  },
+
+  pluginOption: {
+    name: 'Input',
+    type: 'Control',
+    scope: '@Dz',
+  },
 
   ...props.option,
 });
 
-const { fixSchema } = useSchemaForm({ moduleName: props.moduleName, option });
+const { fixSchema } = useSchemaForm({
+  moduleName: props.moduleName,
+  option: schemaOption,
+});
 
 const schemaState = reactive<any>({
   version: new Date().getTime(),
@@ -45,5 +56,15 @@ watch(() => props.schema, refreshWhenSchemaUpdate, { immediate: true });
 </script>
 
 <template>
-  <FormDz :schema="schemaState.cleaned" :baseList="baseList" :dataModel="dataModel" :moduleName="moduleName" :option="option" :key="schemaState.version" />
+  <FormDz
+    :class="[
+      //
+    ]"
+    :schema="schemaState.cleaned"
+    :baseList="baseList"
+    :dataModel="dataModel"
+    :moduleName="moduleName"
+    :option="option"
+    :key="schemaState.version"
+  />
 </template>

@@ -1,108 +1,122 @@
-import { isString, isFunction } from '@vue/shared';
-import { componentMap } from '../plugins';
-
-const componentDefault = 'Input';
-const componentType = 'FormItem';
-
-interface SchemaForm {
-  field: string;
-  title?: string;
-  component: string | Function;
-  labalCompoent?: any;
-
-  size?: string;
-  position?: string;
-
-  option: any;
-  labelOption: any;
-}
+import { findComponent } from '@/plugins';
+import { isString, isFunction } from '@vueuse/core';
 
 export const useSchemaForm = ({ moduleName, option }) => {
-  const fixType = ({ component }) => {
-    if (['xxx'].includes(component)) {
-      return component;
+  const { ViewName, i18nSeparator } = inject('config') as any;
+  const { pluginName, pluginType, pluginScope } = option as any;
+
+  const loggerState = reactive<any>({ list: [] });
+
+  const fixId = ({ id, key }) => {
+    if (id) {
+      return id;
+    } else if (key) {
+      return key;
+    } else {
+      loggerState.list.push({ message: `[warn] [${moduleName}] [fixId]` });
+    }
+  };
+
+  const fixKey = ({ key }) => {
+    if (key) {
+      return key;
+    } else {
+      loggerState.list.push({ message: `[warn] [${moduleName}] [fixKey]` });
     }
   };
 
   const fixComponent = ({ component }) => {
-    if (['xxx'].includes(component)) {
-      return '';
-    }
-
-    if (!component) component = componentDefault;
-
-    if (isString(component)) {
-      console.log(component);
-      return () => componentMap[componentType][`${componentType}${component}`];
+    if (!component) {
+      return () => findComponent({ name: pluginName, type: pluginType, scope: pluginScope });
+    } else if (isString(component)) {
+      return () => findComponent({ name: component, type: pluginType, scope: pluginScope });
     } else if (isFunction(component)) {
       return component;
+    } else {
+      loggerState.list.push({ message: `[warn] [${moduleName}] [fixComponent]` });
     }
+  };
+
+  const fixLabel = ({ key, alias }) => {
+    if (alias) {
+      return [ViewName, moduleName, 'SCHEMA', alias].join(i18nSeparator);
+    } else if (key) {
+      return [ViewName, moduleName, 'SCHEMA', key].join(i18nSeparator);
+    }
+  };
+  const fixTooltip = ({ tooltip }) => {
+    return [ViewName, moduleName, 'TEXT', tooltip].join(i18nSeparator);
+  };
+  const fixText = ({ text }) => {
+    return [ViewName, moduleName, 'TEXT', text].join(i18nSeparator);
+  };
+
+  const fixVisible = ({ visible }) => visible;
+  const fixRequired = ({ required }) => required;
+  const fixReadonly = ({ readonly }) => readonly;
+
+  const fixSource = ({ source }) => {
+    return [ViewName, 'SOURCE', source].join(i18nSeparator);
+  };
+  const fixDict = ({ dict }) => {
+    return [ViewName, 'Dict', dict].join(i18nSeparator);
   };
 
   const fixRule = ({ rule }) => rule || [];
 
-  // Component
-  const fixOption = ({ size, position }) => {
+  const fixConventionOption = ({ size, position }) => {
     return { size, position };
-  };
-  const fixLabelOption = ({ labelOption }) => {
-    if (!labelOption) labelOption = {};
-    return {
-      position: labelOption.position || option.labelPosition,
-      size: labelOption.size || option.labelSize,
-    };
   };
 
   const fixCustomOption = ({ props }) => props || {};
 
-  const fixVisible = ({ visible }) => visible;
-  const fixSource = ({ source }) => source;
-  const fixWidth = ({ width }) => width;
-  const fixTooltip = ({ tooltip }) => tooltip;
-  const fixField = ({ field }) => field;
-  const fixMaxWidth = ({ maxWidth }) => maxWidth;
-  const fixPattern = ({ pattern }) => pattern;
-  const fixRequired = ({ required }) => required;
-  const fixReadonly = ({ readonly }) => readonly;
-  const fixTitle = ({ title, field }) => title;
-
-  const fixLayoutOption = ({ labelOption, formItemOption, size, layout, position }) => {
+  const fixLabelOption = ({ labelOption }) => {
     if (!labelOption) labelOption = {};
-    if (!formItemOption) formItemOption = {};
-    const labelAndFormItemLayout = layout || option.labelAndFormItemLayout;
-    const labelAndFormItemSize = size || option.labelAndFormItemSize;
-    const labelAndFormItemPosition = position || option.labelAndFormItemPosition;
+    const size = labelOption.size || option.labelPosition.size;
+    const position = labelOption.position || option.labelPosition.position;
+    return { size, position };
+  };
 
-    const labelLayout = labelOption.layout || option.labelLayout;
-    const labelSize = labelOption.size || option.labelSize;
-    const labelPosition = labelOption.position || option.labelPosition;
+  const fixCellOption = ({ cellOption }) => {
+    if (!cellOption) cellOption = {};
+    const size = cellOption.size || option.cellOption.size;
+    const position = cellOption.position || option.cellOption.position;
+    return { size, position };
+  };
 
-    const formItemLayout = formItemOption.layout || option.formItemLayout;
-    const formItemSize = formItemOption.size || option.formItemSize;
-    const formItemPosition = formItemOption.position || option.formItemPosition;
-
-    return {
-      ...{ labelAndFormItemLayout, labelAndFormItemSize, labelAndFormItemPosition },
-      ...{ labelLayout, labelSize, labelPosition },
-      ...{ formItemLayout, formItemSize, formItemPosition },
-    };
+  const fixControlOption = ({ controlOption }) => {
+    if (!controlOption) controlOption = {};
+    const size = controlOption.size || option.controlOption.size;
+    const position = controlOption.position || option.controlOption.position;
+    return { size, position };
   };
 
   const fixSchema = item => {
     return {
-      type: fixType(item),
-      field: fixField(item),
-      title: fixTitle(item),
+      id: fixId(item),
+      key: fixKey(item),
+
       component: fixComponent(item),
 
-      option: fixOption(item),
-      labelOption: fixLabelOption(item),
-      customOption: fixCustomOption(item),
-
+      label: fixLabel(item),
       tooltip: fixTooltip(item),
+      text: fixText(item),
+
+      visible: fixVisible(item),
+      required: fixRequired(item),
+      readonly: fixReadonly(item),
+
+      source: fixSource(item),
+      dict: fixDict(item),
+
       rule: fixRule(item),
 
-      layoutOption: fixLayoutOption(item),
+      conventionOption: fixConventionOption(item),
+      customOption: fixCustomOption(item),
+
+      labelOption: fixLabelOption(item),
+      cellOption: fixCellOption(item),
+      controlOption: fixControlOption(item),
     };
   };
 
