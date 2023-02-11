@@ -14,7 +14,7 @@ export default defineConfig({
     vueJsx(),
     AutoImport({
       dts: './types/auto-imports.d.ts',
-      imports: ['vue', 'vue-i18n'],
+      imports: ['vue', 'vue-i18n', '@vueuse/core'],
       resolvers: [ArcoResolver()],
     }),
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
