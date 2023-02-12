@@ -9,7 +9,7 @@ type MessageSchema = typeof zhCN;
 export const i18n = createI18n<[MessageSchema, any, any], 'zh-CN' | 'en-US' | 'ja-JP'>({
   legacy: false,
   locale: 'zh-CN',
-  fallbackLocale: 'en-US',
+  fallbackLocale: 'zh-CN',
   messages: {
     'zh-CN': zhCN,
     'en-US': enUS,

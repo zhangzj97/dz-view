@@ -24,4 +24,6 @@ export default {
   'RefAcroAdmin.Demo/Form.SCHEMA.Text03': 'Text03',
   'RefAcroAdmin.Demo/Form.SCHEMA.Text04': 'Text04',
   'RefAcroAdmin.Demo/Form.SCHEMA.Text05': 'Text05',
+
+  'RefAcroAdmin.Demo/Form.TEXT.这是 Text04 的 tooltip': '这是 Text04 的 tooltip',
 };
