@@ -19,7 +19,7 @@ const placeholder = computed(() => {
   <dz-view col size="h-grow" wrapperClass="" position="1">
     <!-- 主体内容 -->
     <dz-view one size="h-fit w-3/4">
-      <a-input size="small" allow-clear :placeholder="placeholder" />
+      <a-input-password size="small" allow-clear :placeholder="placeholder" autocomplete="new-password" />
     </dz-view>
 
     <!-- 提示文字 -->

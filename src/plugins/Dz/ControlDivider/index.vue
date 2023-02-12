@@ -16,9 +16,9 @@ const text = computed(() => {
 </script>
 
 <template>
-  <dz-view one size="h-grow" wrapperClass="px-4 py-2" position="1">
-    <dz-alert :type="props.customOption.type">
-      <dz-font xs>{{ text }}</dz-font>
-    </dz-alert>
+  <dz-view one size="h-grow" wrapperClass="px-4" position="1">
+    <dz-divider>
+      <dz-font>{{ text }}</dz-font>
+    </dz-divider>
   </dz-view>
 </template>

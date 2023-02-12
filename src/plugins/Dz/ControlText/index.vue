@@ -1,31 +1,30 @@
 <script setup lang="ts">
-import {} from '@/hooks/useFormItem';
-defineProps<{
-  value: any;
+import type { PluginControlProps } from '@/hooks/usePluginControl';
 
-  dataModel: any;
-  content: any;
-  placeholder: string;
-  tooltip: string;
-  rule: any;
-  readonly: boolean;
-  required: boolean;
-  visible: boolean;
-  field: string;
-  labelField: string;
-}>();
+const { t } = useI18n();
+
+const props = defineProps<PluginControlProps>();
+
+const ruleState = reactive({
+  errorMessage: false,
+});
+
+const text = computed(() => {
+  if (props.text) return `${t(props.text)}`;
+  return `提示文字`;
+});
 </script>
 
 <template>
-  <dz-view row size="h-grow" position="5">
-    <dz-view one size="w-grow">
-      <dz-font>{{ content }}</dz-font>
+  <dz-view col size="h-grow" wrapperClass="" position="1">
+    <!-- 主体内容 -->
+    <dz-view one size="h-fit w-3/4">
+      <dz-font sm>{{ text }}</dz-font>
     </dz-view>
 
-    <dz-view row size="w-fit" wrapper-class="gap-2 px-2">
-      <dz-icon size="4" icon="ic:sharp-devices-fold"></dz-icon>
-      <dz-icon size="4" icon="ic:sharp-devices-fold"></dz-icon>
-      <dz-icon size="4" icon="ic:sharp-devices-fold"></dz-icon>
+    <!-- 提示文字 -->
+    <dz-view one size="h-4">
+      <dz-font v-if="ruleState.errorMessage" xs color="text-red-500">{{ ruleState.errorMessage }}</dz-font>
     </dz-view>
   </dz-view>
 </template>

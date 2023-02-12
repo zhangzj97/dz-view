@@ -19,7 +19,7 @@ const placeholder = computed(() => {
   <dz-view col size="h-grow" wrapperClass="" position="1">
     <!-- 主体内容 -->
     <dz-view one size="h-fit w-3/4">
-      <a-input size="small" allow-clear :placeholder="placeholder" />
+      <a-textarea size="small" :rows="4" allow-clear :placeholder="placeholder" :auto-size="{ minRows: 4, maxRows: 8 }" show-count :maxlength="188" />
     </dz-view>
 
     <!-- 提示文字 -->
