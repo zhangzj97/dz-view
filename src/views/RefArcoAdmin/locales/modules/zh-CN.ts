@@ -21,4 +21,16 @@ export default {
 
   'RefAcroAdmin.Demo/Table.DICT.payType': '支付方式',
   'RefAcroAdmin.Demo/Table.DICT.payType/1': '一号支付',
+
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo01': 'Demo01',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo02': 'Demo02',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo03': 'Demo03',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo04': 'Demo04',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo05': 'Demo05',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo06': 'Demo06',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo07': 'Demo07',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo08': 'Demo08',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo09': 'Demo09',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo10': 'Demo10',
+  'RefAcroAdmin.Demo/Form.SCHEMA.Demo11': 'Demo11',
 };
