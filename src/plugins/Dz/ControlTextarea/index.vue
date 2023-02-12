@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import type { PluginControlProps } from '@/hooks/usePluginControl';
-
 const { t } = useI18n();
 
-const props = defineProps<PluginControlProps>();
+const props = defineProps<{
+  k: string;
+  label: string;
+  text: string | false;
+  tooltip?: string | false;
+  visible?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+  propsRow: any;
+  conventionOption: any;
+  customOption: any;
+}>();
 
 const ruleState = reactive({
   errorMessage: false,
