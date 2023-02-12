@@ -8,7 +8,7 @@ export const layoutData = [
     option: { layout: 'one', size: 'h-grow' },
     children: [
       { option: { layout: 'one', size: 'h-16' }, component: () => PaneMenuTool },
-      { option: { layout: 'one', size: 'h-grow', overflow: 'auto' }, component: () => PaneMenu },
+      { option: { layout: 'one', size: 'h-grow', class: 'h-0', overflow: 'auto' }, component: () => PaneMenu },
     ],
   },
 ];
