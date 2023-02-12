@@ -42,7 +42,7 @@ export const layoutData = {
             { option: { layout: 'one', size: 'h-16', shadow: 'shadow-sm' }, component: () => Layout405AppNavBar },
             { option: { layout: 'one', size: 'h-12', shadow: 'shadow-sm' }, component: () => Layout406BreadCrumb },
             { option: { layout: 'one', size: 'h-8', shadow: 'shadow-sm' }, component: () => Layout407RouteTag },
-            { option: { layout: 'one', size: 'h-grow' }, slot: 'default' },
+            { option: { layout: 'one', size: 'h-grow', class: 'h-0', overflow: 'auto' }, slot: 'default' },
           ],
         },
 
