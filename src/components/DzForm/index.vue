@@ -13,18 +13,23 @@ const props = defineProps<{
 }>();
 
 const schemaOption = reactive({
+  required: false,
+  readonly: false,
+  visible: true,
+
   cellOption: {},
 
   labelOption: {
-    size: 'w-48 h-12',
+    size: 'w-24 h-fit',
   },
 
   formItemOption: {
+    layout: 'row',
     size: 'h-fit w-full',
   },
 
   controlOption: {
-    size: 'w-grow h-12',
+    size: 'w-grow h-fit',
   },
 
   pluginOption: {
