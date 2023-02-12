@@ -3,7 +3,7 @@ import { isString, isFunction } from '@vueuse/core';
 
 export const useSchemaForm = ({ moduleName, option }) => {
   const { ViewName, i18nSeparator } = inject('config') as any;
-  const { pluginName, pluginType, pluginScope } = option as any;
+  const { pluginOption } = option as any;
 
   const loggerState = reactive<any>({ list: [] });
 
@@ -27,9 +27,9 @@ export const useSchemaForm = ({ moduleName, option }) => {
 
   const fixComponent = ({ component }) => {
     if (!component) {
-      return () => findComponent({ name: pluginName, type: pluginType, scope: pluginScope });
+      return () => findComponent({ name: pluginOption.name, type: pluginOption.type, scope: pluginOption.scope });
     } else if (isString(component)) {
-      return () => findComponent({ name: component, type: pluginType, scope: pluginScope });
+      return () => findComponent({ name: component, type: pluginOption.type, scope: pluginOption.scope });
     } else if (isFunction(component)) {
       return component;
     } else {
@@ -45,15 +45,26 @@ export const useSchemaForm = ({ moduleName, option }) => {
     }
   };
   const fixTooltip = ({ tooltip }) => {
-    return [ViewName, moduleName, 'TEXT', tooltip].join(i18nSeparator);
+    if (tooltip) return [ViewName, moduleName, 'TEXT', tooltip].join(i18nSeparator);
+    else return false;
   };
   const fixText = ({ text }) => {
-    return [ViewName, moduleName, 'TEXT', text].join(i18nSeparator);
+    if (text) return [ViewName, moduleName, 'TEXT', text].join(i18nSeparator);
+    else return false;
   };
 
-  const fixVisible = ({ visible }) => visible;
-  const fixRequired = ({ required }) => required;
-  const fixReadonly = ({ readonly }) => readonly;
+  const fixVisible = ({ visible }) => {
+    if (!isDefined(visible)) return option.visible;
+    return visible;
+  };
+  const fixRequired = ({ required }) => {
+    if (!isDefined(required)) return option.required;
+    return required;
+  };
+  const fixReadonly = ({ readonly }) => {
+    if (!isDefined(readonly)) return option.readonly;
+    return readonly;
+  };
 
   const fixSource = ({ source }) => {
     return [ViewName, 'SOURCE', source].join(i18nSeparator);
@@ -72,9 +83,17 @@ export const useSchemaForm = ({ moduleName, option }) => {
 
   const fixLabelOption = ({ labelOption }) => {
     if (!labelOption) labelOption = {};
-    const size = labelOption.size || option.labelPosition.size;
-    const position = labelOption.position || option.labelPosition.position;
+    const size = labelOption.size || option.labelOption.size;
+    const position = labelOption.position || option.labelOption.position;
     return { size, position };
+  };
+
+  const fixFormItemOption = ({ formItemOption }) => {
+    if (!formItemOption) formItemOption = {};
+    const layout = formItemOption.layout || option.formItemOption.layout;
+    const size = formItemOption.size || option.formItemOption.size;
+    const position = formItemOption.position || option.formItemOption.position;
+    return { layout, size, position };
   };
 
   const fixCellOption = ({ cellOption }) => {
@@ -115,6 +134,7 @@ export const useSchemaForm = ({ moduleName, option }) => {
       customOption: fixCustomOption(item),
 
       labelOption: fixLabelOption(item),
+      formItemOption: fixFormItemOption(item),
       cellOption: fixCellOption(item),
       controlOption: fixControlOption(item),
     };
