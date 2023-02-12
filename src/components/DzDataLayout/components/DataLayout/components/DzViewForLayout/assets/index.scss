@@ -1,4 +1,16 @@
+.h-grow.h-0 {
+  height: 0;
+}
+
+.w-grow.w-0 {
+  width: 0;
+}
+
 .h-grow,
+.h-grow-1 {
+  @apply h-auto;
+  flex-grow: 1;
+}
 .h-grow-2 {
   @apply h-auto;
   flex-grow: 2;
