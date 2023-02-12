@@ -45,11 +45,12 @@ defineProps<{
               //
             ]"
             :is="item.component()"
+            :k="item.key"
+            :label="item.label"
+            :text="item.text"
+            :propsRow="row"
             :conventionOption="item.conventionOption"
             :customOption="item.customOption"
-            :propsRow="row"
-            :key="item.key"
-            :label="item.label"
           />
         </template>
       </vxe-column>
