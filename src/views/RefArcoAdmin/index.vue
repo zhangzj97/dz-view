@@ -5,15 +5,15 @@ provide('config', config);
 </script>
 
 <template>
-  <layout-page>
-    <router-view v-slot="{ Component, route }">
-      <transition name="fade-slide" mode="out-in" appear>
-        <keep-alive :include="[]">
-          <component :is="Component" :key="route.fullPath" />
-        </keep-alive>
-      </transition>
-    </router-view>
-  </layout-page>
+  <LayoutPage>
+    <RouterView v-slot="{ Component, route }">
+      <Transition name="fade-slide" mode="out-in" appear>
+        <KeepAlive :include="[]">
+          <Component :is="Component" :key="route.fullPath" />
+        </KeepAlive>
+      </Transition>
+    </RouterView>
+  </LayoutPage>
 </template>
 
 <style lang="scss">
