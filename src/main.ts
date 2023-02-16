@@ -2,7 +2,7 @@ import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
 import App from './App.vue';
-import { i18n } from './locales';
+import { i18n } from './locale';
 import { router } from './router';
 
 import './index.css';
