@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { schemaTable } from './schemas';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <dz-view col size="h-grow">
@@ -9,7 +7,7 @@ import { schemaTable } from './schemas';
     </dz-view>
 
     <dz-view one size="h-grow">
-      <dz-page-table :schemaTable="schemaTable"> </dz-page-table>
+      <dz-button icon="ic:baseline-10k" title="xxx" />
     </dz-view>
   </dz-view>
 </template>

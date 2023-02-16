@@ -1,4 +1,4 @@
-export const schemaTable = [
+export const schemaTableTime = [
   { field: 'id', title: 'Id', component: 'Text' },
   { field: 'index', title: 'Index', component: 'Text', tooltip: 'xxxxx' },
   { field: 'date', title: 'date', component: 'Date' },

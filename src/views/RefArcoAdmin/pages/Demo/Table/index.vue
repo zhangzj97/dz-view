@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import { layoutData } from './layouts/index';
+// import { schemaTableTime } from './schemas';
 
-const layoutState = reactive({ data: layoutData });
+const schemaTableTime = reactive([]);
 </script>
 
 <template>
-  <dz-data-layout :layout-data="layoutState.data" />
+  <dz-view col size="h-grow">
+    <dz-view one>
+      <dz-font>Page Tab</dz-font>
+    </dz-view>
+
+    <dz-view one size="h-grow">
+      <dz-page-table :schemaTable="schemaTableTime" :moduleName="'Demo/Table'" />
+    </dz-view>
+  </dz-view>
 </template>
