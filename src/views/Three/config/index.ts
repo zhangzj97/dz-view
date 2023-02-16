@@ -17,12 +17,20 @@ const DzButtonOption = {
   },
 };
 
+const RootRouteOption = {
+  id: 'ROOT',
+  code: 'ROOT',
+};
+
 export const config = {
   // 当前业务配置
   ViewName,
   HomePageName,
   i18nSeparator,
   logoTitle,
+
+  // 路径
+  RootRouteOption,
 
   // 组件配置
   DzAlertOption,
