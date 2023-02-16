@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDzView } from './hooks/useDzView';
+
 const props = defineProps<{
   one?: boolean;
   col?: boolean;
@@ -22,8 +24,10 @@ const props = defineProps<{
   pointer?: boolean;
   shadow?: string;
 
-  wrapperClass?: string;
+  wrapperClass?: string | string[];
 }>();
+
+const { wrapperClass } = useDzView({ props });
 
 const parseSizeClassName = () => {
   const className = {
