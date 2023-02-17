@@ -3,41 +3,7 @@ const HomePageName = 'Main';
 const i18nSeparator = '.';
 const logoTitle = 'Acro Admin';
 
-const DzAlertOption = {
-  themeOption: {
-    primary: '@ThemeApp/Green',
-    danger: '@ThemeApp/Red',
-    info: '@ThemeApp/Blue',
-    warn: '@ThemeApp/Yellow',
-    default: '@ThemeApp/Gray',
-  },
-
-  iconOption: {
-    primary: 'ic:round-check-circle-outline',
-    danger: 'ic:outline-dangerous',
-    info: 'ic:outline-info',
-    warn: 'ic:round-error-outline',
-    default: '',
-  },
-};
-
-const DzButtonOption = {
-  themeOption: {
-    primary: '@ThemeApp/Green',
-    danger: '@ThemeApp/Red',
-    info: '@ThemeApp/Blue',
-    warn: '@ThemeApp/Yellow',
-    default: '@ThemeApp/Gray',
-  },
-
-  iconOption: {
-    primary: 'ic:round-check-circle-outline',
-    danger: 'ic:outline-dangerous',
-    info: 'ic:outline-info',
-    warn: 'ic:round-error-outline',
-    default: '',
-  },
-};
+const SourceThemeCurrentCode = '@ThemeApp/Green';
 
 const RootRouteOption = {
   id: 'ROOT',
@@ -51,10 +17,9 @@ export const config = {
   i18nSeparator,
   logoTitle,
 
+  // Theme
+  SourceThemeCurrentCode,
+
   // 路径
   RootRouteOption,
-
-  // 组件配置
-  DzAlertOption,
-  DzButtonOption,
 };
