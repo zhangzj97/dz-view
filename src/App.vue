@@ -1,7 +1,9 @@
 <script setup lang="ts" name="App">
-// TODO
-// I need find a way to solve the problem `TS6305` that `index.ts` need `index.d.ts` just for type
-// which has the same content.
+import { useSource } from '@/hooks/useSource';
+
+onBeforeMount(async () => {
+  await useSource({ strategy: 'import', sourceName: 'theme' });
+});
 </script>
 
 <template>
