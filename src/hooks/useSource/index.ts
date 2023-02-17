@@ -1,16 +1,23 @@
 export const useSource = async ({ request, strategy, sourceName }: any) => {
   const sourceMap = {
     route: {
+      importSource: true,
       importPath: 'routes',
       localStorageListKey: 'SourceRouteList',
       localStorageMapKey: 'SourceRouteMap',
     },
+    theme: {
+      importSource: false,
+      importPath: 'themes',
+      localStorageListKey: 'SourceThemeList',
+      localStorageMapKey: 'SourceThemeMap',
+    },
   };
 
-  const { importPath, localStorageListKey, localStorageMapKey } = sourceMap[sourceName];
+  const { importPath, importSource, localStorageListKey, localStorageMapKey } = sourceMap[sourceName];
 
   const getSourceImport = async () => {
-    const SourceRaw = (await import(`../../sources/${importPath}/index.ts`)).default;
+    const SourceRaw = importSource ? (await import(`../../sources/${importPath}/index.ts`)).default : (await import(`../../${importPath}/index.ts`)).default;
 
     const SourceList = rawToList({ raw: SourceRaw });
     const SourceMap = listToMap({ list: SourceList });
