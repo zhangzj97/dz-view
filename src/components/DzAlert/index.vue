@@ -21,7 +21,6 @@ const props = defineProps<{
 }>();
 const config: any = inject('config');
 const { themeOption, icon } = useTheme({ props, config, themePart: 'DzAlertOption' });
-console.log({ themeOption, icon });
 </script>
 
 <template>
