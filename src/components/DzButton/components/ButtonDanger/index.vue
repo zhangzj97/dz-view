@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { useClickEffect } from './hooks/useClickEffect';
+import { useTheme } from '@/hooks/useTheme';
 
 defineProps<{
-  title?: string;
-
-  themeOption: any;
+  title?: string | false;
 
   icon?: string | false;
-  iconSize?: string;
 
   loading?: boolean;
   disable?: boolean;
 }>();
 
 const { toggleClickEffect, clickEffectState } = useClickEffect();
+
+const config = inject('config');
+const { themeOption } = useTheme({ config, themePart: 'DzButtonDangerOption' });
 </script>
 
 <template>
@@ -45,7 +46,6 @@ const { toggleClickEffect, clickEffectState } = useClickEffect();
         :wrapperClass="[
           //
           themeOption.bg,
-
           'cursor-wait',
           'py-1 px-2',
           'select-none',
@@ -88,13 +88,15 @@ const { toggleClickEffect, clickEffectState } = useClickEffect();
       shadow="shadow-lg"
       position="4"
       class="z-30"
+      transition
       :wrapperClass="[
         //
         themeOption.bg,
+        themeOption.bgHover,
         themeOption.border,
+        themeOption.borderHover,
         'py-1 px-2',
         'select-none',
-        'hover:opacity-80',
         'rounded',
         'border-[0.5px]',
       ]"

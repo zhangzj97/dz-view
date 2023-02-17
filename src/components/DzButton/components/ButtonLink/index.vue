@@ -1,19 +1,40 @@
 <script setup lang="ts">
-defineProps<{
-  title?: string;
+import { useClickEffect } from './hooks/useClickEffect';
+import { useTheme } from '@/hooks/useTheme';
 
-  themeOption: any;
+defineProps<{
+  title?: string | false;
 
   icon?: string | false;
-  iconSize?: string;
 
   loading?: boolean;
   disable?: boolean;
 }>();
+
+const { toggleClickEffect, clickEffectState } = useClickEffect();
+
+const config = inject('config');
+const { themeOption } = useTheme({ config, themePart: 'DzButtonLinkOption' });
 </script>
 
 <template>
   <dz-view one size="h-fit w-fit">
+    <!-- 光晕 -->
+    <dz-view
+      v-if="false"
+      absolute
+      one
+      size="w-full h-full"
+      transition
+      :wrapperClass="[
+        //
+        themeOption.effectBg,
+        'transform',
+        'rounded',
+        clickEffectState.afterOn ? 'scale-110' : 'scale-100',
+      ]"
+    />
+    <!-- 光晕 -->
     <!-- 覆盖层 -->
     <template v-if="loading">
       <dz-view
@@ -25,8 +46,7 @@ defineProps<{
         class="z-50"
         :wrapperClass="[
           //
-          // themeOption.bg,
-
+          themeOption.bg,
           'cursor-wait',
           'py-0 px-0',
           'select-none',
@@ -69,16 +89,19 @@ defineProps<{
       shadow="shadow-lg"
       position="4"
       class="z-30"
+      transition
       :wrapperClass="[
         //
         themeOption.bg,
+        themeOption.bgHover,
         themeOption.border,
+        themeOption.borderHover,
         'py-0 px-0',
         'select-none',
-        'hover:opacity-80',
         'rounded',
-        'border-0 border-transparent',
+        'border-0',
       ]"
+      @click="toggleClickEffect"
     >
       <template v-if="icon">
         <dz-view one size="w-6" position="5">
@@ -87,7 +110,7 @@ defineProps<{
       </template>
       <template v-if="title">
         <dz-view one size="w-fit h-fit" wrapperClass="pb-0 px-0">
-          <dz-font sm class="underline underline-offset-2" :color="themeOption.border">{{ title }}</dz-font>
+          <dz-font sm class="underline underline-offset-3" :color="themeOption.textColor">{{ title }}</dz-font>
         </dz-view>
       </template>
     </dz-view>

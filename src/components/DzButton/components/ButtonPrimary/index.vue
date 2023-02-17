@@ -14,7 +14,7 @@ defineProps<{
 const { toggleClickEffect, clickEffectState } = useClickEffect();
 
 const config = inject('config');
-const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
+const { themeOption } = useTheme({ config, themePart: 'DzButtonPrimaryOption' });
 </script>
 
 <template>
@@ -51,7 +51,7 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
           'select-none',
           'opacity-90',
           'rounded',
-          'border-[0.5px] border-transparent',
+          'border-[0.5px] border-gray-200',
         ]"
       >
         <dz-icon size="5" color="text-gray-500" icon="line-md:loading-twotone-loop" />
@@ -76,7 +76,7 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
           'select-none',
           'opacity-90',
           'rounded',
-          'border-[0.5px] border-transparent',
+          'border-[0.5px] border-gray-200',
         ]"
       />
     </template>
@@ -85,7 +85,7 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
       row
       size="w-fit"
       pointer
-      shadow="shadow-none"
+      shadow="shadow-lg"
       position="4"
       class="z-30"
       transition
