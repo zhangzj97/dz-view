@@ -1,30 +1,20 @@
 <script setup lang="ts">
 import AlertDz from './components/AlertDz/index.vue';
-import { useTheme } from '@/hooks/useTheme';
+import { useDzAlert } from './hooks/useDzAlert';
 
 const props = defineProps<{
   title?: string;
   message?: string;
 
+  type: 'success' | 'error' | 'warn' | 'info';
+
   closedable?: boolean;
-
-  primary?: boolean;
-  info?: boolean;
-  danger?: boolean;
-  warn?: boolean;
-  theme?: string | false;
-
-  bg?: string;
-  border?: string;
-
-  icon?: string | false;
 }>();
-const config: any = inject('config');
-const { themeOption, icon } = useTheme({ props, config, themePart: 'DzAlertOption' });
+const { themeOption } = useDzAlert({ props });
 </script>
 
 <template>
-  <AlertDz :title="title" :message="message" :themeOption="themeOption" :icon="icon">
+  <AlertDz :title="title" :message="message" :themeOption="themeOption">
     <slot></slot>
   </AlertDz>
 </template>

@@ -5,10 +5,7 @@ defineProps<{
 
   closedable?: boolean;
 
-  theme?: string | false;
   themeOption?: any;
-
-  icon?: string | false;
 }>();
 </script>
 
@@ -25,9 +22,9 @@ defineProps<{
       'rounded',
     ]"
   >
-    <template v-if="icon">
+    <template v-if="themeOption.icon">
       <dz-view one size="w-fit" wrapper-class="pr-2">
-        <dz-icon size="6" :icon="icon" :color="themeOption.iconColor" />
+        <dz-icon size="6" :icon="themeOption.icon" :color="themeOption.iconColor" />
       </dz-view>
     </template>
 
