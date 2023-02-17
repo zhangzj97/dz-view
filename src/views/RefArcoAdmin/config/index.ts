@@ -5,15 +5,17 @@ const logoTitle = 'Acro Admin';
 
 const DzAlertOption = {
   themeOption: {
-    primary: 'green',
-    default: 'gray',
+    primary: '@ThemeApp/Green',
+    danger: '@ThemeApp/Red',
+    default: '@ThemeApp/Gray',
   },
 };
 
 const DzButtonOption = {
   themeOption: {
-    primary: 'blue',
-    default: 'gray',
+    primary: '@ThemeApp/Green',
+    danger: '@ThemeApp/Red',
+    default: '@ThemeApp/Gray',
   },
 };
 
