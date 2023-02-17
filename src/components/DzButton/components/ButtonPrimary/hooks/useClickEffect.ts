@@ -5,7 +5,6 @@ export const useClickEffect = () => {
 
   const toggleClickEffect = () => {
     clickEffectState.afterOn = true;
-    console.log(999);
     setTimeout(() => (clickEffectState.afterOn = false), 300);
   };
 

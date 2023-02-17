@@ -35,7 +35,7 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonDangerOption' });
     />
     <!-- 光晕 -->
     <!-- 覆盖层 -->
-    <template v-if="loading">
+    <template v-if="disable || loading">
       <dz-view
         absolute
         one
@@ -45,40 +45,17 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonDangerOption' });
         class="z-50"
         :wrapperClass="[
           //
-          themeOption.bg,
-          'cursor-wait',
+          'bg-white',
+          'cursor-not-allowed',
           'py-1 px-2',
           'select-none',
-          'opacity-90',
+          'opacity-50',
           'rounded',
           'border-[0.5px] border-gray-200',
         ]"
       >
-        <dz-icon size="5" color="text-gray-500" icon="line-md:loading-twotone-loop" />
+        <dz-icon v-if="loading" size="5" color="text-gray-500" icon="line-md:loading-twotone-loop" />
       </dz-view>
-    </template>
-    <!-- 覆盖层 -->
-
-    <!-- 覆盖层 -->
-    <template v-if="disable">
-      <dz-view
-        absolute
-        one
-        size="w-full h-full"
-        position="5"
-        transition
-        class="z-50"
-        :wrapperClass="[
-          //
-          themeOption.bg,
-          'cursor-not-allowed',
-          'py-1 px-2',
-          'select-none',
-          'opacity-90',
-          'rounded',
-          'border-[0.5px] border-gray-200',
-        ]"
-      />
     </template>
     <!-- 覆盖层 -->
     <dz-view
