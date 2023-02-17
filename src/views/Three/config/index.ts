@@ -5,15 +5,37 @@ const logoTitle = 'Acro Admin';
 
 const DzAlertOption = {
   themeOption: {
-    primary: 'green',
-    default: 'gray',
+    primary: '@ThemeApp/Green',
+    danger: '@ThemeApp/Red',
+    info: '@ThemeApp/Blue',
+    warn: '@ThemeApp/Yellow',
+    default: '@ThemeApp/Gray',
+  },
+
+  iconOption: {
+    primary: 'ic:round-check-circle-outline',
+    danger: 'ic:outline-dangerous',
+    info: 'ic:outline-info',
+    warn: 'ic:round-error-outline',
+    default: '',
   },
 };
 
 const DzButtonOption = {
   themeOption: {
-    primary: 'blue',
-    default: 'gray',
+    primary: '@ThemeApp/Green',
+    danger: '@ThemeApp/Red',
+    info: '@ThemeApp/Blue',
+    warn: '@ThemeApp/Yellow',
+    default: '@ThemeApp/Gray',
+  },
+
+  iconOption: {
+    primary: 'ic:round-check-circle-outline',
+    danger: 'ic:outline-dangerous',
+    info: 'ic:outline-info',
+    warn: 'ic:round-error-outline',
+    default: '',
   },
 };
 
