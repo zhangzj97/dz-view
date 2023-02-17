@@ -34,13 +34,14 @@ const toValue = ({ path }) => {
     return previousValue.replace(search, replace);
   }, path);
 
-  const routePath = key.replace(/^@.*?\//, '');
+  const code = key.replace(/^@.*?\//, '');
 
   return {
     id: String(Math.random() * 10000),
-    code: [routePath].join('.'),
+    code,
     scope: scopeKey,
-    component: routePath,
+
+    component: code,
   };
 };
 
