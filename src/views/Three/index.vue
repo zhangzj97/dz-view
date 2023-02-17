@@ -1,8 +1,19 @@
-<script setup lang="ts" name="App"></script>
+<script setup lang="ts" name="App1">
+import LayoutPage from './layouts/LayoutPageToBArcoAdmin/index.vue';
+import { config } from './config';
+provide('config', config);
+</script>
 
 <template>
-  123
-  <router-view />
+  <LayoutPage>
+    <RouterView v-slot="{ Component, route }">
+      <Transition name="fade-slide" mode="out-in" appear>
+        <KeepAlive :include="[]">
+          <Component :is="Component" :key="route.fullPath" />
+        </KeepAlive>
+      </Transition>
+    </RouterView>
+  </LayoutPage>
 </template>
 
 <style lang="scss">
@@ -10,19 +21,12 @@
 </style>
 
 <style lang="scss">
-/* fade-slide */
-.fade-slide-leave-active,
-.fade-slide-enter-active {
-  transition: all 0.3s;
-}
+@import url(./assets/images/index.scss);
+@import url(./assets/icons/index.scss);
+</style>
 
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
+<style>
+body {
+  overflow: hidden;
 }
 </style>
