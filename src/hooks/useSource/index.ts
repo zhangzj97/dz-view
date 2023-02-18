@@ -12,6 +12,12 @@ export const useSource = async ({ request, strategy, sourceName }: any) => {
       localStorageListKey: 'SourceThemeList',
       localStorageMapKey: 'SourceThemeMap',
     },
+    menu: {
+      importSource: true,
+      importPath: 'menus',
+      localStorageListKey: 'SourceMenuList',
+      localStorageMapKey: 'SourceMenuMap',
+    },
   };
 
   const { importPath, importSource, localStorageListKey, localStorageMapKey } = sourceMap[sourceName];
