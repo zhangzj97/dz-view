@@ -1,9 +1,9 @@
-const ViewName = 'ThemeApp';
+const ViewName = 'SourceThemeApp';
 const HomePageName = 'Main';
 const i18nSeparator = '.';
-const logoTitle = 'Acro Admin';
+const logoTitle = 'SourceThemeApp';
 
-const SourceThemeCurrentCode = '@ThemeApp/Green';
+const SourceThemeCurrentCode = '@SourceThemeApp/Green';
 
 const RootRouteOption = {
   id: 'ROOT',
