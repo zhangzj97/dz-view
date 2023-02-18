@@ -1,16 +1,18 @@
 <script setup lang="ts" name="MenuAntd">
 import SubMenu from './components/SubMenu/index.vue';
 
+defineProps<{
+  menuList: any[];
+}>();
+
 const emit = defineEmits<{
   (e: 'handleClick', item: any): void;
 }>();
 
-const handleClick = (item: any) => emit('handleClick', item);
-
+const handleClick = (item: any) => {
+  emit('handleClick', item);
+};
 const { t } = useI18n();
-defineProps<{
-  menuList: any[];
-}>();
 </script>
 
 <template>
@@ -21,9 +23,9 @@ defineProps<{
           <sub-menu :menuInfo="item" @handleClick="handleClick" />
         </template>
         <template v-else>
-          <a-menu-item :key="item.mate?.id" @click="handleClick(item)">
-            <template #icon><dz-icon :icon="String(item.meta?.icon)" /></template>
-            <div>{{ t(String(item.meta?.code)) }}</div>
+          <a-menu-item :key="item.id" @click="handleClick(item)">
+            <template #icon><dz-icon :icon="String(item.icon)" /></template>
+            <div>{{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}</div>
           </a-menu-item>
         </template>
       </template>
