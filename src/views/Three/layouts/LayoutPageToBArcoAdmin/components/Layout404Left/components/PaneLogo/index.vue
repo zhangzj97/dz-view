@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useSourceMenuStore, useSourceMenuStateStore } from '@/hooks/useSourceStore';
+import { useSourceMenuStateStore } from '@/hooks/useSourceStore';
 import { storeToRefs } from 'pinia';
 const configState = reactive<any>(inject('config') || {});
 
-const { collapsed, mode, theme } = storeToRefs(useSourceMenuStateStore());
+const { collapsed } = storeToRefs(useSourceMenuStateStore());
 </script>
 
 <template>
