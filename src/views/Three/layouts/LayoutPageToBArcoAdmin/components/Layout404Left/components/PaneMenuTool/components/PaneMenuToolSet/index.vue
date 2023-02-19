@@ -21,14 +21,16 @@ const handleInit = (): void => emit('handleInit');
 </script>
 
 <template>
-  <div class="flex flex-row items-center justify-center h-8 gap-2">
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleLight" icon="mdi:white-balance-sunny" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleDark" icon="mdi:weather-night" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleRound" icon="mdi:rounded-corner" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handlePalette" icon="mdi:palette" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleUnfold" icon="mdi:arrow-left-bold-box-outline" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleFold" icon="mdi:arrow-right-bold-box-outline" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleHidden" icon="mdi:eye-settings" />
-    <dz-icon class="w-6 cursor-pointer hover:text-blue-500" @click="handleInit" icon="mdi:refresh" />
-  </div>
+  <dz-view col>
+    <dz-view row>
+      <dz-icon size="6" icon="ic:round-filter-1" />
+      <dz-icon size="6" icon="ic:round-filter-2" />
+      <dz-icon size="6" icon="ic:round-filter-3" />
+    </dz-view>
+    <dz-view row>
+      <dz-icon size="6" icon="ic:round-filter-1" />
+      <dz-icon size="6" icon="ic:round-filter-2" />
+      <dz-icon size="6" icon="ic:round-filter-3" />
+    </dz-view>
+  </dz-view>
 </template>
