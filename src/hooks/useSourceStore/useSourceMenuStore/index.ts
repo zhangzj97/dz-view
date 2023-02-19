@@ -62,11 +62,16 @@ export const useSourceMenuStateStore = defineStore('SourceMenuState', () => {
     collapsed: false,
     mode: 'inline',
     theme: 'light',
+
+    openKeys: [],
+    selectedKeys: [],
   });
 
   const collapsed = computed(() => sourceState.collapsed);
   const mode = computed(() => sourceState.mode);
   const theme = computed(() => sourceState.theme);
+  const openKeys = computed(() => sourceState.openKeys);
+  const selectedKeys = computed(() => sourceState.selectedKeys);
 
   const changeCollapsed = ({ collapsed }) => {
     if (isDefined(collapsed)) {
@@ -84,13 +89,25 @@ export const useSourceMenuStateStore = defineStore('SourceMenuState', () => {
     sourceState.theme = theme;
   };
 
+  const changeOpenKeys = ({ openKeys }) => {
+    sourceState.openKeys = openKeys;
+  };
+
+  const changeSelectedKeys = ({ selectedKeys }) => {
+    sourceState.selectedKeys = selectedKeys;
+  };
+
   return {
     mode,
     theme,
     collapsed,
+    openKeys,
+    selectedKeys,
 
     changeCollapsed,
     changeMode,
     changeTheme,
+    changeOpenKeys,
+    changeSelectedKeys,
   };
 });
