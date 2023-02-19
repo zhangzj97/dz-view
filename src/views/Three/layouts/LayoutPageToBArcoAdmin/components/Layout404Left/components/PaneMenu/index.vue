@@ -3,8 +3,10 @@ import MenuAntd from './components/MenuAntd/index.vue';
 
 import { useRouter } from 'vue-router';
 import { useTree } from '@/hooks/useTree';
-import { useSourceMenuStore } from '@/hooks/useSourceStore';
+import { useSourceMenuStore, useSourceMenuStateStore } from '@/hooks/useSourceStore';
 import { storeToRefs } from 'pinia';
+
+const { collapsed, mode, theme } = storeToRefs(useSourceMenuStateStore());
 
 const { version } = storeToRefs(useSourceMenuStore());
 const { listToTree } = useTree();
@@ -17,7 +19,7 @@ const refresh = () => {
 
 const router = useRouter();
 
-const routeState = reactive<any>({ menuList: [] });
+const routeState = reactive<any>({ menuList: [], collapsed: false });
 
 // 接收通知
 watch(version, refresh);
@@ -34,5 +36,5 @@ const handleClick = (item: any) => {
 </script>
 
 <template>
-  <MenuAntd :menuList="routeState.menuList" @handleClick="handleClick" />
+  <MenuAntd :menuList="routeState.menuList" @handleClick="handleClick" :mode="mode" :theme="theme" :collapsed="collapsed" />
 </template>
