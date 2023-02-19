@@ -1,11 +1,9 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import { createRouteGuard } from './guard';
-import { useRoute } from './hooks/useRoute';
-import { useSource } from '@/hooks/useSource';
 import { RootRoute } from './modules/Static';
+import { useSourceRouteSetup } from '@/hooks/useSourceSetup';
 
-const { SourceList: SourceRouteList } = await useSource({ strategy: 'import', sourceName: 'route' });
-const { routeWithScopeRoot } = useRoute({ raw: SourceRouteList });
+const { routeWithScopeRoot } = useSourceRouteSetup();
 
 export const routes: RouteRecordRaw[] = [RootRoute, ...routeWithScopeRoot];
 
