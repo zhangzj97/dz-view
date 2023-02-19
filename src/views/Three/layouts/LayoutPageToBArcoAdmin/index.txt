@@ -1,0 +1,53 @@
+<script setup lang="ts">
+import Layout200NoticeBar from './components/Layout200NoticeBar/index.vue';
+import Layout300AppNavBar from './components/Layout300AppNavBar/index.vue';
+import Layout301AppNavBar from './components/Layout301AppNavBar/index.vue';
+import Layout401FloatLeft from './components/Layout401FloatLeft/index.vue';
+import Layout402FloatRight from './components/Layout402FloatRight/index.vue';
+import Layout403SlimLeft from './components/Layout403SlimLeft/index.vue';
+import Layout404Left from './components/Layout404Left/index.vue';
+import Layout405AppNavBar from './components/Layout405AppNavBar/index.vue';
+import Layout406BreadCrumb from './components/Layout406BreadCrumb/index.vue';
+import Layout407RouteTag from './components/Layout407RouteTag/index.vue';
+import Layout500FooterBar from './components/Layout500FooterBar/index.vue';
+import { useSourceMenuStore } from '@/hooks/useSourceStore';
+
+const initMenu = () => {
+  const { initSourceImportRaw: initMenu } = useSourceMenuStore();
+  initMenu();
+};
+
+onBeforeMount(() => {
+  initMenu();
+});
+</script>
+
+<template>
+  <dz-view col size="w-screen h-screen" overflow-hidden>
+    <dz-view one size="h-fit">
+      <Layout200NoticeBar />
+    </dz-view>
+    <dz-view one size="h-16">
+      <Layout300AppNavBar />
+    </dz-view>
+    <dz-view row size="h-grow">
+      <dz-view one size="w-fit">
+        <Layout404Left />
+      </dz-view>
+      <dz-view col size="w-grow">
+        <dz-view one size="h-16">
+          <Layout405AppNavBar />
+        </dz-view>
+        <dz-view one size="h-12">
+          <Layout406BreadCrumb />
+        </dz-view>
+        <dz-view one size="h-8">
+          <Layout407RouteTag />
+        </dz-view>
+        <dz-view one size="h-grow" class="h-0" overflow>
+          <slot></slot>
+        </dz-view>
+      </dz-view>
+    </dz-view>
+  </dz-view>
+</template>
