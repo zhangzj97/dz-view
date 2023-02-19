@@ -1,15 +1,24 @@
 <script setup lang="ts" name="PaneMenu">
 import MenuAntd from './components/MenuAntd/index.vue';
+
 import { useRouter } from 'vue-router';
-
-import { useSource } from '@/hooks/useSource';
 import { useTree } from '@/hooks/useTree';
+import { useSourceMenuStore } from '@/hooks/useSourceStore';
+import { storeToRefs } from 'pinia';
 
-onBeforeMount(async () => {
-  const { SourceList } = await useSource({ strategy: 'local', sourceName: 'menu' });
-  const { listToTree } = useTree();
+const { version } = storeToRefs(useSourceMenuStore());
+const { listToTree } = useTree();
 
-  routeState.menuList = listToTree({ list: SourceList.filter((item: any) => item.showMenu) }).filter((item: any) => !item.parentId);
+const refresh = () => {
+  const { list } = useSourceMenuStore();
+  const menuShowList = list.filter((item: any) => item.showMenu);
+  routeState.menuList = listToTree({ list: menuShowList }).filter((item: any) => !item.parentId);
+};
+
+watch(version, refresh);
+
+onMounted(async () => {
+  refresh();
 });
 
 const router = useRouter();
@@ -20,7 +29,6 @@ const routeState = reactive<any>({
 
 const handleClick = (item: any) => {
   const { redirct, scope } = item;
-
   router.push({ path: `/@${scope}${redirct}` });
 };
 </script>
