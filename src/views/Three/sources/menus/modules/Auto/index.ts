@@ -43,13 +43,14 @@ const toValue = ({ path }) => {
 
     component: code,
     icon: 'ic:twotone-yard',
-    path: `/${code}`,
     redirct: `/${code}`,
     target: '_self',
     url: '',
     showMenu: true,
     parentId: scopeKey,
     parentCode: scopeKey,
+    // Auto import 使用的上级 route code is `scopeKey`
+    path: `${scopeKey},${code}`,
   };
 };
 

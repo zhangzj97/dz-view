@@ -6,21 +6,33 @@ defineProps<{
   collapsed: boolean;
   mode?: string | any;
   theme?: string | any;
+  openKeys?: any[];
+  selectedKeys?: any[];
 }>();
 
 const emit = defineEmits<{
   (e: 'handleClick', item: any): void;
+  (e: 'handleUpdateOpenKeys', item: any): void;
+  (e: 'handleUpdateSelectedKeys', item: any): void;
 }>();
 
 const handleClick = (item: any) => {
   emit('handleClick', item);
 };
 const { t } = useI18n();
+
+const updateOpenKeys = (item: any) => {
+  emit('handleUpdateOpenKeys', item);
+};
+
+const updateSelectedKeys = (item: any) => {
+  emit('handleUpdateSelectedKeys', item);
+};
 </script>
 
 <template>
   <div class="max-w-[16rem] dz-menu-ant">
-    <a-menu :mode="mode" :inline-collapsed="collapsed" :theme="theme">
+    <a-menu :mode="mode" :inline-collapsed="collapsed" :theme="theme" :openKeys="openKeys" :selectedKeys="selectedKeys" @update:openKeys="updateOpenKeys" @update:selectedKeys="updateSelectedKeys">
       <template v-for="(item, index) of menuList" :key="index">
         <template v-if="item.children && item.children?.length > 0">
           <sub-menu :menuInfo="item" @handleClick="handleClick" />
