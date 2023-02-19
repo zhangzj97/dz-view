@@ -15,16 +15,16 @@ const refresh = () => {
   routeState.menuList = listToTree({ list: menuShowList }).filter((item: any) => !item.parentId);
 };
 
-watch(version, refresh);
-
-onMounted(async () => {
-  refresh();
-});
-
 const router = useRouter();
 
-const routeState = reactive<any>({
-  menuList: [],
+const routeState = reactive<any>({ menuList: [] });
+
+// 接收通知
+watch(version, refresh);
+
+// 初始化刷新
+onMounted(async () => {
+  refresh();
 });
 
 const handleClick = (item: any) => {
