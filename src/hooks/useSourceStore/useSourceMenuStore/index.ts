@@ -56,3 +56,41 @@ export const useSourceMenuStore = defineStore('SourceMenu', () => {
     changeVersion,
   };
 });
+
+export const useSourceMenuStateStore = defineStore('SourceMenuState', () => {
+  const sourceState = reactive<any>({
+    collapsed: false,
+    mode: 'inline',
+    theme: 'light',
+  });
+
+  const collapsed = computed(() => sourceState.collapsed);
+  const mode = computed(() => sourceState.mode);
+  const theme = computed(() => sourceState.theme);
+
+  const changeCollapsed = ({ collapsed }) => {
+    if (isDefined(collapsed)) {
+      sourceState.collapsed = collapsed;
+    } else {
+      sourceState.collapsed = !sourceState.collapsed;
+    }
+  };
+
+  const changeMode = ({ mode }) => {
+    sourceState.mode = mode;
+  };
+
+  const changeTheme = ({ theme }) => {
+    sourceState.theme = theme;
+  };
+
+  return {
+    mode,
+    theme,
+    collapsed,
+
+    changeCollapsed,
+    changeMode,
+    changeTheme,
+  };
+});
