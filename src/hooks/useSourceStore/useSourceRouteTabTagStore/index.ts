@@ -39,7 +39,7 @@ export const useSourceRouteTabTagStore = defineStore('SourceRouteTabTag', () => 
     sourceState.map = map;
   };
 
-  // 触发刷新资源
+  // 触发刷新资源 通知其他组件变更
   const changeVersion = () => {
     sourceState.version = String(new Date().getTime());
   };
