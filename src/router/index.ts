@@ -1,12 +1,21 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import {
+  createRouter,
+  createWebHistory,
+  type RouteRecordRaw,
+} from 'vue-router';
 import { createRouteGuard } from './guard';
 import { RootRoute } from './modules/Static';
-import { useSourceRouteSetup } from '@/hooks/useSourceSetup';
 
-const { routeWithScopeRoot } = useSourceRouteSetup();
+// 注册 基本的路由 , 路由是不需要 Store 的资源
+import { useSourceRouteStore } from '@/hooks/useSourceStore';
+const { initSourceImportRaw } = useSourceRouteStore();
+const { list: routeList } = await initSourceImportRaw();
 
-export const routes: RouteRecordRaw[] = [RootRoute, ...routeWithScopeRoot];
+export const routes: RouteRecordRaw[] = [RootRoute, ...routeList];
 
-export const router = createRouter({ history: createWebHistory(import.meta.env.BASE_URL), routes });
+export const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
+});
 
 createRouteGuard(router);
