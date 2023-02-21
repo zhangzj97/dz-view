@@ -3,7 +3,9 @@ import type { RouteRecordRaw } from 'vue-router';
 export const RootRoute: RouteRecordRaw = {
   path: '/',
   redirect: '/@Three',
-  meta: {
-    code: 'Route.Root',
-  },
+};
+
+export const OtherRoute: RouteRecordRaw = {
+  path: '/:catchAll(.*)*',
+  component: () => import('../../../views/Three/index.vue'),
 };
