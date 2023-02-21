@@ -70,10 +70,13 @@ const updateOpenKeys = (item: any) => {
   const { getSource } = useSourceMenuStore();
   const { list } = getSource();
   const rootList = list
-    .filter((item: any) => !item.parentId)
+    .filter(
+      (item: any) =>
+        !item.parentId || item.parentId === '0' || item.parentId === 0
+    )
     .map((item: any) => String(item.id));
 
-  const lastCode = item[item.length - 1] || '';
+  const lastCode = String(item[item.length - 1]) || '';
   if (!lastCode) {
     changeOpenKeys({ openKeys: [] });
   } else if (!rootList.includes(lastCode)) {
