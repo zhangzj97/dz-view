@@ -76,6 +76,7 @@ export const useSourceMenuStore = defineStore(
 
 export const useSourceMenuStateStore = defineStore('SourceMenuState', () => {
   const sourceState = reactive<any>({
+    version: String(new Date().getTime()),
     collapsed: false,
     mode: 'inline',
     theme: 'light',
@@ -84,6 +85,7 @@ export const useSourceMenuStateStore = defineStore('SourceMenuState', () => {
     selectedKeys: [],
   });
 
+  const version = computed(() => sourceState.version);
   const collapsed = computed(() => sourceState.collapsed);
   const mode = computed(() => sourceState.mode);
   const theme = computed(() => sourceState.theme);
@@ -114,13 +116,20 @@ export const useSourceMenuStateStore = defineStore('SourceMenuState', () => {
     sourceState.selectedKeys = selectedKeys;
   };
 
+  // 触发刷新资源 通知其他组件变更
+  const changeVersion = () => {
+    sourceState.version = String(new Date().getTime());
+  };
+
   return {
+    version,
     mode,
     theme,
     collapsed,
     openKeys,
     selectedKeys,
 
+    changeVersion,
     changeCollapsed,
     changeMode,
     changeTheme,
