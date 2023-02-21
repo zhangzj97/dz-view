@@ -34,7 +34,6 @@ const setupPageGuard = (router: Router) => {
 
       return;
     } else if (to.name) {
-      console.log(999, to);
       // 存在静态注册的
       // 访问特定的静态注册 比如404
 
