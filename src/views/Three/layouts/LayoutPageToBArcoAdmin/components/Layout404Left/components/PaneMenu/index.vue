@@ -25,7 +25,9 @@ const refreshMenu = () => {
   const { list } = getSource();
   const menuShowList = list.filter((item: any) => item.showMenu);
   routeState.menuList = listToTree({ list: menuShowList }).filter(
-    (item: any) => !item.parentId
+    (item: any) => {
+      return !item.parentId || item.parentId === 0 || item.parentId === '0';
+    }
   );
 };
 
@@ -45,6 +47,12 @@ const routeState = reactive<any>({ menuList: [], collapsed: false });
 
 // 接收通知
 watch(version, refreshMenu);
+watch(
+  () => router.currentRoute.value.path,
+  () => {
+    refreshMenuKey();
+  }
+);
 
 // 初始化刷新
 onMounted(async () => {
