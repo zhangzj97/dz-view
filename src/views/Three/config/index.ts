@@ -1,5 +1,5 @@
 const ViewName = 'Three';
-const HomePageName = 'Main';
+const RouteHomePageName = 'PAGEHOME';
 const i18nSeparator = '.';
 const logoTitle = 'Acro Admin';
 
@@ -13,7 +13,7 @@ const RootRouteOption = {
 export const config = {
   // 当前业务配置
   ViewName,
-  HomePageName,
+  RouteHomePageName,
   i18nSeparator,
   logoTitle,
 

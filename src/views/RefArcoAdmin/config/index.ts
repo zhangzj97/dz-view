@@ -1,5 +1,5 @@
 const ViewName = 'RefAcroAdmin';
-const HomePageName = 'Main';
+const RouteHomePageName = 'Home/Dashboard';
 const i18nSeparator = '.';
 const logoTitle = 'Acro Admin';
 
@@ -22,7 +22,7 @@ const DzButtonOption = {
 export const config = {
   // 当前业务配置
   ViewName,
-  HomePageName,
+  RouteHomePageName,
   i18nSeparator,
   logoTitle,
 
