@@ -4,7 +4,7 @@ const scopeKey = config.ViewName;
 
 export default [
   {
-    code: scopeKey,
+    name: scopeKey,
     path: `/@${scopeKey}`,
     component: () => import('../../../../index.vue'),
     children: [],
