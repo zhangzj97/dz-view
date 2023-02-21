@@ -2,10 +2,15 @@ export const useTree = () => {
   const listToTree = ({ list }) => {
     const result = {};
 
-    const map = Object.fromEntries(list.map(item => [item.id, { children: [], ...item }]));
+    const map = Object.fromEntries(
+      list.map((item: any) => [String(item.id), { children: [], ...item }])
+    );
 
-    list.forEach(item => {
-      const { id, parentId } = item;
+    list.forEach((item: any) => {
+      let { id, parentId } = item;
+      id = String(id);
+      parentId = String(parentId);
+
       // 子 族谱有父亲
       if (parentId && map[parentId]) {
         map[parentId].children.push(map[id]);
