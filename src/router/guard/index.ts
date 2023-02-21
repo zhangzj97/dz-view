@@ -5,47 +5,92 @@ import 'nprogress/nprogress.css';
 import {
   useSourceMenuStore,
   useSourceRouteStoreTool,
+  useSourceRouteTabTagStore,
 } from '@/hooks/useSourceStore';
 
 NProgress.configure({ showSpinner: false });
 
 const setupPageGuard = (router: Router) => {
-  router.beforeEach(async to => {
-    setRouteEmitter(to);
-  });
-};
-
-// const setupRouteTabTagGuard = (router: Router) => {
-//   router.beforeEach(async to => {
-//     const { map: menuMap } = useSourceMenuStore();
-//     const { setSource, list, changeVersion } = useSourceRouteTabTagStore();
-//     const { id, code, scope }: any = to.meta;
-//     if (menuMap[id]) {
-//       list.push({ id, code, scope });
-//     } else if (!list.find(item => item.id === to.meta.id)) {
-//       list.push({ ...menuMap[id] });
-//     }
-//     const map = Object.fromEntries(list.map(item => [item.id, item]));
-//     setSource({ list, map });
-//     useStorage('SourceRouteTabTagLocal', list);
-//     changeVersion();
-//   });
-// };
-
-const setupMenuGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
-    const { getSource, initSourceImportRaw } = useSourceMenuStore();
-    const { list } = getSource();
+    if (!to.name) {
+      // 不存在静态注册的
+      // 尝试获取菜单资源
+      const { getSource, initSourceImportRaw } = useSourceMenuStore();
+      let { list } = getSource();
 
-    if (list.length === 0) {
-      const { list } = await initSourceImportRaw();
-      const { menuToRoute } = useSourceRouteStoreTool();
-      list.forEach((item: any) => {
-        router.addRoute(item.scope, menuToRoute({ menu: item }));
-      });
-      next({ ...to, replace: true });
+      if (list.length === 0) {
+        // 先获取动态数据 如果有就去
+        ({ list } = await initSourceImportRaw()); // TODO ({ list } = await refreshSource({}));
+        const { menuToRoute } = useSourceRouteStoreTool();
+        list.forEach((item: any) => {
+          router.addRoute(item.scope, menuToRoute({ menu: item }));
+        });
+        router.getRoutes();
+        next({ ...to, replace: true });
+      } else if (list.length >= 0) {
+        // 先获取动态数据 如果没有就到404
+        next({ name: 'ExceptionPage404' });
+      }
+
       return;
-    } else {
+    } else if (to.name) {
+      console.log(999, to);
+      // 存在静态注册的
+      // 访问特定的静态注册 比如404
+
+      const { getSource, initSourceImportRaw } = useSourceMenuStore();
+      let { list } = getSource();
+      if (list.length === 0) {
+        // 先获取动态数据 如果有就去
+        ({ list } = await initSourceImportRaw()); // TODO ({ list } = await refreshSource({}));
+        const { menuToRoute } = useSourceRouteStoreTool();
+        list.forEach((item: any) => {
+          router.addRoute(item.scope, menuToRoute({ menu: item }));
+        });
+        router.getRoutes();
+      }
+      // 存在数据了 才考虑 tabtag
+
+      if (!to.meta.menu) {
+        next();
+        return;
+      }
+      // 处理 tab tag
+      {
+        const {
+          setSource: setSourceRouteTabTag,
+          getSource: getSourceRouteTabTag,
+          changeVersion: changeVersionRouteTabTag,
+        } = useSourceRouteTabTagStore();
+        const { getSource: getSourceMenu } = useSourceMenuStore();
+
+        let { list: listRouteTabTag } = getSourceRouteTabTag();
+        const { list: listMenu } = getSourceMenu();
+
+        listRouteTabTag.unshift(
+          ...listMenu.filter((item: any) => item.tagFixed)
+        );
+
+        listRouteTabTag.push({ ...to.meta.menu });
+        listRouteTabTag = listRouteTabTag.reduce(
+          (previousValue: any[], currentValue: any) => {
+            const { code } = currentValue;
+            if (!previousValue.find(item => item.code === code)) {
+              return [...previousValue, currentValue];
+            }
+            return previousValue;
+          },
+          []
+        );
+
+        const mapRouteTabTag = Object.fromEntries(
+          listRouteTabTag.map((item: any) => [item.id, item])
+        );
+
+        setSourceRouteTabTag({ list: listRouteTabTag, map: mapRouteTabTag });
+        changeVersionRouteTabTag();
+      }
+
       next();
     }
   });
@@ -54,8 +99,6 @@ const setupMenuGuard = (router: Router) => {
 export const createRouteGuard = (router: Router) => {
   NProgress.start();
   setupPageGuard(router);
-  // setupRouteTabTagGuard(router);
-  setupMenuGuard(router);
 
   NProgress.done();
 };
