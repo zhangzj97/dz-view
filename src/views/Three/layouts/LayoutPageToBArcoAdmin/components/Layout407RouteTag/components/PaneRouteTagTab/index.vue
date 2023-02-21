@@ -62,7 +62,6 @@ const handleCloseUnactive = (item: any) => {
 const config = inject('config');
 const handleCloseActive = (item: any) => {
   const { RouteHomePageName, ViewName } = config as any;
-  console.log(config);
   const scope = ViewName;
   const { code } = item;
   const { setSource, getSource, changeVersion } = useSourceRouteTabTagStore();
