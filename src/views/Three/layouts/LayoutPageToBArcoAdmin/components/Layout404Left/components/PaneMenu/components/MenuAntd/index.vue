@@ -32,14 +32,24 @@ const updateSelectedKeys = (item: any) => {
 
 <template>
   <div class="max-w-[16rem] dz-menu-ant">
-    <a-menu :mode="mode" :inline-collapsed="collapsed" :theme="theme" :openKeys="openKeys" :selectedKeys="selectedKeys" @update:openKeys="updateOpenKeys" @update:selectedKeys="updateSelectedKeys">
+    <a-menu
+      :mode="mode"
+      :inline-collapsed="collapsed"
+      :theme="theme"
+      :openKeys="openKeys"
+      :selectedKeys="selectedKeys"
+      @update:openKeys="updateOpenKeys"
+      @update:selectedKeys="updateSelectedKeys"
+    >
       <template v-for="(item, index) of menuList" :key="index">
         <template v-if="item.children && item.children?.length > 0">
           <sub-menu :menuInfo="item" @handleClick="handleClick" />
         </template>
         <template v-else>
-          <a-menu-item :key="item.id" @click="handleClick(item)">
-            <template #icon><dz-icon size="6" :icon="String(item.icon)" /></template>
+          <a-menu-item :key="String(item.id)" @click="handleClick(item)">
+            <template #icon>
+              <dz-icon size="6" :icon="String(item.icon)" />
+            </template>
             <div>{{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}</div>
           </a-menu-item>
         </template>
@@ -65,7 +75,10 @@ const updateSelectedKeys = (item: any) => {
   @apply flex flex-row items-center;
 }
 
-.dz-menu-ant .ant-menu-inline-collapsed .ant-menu-submenu-title .ant-menu-title-content {
+.dz-menu-ant
+  .ant-menu-inline-collapsed
+  .ant-menu-submenu-title
+  .ant-menu-title-content {
   display: none !important;
 }
 .dz-menu-ant .ant-menu.ant-menu-inline-collapsed {

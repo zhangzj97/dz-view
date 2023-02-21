@@ -3,31 +3,38 @@ import MenuAntd from './components/MenuAntd/index.vue';
 
 import { useRouter, useRoute } from 'vue-router';
 import { useTree } from '@/hooks/useTree';
-import { useSourceMenuStore, useSourceMenuStateStore } from '@/hooks/useSourceStore';
+import {
+  useSourceMenuStore,
+  useSourceMenuStateStore,
+} from '@/hooks/useSourceStore';
 import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const route = useRoute();
 
-const { collapsed, mode, theme, openKeys, selectedKeys } = storeToRefs(useSourceMenuStateStore());
+const { collapsed, mode, theme, openKeys, selectedKeys } = storeToRefs(
+  useSourceMenuStateStore()
+);
 const { changeOpenKeys, changeSelectedKeys } = useSourceMenuStateStore();
 
 const { version } = storeToRefs(useSourceMenuStore());
 const { listToTree } = useTree();
 
-const refresh = () => {
-  const { list } = useSourceMenuStore();
+const refreshMenu = () => {
+  const { getSource } = useSourceMenuStore();
+  const { list } = getSource();
   const menuShowList = list.filter((item: any) => item.showMenu);
-  routeState.menuList = listToTree({ list: menuShowList }).filter((item: any) => !item.parentId);
+  routeState.menuList = listToTree({ list: menuShowList }).filter(
+    (item: any) => !item.parentId
+  );
 };
 
 const refreshMenuKey = () => {
-  const { map } = useSourceMenuStore();
-  const { code } = route.meta.data as any;
-  const { id, showMenu, path } = map[code];
-  const openKeys = path.replace(/,.*?$/, '').split(',');
+  if (!route.meta?.menu) return;
+  const { id, showMenu, path } = route.meta.menu as any;
+  const openKeys = path.replace(/,.*?$/, '').split('|');
   if (showMenu) {
-    changeSelectedKeys({ selectedKeys: [id] });
+    changeSelectedKeys({ selectedKeys: [String(id)] });
   } else {
     changeSelectedKeys({ selectedKeys: [] });
   }
@@ -37,27 +44,35 @@ const refreshMenuKey = () => {
 const routeState = reactive<any>({ menuList: [], collapsed: false });
 
 // 接收通知
-watch(version, refresh);
+watch(version, refreshMenu);
 
 // 初始化刷新
 onMounted(async () => {
-  refresh();
+  refreshMenu();
   refreshMenuKey();
 });
 
 const handleClick = (item: any) => {
-  const { redirct, scope } = item;
-  router.push({ path: `/@${scope}${redirct}` });
+  const { route } = item;
+  router.push({ path: route });
 };
 
 // 根菜单 互斥
 const updateOpenKeys = (item: any) => {
-  const { list } = useSourceMenuStore();
-  const rootList = list.map((item: any) => item.id);
-  const lastCode = item[item.length - 1];
+  const { getSource } = useSourceMenuStore();
+  const { list } = getSource();
+  const rootList = list
+    .filter((item: any) => !item.parentId)
+    .map((item: any) => String(item.id));
+
+  const lastCode = item[item.length - 1] || '';
   if (!lastCode) {
     changeOpenKeys({ openKeys: [] });
-  } else if (item.find((item: any) => rootList.includes(item) && item !== lastCode)) {
+  } else if (!rootList.includes(lastCode)) {
+    changeOpenKeys({ openKeys: item });
+  } else if (
+    item.find((item: any) => rootList.includes(item) && item !== lastCode)
+  ) {
     changeOpenKeys({ openKeys: [lastCode] });
   } else {
     changeOpenKeys({ openKeys: item });

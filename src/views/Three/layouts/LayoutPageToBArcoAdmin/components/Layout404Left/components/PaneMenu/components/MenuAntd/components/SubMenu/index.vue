@@ -19,8 +19,10 @@ export default { name: 'SubMenu' };
 </script>
 
 <template>
-  <a-sub-menu :key="menuInfo.id">
-    <template #icon><dz-icon size="6" :icon="String(menuInfo.icon)" /></template>
+  <a-sub-menu :key="String(menuInfo.id)">
+    <template #icon>
+      <dz-icon size="6" :icon="String(menuInfo.icon)" />
+    </template>
     <template #title>
       <div>{{ t(String(`@${menuInfo.scope}.ROUTE.${menuInfo.code}`)) }}</div>
     </template>
@@ -29,8 +31,10 @@ export default { name: 'SubMenu' };
         <sub-menu :menuInfo="item" @handleClick="handleClick" />
       </template>
       <template v-else>
-        <a-menu-item :key="item.id" @click="handleClick(item)">
-          <template #icon><dz-icon size="6" :icon="String(item.icon)" /></template>
+        <a-menu-item :key="String(item.id)" @click="handleClick(item)">
+          <template #icon>
+            <dz-icon size="6" :icon="String(item.icon)" />
+          </template>
           <div>{{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}</div>
         </a-menu-item>
       </template>
