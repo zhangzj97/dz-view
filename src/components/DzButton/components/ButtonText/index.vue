@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useClickEffect } from './hooks/useClickEffect';
-import { useTheme } from '@/hooks/useTheme';
 
 defineProps<{
   title?: string | false;
@@ -13,8 +12,18 @@ defineProps<{
 
 const { toggleClickEffect, clickEffectState } = useClickEffect();
 
-const config = inject('config');
-const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
+// const config = inject('config');
+// const { themeOption } = useTheme({ config, themePart: 'DzButtonDangerOption' });
+
+const themeOption = {
+  bg: 'bg-transparent',
+  bgHover: 'hover:bg-gray-100',
+  border: 'border-transparent',
+  borderHover: '',
+  iconColor: 'text-gray-800',
+  textColor: 'text-gray-800',
+  effectBg: 'bg-transparent',
+};
 </script>
 
 <template>
@@ -54,7 +63,12 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
           'border-[0.5px] border-gray-200',
         ]"
       >
-        <dz-icon v-if="loading" size="5" color="text-gray-500" icon="line-md:loading-twotone-loop" />
+        <dz-icon
+          v-if="loading"
+          size="5"
+          color="text-gray-500"
+          icon="line-md:loading-twotone-loop"
+        />
       </dz-view>
     </template>
     <!-- 覆盖层 -->
@@ -81,7 +95,11 @@ const { themeOption } = useTheme({ config, themePart: 'DzButtonTextOption' });
     >
       <template v-if="icon">
         <dz-view one size="w-6" position="5">
-          <dz-icon size="5" :icon="icon" :color="themeOption.iconColor"></dz-icon>
+          <dz-icon
+            size="5"
+            :icon="icon"
+            :color="themeOption.iconColor"
+          ></dz-icon>
         </dz-view>
       </template>
       <template v-if="title">
