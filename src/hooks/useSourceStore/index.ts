@@ -7,4 +7,7 @@ export {
   useSourceRouteStoreTool,
 } from './useSourceRouteStore';
 export { useSourceThemeStore } from './useSourceThemeStore';
-export { useSourceRouteTabTagStore } from './useSourceRouteTabTagStore';
+export {
+  useSourceRouteTabTagStore,
+  useSourceRouteTabTagStateStore,
+} from './useSourceRouteTabTagStore';
