@@ -51,6 +51,11 @@ export const useSourceMenuStore = defineStore(
       return { list: sourceState.list, map: sourceState.map };
     };
 
+    // 获取当前的资源
+    const getSource = () => {
+      return { list: sourceState.list, map: sourceState.map };
+    };
+
     // 触发刷新资源 通知其他组件变更
     const changeVersion = () => {
       sourceState.version = String(new Date().getTime());
@@ -62,6 +67,7 @@ export const useSourceMenuStore = defineStore(
       initSourceImportRaw,
       refreshSource,
       setSource,
+      getSource,
 
       changeVersion,
     };
