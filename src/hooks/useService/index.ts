@@ -1,6 +1,6 @@
 import SourceService from '@/services';
 
-export const usePlugin = () => {
+export const useService = () => {
   return {
     SourceService,
   };
