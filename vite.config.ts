@@ -5,7 +5,10 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
-import { ArcoResolver, AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+import {
+  ArcoResolver,
+  AntDesignVueResolver,
+} from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,17 +23,19 @@ export default defineConfig({
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
       dts: './types/auto-imports-components.d.ts',
-      dirs: ['./src/components'],
-      extensions: ['vue'],
-      deep: true,
+      globs: ['./src/components/*/index.vue'],
       resolvers: [AntDesignVueResolver()],
-      directoryAsNamespace: true,
+      directoryAsNamespace: false,
       globalNamespaces: [],
       directives: true,
       importPathTransform: v => v,
       allowOverrides: false,
       include: [/\.vue$/, /\.vue\?vue/],
-      exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+      exclude: [
+        /[\\/]node_modules[\\/]/,
+        /[\\/]\.git[\\/]/,
+        /[\\/]\.nuxt[\\/]/,
+      ],
     }),
   ],
   resolve: {
