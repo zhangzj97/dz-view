@@ -1,7 +1,8 @@
-import SourceRaw from '@/sources/routes';
+import { defineStore } from 'pinia';
+import SourceRaw from '@/services';
 
-export const useSourceRouteStore =
-  //
+export const useSourceServiceStore = defineStore(
+  'SourceServiceStore', //
   () => {
     const sourceState = reactive<any>({
       version: '',
@@ -22,7 +23,7 @@ export const useSourceRouteStore =
         []
       );
       sourceState.map = Object.fromEntries(
-        sourceState.list.map((item: any) => [item.id, item])
+        sourceState.list.map((item: any) => [item.$id, item])
       );
 
       return { list: sourceState.list, map: sourceState.map };
@@ -36,7 +37,7 @@ export const useSourceRouteStore =
 
       sourceState.list = data.list;
       sourceState.map = Object.fromEntries(
-        sourceState.list.map(item => [item.id, item])
+        sourceState.list.map(item => [item.$id, item])
       );
 
       return { list: sourceState.list, map: sourceState.map };
@@ -70,32 +71,5 @@ export const useSourceRouteStore =
 
       changeVersion,
     };
-  };
-
-export const useSourceRouteStoreTool = () => {
-  //
-  const menuToRoute = ({ menu }) => {
-    const { code, scope, component, redirect, route: routePath } = menu;
-    const [component01, component02] = component.split('/');
-
-    const route = {
-      name: [`@${scope}`, 'ROUTE', code].join('.'),
-      redirect,
-      path: routePath,
-      component: () =>
-        import(
-          `../../../views/${scope}/pages/${component01}/${component02}/index.vue`
-        ),
-      meta: {
-        menu,
-        label: [`@${scope}`, 'ROUTE', code].join('.'),
-      },
-    };
-
-    return route;
-  };
-
-  return {
-    menuToRoute,
-  };
-};
+  }
+);
