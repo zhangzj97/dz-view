@@ -13,7 +13,12 @@ defineProps<{
       <slot></slot>
     </dz-view>
     <dz-view one size="w-grow">
-      <dz-view one size="h-1/2" class="min-w-[2rem]" wrapperClass="border-b-[1px] border-gray-300" />
+      <dz-view
+        one
+        size="h-1/2"
+        class="min-w-[2rem]"
+        wrapperClass="border-b-[1px] border-gray-300"
+      />
     </dz-view>
   </dz-view>
 </template>
