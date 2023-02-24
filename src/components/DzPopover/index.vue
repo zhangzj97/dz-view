@@ -23,7 +23,11 @@ const parseOverlayClassName = () => {
 </script>
 
 <template>
-  <PopoverAntd v-if="tooltip" :overlay-class-name="parseOverlayClassName()" :placement="placement">
+  <PopoverAntd
+    v-if="tooltip"
+    :overlay-class-name="parseOverlayClassName()"
+    :placement="placement"
+  >
     <slot></slot>
     <template #content>
       <slot name="content">
@@ -32,7 +36,11 @@ const parseOverlayClassName = () => {
     </template>
   </PopoverAntd>
 
-  <PopoverAntd v-else :overlay-class-name="parseOverlayClassName()" :placement="placement">
+  <PopoverAntd
+    v-else
+    :overlay-class-name="parseOverlayClassName()"
+    :placement="placement"
+  >
     <slot></slot>
     <template #content>
       <slot name="content"></slot>
