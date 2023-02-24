@@ -35,10 +35,11 @@ const changeVisible = (visible: boolean) => {
 // ! 布局功能 Layout
 type FlexLayoutType = 'flex' | 'flex-grow' | 'flex-grow' | '';
 
-const layoutState: { style: LayoutStyle; flexLayoutType: FlexLayoutType } = reactive({
-  style: { top: '16px', left: '16px', width: '400px', height: '200px' },
-  flexLayoutType: 'flex-grow',
-});
+const layoutState: { style: LayoutStyle; flexLayoutType: FlexLayoutType } =
+  reactive({
+    style: { top: '16px', left: '16px', width: '400px', height: '200px' },
+    flexLayoutType: 'flex-grow',
+  });
 
 // ! 3D功能 3D
 // TODO 3D功能
@@ -66,7 +67,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="visibleState.visible" class="fixed flex flex-col border rounded shadow" :style="{ ...layoutState.style }">
+  <div
+    v-if="visibleState.visible"
+    class="fixed flex flex-col border rounded shadow"
+    :style="{ ...layoutState.style }"
+  >
     <!-- Header -->
     <div class="flex h-12 bg-blue-300">
       <div @click="changeVisible(false)">Hide</div>
