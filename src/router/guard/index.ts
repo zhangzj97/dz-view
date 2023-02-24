@@ -23,6 +23,7 @@ const setupPageGuard = (router: Router) => {
         ({ list } = await initSourceImportRaw()); // TODO ({ list } = await refreshSource({}));
         const { menuToRoute } = useSourceRouteStoreTool();
         list.forEach((item: any) => {
+          if (item.type !== 'route') return;
           router.addRoute(item.scope, menuToRoute({ menu: item }));
         });
         router.getRoutes();
