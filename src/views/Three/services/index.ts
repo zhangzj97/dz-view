@@ -2,6 +2,7 @@
 // import CustomSource from './modules/Custom';
 // import ScriptSource from './modules/Script';
 import DemoSource from './modules/Demo';
+import AuthSource from './modules/auth-service';
 
 import { config } from '../config';
 
@@ -12,6 +13,7 @@ export default {
   // ...ScriptSource,
   // ...CustomSource,
   ...DemoSource,
+  ...AuthSource,
 };
 
 export { scopeKey };
