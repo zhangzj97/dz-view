@@ -44,4 +44,15 @@ export default defineConfig({
       'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
     },
   },
+
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9001',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api\/.*?\//, '/'), // 不可以省略rewrite
+      },
+    },
+  },
 });
