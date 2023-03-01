@@ -1,6 +1,6 @@
 import { useAutoImport } from '@/hooks/useAutoImport';
 
-const fileMap = import.meta.glob(['@/views/*/sources/menus/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/themes/index.ts'], {
   eager: true,
 });
 

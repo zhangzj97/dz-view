@@ -1,6 +1,8 @@
 import { useAutoImport } from '@/hooks/useAutoImport';
 
-const fileMap = import.meta.glob(['@/views/*/sources/permissions/index.ts'], { eager: true });
+const fileMap = import.meta.glob(['@/views/*/sources/plugins/index.ts'], {
+  eager: true,
+});
 
 const toKey = ({ file }) => {
   return `@${file.scopeKey}`;
