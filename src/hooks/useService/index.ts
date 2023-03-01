@@ -9,7 +9,7 @@ export const useService = () => {
 
     const { data } = await map[moduleName]()[apiName](payload);
 
-    return { data };
+    return { data: data.data };
   };
 
   return {
