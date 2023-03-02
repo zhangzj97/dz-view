@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const { t } = useI18n();
 
-defineProps<{
-  k: string;
+const props = defineProps<{
+  k?: string;
 
   label: string;
-  text: string | false;
+  text?: string | false;
   tooltip?: string | false;
 
   visible?: boolean;
@@ -13,14 +13,14 @@ defineProps<{
 
   required?: boolean;
 
-  propsRow: any;
-  conventionOption: any;
-  customOption: any;
+  propsRow?: any;
+  conventionOption?: any;
+  customOption?: any;
 }>();
 </script>
 
 <template>
-  <dz-view col size="h-grow" wrapperClass="" position="6">
+  <dz-view col size="h-grow" :wrapperClass="['px-2']" position="6">
     <!-- 主体内容 -->
     <dz-view row size="h-fit">
       <template v-if="required">

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import PaneLabelCol from './components/PaneLabelCol/index.vue';
+// import PaneLabelCol from './components/PaneLabelCol/index.vue';
 import PaneLabelRow from './components/PaneLabelRow/index.vue';
 import { VxeTable, VxeColumn } from 'vxe-table';
 import 'vxe-table/lib/style.css';
+
+const { t } = useI18n();
 
 defineProps<{
   schema?: any[] | any;
@@ -19,9 +21,13 @@ defineProps<{
     class="dz-table"
     :class="[className || 'dz-table-scrollbar']"
     stripe
-    border
+    :border="true"
     round
+    width="400"
+    max-width="80%"
     height="auto"
+    max-height="100%"
+    min-height="100%"
     :column-config="{ isCurrent: true, isHover: true, resizable: true }"
     :row-config="{ isCurrent: true, isHover: true }"
     :data="baseList"
@@ -33,32 +39,23 @@ defineProps<{
     <vxe-column type="checkbox" width="60" />
 
     <template v-for="(item, index) of schema" :key="index">
-      <vxe-column :field="item.field" :title="item.title">
+      <vxe-column :field="item.code" :title="t(item.label)" :width="item.width">
         <template v-if="item.tooltip" #header>
           <!-- Todo 由于父级 布局样式 -->
-          <PaneLabelRow :label="item.label" :tooltip="item.tooltip" :required="item.required" />
+          <PaneLabelRow v-bind="item" />
           <!-- 存在问题 -->
         </template>
         <template #default="{ row }">
-          <Component
-            :class="[
-              //
-            ]"
-            :is="item.component()"
-            :k="item.key"
-            :label="item.label"
-            :text="item.text"
-            :propsRow="row"
-            :conventionOption="item.conventionOption"
-            :customOption="item.customOption"
-          />
+          <Component :is="item.component()" :propsRow="row" v-bind="item" />
         </template>
       </vxe-column>
     </template>
 
     <template #empty>
       <span style="color: red">
-        <img src="https://pic2.zhimg.com/50/v2-f7031359103859e1ed38559715ef5f3f_hd.gif" />
+        <img
+          src="https://pic2.zhimg.com/50/v2-f7031359103859e1ed38559715ef5f3f_hd.gif"
+        />
         <p>没有更多数据了！</p>
       </span>
     </template>
@@ -91,5 +88,17 @@ defineProps<{
 /*边角，即两个滚动条的交汇处*/
 .dz-table.dz-table-scrollbar ::-webkit-scrollbar-corner {
   background-color: #ffffff;
+}
+</style>
+
+<style>
+.vxe-table--render-default .vxe-cell {
+  @apply p-0;
+}
+.vxe-body--column.col--seq,
+.vxe-body--column.col--radio,
+.vxe-body--column.col--checkbox,
+.vxe-header--column {
+  @apply px-2;
 }
 </style>

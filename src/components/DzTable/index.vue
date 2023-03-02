@@ -4,8 +4,8 @@ import TableVxe from './components/TableVxe/index.vue';
 import { useSchemaTable } from './hooks/useSchemaTable';
 
 const props = defineProps<{
-  schema?: any[] | any;
-  baseList?: any[];
+  schema: any[] | any;
+  baseList: any[];
   dataModel?: any;
   option?: any;
   moduleName?: string;
@@ -33,39 +33,38 @@ const schemaOption = reactive({
   },
 
   pluginOption: {
-    name: 'Text',
-    type: 'Cell',
-    scope: '@Dz',
+    cellPluginCode: '@SourcePluginApp/CellText',
   },
 
   ...props.option,
 });
 
-const { fixSchema } = useSchemaTable({
+const config = inject('config');
+const { rawToFixedSchema } = useSchemaTable({
   moduleName: props.moduleName,
   option: schemaOption,
+  config,
 });
 
 const schemaState = reactive<any>({
   version: new Date().getTime(),
   raw: null,
-  cleaned: [],
+  fixed: [],
 });
 
-const refreshWhenSchemaUpdate = (value: any) => {
-  schemaState.raw = value;
-  schemaState.cleaned = props.schema.map(fixSchema);
+const refreshWhenSchemaUpdate = () => {
+  schemaState.raw = props.schema;
+  schemaState.fixed = rawToFixedSchema({ list: schemaState.raw });
   schemaState.version = new Date().getTime();
 };
+
 watch(() => props.schema, refreshWhenSchemaUpdate, { immediate: true });
 </script>
 
 <template>
   <TableVxe
-    :class="[
-      //
-    ]"
-    :schema="schemaState.cleaned"
+    :class="[]"
+    :schema="schemaState.fixed"
     :baseList="baseList"
     :dataModel="dataModel"
     :moduleName="moduleName"

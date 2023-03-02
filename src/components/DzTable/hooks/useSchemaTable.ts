@@ -1,55 +1,51 @@
-import { findComponent } from '@/plugins';
+import { useSourcePluginStore } from '@/hooks/useSourceStore';
 import { isString, isFunction } from '@vueuse/core';
 
-export const useSchemaTable = ({ moduleName, option }) => {
-  const { ViewName, i18nSeparator } = inject('config') as any;
+const { findPlugin } = useSourcePluginStore();
+
+export const useSchemaTable = ({ moduleName, option, config }) => {
+  const { ViewName } = config;
   const { pluginOption } = option as any;
 
   const loggerState = reactive<any>({ list: [] });
 
-  const fixId = ({ id, key }) => {
-    if (id) {
-      return id;
-    } else if (key) {
-      return key;
+  const fixCode = ({ code }) => {
+    if (code) {
+      return code;
     } else {
-      loggerState.list.push({ message: `[warn] [${moduleName}] [fixId]` });
-    }
-  };
-
-  const fixKey = ({ key }) => {
-    if (key) {
-      return key;
-    } else {
-      loggerState.list.push({ message: `[warn] [${moduleName}] [fixKey]` });
+      loggerState.list.push({ message: `[warn] [${moduleName}] [fixCode]` });
     }
   };
 
   const fixComponent = ({ component }) => {
     if (!component) {
-      return () => findComponent({ name: pluginOption.name, type: pluginOption.type, scope: pluginOption.scope });
-    } else if (isString(component)) {
-      return () => findComponent({ name: component, type: pluginOption.type, scope: pluginOption.scope });
+      return findPlugin({ code: pluginOption.cellPluginCode });
+    } else if (isString(component) && component.match(/@/)) {
+      return findPlugin({ code: component });
+    } else if (isString(component) && !component.match(/@/)) {
+      return findPlugin({ code: `@SourcePluginApp/Cell${component}` });
     } else if (isFunction(component)) {
       return component;
     } else {
-      loggerState.list.push({ message: `[warn] [${moduleName}] [fixComponent]` });
+      loggerState.list.push({
+        message: `[warn] [${moduleName}] [fixComponent]`,
+      });
     }
   };
 
-  const fixLabel = ({ key, alias }) => {
+  const fixLabel = ({ code, alias }) => {
     if (alias) {
-      return [ViewName, moduleName, 'SCHEMA', alias].join(i18nSeparator);
-    } else if (key) {
-      return [ViewName, moduleName, 'SCHEMA', key].join(i18nSeparator);
+      return [`@${ViewName}`, moduleName, 'SCHEMA', alias].join('.');
+    } else if (code) {
+      return [`@${ViewName}`, moduleName, 'SCHEMA', code].join('.');
     }
   };
   const fixTooltip = ({ tooltip }) => {
-    if (tooltip) return [ViewName, moduleName, 'TEXT', tooltip].join(i18nSeparator);
+    if (tooltip) return [`@${ViewName}`, moduleName, 'TEXT', tooltip].join('.');
     else return false;
   };
   const fixText = ({ text }) => {
-    if (text) return [ViewName, moduleName, 'TEXT', text].join(i18nSeparator);
+    if (text) return [`@${ViewName}`, moduleName, 'TEXT', text].join('.');
     else return false;
   };
 
@@ -67,10 +63,10 @@ export const useSchemaTable = ({ moduleName, option }) => {
   };
 
   const fixSource = ({ source }) => {
-    return [ViewName, 'SOURCE', source].join(i18nSeparator);
+    return source;
   };
   const fixDict = ({ dict }) => {
-    return [ViewName, 'Dict', dict].join(i18nSeparator);
+    return dict;
   };
 
   const fixRule = ({ rule }) => rule || [];
@@ -110,10 +106,15 @@ export const useSchemaTable = ({ moduleName, option }) => {
     return { size, position };
   };
 
-  const fixSchema = item => {
+  const fixWidth = ({ width }) => {
+    return width || 200;
+  };
+
+  const fixSchema = (item: any) => {
     return {
-      id: fixId(item),
-      key: fixKey(item),
+      // id: fixId(item),
+      // key: fixKey(item),
+      code: fixCode(item),
 
       component: fixComponent(item),
 
@@ -137,10 +138,16 @@ export const useSchemaTable = ({ moduleName, option }) => {
       formItemOption: fixFormItemOption(item),
       cellOption: fixCellOption(item),
       controlOption: fixControlOption(item),
+
+      width: fixWidth(item),
     };
   };
 
+  const rawToFixedSchema = ({ list }) => {
+    return list.map(fixSchema);
+  };
+
   return {
-    fixSchema,
+    rawToFixedSchema,
   };
 };
