@@ -29,7 +29,7 @@ const refresh = () => {
   // 3. 转化成显示的数据
   if (!isNaN(Number(cellState.value)) && dayjs(cellState.value).isValid()) {
     cellState.label = dayjs(Number(cellState.value)).format(
-      'YYYY-MM-DD' //
+      'YYYY' //
     );
   }
 };
