@@ -569,7 +569,7 @@ export default [
     component: 'Auth/AcUserUpdateLog',
     icon: 'ic:twotone-yard',
     redirect: '',
-    route: '',
+    route: '/Auth/AcUserUpdateLog',
     target: '_self',
     url: '',
     showMenu: true,
