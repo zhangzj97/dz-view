@@ -51,6 +51,24 @@ export const useSourceMenuStore = defineStore(
       return { list: sourceState.list, map: sourceState.map };
     };
 
+    // 强制改变资源
+    const setSourceList = async ({ list }) => {
+      sourceState.list = list;
+      sourceState.map = Object.fromEntries(
+        sourceState.list.map((item: any) => [item.id, item])
+      );
+
+      return { list: sourceState.list, map: sourceState.map };
+    };
+
+    // 强制改变资源
+    const setSourceMap = async ({ map }) => {
+      sourceState.map = map;
+      sourceState.list = Object.values(map);
+
+      return { list: sourceState.list, map: sourceState.map };
+    };
+
     // 获取当前的资源
     const getSource = () => {
       return { list: sourceState.list, map: sourceState.map };
@@ -67,6 +85,8 @@ export const useSourceMenuStore = defineStore(
       initSourceImportRaw,
       refreshSource,
       setSource,
+      setSourceList,
+      setSourceMap,
       getSource,
 
       changeVersion,
