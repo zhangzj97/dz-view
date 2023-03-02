@@ -9,5 +9,3 @@ export default {
   Static,
   ...Remote,
 };
-
-console.log({ Dz, Custom, Static, ...Remote });
