@@ -1,5 +1,5 @@
 export default {
-  'AuUser/Form1': {
+  'Demo/Form1': {
     Select: { url: '/Demo/Form1/Select' },
     Create: { url: '/Demo/Form1/Create' },
     Update: { url: '/Demo/Form1/Update' },
