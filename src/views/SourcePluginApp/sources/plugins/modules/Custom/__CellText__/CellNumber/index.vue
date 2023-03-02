@@ -25,7 +25,9 @@ const refresh = () => {
   // 2. 获取数据
   cellState.value = cellState.entity[cellState.code];
   // 3. 转化成显示的数据
-  cellState.label = cellState.value;
+  if (!isNaN(Number(cellState.value))) {
+    cellState.label = Number(cellState.value).toLocaleString();
+  }
 };
 
 onMounted(() => {

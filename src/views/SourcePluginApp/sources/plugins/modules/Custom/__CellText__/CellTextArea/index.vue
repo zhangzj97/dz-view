@@ -40,6 +40,19 @@ onMounted(() => {
     :position="cellOption.position"
     :wrapper-class="['px-2']"
   >
-    <dz-font class="whitespace-pre-wrap">{{ cellState.label }}</dz-font>
+    <dz-popover :tooltip="cellState.label">
+      <div class="cell-textarea">
+        {{ cellState.label }}
+      </div>
+    </dz-popover>
   </dz-view>
 </template>
+
+<style scoped lang="scss">
+.cell-textarea {
+  @apply overflow-hidden  text-ellipsis whitespace-pre-wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+</style>
