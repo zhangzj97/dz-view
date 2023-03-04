@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import {
   ArcoResolver,
   AntDesignVueResolver,
+  ElementPlusResolver,
 } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
@@ -18,13 +19,17 @@ export default defineConfig({
     AutoImport({
       dts: './types/auto-imports.d.ts',
       imports: ['vue', 'vue-i18n', '@vueuse/core'],
-      resolvers: [ArcoResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+        AntDesignVueResolver(),
+        ArcoResolver(),
+      ],
     }),
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
       dts: './types/auto-imports-components.d.ts',
       globs: ['./src/components/*/index.vue'],
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [ElementPlusResolver(), AntDesignVueResolver()],
       directoryAsNamespace: false,
       globalNamespaces: [],
       directives: true,
