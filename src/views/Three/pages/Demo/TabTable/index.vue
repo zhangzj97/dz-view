@@ -7,6 +7,6 @@
     position="1"
     wrapper-class="p-4 m-4 border rounded-md shadow"
   >
-    <dz-font>Form</dz-font>
+    <dz-font>TabTable</dz-font>
   </dz-view>
 </template>

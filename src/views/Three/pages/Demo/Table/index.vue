@@ -1,80 +1,18 @@
 <script setup lang="ts">
+import { mock } from './mocks';
+import { schema } from './schemas';
 import { useService } from '@/hooks/useService';
 const { dispatch } = useService();
 
-const schemaTable = [
-  { code: 'Text', component: 'Text' },
-  { code: 'Textarea', component: 'TextArea' },
-  { code: 'Number', component: 'Number' },
-
-  { code: 'Time', component: 'Time' },
-  { code: 'Datetime', component: 'DateTime' },
-  { code: 'Daytime', component: 'DayTime' },
-  { code: 'Date', component: 'Date' },
-  { code: 'Mounth', component: 'Mounth' },
-  { code: 'Year', component: 'Year' },
-  { code: 'DayHour', component: 'Hour' },
-  { code: 'DayHour', component: 'DayHour' },
-
-  {
-    code: 'Find',
-    component: 'Find',
-    service: 'Auth/AcUser/Find',
-    props: { coverField: 'FindCoverField' },
-  },
-
-  {
-    code: 'EnumText',
-    component: 'EnumText',
-    service: 'Enum.Auth/AcUser.AppType',
-  },
-  {
-    code: 'EnumTag',
-    component: 'EnumTag',
-    service: 'Auth/AcUser/Find',
-  },
-
-  { code: 'Image', component: 'Image' },
-  { code: 'File', component: 'File' },
-
-  //
-];
+const schemaTable = schema.table;
 
 const dataState = reactive({
-  list: [
-    {
-      id: 'id',
-      remark: 'remark',
-      avatar: 'avatar',
-      createTime: 0,
-      updateTime: 0,
-    },
-    {
-      id: 'id',
-      remark: 'remark',
-      avatar: 'avatar',
-      createTime: 0,
-      updateTime: 0,
-    },
-    {
-      id: 'id',
-      remark: 'remark',
-      avatar: 'avatar',
-      createTime: 0,
-      updateTime: 0,
-    },
-  ],
+  list: mock.tableList,
 });
 
-const moduleState = reactive({
-  name: 'Demo/Table',
-});
+const moduleState = reactive({ name: 'Demo/Table' });
 
-const pageState = reactive({
-  page: 0,
-  pageSize: 0,
-  total: 0,
-});
+const pageState = reactive({ page: 0, pageSize: 0, total: 0 });
 
 onMounted(() => {
   pageState.page = 1;
@@ -82,14 +20,11 @@ onMounted(() => {
 });
 
 const updatePage = (value: number) => {
-  console.log({ value });
-
   pageState.page = value;
   refresh();
 };
 
 const updatePageSize = (value: number) => {
-  console.log({ value });
   pageState.pageSize = value;
   refresh();
 };
