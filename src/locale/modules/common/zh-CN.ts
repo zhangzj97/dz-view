@@ -71,6 +71,7 @@ export default {
   '@Three.ROUTE.Demo/Table': 'Demo/表格',
   '@Three.ROUTE.Demo/Form': 'Demo/表单',
   '@Three.ROUTE.Demo/TabTable': '切换式表格',
+  '@Three.ROUTE.Demo/Popover': 'Popover',
   '@Three.ROUTE.Demo/Modal': '模态框',
 
   '@Three.ROUTE.uThree': 'ThreeAuto',
