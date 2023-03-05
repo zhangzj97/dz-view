@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PopoverAntd from './components/PopoverAntd/index.vue';
+import PopconfirmAntd from './components/PopconfirmAntd/index.vue';
 
 const props = defineProps<{
   placement?: any;
@@ -9,7 +10,21 @@ const props = defineProps<{
   sharp?: boolean;
 
   tooltip?: string;
+  confirm?: string;
 }>();
+
+const emit = defineEmits<{
+  (e: 'ok'): void;
+  (e: 'cancle'): void;
+}>();
+
+const handleOk = () => {
+  emit('ok');
+};
+
+const handleCancle = () => {
+  emit('cancle');
+};
 
 const parseOverlayClassName = () => {
   const result = ['dz-popover', props.overlayClassName];
@@ -35,6 +50,17 @@ const parseOverlayClassName = () => {
       </slot>
     </template>
   </PopoverAntd>
+
+  <PopconfirmAntd
+    v-else-if="confirm"
+    :overlay-class-name="parseOverlayClassName()"
+    :placement="placement"
+    :title="confirm"
+    @handleOk="handleOk"
+    @handleCancle="handleCancle"
+  >
+    <slot></slot>
+  </PopconfirmAntd>
 
   <PopoverAntd
     v-else
