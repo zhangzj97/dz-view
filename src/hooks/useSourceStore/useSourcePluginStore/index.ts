@@ -4,11 +4,11 @@ import SourceRaw from '@/sources/plugins';
 export const useSourcePluginStore = defineStore(
   'SourcePlugin', //
   () => {
-    const sourceState = reactive<any>({
+    const sourceState: any = {
       version: '',
       list: [],
       map: {},
-    });
+    };
 
     const version = computed(() => sourceState.version);
 
@@ -23,7 +23,7 @@ export const useSourcePluginStore = defineStore(
         []
       );
       sourceState.map = Object.fromEntries(
-        sourceState.list.map((item: any) => [item.id, item])
+        sourceState.list.map((item: any) => [item.id, item.default])
       );
 
       return { list: sourceState.list, map: sourceState.map };
@@ -79,6 +79,10 @@ export const useSourcePluginStore = defineStore(
       sourceState.version = String(new Date().getTime());
     };
 
+    const findPlugin = ({ code }) => {
+      return () => sourceState.map[code];
+    };
+
     return {
       version,
 
@@ -90,6 +94,8 @@ export const useSourcePluginStore = defineStore(
       getSource,
 
       changeVersion,
+
+      findPlugin,
     };
   }
 );

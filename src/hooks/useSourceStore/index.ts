@@ -12,3 +12,4 @@ export {
   useSourceRouteTabTagStateStore,
 } from './useSourceRouteTabTagStore';
 export { useSourceServiceStore } from './useSourceServiceStore';
+export { useSourcePluginStore } from './useSourcePluginStore';
