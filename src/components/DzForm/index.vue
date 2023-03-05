@@ -33,9 +33,7 @@ const schemaOption = reactive({
   },
 
   pluginOption: {
-    name: 'Input',
-    type: 'Control',
-    scope: '@Dz',
+    cellPluginCode: '',
   },
 
   ...props.option,

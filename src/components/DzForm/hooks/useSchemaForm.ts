@@ -1,5 +1,7 @@
-import { findComponent } from '@/plugins';
+import { usePlugin } from '@/hooks/usePlugin';
 import { isString, isFunction } from '@vueuse/core';
+
+const { findPlugin } = usePlugin();
 
 export const useSchemaForm = ({ moduleName, option }) => {
   const { ViewName, i18nSeparator } = inject('config') as any;
@@ -27,9 +29,9 @@ export const useSchemaForm = ({ moduleName, option }) => {
 
   const fixComponent = ({ component }) => {
     if (!component) {
-      return () => findComponent({ name: pluginOption.name, type: pluginOption.type, scope: pluginOption.scope });
+      return () => findPlugin({ name: pluginOption.name, type: pluginOption.type, scope: pluginOption.scope });
     } else if (isString(component)) {
-      return () => findComponent({ name: component, type: pluginOption.type, scope: pluginOption.scope });
+      return () => findPlugin({ name: component, type: pluginOption.type, scope: pluginOption.scope });
     } else if (isFunction(component)) {
       return component;
     } else {
