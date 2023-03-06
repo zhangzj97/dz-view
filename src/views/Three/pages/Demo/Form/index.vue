@@ -7,6 +7,8 @@
     position="1"
     wrapper-class="p-4 m-4 border rounded-md shadow"
   >
-    <dz-font>Form</dz-font>
+    <dz-view col size="w-96" bg="bg-green-400">
+      <t-form></t-form>
+    </dz-view>
   </dz-view>
 </template>
