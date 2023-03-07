@@ -4,7 +4,7 @@ type PluginControlProps = {
   code: string;
   controlOption?: any;
   customOption?: any;
-  propsRow: any;
+  propsRow?: any;
 
   version: string | number;
 };

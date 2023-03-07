@@ -3,7 +3,7 @@ defineProps<{
   code: string;
   propsRow?: any;
 
-  version: string | number;
+  version: any;
 
   component: any;
 }>();
@@ -13,7 +13,6 @@ const emit = defineEmits<{
 }>();
 
 const updateValue = value => {
-  console.log(999);
   emit('updateValue', value);
 };
 </script>
@@ -31,9 +30,8 @@ const updateValue = value => {
       </dz-view>
       <dz-view one size="w-grow" bg="bg-pink-400">
         <Component
-          :is="component"
+          :is="component()"
           :code="code"
-          :propsRow="propsRow"
           :version="version"
           @updateValue="updateValue"
         />
