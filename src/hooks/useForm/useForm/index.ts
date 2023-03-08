@@ -3,17 +3,15 @@ import { useSourcePluginStore } from '@/hooks/useSourceStore';
 const { findPlugin } = useSourcePluginStore();
 
 export const useForm = ({ moduleName, schema }) => {
-  const { fixSchemaData, fixSchemaProps, schemaDom, fixSchemaVersion } =
-    useFormSchema({
-      moduleName,
-      schema,
-    });
+  const { fixSchemaData, fixSchemaProps, fixSchemaVersion } = useFormSchema({
+    moduleName,
+    schema,
+  });
 
   const formState = reactive({
-    entity: Object.assign({}, schema.defaultValue),
-    schema: fixSchemaData(schema),
+    entity: {},
+    schemaData: fixSchemaData(schema),
     schemaProps: fixSchemaProps(schema),
-    schemaDom: schemaDom(schema),
     schemaVersion: fixSchemaVersion(schema),
   });
 
@@ -23,14 +21,15 @@ export const useForm = ({ moduleName, schema }) => {
 
   const setEntity = async ({ entity }) => {
     formState.entity = entity;
+    Object.keys(formState.schemaData).forEach(code => {
+      formState.schemaVersion[code] = String(Math.random());
+    });
   };
 
   const resetEntity = () => {
-    formState.entity = schema.defaultValue;
-  };
-
-  const clearEntity = () => {
-    formState.entity = {};
+    Object.keys(formState.schemaData).forEach(code => {
+      setValue(code, schema.defaultValue[code]);
+    });
   };
 
   const mergeEntity = async ({ entity }) => {
@@ -47,12 +46,19 @@ export const useForm = ({ moduleName, schema }) => {
   };
 
   const setSchema = (code: string, { visible, required, readonly }) => {
-    isDefined(visible) && (formState.schema[code].visible = visible);
-    isDefined(required) && (formState.schema[code].required = required);
-    isDefined(readonly) && (formState.schema[code].readonly = readonly);
+    isDefined(visible) && (formState.schemaData[code].visible = visible);
+    isDefined(required) && (formState.schemaData[code].required = required);
+    isDefined(readonly) && (formState.schemaData[code].readonly = readonly);
   };
 
   const formDom = ref();
+
+  const initEntity = () => {
+    Object.keys(schema.defaultValue).forEach(code => {
+      setValue(code, schema.defaultValue[code]);
+    });
+  };
+  initEntity();
 
   return {
     formDom,
@@ -62,8 +68,6 @@ export const useForm = ({ moduleName, schema }) => {
     getEntity,
     setEntity,
     resetEntity,
-    clearEntity,
-    mergeEntity,
 
     getValue,
     setValue,
@@ -137,11 +141,6 @@ const useFormSchema = ({ moduleName, schema }) => {
       ])
     );
 
-  const schemaDom = ({ data }) =>
-    Object.fromEntries(
-      Object.entries(data).map(([code]: any) => [code, ref()])
-    );
-
   const fixSchemaVersion = ({ data }) =>
     Object.fromEntries(
       Object.entries(data).map(([code]: any) => [code, String(Math.random())])
@@ -150,7 +149,6 @@ const useFormSchema = ({ moduleName, schema }) => {
   return {
     fixSchemaData,
     fixSchemaProps,
-    schemaDom,
     fixSchemaVersion,
   };
 };
