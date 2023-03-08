@@ -1,16 +1,10 @@
 export const useValidate = () => {
   const errorState = reactive<any>({
-    error: false,
-    visible: false,
     list: [],
   });
 
-  const message = computed(() => {
-    if (errorState.list.length > 0) {
-      return errorState.list[0].message;
-    } else {
-      return '';
-    }
+  const error = computed(() => {
+    return errorState.list?.[0] || {};
   });
 
   const validate = ({ value, requiredValidate, rule }) => {
@@ -26,20 +20,11 @@ export const useValidate = () => {
       }
     });
 
-    if (errorState.list.length > 0) {
-      errorState.error = true;
-      errorState.visible = true;
-    } else {
-      errorState.error = false;
-      errorState.visible = false;
-    }
-
     return errorState.list;
   };
 
   return {
-    errorState,
-    message,
+    error,
 
     validate,
   };
