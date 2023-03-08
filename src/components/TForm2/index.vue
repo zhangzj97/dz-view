@@ -1,96 +1,50 @@
 <script setup lang="ts">
 import FormItem from './components/FormItem/index.vue';
 
-import { useSchemaForm } from './hooks/useSchemaForm';
-
 const props = defineProps<{
   moduleName: string;
-  schema: any[];
-
-  option?: any;
-  entity: any;
-
-  versionMap?: any;
+  formState: any;
 }>();
 
-const schemaOption = reactive({
-  required: false,
-  readonly: false,
-  visible: true,
-
-  cellOption: {},
-
-  labelOption: {
-    size: 'w-48 h-12',
-  },
-
-  formItemOption: {
-    layout: 'row',
-    size: 'h-fit w-full',
-  },
-
-  controlOption: {
-    size: 'w-grow h-12',
-  },
-
-  pluginOption: {
-    cellPluginCode: '@SourcePluginApp/ControlInput1',
-  },
-
-  ...props.option,
-});
-
-const config = inject('config');
-const { rawToFixedSchema } = useSchemaForm({
-  moduleName: props.moduleName,
-  option: schemaOption,
-  config,
-});
-
-const schemaState = reactive<any>({
-  version: new Date().getTime(),
-  raw: null,
-  fixed: [],
-});
-
-const refreshWhenSchemaUpdate = () => {
-  schemaState.raw = props.schema;
-  schemaState.fixed = rawToFixedSchema({ list: schemaState.raw });
-  schemaState.version = new Date().getTime();
-};
-
-watch(() => props.schema, refreshWhenSchemaUpdate, { immediate: true });
-
-const updateValueByCode = ({ code, beforeUpdate, afterUpdate }, value) => {
-  beforeUpdate({}, value);
+const updateValueByCode = (
+  { code, beforeUpdate, afterUpdate }: any,
+  value: any
+) => {
+  isDefined(beforeUpdate) && beforeUpdate({}, value);
   emit('setValue', code, value);
-  afterUpdate({}, value);
+  isDefined(afterUpdate) && afterUpdate({}, value);
 };
 
 const emit = defineEmits<{
   (e: 'setValue', code: string, value: any): void;
 }>();
 
-provide('entity', props.entity);
+provide('formState', props.formState);
+
+const schemaDom = reactive({ ...props.formState.schema });
+
+const validate = () => {
+  Object.entries(props.formState.schema).forEach(([key]) => {
+    console.log(props.formState.schemaDom[key].validate());
+  });
+};
+
+defineExpose({ validate });
 </script>
 
 <template>
   <dz-view grid size="h-fit">
     <slot>
-      <template v-for="(item, index) of schemaState.fixed" :key="index">
+      <template
+        v-for="([code], index) of Object.entries(formState.schema)"
+        :key="index"
+      >
         <FormItem
-          :code="item.code"
-          :component="item.component"
-          :version="versionMap[item.code]"
+          :ref="e => (schemaDom[code] = e)"
+          :code="code"
+          :component="formState.schemaProps.component"
           @updateValue="
-            updateValueByCode(
-              {
-                code: item.code,
-                beforeUpdate: item.beforeUpdate,
-                afterUpdate: item.afterUpdate,
-              },
-              $event
-            )
+            updateValueByCode({ code, ...formState.schemaMethod }, $event)
           "
         />
       </template>
