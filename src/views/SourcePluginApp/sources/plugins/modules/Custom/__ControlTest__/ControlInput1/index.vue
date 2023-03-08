@@ -1,35 +1,29 @@
 <script setup lang="ts">
-// !!! PlugincontrolProps
-type PluginControlProps = {
+import { useValidate } from './useValidate';
+
+const props = defineProps<{
   code: string;
-  controlOption?: any;
-  customOption?: any;
-  propsRow?: any;
+}>();
 
-  version: string | number;
-};
-// !!!
+const formState: any = inject('formState');
 
-const props = defineProps<PluginControlProps>();
-
-const controlState = reactive<any>({
-  value: null,
-  label: null,
-});
+const version = computed(() => formState.schemaVersion[props.code]);
 
 watch(
-  () => props.version,
+  () => version,
   () => {
     refresh();
+    validate();
   }
 );
 
-const entity: any = inject('entity');
+const controlState = reactive<any>({ value: null, label: null });
+
 const refresh = () => {
   // 1. 缓存数据
-  controlState.code = props.code;
+  controlState.code = formState.entity[props.code];
   // 2. 获取数据
-  controlState.value = entity[controlState.code];
+  controlState.value = formState.entity[controlState.code];
   // 3. 转化成显示的数据
   controlState.label = controlState.value;
 };
@@ -42,14 +36,24 @@ const emit = defineEmits<{
   (e: 'updateValue', value: any): void;
 }>();
 
-const updateValue = value => {
-  emit('updateValue', value);
-};
+const updateValue = (value: any) => emit('updateValue', value);
+
+const { validate: validateCurrent, message, errorState } = useValidate();
+
+const validate = () =>
+  validateCurrent({
+    rule: formState.schemaData.rule,
+    requiredValidate: (value: any) => !!value,
+    value: controlState.value,
+  });
+
+defineExpose({ validate });
 </script>
 
 <template>
-  <dz-view one :wrapper-class="['px-2']">
-    {{ version }}
+  <dz-view col :wrapper-class="['px-2 py-1']">
     <a-input :value="controlState.value" @update:value="updateValue" />
+
+    <dz-font xs color="text-red-500" class="h-5">{{ message }}</dz-font>
   </dz-view>
 </template>
