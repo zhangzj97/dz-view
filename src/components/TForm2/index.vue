@@ -21,11 +21,11 @@ const emit = defineEmits<{
 
 provide('formState', props.formState);
 
-const schemaDom = reactive({ ...props.formState.schema });
+const schemaDom = reactive({ ...props.formState.schemaData });
 
 const validate = () => {
-  Object.entries(props.formState.schema).forEach(([key]) => {
-    console.log(props.formState.schemaDom[key].validate());
+  Object.entries(props.formState.schemaData).forEach(([key]) => {
+    console.log(schemaDom[key].validate());
   });
 };
 
@@ -36,13 +36,13 @@ defineExpose({ validate });
   <dz-view grid size="h-fit">
     <slot>
       <template
-        v-for="([code], index) of Object.entries(formState.schema)"
+        v-for="([code], index) of Object.entries(formState.schemaData)"
         :key="index"
       >
         <FormItem
           :ref="e => (schemaDom[code] = e)"
           :code="code"
-          :component="formState.schemaProps.component"
+          :component="formState.schemaProps[code].component"
           @updateValue="
             updateValueByCode({ code, ...formState.schemaMethod }, $event)
           "
