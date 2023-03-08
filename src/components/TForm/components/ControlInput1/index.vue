@@ -51,8 +51,9 @@ const updateValue = value => {
 </script>
 
 <template>
-  <dz-view one :wrapper-class="['px-2']">
-    {{ version }}
+  <dz-view col :wrapper-class="['px-2']">
     <a-input :value="controlState.value" @update:value="updateValue" />
+
+    <dz-font xs color="text-red-500">错误信息</dz-font>
   </dz-view>
 </template>
