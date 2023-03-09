@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import SourceRaw from '@/themes';
+import SourceRaw from '@/sources/themes';
 
 export const useSourceThemeStore = defineStore(
   'SourceTheme', //
