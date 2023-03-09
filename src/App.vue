@@ -1,9 +1,12 @@
 <script setup lang="ts" name="App">
-import { useSource } from '@/hooks/useSource';
+import {
+  useSourceServiceStore,
+  useSourcePluginStore,
+} from '@/hooks/useSourceStore';
 
-onBeforeMount(async () => {
-  await useSource({ strategy: 'import', sourceName: 'theme' });
-  await useSource({ strategy: 'import', sourceName: 'menu' });
+onMounted(async () => {
+  console.log(await useSourceServiceStore().initSourceImportRaw());
+  console.log(await useSourcePluginStore().initSourceImportRaw());
 });
 </script>
 
@@ -14,3 +17,7 @@ onBeforeMount(async () => {
     <ConsoleRouter />
   </ContainerDrag>
 </template>
+
+<style lang="scss">
+@import url(./assets/index.scss);
+</style>

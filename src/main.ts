@@ -5,8 +5,6 @@ import App from './App.vue';
 import { i18n } from './locale';
 import { router } from './router';
 
-import './index.css';
-
 const app = createApp(App);
 
 app.use(createPinia());

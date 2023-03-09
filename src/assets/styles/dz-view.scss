@@ -1,0 +1,12 @@
+.h-grow {
+  flex-grow: 1;
+}
+
+.w-grow {
+  flex-grow: 1;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
