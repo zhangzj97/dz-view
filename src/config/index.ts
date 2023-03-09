@@ -1,7 +1,1 @@
-const RootRouteOption = {
-  name: 'Home',
-};
-
-export const config = {
-  RootRouteOption,
-};
+export const config = {};
