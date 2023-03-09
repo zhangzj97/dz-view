@@ -17,7 +17,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     AutoImport({
-      dts: './types/auto-imports.d.ts',
+      dts: './types/unplugin-auto-import.d.ts',
       imports: ['vue', 'vue-i18n', '@vueuse/core'],
       resolvers: [
         ElementPlusResolver(),
@@ -27,7 +27,7 @@ export default defineConfig({
     }),
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
-      dts: './types/auto-imports-components.d.ts',
+      dts: './types/unplugin-vue-components.d.ts',
       globs: ['./src/components/*/index.vue'],
       resolvers: [ElementPlusResolver(), AntDesignVueResolver()],
       directoryAsNamespace: false,
@@ -56,7 +56,7 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:9001',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api\/.*?\//, '/'), // 不可以省略rewrite
+        rewrite: path => path.replace(/^\/api\/.*?\//, '/'),
       },
     },
   },
