@@ -1,8 +1,4 @@
-type AutoImportResult = {
-  modules: Record<string, unknown>;
-};
-
-export const useAutoImport = ({ fileMap, toKey, toValue }) => {
+export const useAutoImport = () => {
   const lintPath = ({ path, file }) => {
     if (path.match(/__.*__\/index\.vue/)) {
       return {
@@ -36,36 +32,27 @@ export const useAutoImport = ({ fileMap, toKey, toValue }) => {
   };
 
   // 获取结果
-  const toResult = (
-    { fileMap, toKeyCallback, toValueCallback } = {
-      fileMap: {},
-      toKeyCallback: toKey,
-      toValueCallback: toValue,
-    }
-  ) => {
-    const result: AutoImportResult = {
-      modules: {},
-    };
+  const toResult = ({ fileMap, toKey, toValue }) =>
+    Object.fromEntries(
+      Object.entries(fileMap).map(([path, file]) => {
+        const key = toKey({ path, file });
+        const value = toValue({ path, file });
 
-    Object.keys(fileMap).forEach((path: string) => {
-      const file = fileMap[path];
-      const key = toKeyCallback({ path, file });
-      const value = toValueCallback({ path, file });
-      result.modules[key] = value;
+        lintPathLog({ path, file });
+        return [key, value];
+      })
+    );
 
-      lintPathLog({ path, file });
-    });
-
-    return result;
+  const toKeyWithModules = ({ path, scope }) => {
+    return path
+      .replace(/__.*?__\//, '')
+      .replace(/^.\/modules\//g, '')
+      .replace(/\/index.(ts|vue|js)$/, '')
+      .replace(/^/, `@${scope}/`);
   };
 
-  const result = toResult({
-    fileMap,
-    toKeyCallback: toKey,
-    toValueCallback: toValue,
-  });
-
   return {
-    result,
+    toResult,
+    toKeyWithModules,
   };
 };
