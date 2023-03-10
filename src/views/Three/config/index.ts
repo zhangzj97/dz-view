@@ -1,4 +1,5 @@
 const ViewName = 'Three';
+const ScopeCode = 'Three';
 const RouteHomePageName = 'PAGEHOME';
 const i18nSeparator = '.';
 const logoTitle = 'Acro Admin';
@@ -13,6 +14,7 @@ const RootRouteOption = {
 export const config = {
   // 当前业务配置
   ViewName,
+  ScopeCode,
   RouteHomePageName,
   i18nSeparator,
   logoTitle,

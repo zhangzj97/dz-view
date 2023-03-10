@@ -1,4 +1,5 @@
 const ViewName = 'SourceThemeApp';
+const ScopeCode = 'SourceThemeApp';
 const RouteHomePageName = 'Home/Dashboard';
 const i18nSeparator = '.';
 const logoTitle = 'SourceThemeApp';
@@ -13,6 +14,7 @@ const RootRouteOption = {
 export const config = {
   // 当前业务配置
   ViewName,
+  ScopeCode,
   RouteHomePageName,
   i18nSeparator,
   logoTitle,

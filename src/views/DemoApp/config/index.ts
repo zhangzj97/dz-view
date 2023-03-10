@@ -1,8 +1,8 @@
-const ViewName = 'SourcePluginApp';
-const ScopeCode = 'SourcePluginApp';
-const RouteHomePageName = 'Home/Dashboard';
+const ViewName = 'Demo';
+const ScopeCode = 'Demo';
+const RouteHomePageName = 'PAGEHOME';
 const i18nSeparator = '.';
-const logoTitle = 'SourcePluginApp';
+const logoTitle = 'Acro Admin';
 
 const SourceThemeCurrentCode = '@SourceThemeApp/Green';
 
