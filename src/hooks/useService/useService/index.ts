@@ -2,6 +2,7 @@ import {
   useSourceAccess,
   useSourceApi,
   useSourceApiService,
+  useSourceAuth,
   useSourceEnum,
   useSourcePlugin,
   useSourceRoute,
@@ -13,6 +14,7 @@ export const useService = async () => {
     SourceAccess: useSourceAccess,
     SourceApi: useSourceApi,
     SourceApiService: useSourceApiService,
+    SourceAuth: useSourceAuth,
     SourceEnum: useSourceEnum,
     SourcePlugin: useSourcePlugin,
     SourceRoute: useSourceRoute,
@@ -31,8 +33,24 @@ export const useService = async () => {
     return { data: data };
   };
 
+  const checkAll = async () => {
+    console.log({
+      ...serviceState,
+      SourceAccess: (await useSourceAccess().Select()).data,
+      SourceApi: (await useSourceApi().Select()).data,
+      SourceApiService: (await useSourceApiService().Select()).data,
+      SourceAuth: (await useSourceAuth().Select()).data,
+      SourceEnum: (await useSourceEnum().Select()).data,
+      SourcePlugin: (await useSourcePlugin().Select()).data,
+      SourceRoute: (await useSourceRoute().Select()).data,
+      SourceTheme: (await useSourceTheme().Select()).data,
+    });
+  };
+
   return {
     dispatch,
+
+    checkAll,
   };
 };
 
