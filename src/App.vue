@@ -1,14 +1,4 @@
-<script setup lang="ts" name="App">
-import {
-  useSourceServiceStore,
-  useSourcePluginStore,
-} from '@/hooks/useSourceStore';
-
-onMounted(async () => {
-  console.log(await useSourceServiceStore().initSourceImportRaw());
-  console.log(await useSourcePluginStore().initSourceImportRaw());
-});
-</script>
+<script setup lang="ts" name="App"></script>
 
 <template>
   <RouterView />
