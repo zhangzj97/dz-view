@@ -1,17 +1,12 @@
-// import AutoSource from './modules/Auto';
-// import CustomSource from './modules/Custom';
-// import ScriptSource from './modules/Script';
-import CustomSource from './modules/Custom';
-
+import { useAutoImport } from '@/hooks/useAutoImport';
 import { config } from '../../config';
+const { ScopeCode } = config;
+const { toResult, toKeyWithModules } = useAutoImport();
 
-const scopeKey = config.ViewName;
+const fileMap = import.meta.glob(['./modules/*/index.ts'], {
+  eager: true,
+});
+const toKey = ({ path }) => toKeyWithModules({ path, scope: ScopeCode });
+const toValue = ({ file }) => file.default;
 
-export default {
-  // ...AutoSource,
-  // ...ScriptSource,
-  ...CustomSource,
-  // ...DzSource,
-};
-
-export { scopeKey };
+export default toResult({ fileMap, toKey, toValue });
