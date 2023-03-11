@@ -14,11 +14,7 @@
   "compilerOptions": {
     "composite": true,
     "lib": [],
-    "types": [
-      "node",
-      "jsdom",
-      "webpack-env"
-    ],
+    "types": ["node", "jsdom", "webpack-env"],
     "noImplicitAny": false
   }
 }

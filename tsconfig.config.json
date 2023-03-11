@@ -16,14 +16,9 @@
   "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "types": [
-      "node",
-      "webpack-env"
-    ],
+    "types": ["node", "webpack-env"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "baseUrl": "./"
   }

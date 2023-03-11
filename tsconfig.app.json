@@ -10,19 +10,13 @@
     "src/**/*",
     "src/**/*.vue"
   ],
-  "exclude": [
-    "src/**/__tests__/*"
-  ],
+  "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
+    "types": ["webpack-env"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   }
 }
