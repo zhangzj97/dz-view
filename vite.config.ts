@@ -18,7 +18,7 @@ export default defineConfig({
     vueJsx(),
     AutoImport({
       dts: './types/unplugin-auto-import.d.ts',
-      imports: ['vue', 'vue-i18n', '@vueuse/core'],
+      imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
       resolvers: [
         ElementPlusResolver(),
         AntDesignVueResolver(),
