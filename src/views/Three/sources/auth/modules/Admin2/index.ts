@@ -1,10 +1,10 @@
 export default {
   userinfo: {
-    id: '1',
+    id: '2',
 
     avatar: '/',
-    nickname: 'adminer1',
-    username: 'admin1',
+    nickname: 'adminer2',
+    username: 'admin2',
   },
 
   roleList: [
@@ -13,5 +13,5 @@ export default {
   ],
 
   token: 'xxxxxxx',
-  expireTime: new Date().getTime(),
+  expireTime: new Date().getTime() + 1000000,
 };
