@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw } from '../utils';
+import { toSourceRaw, toApiService } from '../../utils';
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceAccessDefault';
@@ -8,16 +8,16 @@ const StoreKey = 'SourceAccess';
 const SourceFind = '/SourceAccess/Find';
 
 // 自动获取 SourceRaw
-const fileMap = import.meta.glob(['@/views/*/sources/access/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/apis/index.ts'], {
   eager: true,
 });
-const SourceRaw = toSourceRaw({ fileMap });
+const SourceRaw = toApiService({ api: toSourceRaw({ fileMap }) });
 
 // request
 const { request } = useRequest();
 
 // useSource
-export const useSourceAccess = defineStore(
+export const useSourceApiService = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {

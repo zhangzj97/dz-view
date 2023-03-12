@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, toAccessRouteTag } from '../utils';
+import { toSourceRaw, toAccessPermission } from '../../utils';
 
 // TODO 来自于Config
-const LocalStorageKey = 'SourceAccessRouteTagDefault';
-const StoreKey = 'SourceAccessRouteTag';
-const SourceFind = '/SourceAccessRouteTag/Find';
+const LocalStorageKey = 'SourceAccessPermissionDefault';
+const StoreKey = 'SourceAccessPermission';
+const SourceFind = '/SourceAccessPermission/Find';
 
 // 自动获取 SourceRaw
 const fileMap = import.meta.glob(['@/views/*/sources/access/index.ts'], {
   eager: true,
 });
-const SourceRaw = toAccessRouteTag({ access: toSourceRaw({ fileMap }) });
+const SourceRaw = toAccessPermission({ access: toSourceRaw({ fileMap }) });
 
 // request
 const { request } = useRequest();
 
 // useSource
-export const useSourceAccessRouteTag = defineStore(
+export const useSourceAccessPermission = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {
@@ -80,6 +80,14 @@ export const useSourceAccessRouteTag = defineStore(
       return { code: 0, data: {} };
     };
 
+    // 更新
+    const UpdateByAccess = async payload => {
+      const { access, cache } = payload;
+      sourceState.map.default = toAccessPermission({ access });
+      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      return { code: 0, data: {} };
+    };
+
     // return
     return {
       version,
@@ -93,6 +101,9 @@ export const useSourceAccessRouteTag = defineStore(
       // GetValue,
       Find,
       Update,
+
+      // Other
+      UpdateByAccess,
     };
   }
 );

@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw } from '../utils';
+import { toSourceRaw, toAccessRoute } from '../../utils';
 
 // TODO 来自于Config
-const LocalStorageKey = 'SourceEnumDefault';
-const StoreKey = 'SourceEnum';
-const SourceFind = '/SourceEnum/Find';
+const LocalStorageKey = 'SourceAccessRouteDefault';
+const StoreKey = 'SourceAccessRoute';
+const SourceFind = '/SourceAccessRoute/Find';
 
 // 自动获取 SourceRaw
-const fileMap = import.meta.glob(['@/views/*/sources/enums/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/access/index.ts'], {
   eager: true,
 });
-const SourceRaw = toSourceRaw({ fileMap });
+const SourceRaw = toAccessRoute({ access: toSourceRaw({ fileMap }) });
 
 // request
 const { request } = useRequest();
 
 // useSource
-export const useSourceEnum = defineStore(
+export const useSourceAccessRoute = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {
@@ -80,6 +80,14 @@ export const useSourceEnum = defineStore(
       return { code: 0, data: {} };
     };
 
+    // 更新
+    const UpdateByAccess = async payload => {
+      const { access, cache } = payload;
+      sourceState.map.default = toAccessRoute({ access });
+      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      return { code: 0, data: {} };
+    };
+
     // return
     return {
       version,
@@ -93,6 +101,9 @@ export const useSourceEnum = defineStore(
       // GetValue,
       Find,
       Update,
+
+      // Other
+      UpdateByAccess,
     };
   }
 );

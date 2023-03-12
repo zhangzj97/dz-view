@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, toAccessMenu } from '../utils';
+import { toSourceRaw } from '../../utils';
 
 // TODO 来自于Config
-const LocalStorageKey = 'SourceAccessMenuDefault';
-const StoreKey = 'SourceAccessMenu';
-const SourceFind = '/SourceAccessMenu/Find';
+const LocalStorageKey = 'SourcePluginDefault';
+const StoreKey = 'SourcePlugin';
+const SourceFind = '/SourcePlugin/Find';
 
 // 自动获取 SourceRaw
-const fileMap = import.meta.glob(['@/views/*/sources/access/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/plugins/index.ts'], {
   eager: true,
 });
-const SourceRaw = toAccessMenu({ access: toSourceRaw({ fileMap }) });
+const SourceRaw = toSourceRaw({ fileMap });
 
 // request
 const { request } = useRequest();
 
 // useSource
-export const useSourceAccessMenu = defineStore(
+export const useSourcePlugin = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {

@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw } from '../utils';
+import { toSourceRaw, toAccessMenu } from '../../utils';
 
 // TODO 来自于Config
-const LocalStorageKey = 'SourcePluginDefault';
-const StoreKey = 'SourcePlugin';
-const SourceFind = '/SourcePlugin/Find';
+const LocalStorageKey = 'SourceAccessMenuDefault';
+const StoreKey = 'SourceAccessMenu';
+const SourceFind = '/SourceAccessMenu/Find';
 
 // 自动获取 SourceRaw
-const fileMap = import.meta.glob(['@/views/*/sources/plugins/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/access/index.ts'], {
   eager: true,
 });
-const SourceRaw = toSourceRaw({ fileMap });
+const SourceRaw = toAccessMenu({ access: toSourceRaw({ fileMap }) });
 
 // request
 const { request } = useRequest();
 
 // useSource
-export const useSourcePlugin = defineStore(
+export const useSourceAccessMenu = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {
@@ -80,6 +80,14 @@ export const useSourcePlugin = defineStore(
       return { code: 0, data: {} };
     };
 
+    // 更新
+    const UpdateByAccess = async payload => {
+      const { access, cache } = payload;
+      sourceState.map.default = toAccessMenu({ access });
+      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      return { code: 0, data: {} };
+    };
+
     // return
     return {
       version,
@@ -93,6 +101,9 @@ export const useSourcePlugin = defineStore(
       // GetValue,
       Find,
       Update,
+
+      // Other
+      UpdateByAccess,
     };
   }
 );

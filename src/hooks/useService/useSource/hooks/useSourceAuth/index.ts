@@ -1,23 +1,25 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, toAccessPermission } from '../utils';
+import { toSourceRaw } from '../../utils';
 
 // TODO 来自于Config
-const LocalStorageKey = 'SourceAccessPermissionDefault';
-const StoreKey = 'SourceAccessPermission';
-const SourceFind = '/SourceAccessPermission/Find';
+const LocalStorageKey = 'SourceAuthDefault';
+const StoreKey = 'SourceAuth';
+const SourceFind = '/SourceAuth/Find';
+const SourceLogin = '/SourceAuth/Login';
+const SourceLogout = '/SourceAuth/Logout';
 
 // 自动获取 SourceRaw
-const fileMap = import.meta.glob(['@/views/*/sources/access/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/auth/index.ts'], {
   eager: true,
 });
-const SourceRaw = toAccessPermission({ access: toSourceRaw({ fileMap }) });
+const SourceRaw = toSourceRaw({ fileMap });
 
 // request
 const { request } = useRequest();
 
 // useSource
-export const useSourceAccessPermission = defineStore(
+export const useSourceAuth = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {
@@ -80,6 +82,27 @@ export const useSourceAccessPermission = defineStore(
       return { code: 0, data: {} };
     };
 
+    // 登录
+    const Login = async payload => {
+      const { data } = await request({
+        url: SourceLogin,
+        method: 'POST',
+        payload,
+      });
+      return { code: 0, data: data.data };
+    };
+
+    // 登出
+    const Logout = async payload => {
+      const { data } = await request({
+        url: SourceLogout,
+        method: 'POST',
+        payload,
+      });
+      useLocalStorage(LocalStorageKey, {});
+      return { code: 0, data: data.data };
+    };
+
     // return
     return {
       version,
@@ -93,6 +116,10 @@ export const useSourceAccessPermission = defineStore(
       // GetValue,
       Find,
       Update,
+
+      // Other
+      Login,
+      Logout,
     };
   }
 );

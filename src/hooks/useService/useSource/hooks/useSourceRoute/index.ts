@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw } from '../utils';
+import { toSourceRaw } from '../../utils';
 
 // TODO 来自于Config
-const LocalStorageKey = 'SourceThemeDefault';
-const StoreKey = 'SourceTheme';
-const SourceFind = '/SourceTheme/Find';
+const LocalStorageKey = 'SourceRouteDefault';
+const StoreKey = 'SourceRoute';
+const SourceFind = '/SourceRoute/Find';
 
 // 自动获取 SourceRaw
-const fileMap = import.meta.glob(['@/views/*/sources/themes/index.ts'], {
+const fileMap = import.meta.glob(['@/views/*/sources/routes/index.ts'], {
   eager: true,
 });
 const SourceRaw = toSourceRaw({ fileMap });
@@ -17,7 +17,7 @@ const SourceRaw = toSourceRaw({ fileMap });
 const { request } = useRequest();
 
 // useSource
-export const useSourceTheme = defineStore(
+export const useSourceRoute = defineStore(
   StoreKey, //
   () => {
     const sourceState: any = {
