@@ -30,6 +30,7 @@ export const useService = async () => {
     SourceTheme: useSourceTheme,
 
     // 把 api service 解构出来
+    // 会把 default 也解构出来
     ...(await useSourceApiService().SelectModule()).data,
   });
 
