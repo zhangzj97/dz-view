@@ -80,7 +80,7 @@ export const useSourceAccessPermission = defineStore(
       return { code: 0, data: {} };
     };
 
-    // 返回
+    // return
     return {
       version,
       refresh,
