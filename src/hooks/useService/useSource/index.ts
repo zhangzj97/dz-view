@@ -1,5 +1,10 @@
 export { useSourceAccess } from './useSourceAccess';
-export { useSourceApi, useSourceApiService } from './useSourceApi';
+export { useSourceAccessMenu } from './useSourceAccessMenu';
+export { useSourceAccessPermission } from './useSourceAccessPermission';
+export { useSourceAccessRoute } from './useSourceAccessRoute';
+export { useSourceAccessRouteTag } from './useSourceAccessRouteTag';
+export { useSourceApi } from './useSourceApi';
+export { useSourceApiService } from './useSourceApiService';
 export { useSourceEnum } from './useSourceEnum';
 export { useSourceAuth } from './useSourceAuth';
 export { useSourcePlugin } from './useSourcePlugin';

@@ -1,81 +1,36 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
+import { toSourceRaw } from '../utils';
 
-const { request } = useRequest();
+// TODO 来自于Config
+const LocalStorageKey = 'SourceApiDefault';
+const StoreKey = 'SourceApi';
+const SourceFind = '/SourceApi/Find';
 
+// 自动获取 SourceRaw
 const fileMap = import.meta.glob(['@/views/*/sources/apis/index.ts'], {
   eager: true,
 });
+const SourceRaw = toSourceRaw({ fileMap });
 
-const SourceRaw = Object.entries(fileMap).reduce(
-  (prev, [, item]: any) => Object.assign(prev, item.default),
-  {}
-);
+// request
+const { request } = useRequest();
 
-const apiToService = ({ SourceRaw }) => {
-  const data = Object.entries(SourceRaw).reduce(
-    (prev, [, item]) => Object.assign(prev, item),
-    {}
-  );
-
-  return Object.entries(data).reduce((prev, [key, item]: any) => {
-    prev[key] = defineStore(key, () => {
-      const moduleState = reactive({
-        version: {
-          data: { code: '0', value: String(Math.random()) },
-          queryModel: { code: '0', value: String(Math.random()) },
-          searchModel: { code: '0', value: String(Math.random()) },
-        },
-
-        queryModel: {},
-        searchModel: {},
-      });
-
-      const version = computed(() => moduleState.version.data);
-      const queryModelVersion = computed(() => moduleState.version.queryModel);
-      const searchModelVersion = computed(
-        () => moduleState.version.searchModel
-      );
-
-      const actionApi = Object.entries(item).reduce((prev2, [key2, item2]) => {
-        prev2[key2] = async payload => {
-          const { url, method } = item2 as any;
-          const requestUrl = url;
-          const requestMethod = method || `POST`;
-          return request({
-            method: requestMethod,
-            url: requestUrl,
-            payload,
-          });
-        };
-        return prev2;
-      }, {});
-
-      return {
-        version,
-        queryModelVersion,
-        searchModelVersion,
-
-        ...actionApi,
-      };
-    });
-
-    return prev;
-  }, {});
-};
-
-const SourceRawApiService = apiToService({ SourceRaw });
-
+// useSource
 export const useSourceApi = defineStore(
-  'SourceApi', //
+  StoreKey, //
   () => {
     const sourceState: any = {
       version: { code: '1', value: String(Math.random()) },
-      map: { ...SourceRaw },
+      // 如果不刻意使用, 主要使用 default
+      map: {
+        ...SourceRaw,
+        default: useLocalStorage(LocalStorageKey, {}),
+      },
     };
 
+    // version 变动通知
     const version = computed(() => sourceState.version);
-
     const refresh = async ({ code }: { code: '0' }) => {
       Object.assign(sourceState.version, {
         code,
@@ -83,36 +38,60 @@ export const useSourceApi = defineStore(
       });
     };
 
-    const Find = async (payload, { cache }) => {
-      if (cache) {
-        const { code } = payload;
-        return { code: 0, data: sourceState.map[code] };
+    // 以 sourceState.map 作为 Map, 刻意查看其他模块的 Source
+    const FindModule = async ({ moduleName }) => ({
+      code: 0,
+      data: sourceState.map[moduleName],
+    });
+
+    // 查看所有 Source
+    const SelectModule = async () => ({ code: 0, data: sourceState.map });
+
+    // TODO
+    // 以 sourceState.map.default 作为 Map, 查看某值
+    // const GetValue = async ({ code }) => ({
+    //   code: 0,
+    //   data: sourceState.map.default[code],
+    // });
+
+    // 查看
+    // remote = true   远程调用
+    // remote = false  查看 sourceState.map.default
+    const Find = async payload => {
+      const { remote } = payload;
+      if (!remote) {
+        return { code: 0, data: sourceState.map.default };
       } else {
         const { data } = await request({
-          url: '/xxx/xxx',
+          url: SourceFind,
           method: 'POST',
           payload,
         });
-        return data;
+        return { code: 0, data: data.data };
       }
     };
 
-    const Select = async () => {
-      return { code: 0, data: sourceState.map };
-    };
-
+    // 更新
+    // cache 是否存入 localStorage 以供下次刷新使用
     const Update = async payload => {
-      const { code, value } = payload;
-      sourceState.map[code] = value;
+      const { value, cache } = payload;
+      sourceState.map.default = value;
+      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
       return { code: 0, data: {} };
     };
 
+    // 返回
     return {
       version,
       refresh,
 
+      // source module
+      FindModule,
+      SelectModule,
+
+      // source default module
+      // GetValue,
       Find,
-      Select,
       Update,
     };
   }

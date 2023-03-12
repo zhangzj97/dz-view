@@ -18,6 +18,7 @@ const SourceRaw = toSourceRaw({ fileMap });
 // request
 const { request } = useRequest();
 
+// useSource
 export const useSourceAuth = defineStore(
   StoreKey, //
   () => {
@@ -81,6 +82,7 @@ export const useSourceAuth = defineStore(
       return { code: 0, data: {} };
     };
 
+    // 登录
     const Login = async payload => {
       const { data } = await request({
         url: SourceLogin,
@@ -90,6 +92,7 @@ export const useSourceAuth = defineStore(
       return { code: 0, data: data.data };
     };
 
+    // 登出
     const Logout = async payload => {
       const { data } = await request({
         url: SourceLogout,
@@ -100,18 +103,21 @@ export const useSourceAuth = defineStore(
       return { code: 0, data: data.data };
     };
 
+    // 返回
     return {
       version,
       refresh,
 
+      // source module
       FindModule,
       SelectModule,
 
+      // source default module
       // GetValue,
       Find,
-
       Update,
 
+      // Other
       Login,
       Logout,
     };
