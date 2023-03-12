@@ -86,7 +86,7 @@ export const useSourceApi = defineStore(
     const Find = async (payload, { cache }) => {
       if (cache) {
         const { code } = payload;
-        return { code: 0, data: { content: sourceState.map[code] } };
+        return { code: 0, data: sourceState.map[code] };
       } else {
         const { data } = await request({
           url: '/xxx/xxx',
@@ -110,64 +110,6 @@ export const useSourceApi = defineStore(
     return {
       version,
       refresh,
-
-      Find,
-      Select,
-      Update,
-    };
-  }
-);
-
-export const useSourceApiService = defineStore(
-  'SourceApiService', //
-  () => {
-    const sourceState: any = {
-      version: { code: '1', value: String(Math.random()) },
-      map: { ...SourceRawApiService },
-    };
-
-    const version = computed(() => sourceState.version);
-
-    const refresh = async ({ code }: { code: '0' }) => {
-      Object.assign(sourceState.version, {
-        code,
-        value: String(Math.random()),
-      });
-    };
-
-    const getApiServiceStatic = () => {
-      return { code: 0, data: sourceState.map };
-    };
-
-    const Find = async (payload, { cache }) => {
-      if (cache) {
-        const { code } = payload;
-        return { code: 0, data: { content: sourceState.map[code] } };
-      } else {
-        const { data } = await request({
-          url: '/xxx/xxx',
-          method: 'POST',
-          payload,
-        });
-        return data;
-      }
-    };
-
-    const Select = async () => {
-      return { code: 0, data: sourceState.map };
-    };
-
-    const Update = async payload => {
-      const { code, value } = payload;
-      sourceState.map[code] = value;
-      return { code: 0, data: {} };
-    };
-
-    return {
-      version,
-      refresh,
-
-      getApiServiceStatic,
 
       Find,
       Select,
