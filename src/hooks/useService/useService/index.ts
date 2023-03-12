@@ -1,5 +1,9 @@
 import {
   useSourceAccess,
+  useSourceAccessMenu,
+  useSourceAccessPermission,
+  useSourceAccessRoute,
+  useSourceAccessRouteTag,
   useSourceApi,
   useSourceApiService,
   useSourceAuth,
@@ -9,9 +13,14 @@ import {
   useSourceTheme,
 } from '../useSource';
 
+// useService
 export const useService = async () => {
   const serviceState = reactive({
     SourceAccess: useSourceAccess,
+    SourceAccessMenu: useSourceAccessMenu,
+    SourceAccessPermission: useSourceAccessPermission,
+    SourceAccessRoute: useSourceAccessRoute,
+    SourceAccessRouteTag: useSourceAccessRouteTag,
     SourceApi: useSourceApi,
     SourceApiService: useSourceApiService,
     SourceAuth: useSourceAuth,
@@ -20,40 +29,48 @@ export const useService = async () => {
     SourceRoute: useSourceRoute,
     SourceTheme: useSourceTheme,
 
-    ...useSourceApiService().getApiServiceStatic().data,
+    // 把 api service 解构出来
+    ...(await useSourceApiService().SelectModule()).data,
   });
 
-  const dispatch = async (code: DispatchCode, payload, option?: any) => {
+  // dispatch
+  const dispatch = async (code, payload) => {
     const [moduleName, apiName] = code.split('.');
-    const { data } = await serviceState[moduleName]()[apiName](
-      payload,
-      option || {}
-    );
-
+    const { data } = await serviceState[moduleName]()[apiName](payload);
     return { data: data };
   };
 
+  // 测试专用
   const checkAll = async () => {
     console.log({
       ...serviceState,
-      SourceAccess: (await useSourceAccess().Select()).data,
-      SourceApi: (await useSourceApi().Select()).data,
-      SourceApiService: (await useSourceApiService().Select()).data,
-      SourceAuth: (await useSourceAuth().Select()).data,
-      SourceEnum: (await useSourceEnum().Select()).data,
-      SourcePlugin: (await useSourcePlugin().Select()).data,
-      SourceRoute: (await useSourceRoute().Select()).data,
-      SourceTheme: (await useSourceTheme().Select()).data,
+      SourceAccess: (await useSourceAccess().SelectModule()).data,
+      SourceAccessMenu: (await useSourceAccessMenu().SelectModule()).data,
+      SourceAccessPermission: (await useSourceAccessPermission().SelectModule())
+        .data,
+      SourceAccessRoute: (await useSourceAccessRoute().SelectModule()).data,
+      SourceAccessRouteTag: (await useSourceAccessRouteTag().SelectModule())
+        .data,
+      SourceApi: (await useSourceApi().SelectModule()).data,
+      SourceApiService: (await useSourceApiService().SelectModule()).data,
+      SourceAuth: (await useSourceAuth().SelectModule()).data,
+      SourceEnum: (await useSourceEnum().SelectModule()).data,
+      SourcePlugin: (await useSourcePlugin().SelectModule()).data,
+      SourceRoute: (await useSourceRoute().SelectModule()).data,
+      SourceTheme: (await useSourceTheme().SelectModule()).data,
     });
   };
 
+  // return
   return {
     dispatch,
 
+    // 测试
     checkAll,
   };
 };
 
+// TODO
 export declare type DispatchCode =
   | 'SourceAccess.Select'
   | 'SourceAccess.Find'
