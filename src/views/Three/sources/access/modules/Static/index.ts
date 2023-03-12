@@ -1,5 +1,5 @@
-export default [
-  {
+export default {
+  Three: {
     id: '100',
     code: 'Three',
     type: 'node',
@@ -16,7 +16,7 @@ export default [
     parentId: '0',
     path: '100',
   },
-  {
+  'Demo/User': {
     id: '101',
     code: 'Demo/User',
     type: 'route',
@@ -33,7 +33,7 @@ export default [
     parentId: '100',
     path: '100|101',
   },
-  {
+  PAGEHOME: {
     id: '102',
     code: 'PAGEHOME',
     type: 'route',
@@ -50,7 +50,7 @@ export default [
     parentId: '100',
     path: '100|102',
   },
-  {
+  Demo: {
     id: '200',
     code: 'Demo',
     type: 'node',
@@ -67,7 +67,7 @@ export default [
     parentId: '100',
     path: '100|200',
   },
-  {
+  'Demo/Button': {
     id: '201',
     code: 'Demo/Button',
     type: 'route',
@@ -84,7 +84,7 @@ export default [
     parentId: '200',
     path: '100|200|201',
   },
-  {
+  'Demo/Alert': {
     id: '202',
     code: 'Demo/Alert',
     type: 'route',
@@ -101,7 +101,7 @@ export default [
     parentId: '200',
     path: '100|200|202',
   },
-  {
+  'Demo/Table': {
     id: '203',
     code: 'Demo/Table',
     type: 'route',
@@ -118,7 +118,7 @@ export default [
     parentId: '200',
     path: '100|200|203',
   },
-  {
+  'Demo/Modal': {
     id: '204',
     code: 'Demo/Modal',
     type: 'route',
@@ -135,7 +135,7 @@ export default [
     parentId: '200',
     path: '100|200|204',
   },
-  {
+  'Demo/Form': {
     id: '205',
     code: 'Demo/Form',
     type: 'route',
@@ -152,7 +152,7 @@ export default [
     parentId: '200',
     path: '100|200|205',
   },
-  {
+  'Demo/TabTable': {
     id: '206',
     code: 'Demo/TabTable',
     type: 'route',
@@ -169,7 +169,7 @@ export default [
     parentId: '200',
     path: '100|200|206',
   },
-  {
+  'Demo/Popover': {
     id: '207',
     code: 'Demo/Popover',
     type: 'route',
@@ -186,7 +186,7 @@ export default [
     parentId: '200',
     path: '100|200|207',
   },
-  {
+  Demo2: {
     id: '300',
     code: 'Demo2',
     type: 'route',
@@ -203,7 +203,7 @@ export default [
     parentId: '100',
     path: '100|300',
   },
-  {
+  'Demo/Button02': {
     id: '301',
     code: 'Demo/Button02',
     type: 'route',
@@ -220,7 +220,7 @@ export default [
     parentId: '300',
     path: '100|300|301',
   },
-  {
+  'Demo/Alert02': {
     id: '302',
     code: 'Demo/Alert02',
     type: 'route',
@@ -237,7 +237,7 @@ export default [
     parentId: '300',
     path: '100|300|302',
   },
-  {
+  baidu: {
     id: '303',
     code: 'baidu',
     type: 'link',
@@ -254,7 +254,7 @@ export default [
     parentId: '300',
     path: '100|300|303',
   },
-  {
+  Route: {
     id: '400',
     code: 'Route',
     type: 'node',
@@ -271,7 +271,7 @@ export default [
     parentId: '100',
     path: '100|400',
   },
-  {
+  'Demo/Fixed': {
     id: '401',
     code: 'Demo/Fixed',
     type: 'route',
@@ -288,7 +288,7 @@ export default [
     parentId: '400',
     path: '100|400|401',
   },
-  {
+  uThree: {
     id: '10100',
     code: 'uThree',
     type: 'node',
@@ -305,7 +305,7 @@ export default [
     parentId: '0',
     path: '10100',
   },
-  {
+  'uDemo/User': {
     id: '10101',
     code: 'uDemo/User',
     type: 'route',
@@ -322,7 +322,7 @@ export default [
     parentId: '10100',
     path: '10100|10101',
   },
-  {
+  uDemo: {
     id: '10200',
     code: 'uDemo',
     type: 'node',
@@ -339,7 +339,7 @@ export default [
     parentId: '10100',
     path: '10100|10200',
   },
-  {
+  'uDemo/Button': {
     id: '10201',
     code: 'uDemo/Button',
     type: 'route',
@@ -356,7 +356,7 @@ export default [
     parentId: '10200',
     path: '10100|10200|10201',
   },
-  {
+  'uDemo/Alert': {
     id: '10202',
     code: 'uDemo/Alert',
     type: 'route',
@@ -373,7 +373,7 @@ export default [
     parentId: '10200',
     path: '10100|10200|10202',
   },
-  {
+  uDemo2: {
     id: '10300',
     code: 'uDemo2',
     type: 'route',
@@ -390,7 +390,7 @@ export default [
     parentId: '10100',
     path: '10100|10300',
   },
-  {
+  'uDemo/Button02': {
     id: '10301',
     code: 'uDemo/Button02',
     type: 'route',
@@ -407,7 +407,7 @@ export default [
     parentId: '10300',
     path: '10100|10300|10301',
   },
-  {
+  'uDemo/Alert02': {
     id: '10302',
     code: 'uDemo/Alert02',
     type: 'route',
@@ -424,7 +424,7 @@ export default [
     parentId: '10300',
     path: '10100|10300|10302',
   },
-  {
+  ubaidu: {
     id: '10303',
     code: 'ubaidu',
     type: 'link',
@@ -441,7 +441,7 @@ export default [
     parentId: '10300',
     path: '10100|10300|10303',
   },
-  {
+  uRoute: {
     id: '10400',
     code: 'uRoute',
     type: 'node',
@@ -458,7 +458,7 @@ export default [
     parentId: '10100',
     path: '10100|10400',
   },
-  {
+  'uDemo/Fixed': {
     id: '10401',
     code: 'uDemo/Fixed',
     type: 'route',
@@ -475,7 +475,7 @@ export default [
     parentId: '10400',
     path: '10100|10400|10401',
   },
-  {
+  Auth: {
     id: '500',
     code: 'Auth',
     type: 'node',
@@ -492,7 +492,7 @@ export default [
     parentId: '100',
     path: '100|500',
   },
-  {
+  'Auth/AcGroup': {
     id: '501',
     code: 'Auth/AcGroup',
     type: 'route',
@@ -509,7 +509,7 @@ export default [
     parentId: '500',
     path: '100|500|501',
   },
-  {
+  'Auth/AcGroupRole': {
     id: '502',
     code: 'Auth/AcGroupRole',
     type: 'route',
@@ -526,7 +526,7 @@ export default [
     parentId: '500',
     path: '100|500|502',
   },
-  {
+  'Auth/AcRole': {
     id: '503',
     code: 'Auth/AcRole',
     type: 'route',
@@ -543,7 +543,7 @@ export default [
     parentId: '500',
     path: '100|500|503',
   },
-  {
+  'Auth/AcUser': {
     id: '504',
     code: 'Auth/AcUser',
     type: 'route',
@@ -560,7 +560,7 @@ export default [
     parentId: '500',
     path: '100|500|504',
   },
-  {
+  'Auth/AcUserGroup': {
     id: '505',
     code: 'Auth/AcUserGroup',
     type: 'route',
@@ -577,7 +577,7 @@ export default [
     parentId: '500',
     path: '100|500|505',
   },
-  {
+  'Auth/AcUserLoginLog': {
     id: '506',
     code: 'Auth/AcUserLoginLog',
     type: 'route',
@@ -594,7 +594,7 @@ export default [
     parentId: '500',
     path: '100|500|506',
   },
-  {
+  'Auth/AcUserLoginWay': {
     id: '507',
     code: 'Auth/AcUserLoginWay',
     type: 'route',
@@ -611,7 +611,7 @@ export default [
     parentId: '500',
     path: '100|500|507',
   },
-  {
+  'Auth/AcUserProfile': {
     id: '508',
     code: 'Auth/AcUserProfile',
     type: 'route',
@@ -628,7 +628,7 @@ export default [
     parentId: '500',
     path: '100|500|508',
   },
-  {
+  'Auth/AcUserRole': {
     id: '509',
     code: 'Auth/AcUserRole',
     type: 'route',
@@ -645,7 +645,7 @@ export default [
     parentId: '500',
     path: '100|500|509',
   },
-  {
+  'Auth/AcUserUpdateLog': {
     id: '510',
     code: 'Auth/AcUserUpdateLog',
     type: 'route',
@@ -662,4 +662,4 @@ export default [
     parentId: '500',
     path: '100|500|510',
   },
-];
+};
