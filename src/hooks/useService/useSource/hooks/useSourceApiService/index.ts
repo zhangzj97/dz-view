@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, toApiService } from '../../utils';
+import { toSourceRaw, toApiService, getStorage, setStorage } from '../../utils';
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceAccessDefault';
 const StoreKey = 'SourceAccess';
-const SourceFind = '/SourceAccess/Find';
+const SourceFind = '/Auth/FindSourceAccess';
 
 // 自动获取 SourceRaw
 const fileMap = import.meta.glob(['@/views/*/sources/apis/index.ts'], {
@@ -25,7 +25,7 @@ export const useSourceApiService = defineStore(
       // 如果不刻意使用, 主要使用 default
       map: {
         ...SourceRaw,
-        default: useLocalStorage(LocalStorageKey, {}),
+        default: getStorage(LocalStorageKey, { defaultValue: {} }),
       },
     };
 
@@ -46,6 +46,7 @@ export const useSourceApiService = defineStore(
 
     // 查看所有 Source
     const SelectModule = async () => ({ code: 0, data: sourceState.map });
+    const SelectModuleStatic = () => ({ code: 0, data: sourceState.map });
 
     // TODO
     // 以 sourceState.map.default 作为 Map, 查看某值
@@ -76,7 +77,7 @@ export const useSourceApiService = defineStore(
     const Update = async payload => {
       const { value, cache } = payload;
       sourceState.map.default = value;
-      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      cache && setStorage(LocalStorageKey, sourceState.map.default);
       return { code: 0, data: {} };
     };
 
@@ -93,6 +94,9 @@ export const useSourceApiService = defineStore(
       // GetValue,
       Find,
       Update,
+
+      // SelectModuleStatic
+      SelectModuleStatic,
     };
   }
 );

@@ -1,6 +1,11 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, toAccessPermission } from '../../utils';
+import {
+  toSourceRaw,
+  toAccessPermission,
+  getStorage,
+  setStorage,
+} from '../../utils';
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceAccessPermissionDefault';
@@ -25,7 +30,7 @@ export const useSourceAccessPermission = defineStore(
       // 如果不刻意使用, 主要使用 default
       map: {
         ...SourceRaw,
-        default: useLocalStorage(LocalStorageKey, {}),
+        default: getStorage(LocalStorageKey, { defaultValue: {} }),
       },
     };
 
@@ -76,7 +81,7 @@ export const useSourceAccessPermission = defineStore(
     const Update = async payload => {
       const { value, cache } = payload;
       sourceState.map.default = value;
-      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      cache && setStorage(LocalStorageKey, sourceState.map.default);
       return { code: 0, data: {} };
     };
 
@@ -84,7 +89,16 @@ export const useSourceAccessPermission = defineStore(
     const UpdateByAccess = async payload => {
       const { access, cache } = payload;
       sourceState.map.default = toAccessPermission({ access });
-      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      cache && setStorage(LocalStorageKey, sourceState.map.default);
+      return { code: 0, data: {} };
+    };
+
+    // 快速添加一个权限
+    const AddPermission = async payload => {
+      const { code, codeMap, cache } = payload;
+      code && (sourceState.map.default[code] = {});
+      codeMap && Object.assign(sourceState.map.default, codeMap);
+      cache && setStorage(LocalStorageKey, sourceState.map.default);
       return { code: 0, data: {} };
     };
 
@@ -104,6 +118,7 @@ export const useSourceAccessPermission = defineStore(
 
       // Other
       UpdateByAccess,
+      AddPermission,
     };
   }
 );

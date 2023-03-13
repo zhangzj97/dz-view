@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw } from '../../utils';
+import { toSourceRaw, getStorage, setStorage } from '../../utils';
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceRouteDefault';
@@ -25,7 +25,7 @@ export const useSourceRoute = defineStore(
       // 如果不刻意使用, 主要使用 default
       map: {
         ...SourceRaw,
-        default: useLocalStorage(LocalStorageKey, {}),
+        default: getStorage(LocalStorageKey, { defaultValue: {} }),
       },
     };
 
@@ -76,7 +76,7 @@ export const useSourceRoute = defineStore(
     const Update = async payload => {
       const { value, cache } = payload;
       sourceState.map.default = value;
-      cache && useLocalStorage(LocalStorageKey, sourceState.map.default);
+      cache && setStorage(LocalStorageKey, sourceState.map.default);
       return { code: 0, data: {} };
     };
 
