@@ -1,24 +1,28 @@
 import { config } from '../../../../config';
-
 const scopeKey = config.ViewName;
 
-export default [
-  {
+const routeMate = { access: { scope: scopeKey } };
+
+export default {
+  Router: {
+    name: 'Router',
+    path: '/Router',
+    component: () => import('../../../../pages/Router/index.vue'),
+    meta: routeMate,
+  },
+  [scopeKey]: {
     name: scopeKey,
-    path: '/',
+    path: `/${scopeKey}`,
     component: () => import('../../../../index.vue'),
     children: [
       {
-        name: 'ExceptionPage404',
+        name: '404',
         path: '/404',
-        redirct: '/404',
         component: () =>
           import('../../../../pages/Demo/Exception404/index.vue'),
+        meta: routeMate,
       },
     ],
+    meta: routeMate,
   },
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('../../../../index.vue'),
-  },
-];
+};
