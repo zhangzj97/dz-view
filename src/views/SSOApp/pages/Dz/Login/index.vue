@@ -1,7 +1,35 @@
 <script setup lang="ts">
-const loginTest = () => {};
+import { useService } from '@/hooks/useService';
+const { dispatch } = useService();
 
-const login = () => {};
+const router = useRouter();
+const route = useRoute();
+
+const loginTest = async () => {
+  await dispatch('SourceAuth.Login', {});
+  const { data: AuthData } = await dispatch('SourceAuth.Find', {
+    remote: true,
+  });
+  await dispatch('SourceAuth.Update', {
+    value: AuthData,
+    cache: true,
+  });
+
+  // const { data: AuthData2 } = await dispatch('SourceAuth.Find', {
+  //   remote: false,
+  // });
+  // console.log(AuthData2);
+
+  if (route.query.redirct) {
+    router.push({ path: String(route.query.redirct) });
+    return;
+  } else {
+    router.push({ name: 'Router' });
+    return;
+  }
+};
+
+const login = async () => {};
 const sms = () => {};
 const captcha = () => {};
 </script>
