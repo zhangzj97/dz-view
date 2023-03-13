@@ -1,18 +1,48 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
 
-export const toAccessMenu = ({ access }) => {
-  return {};
-};
-export const toAccessPermission = ({ access }) => {
-  return {};
-};
+export const toAccessMenu = ({ access }) =>
+  Object.fromEntries(
+    Object.entries(access).filter(([, item]: any) =>
+      ['node', 'route'].includes(item.type)
+    )
+  );
+export const toAccessPermission = ({ access }) =>
+  Object.fromEntries(
+    Object.entries(access).filter(([, item]: any) =>
+      ['client', 'route', 'action'].includes(item.type)
+    )
+  );
 export const toAccessRoute = ({ access }) => {
-  return {};
+  return Object.fromEntries(
+    Object.entries(access)
+      .filter(([, item]: any) => {
+        return ['route'].includes(item.type) && item.route;
+      })
+      .map(([, item]: any) => {
+        const [c1, c2] = item.component.split('/');
+        return [
+          item.code,
+          {
+            path: item.route,
+            name: item.code,
+            component: () =>
+              import(
+                `../../../../views/${item.scope}/pages/${c1}/${c2}/index.vue`
+              ),
+            meta: {
+              access: item,
+            },
+          },
+        ];
+      })
+  );
 };
-export const toAccessRouteTag = ({ access }) => {
-  return {};
-};
+
+export const toAccessRouteTag = ({ access }) =>
+  Object.fromEntries(
+    Object.entries(access).filter(([, item]: any) => item.tagFixed)
+  );
 
 export const toSourceRaw = ({ fileMap }) =>
   Object.entries(fileMap).reduce(
@@ -72,4 +102,20 @@ export const toApiService = ({ api }) => {
 
     return prev;
   }, {});
+};
+
+export const getStorage = (code, { defaultValue }) => {
+  if (!localStorage.key(code)) {
+    localStorage.setItem(code, JSON.stringify(defaultValue));
+  }
+
+  try {
+    return JSON.parse(localStorage.getItem(code) || '{}');
+  } catch (e) {
+    return {};
+  }
+};
+
+export const setStorage = (code, value) => {
+  localStorage.setItem(code, JSON.stringify(value));
 };
