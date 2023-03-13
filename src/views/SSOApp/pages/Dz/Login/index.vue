@@ -15,11 +15,6 @@ const loginTest = async () => {
     cache: true,
   });
 
-  // const { data: AuthData2 } = await dispatch('SourceAuth.Find', {
-  //   remote: false,
-  // });
-  // console.log(AuthData2);
-
   if (route.query.redirct) {
     router.push({ path: String(route.query.redirct) });
     return;
