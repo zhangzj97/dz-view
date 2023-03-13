@@ -14,7 +14,7 @@ import {
 } from '../useSource';
 
 // useService
-export const useService = async () => {
+export const useService = () => {
   const serviceState = reactive({
     SourceAccess: useSourceAccess,
     SourceAccessMenu: useSourceAccessMenu,
@@ -31,14 +31,19 @@ export const useService = async () => {
 
     // 把 api service 解构出来
     // 会把 default 也解构出来
-    ...(await useSourceApiService().SelectModule()).data,
+    ...useSourceApiService().SelectModuleStatic().data,
   });
 
   // dispatch
   const dispatch = async (code, payload) => {
     const [moduleName, apiName] = code.split('.');
-    const { data } = await serviceState[moduleName]()[apiName](payload);
-    return { data: data };
+    try {
+      const { data } = await serviceState[moduleName]()[apiName](payload);
+      return { data: data };
+    } catch (e) {
+      console.error('dispatch 发生错误 :', code);
+      return { data: {} };
+    }
   };
 
   // 测试专用
