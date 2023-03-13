@@ -1,6 +1,5 @@
-import type { RouteRecordRaw } from 'vue-router';
-
-export const OtherRoute: RouteRecordRaw = {
+export const OtherRoute = {
   path: '/:catchAll(.*)*',
+  name: 'Other',
   component: () => import('../../../App.vue'),
 };
