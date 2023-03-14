@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { useDzView } from './hooks/useDzView';
+import { useView } from './hooks/useView';
 
 const props = defineProps<{
+  // Flex
   one?: boolean;
   col?: boolean;
   row?: boolean;
   grid?: boolean;
 
+  // Position
   relative?: boolean;
-  fixed?: boolean;
   absolute?: boolean;
+  fixed?: boolean;
+
   position?: string;
 
   overflow?: boolean;
@@ -17,26 +21,53 @@ const props = defineProps<{
 
   grow?: number | boolean | string;
   // shrink?: number | boolean | string;
+
+  // Size
   size?: string;
 
   bg?: string;
   transition?: boolean;
+
+  // Cursor
   pointer?: boolean;
+
   shadow?: string;
 
+  /**
+   * @deprecated
+   */
   wrapperClass?: string | string[];
+
+  wrapClass?: string | string[];
 }>();
 
+const {
+  viewDisplayCSS,
+  viewPositionCSS,
+  viewFlexCSS,
+  viewFlexAlign,
+  viewSizeWidthCSS,
+  viewSizeHeightCSS,
+  viewShadowCSS,
+  viewCursorCSS,
+  viewTransitionCSS,
+
+  wrapDisplayCSS,
+  wrapPositionCSS,
+  wrapFlexCSS,
+  wrapFlexAlign,
+  wrapSizeWidthCSS,
+  wrapSizeHeightCSS,
+  wrapShadowCSS,
+  wrapCursorCSS,
+  wrapTransitionCSS,
+
+  wrapOtherCSS,
+} = useView({
+  props,
+});
+
 const { wrapperClass } = useDzView({ props });
-
-const parseSizeClassName = () => {
-  const className = {
-    width: props.size?.match(/w-[^\s].*/)?.[0] || 'w-auto',
-    height: props.size?.match(/h-[^\s].*/)?.[0] || 'h-auto',
-  };
-
-  return [className.width, className.height];
-};
 
 const parsePositionClassName = () => {
   const className = {
@@ -63,20 +94,19 @@ const parsePositionFlexClassName = () => {
   <div
     class="dz-view"
     :class="[
-      'flex',
-      'flex-row flex-nowrap',
+      viewDisplayCSS(),
+      viewPositionCSS(),
+      viewFlexCSS(),
+      viewSizeWidthCSS(),
+      viewSizeHeightCSS(),
       //
-      !fixed && !absolute && 'relative',
-      fixed && 'fixed',
-      absolute && 'absolute',
-      ...parseSizeClassName(),
       ...parsePositionClassName(),
       // 'border-2 bg-green-300 border-green-600',
       'border-transparent',
       'bg-transparent',
       position,
-      transition && 'transition-all',
-      pointer && 'cursor-pointer',
+      viewTransitionCSS(),
+      viewCursorCSS(),
       shadow,
     ]"
     :style="{
@@ -100,22 +130,19 @@ const parsePositionFlexClassName = () => {
       class="dz-view-wrapper"
       :class="[
         //
-        'flex',
-        'relative',
-        one && 'flex-col flex-nowrap',
-        col && 'flex-col flex-nowrap',
-        row && 'flex-row flex-nowrap',
-        grid && 'flex-row flex-wrap',
+        wrapDisplayCSS(),
+        wrapPositionCSS(),
+        wrapFlexCSS(),
+        wrapSizeWidthCSS(),
+        wrapSizeHeightCSS(),
         overflow && 'overflow-auto',
         overflowHidden && 'overflow-hidden',
         ...parsePositionFlexClassName(),
         'flex-grow',
-        'w-auto',
-        'h-auto',
         // 'border-2 bg-cyan-300 border-cyan-600',
         // 'border-transparent',
         // 'bg-transparent',
-        transition && 'transition-all',
+        wrapTransitionCSS(),
         wrapperClass,
       ]"
       :style="{}"
@@ -127,7 +154,7 @@ const parsePositionFlexClassName = () => {
 
 <style scoped lang="scss">
 .dz-view-wrapper::-webkit-scrollbar {
-  @apply w-0 h-0;
+  @apply w-[10px] h-[10px];
 }
 </style>
 

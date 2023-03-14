@@ -14,9 +14,12 @@ export const layoutData = {
   option: { layout: 'col', size: 'w-screen h-screen', overflow: 'hidden' },
   children: [
     // 通知栏
-    { option: { layout: 'one', size: 'h-fit' }, component: () => Layout200NoticeBar },
+    {
+      option: { layout: 'one', size: 'h-fit' },
+      component: () => Layout200NoticeBar,
+    },
     // 应用 Navbar
-    { option: { layout: 'one', size: 'h-16' }, component: () => Layout300AppNavBar },
+    // { option: { layout: 'one', size: 'h-16' }, component: () => Layout300AppNavBar },
     // 粘性应用 Navbar
     // TODO
     // {
@@ -35,14 +38,34 @@ export const layoutData = {
       option: { layout: 'row', size: 'h-grow' },
       children: [
         // { option: { layout: 'one', size: 'w-16', overflow: 'auto' }, component: () => Layout403SlimLeft },
-        { option: { layout: 'one', size: 'w-fit', shadow: 'shadow-sm' }, component: () => Layout404Left },
+        // {
+        //   option: { layout: 'one', size: 'w-fit', shadow: 'shadow-sm' },
+        //   component: () => Layout404Left,
+        // },
         {
           option: { layout: 'col', size: 'w-grow' },
           children: [
-            { option: { layout: 'one', size: 'h-16', shadow: 'shadow-sm' }, component: () => Layout405AppNavBar },
-            { option: { layout: 'one', size: 'h-12', shadow: 'shadow-sm' }, component: () => Layout406BreadCrumb },
-            { option: { layout: 'one', size: 'h-8', shadow: 'shadow-sm' }, component: () => Layout407RouteTag },
-            { option: { layout: 'one', size: 'h-grow', class: 'h-0', overflow: 'auto' }, slot: 'default' },
+            // {
+            //   option: { layout: 'one', size: 'h-16', shadow: 'shadow-sm' },
+            //   component: () => Layout405AppNavBar,
+            // },
+            // {
+            //   option: { layout: 'one', size: 'h-12', shadow: 'shadow-sm' },
+            //   component: () => Layout406BreadCrumb,
+            // },
+            // {
+            //   option: { layout: 'one', size: 'h-8', shadow: 'shadow-sm' },
+            //   component: () => Layout407RouteTag,
+            // },
+            {
+              option: {
+                layout: 'one',
+                size: 'h-grow',
+                class: 'h-0',
+                overflow: 'auto',
+              },
+              slot: 'default',
+            },
           ],
         },
 
