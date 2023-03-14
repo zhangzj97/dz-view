@@ -28,11 +28,13 @@ export const useView = ({ props }) => {
   const viewFlexAlign = () => '';
   const viewSizeWidthCSS = () => {
     const { size } = props;
-    return size.match(/w-[^\s].*/)?.[0] || 'w-auto';
+    if (!size) return 'w-auto';
+    else return size.match(/w-[^\s].*/)?.[0] || 'w-auto';
   };
   const viewSizeHeightCSS = () => {
     const { size } = props;
-    return size.match(/w-[^\s].*/)?.[0] || 'h-auto';
+    if (!size) return 'w-auto';
+    else return size.match(/h-[^\s].*/)?.[0] || 'h-auto';
   };
   const viewCursorCSS = () => {
     const { pointer } = props;
