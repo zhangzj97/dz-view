@@ -13,9 +13,9 @@ export const layoutData = {
       },
       component: () => PaneRouteTagTab,
     },
-    {
-      option: { layout: 'one', size: 'w-fit' },
-      component: () => PaneToolbar,
-    },
+    // {
+    //   option: { layout: 'one', size: 'w-fit' },
+    //   component: () => PaneToolbar,
+    // },
   ],
 };
