@@ -1,7 +1,6 @@
 <script setup lang="ts">
 defineProps<{
   baseList: any[];
-
   selectedKeys: any[];
 }>();
 
@@ -27,103 +26,48 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <dz-view
-    class=""
-    row
-    size="h-grow"
-    overflow
-    position="4"
-    wrapper-class="gap-1 px-2"
-  >
+  <dz-view row size="h-grow" overflow position="4" wrapper-class="gap-1 px-2">
     <template v-for="(item, index) of baseList" :key="index">
-      <template v-if="item.tagFixed && selectedKeys.includes(String(item.id))">
-        <dz-view
-          row
-          position="4"
-          pointer
-          size="w-fit"
-          transition
-          class="route-tab-tag shrink-0"
-          wrapper-class="px-2 rounded-sm border-[1px] border-gray-300 bg-blue-500 hover:bg-blue-300"
-        >
-          <dz-font color="text-white" class="mr-1" @click="handleClick(item)">
-            {{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}
-          </dz-font>
+      <dz-view
+        row
+        position="4"
+        pointer
+        size="w-fit"
+        transition
+        class="route-tab-tag shrink-0"
+        wrapper-class=" rounded-sm border-[1px] border-gray-300 bg-white hover:bg-gray-200"
+        @click="handleClick(item)"
+      >
+        <dz-view one size="w-5 h-5" position="5" transition>
+          <dz-icon
+            icon="ic:round-circle"
+            size="3"
+            :color="
+              selectedKeys.includes(item.routeTagCode)
+                ? 'text-blue-300'
+                : 'text-gray-300'
+            "
+          />
         </dz-view>
-      </template>
-
-      <template v-else-if="item.tagFixed">
+        <dz-font color="text-gray-600" class="mr-2">
+          {{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}
+        </dz-font>
         <dz-view
-          row
-          position="4"
-          pointer
-          size="w-fit"
+          v-if="!item.tagFixed"
+          class="route-tab-tag__icon hover:bg-gray-50"
+          one
+          size="w-5 h-5"
+          position="5"
           transition
-          class="shrink-0"
-          wrapper-class="px-2 rounded-sm border-[1px] border-gray-300 bg-white hover:bg-gray-400"
-          @click="handleClick(item)"
+          @click.stop="
+            selectedKeys.includes(item.routeTagCode)
+              ? handleCloseActive(item)
+              : handleCloseUnactive(item)
+          "
         >
-          <dz-font color="text-gray-600" class="mr-1">
-            {{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}
-          </dz-font>
+          <dz-icon size="3" icon="ic:round-close"></dz-icon>
         </dz-view>
-      </template>
-
-      <template v-else-if="selectedKeys.includes(String(item.id))">
-        <dz-view
-          row
-          position="4"
-          pointer
-          size="w-fit"
-          transition
-          class="route-tab-tag shrink-0"
-          wrapper-class="pl-2 rounded-sm border-[1px] border-gray-300 bg-blue-500 hover:bg-blue-400"
-          @click="handleClick(item)"
-        >
-          <dz-font color="text-white" class="mr-1">
-            {{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}
-          </dz-font>
-          <dz-view
-            class="route-tab-tag__icon"
-            one
-            size="w-5 h-5"
-            position="5"
-            transition
-            wrapper-class="hover:bg-gray-100"
-            @click.stop="handleCloseActive(item)"
-          >
-            <dz-icon size="3" icon="ic:round-close"></dz-icon>
-          </dz-view>
-        </dz-view>
-      </template>
-
-      <template v-else>
-        <dz-view
-          row
-          position="4"
-          pointer
-          size="w-fit"
-          transition
-          class="route-tab-tag shrink-0"
-          wrapper-class="pl-2 rounded-sm border-[1px] border-gray-300 bg-white hover:bg-gray-300"
-          @click="handleClick(item)"
-        >
-          <dz-font color="text-gray-600" class="mr-1">
-            {{ t(String(`@${item.scope}.ROUTE.${item.code}`)) }}
-          </dz-font>
-          <dz-view
-            class="route-tab-tag__icon"
-            one
-            size="w-5 h-5"
-            position="5"
-            transition
-            wrapper-class="rounded-sm hover:bg-gray-100"
-            @click.stop="handleCloseUnactive(item)"
-          >
-            <dz-icon size="3" icon="ic:round-close" color="text-gray-900" />
-          </dz-view>
-        </dz-view>
-      </template>
+      </dz-view>
     </template>
   </dz-view>
 </template>
