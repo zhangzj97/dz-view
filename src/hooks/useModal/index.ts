@@ -1,9 +1,19 @@
 export const useModal = () => {
-  const modalState = reactive({
+  const modalState = reactive<any>({
     visible: false,
     loading: false,
     fullScreen: false,
   });
+
+  const triggerDom = ref();
+  const toggleTrigger = () => {
+    const event = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
+    triggerDom.value.dispatchEvent(event);
+  };
 
   const visible = computed(() => modalState.visible);
   const loading = computed(() => modalState.loading);
@@ -37,6 +47,7 @@ export const useModal = () => {
     visible,
     loading,
     fullScreen,
+    triggerDom,
 
     toggleLoading,
     toggleVisible,
@@ -44,5 +55,7 @@ export const useModal = () => {
     setVisible,
     setFullScreen,
     toggleFullScreen,
+
+    toggleTrigger,
   };
 };
