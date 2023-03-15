@@ -1,9 +1,15 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, getStorage, setStorage } from '../../utils';
+import {
+  //
+  toSourceRaw,
+  getStorage,
+  setStorage,
+} from '../../utils';
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceAuthDefault';
+const LocalStorageStateKey = 'SourceAuthState';
 const StoreKey = 'SourceAuth';
 const SourceFind = '/Auth/FindSourceAuth';
 const SourceLogin = '/Auth/Login';
@@ -29,6 +35,29 @@ export const useSourceAuth = defineStore(
         ...SourceRaw,
         default: getStorage(LocalStorageKey, { defaultValue: {} }),
       },
+    };
+
+    const state: any = reactive(
+      getStorage(LocalStorageStateKey, {
+        defaultValue: {
+          version: { code: '1', value: String(Math.random()) },
+          id: '',
+          avatar: '',
+          nickname: '',
+          username: '',
+          realname: '',
+          token: '',
+          expireTime: '',
+        },
+      })
+    );
+
+    const State = async () => ({ code: 0, data: state });
+
+    const UpdateState = async paylaod => {
+      Object.assign(state, paylaod);
+      setStorage(LocalStorageStateKey, state);
+      return { code: 0, data: {} };
     };
 
     // version 变动通知
@@ -105,6 +134,10 @@ export const useSourceAuth = defineStore(
 
     // return
     return {
+      // State
+      State,
+      UpdateState,
+
       version,
       refresh,
 
