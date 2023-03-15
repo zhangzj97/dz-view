@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
 import {
+  //
   toSourceRaw,
   toAccessRouteTag,
   getStorage,
@@ -9,6 +10,7 @@ import {
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceAccessRouteTagDefault';
+const LocalStorageStateKey = 'SourceAccessRouteTagState';
 const StoreKey = 'SourceAccessRouteTag';
 const SourceFind = '/SourceAccessRouteTag/Find';
 
@@ -32,6 +34,25 @@ export const useSourceAccessRouteTag = defineStore(
         ...SourceRaw,
         default: getStorage(LocalStorageKey, { defaultValue: {} }),
       },
+    };
+
+    const state: any = reactive(
+      getStorage(LocalStorageStateKey, {
+        defaultValue: {
+          version: { code: '1', value: String(Math.random()) },
+          theme: 'light',
+          selectedKeys: [],
+          aliveList: [],
+        },
+      })
+    );
+
+    const State = async () => ({ code: 0, data: state });
+
+    const UpdateState = async paylaod => {
+      Object.assign(state, paylaod);
+      setStorage(LocalStorageStateKey, state);
+      return { code: 0, data: {} };
     };
 
     // version 变动通知
@@ -87,15 +108,18 @@ export const useSourceAccessRouteTag = defineStore(
 
     // 更新
     const UpdateByAccess = async payload => {
-      const { access, routeTag, cache } = payload;
-      const value = { ...routeTag, ...toAccessRouteTag({ access }) };
-      sourceState.map.default = value;
+      const { access, cache } = payload;
+      sourceState.map.default = toAccessRouteTag({ access });
       cache && setStorage(LocalStorageKey, sourceState.map.default);
       return { code: 0, data: {} };
     };
 
     // return
     return {
+      // State
+      State,
+      UpdateState,
+
       version,
       refresh,
 

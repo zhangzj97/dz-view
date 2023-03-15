@@ -1,9 +1,16 @@
 import { defineStore } from 'pinia';
 import { useRequest } from '@/hooks/useRequest';
-import { toSourceRaw, toAccessMenu, getStorage, setStorage } from '../../utils';
+import {
+  //
+  toSourceRaw,
+  toAccessMenu,
+  getStorage,
+  setStorage,
+} from '../../utils';
 
 // TODO 来自于Config
 const LocalStorageKey = 'SourceAccessMenuDefault';
+const LocalStorageStateKey = 'SourceAccessMenuState';
 const StoreKey = 'SourceAccessMenu';
 const SourceFind = '/SourceAccessMenu/Find';
 
@@ -27,6 +34,27 @@ export const useSourceAccessMenu = defineStore(
         ...SourceRaw,
         default: getStorage(LocalStorageKey, { defaultValue: {} }),
       },
+    };
+
+    const state: any = reactive(
+      getStorage(LocalStorageStateKey, {
+        defaultValue: {
+          version: { code: '1', value: String(Math.random()) },
+          collapsed: false,
+          mode: 'inline',
+          theme: 'light',
+          openKeys: [],
+          selectedKeys: [],
+        },
+      })
+    );
+
+    const State = async () => ({ code: 0, data: state });
+
+    const UpdateState = async paylaod => {
+      Object.assign(state, paylaod);
+      setStorage(LocalStorageStateKey, state);
+      return { code: 0, data: {} };
     };
 
     // version 变动通知
@@ -90,6 +118,10 @@ export const useSourceAccessMenu = defineStore(
 
     // return
     return {
+      // State
+      State,
+      UpdateState,
+
       version,
       refresh,
 
