@@ -14,6 +14,15 @@ const loginTest = async () => {
     value: AuthData,
     cache: true,
   });
+  await dispatch('SourceAuth.UpdateState', {
+    id: AuthData.userinfo.id,
+    avatar: AuthData.userinfo.avatar,
+    nickname: AuthData.userinfo.nickname,
+    username: AuthData.userinfo.username,
+    realname: AuthData.userinfo.realname,
+    token: AuthData.token,
+    expireTime: AuthData.expireTime,
+  });
 
   if (route.query.redirct) {
     router.push({ path: String(route.query.redirct) });
