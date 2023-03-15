@@ -41,7 +41,9 @@ export const toAccessRoute = ({ access }) => {
 
 export const toAccessRouteTag = ({ access }) =>
   Object.fromEntries(
-    Object.entries(access).filter(([, item]: any) => item.tagFixed)
+    Object.entries(access).filter(([, item]: any) =>
+      ['route'].includes(item.type)
+    )
   );
 
 export const toSourceRaw = ({ fileMap }) =>
@@ -105,7 +107,7 @@ export const toApiService = ({ api }) => {
 };
 
 export const getStorage = (code, { defaultValue }) => {
-  if (!localStorage.key(code)) {
+  if (!localStorage.getItem(code)) {
     localStorage.setItem(code, JSON.stringify(defaultValue));
   }
 
