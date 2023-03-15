@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import PaneTagTab from './components/PaneTagTab/index.vue';
 import { useService } from '@/hooks/useService';
-import { Item } from 'ant-design-vue/es/menu';
 
 const { dispatch } = useService();
 const router = useRouter();
