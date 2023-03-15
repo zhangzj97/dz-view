@@ -154,7 +154,7 @@ const parsePositionFlexClassName = () => {
 
 <style scoped lang="scss">
 .dz-view-wrapper::-webkit-scrollbar {
-  @apply w-[10px] h-[10px];
+  @apply w-0 h-0;
 }
 </style>
 
