@@ -1,5 +1,5 @@
 <script setup lang="ts" name="App1">
-import LayoutPage from './layouts/LayoutPageToBArcoAdmin/index.vue';
+import LayoutPage from './layouts/LayoutPageToB/index.vue';
 import { config } from './config';
 provide('config', config);
 </script>
