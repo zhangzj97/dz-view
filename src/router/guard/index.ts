@@ -25,6 +25,11 @@ const setupBaseGuard = (router: Router) => {
         remote: false,
       });
 
+      await dispatch('SourceAccessPermission.AddPermission', {
+        codeMap: { Router: {} },
+        cache: true,
+      });
+
       // 注册初始路由
       const staticRoute = Object.entries(RouteData).reduce(
         (prev, [, item]: any) => Object.assign(prev, item),
@@ -58,7 +63,12 @@ const setupBaseGuard = (router: Router) => {
     );
     const hasAccessPermission = AccessPermissionData[to.name as string];
     if (!hasAccessPermission) {
-      console.log('hasAccessPermission 没有权限', AccessPermissionData);
+      console.log(
+        '权限记录',
+        'hasAccessPermission 没有权限',
+        to.name,
+        AccessPermissionData
+      );
       next({
         name: 'Router',
         query: { redirct: from.path },
