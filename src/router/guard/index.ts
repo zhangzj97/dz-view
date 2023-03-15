@@ -15,6 +15,8 @@ const setupBaseGuard = (router: Router) => {
   // 2. 当前路由没有注册
   // 3. 当前路由没有权限
   router.beforeEach(async (to, from, next) => {
+    // 进度条
+    NProgress.start();
     const { dispatch } = useService();
 
     // 是否注册 Router
@@ -76,6 +78,8 @@ const setupBaseGuard = (router: Router) => {
       return;
     }
 
+    // 进度条
+    NProgress.done();
     //
     next();
     return;
@@ -83,12 +87,6 @@ const setupBaseGuard = (router: Router) => {
 };
 
 export const createRouteGuard = (router: Router) => {
-  // 进度条
-  NProgress.start();
-
   // 路由
   setupBaseGuard(router);
-
-  // 进度条
-  NProgress.done();
 };
