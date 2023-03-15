@@ -37,11 +37,14 @@ export const layoutData = {
     {
       option: { layout: 'row', size: 'h-grow' },
       children: [
-        // { option: { layout: 'one', size: 'w-16', overflow: 'auto' }, component: () => Layout403SlimLeft },
         // {
-        //   option: { layout: 'one', size: 'w-fit', shadow: 'shadow-sm' },
-        //   component: () => Layout404Left,
+        //   option: { layout: 'one', size: 'w-16', overflow: 'auto' },
+        //   component: () => Layout403SlimLeft,
         // },
+        {
+          option: { layout: 'one', size: 'w-fit', shadow: 'shadow-sm' },
+          component: () => Layout404Left,
+        },
         {
           option: { layout: 'col', size: 'w-grow' },
           children: [
@@ -49,14 +52,14 @@ export const layoutData = {
             //   option: { layout: 'one', size: 'h-16', shadow: 'shadow-sm' },
             //   component: () => Layout405AppNavBar,
             // },
-            // {
-            //   option: { layout: 'one', size: 'h-12', shadow: 'shadow-sm' },
-            //   component: () => Layout406BreadCrumb,
-            // },
-            // {
-            //   option: { layout: 'one', size: 'h-8', shadow: 'shadow-sm' },
-            //   component: () => Layout407RouteTag,
-            // },
+            {
+              option: { layout: 'one', size: 'h-12', shadow: 'shadow-sm' },
+              component: () => Layout406BreadCrumb,
+            },
+            {
+              option: { layout: 'one', size: 'h-8', shadow: 'shadow-sm' },
+              component: () => Layout407RouteTag,
+            },
             {
               option: {
                 layout: 'one',
