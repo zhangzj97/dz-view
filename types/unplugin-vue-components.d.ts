@@ -42,6 +42,8 @@ declare module '@vue/runtime-core' {
     DzPopover: typeof import('./../src/components/DzPopover/index.vue')['default']
     DzTable: typeof import('./../src/components/DzTable/index.vue')['default']
     DzView: typeof import('./../src/components/DzView/index.vue')['default']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
+    ElDrawer: typeof import('element-plus/es')['ElDrawer']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TForm: typeof import('./../src/components/TForm/index.vue')['default']
