@@ -8,6 +8,8 @@ defineProps<{
 
   loading?: boolean;
   disable?: boolean;
+
+  size?: string;
 }>();
 
 const { toggleClickEffect, clickEffectState } = useClickEffect();
@@ -27,7 +29,7 @@ const themeOption = {
 </script>
 
 <template>
-  <dz-view one size="h-fit w-fit">
+  <dz-view one :size="size">
     <!-- 光晕 -->
     <dz-view
       absolute
@@ -74,7 +76,7 @@ const themeOption = {
     <!-- 覆盖层 -->
     <dz-view
       row
-      size="w-fit"
+      :size="size"
       pointer
       shadow="shadow-none"
       position="4"

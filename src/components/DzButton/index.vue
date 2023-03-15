@@ -17,13 +17,46 @@ defineProps<{
   danger?: boolean;
   text?: boolean;
   link?: boolean;
+
+  size?: string;
 }>();
 </script>
 
 <template>
-  <ButtonPrimary v-if="primary" :title="title" :icon="icon" :loading="loading" :disable="disable" />
-  <ButtonDanger v-else-if="danger" :title="title" :icon="icon" :loading="loading" :disable="disable" />
-  <ButtonText v-else-if="text" :title="title" :icon="icon" :loading="loading" :disable="disable" />
-  <ButtonLink v-else-if="link" :title="title" :icon="icon" :loading="loading" :disable="disable" />
-  <ButtonDefault v-else :title="title" :icon="icon" :loading="loading" :disable="disable" />
+  <ButtonPrimary
+    v-if="primary"
+    :title="title"
+    :icon="icon"
+    :loading="loading"
+    :disable="disable"
+  />
+  <ButtonDanger
+    v-else-if="danger"
+    :title="title"
+    :icon="icon"
+    :loading="loading"
+    :disable="disable"
+  />
+  <ButtonText
+    v-else-if="text"
+    :size="size || 'w-fit h-fit'"
+    :title="title"
+    :icon="icon"
+    :loading="loading"
+    :disable="disable"
+  />
+  <ButtonLink
+    v-else-if="link"
+    :title="title"
+    :icon="icon"
+    :loading="loading"
+    :disable="disable"
+  />
+  <ButtonDefault
+    v-else
+    :title="title"
+    :icon="icon"
+    :loading="loading"
+    :disable="disable"
+  />
 </template>
