@@ -32,8 +32,17 @@ onBeforeMount(async () => {
     return;
   } else if (token && (!expireTime || expireTime <= Date.now())) {
     console.log('过期了 先去登录');
-    await dispatch('SourceAuth.Logout', { AuthData });
-    await dispatch('SourceAuth.Update', { value: {}, cache: true });
+    await dispatch('SourceAuth.Logout', {});
+    await dispatch('SourceAuth.Update', { value: {} });
+    await dispatch('SourceAccess.Update', { value: {}, cache: true });
+    await dispatch('SourceAccessMenu.Update', { value: {}, cache: true });
+    await dispatch('SourceAccessPermission.Update', { value: {}, cache: true });
+    await dispatch('SourceAccessRoute.Update', { value: {}, cache: true });
+    await dispatch('SourceAccessRouteTag.Update', { value: {}, cache: true });
+    await dispatch('SourceAccessPermission.AddPermission', {
+      codeMap: WhiteListPermission,
+      cache: true,
+    });
     router.replace({
       name: 'DzLogin',
       query: { redirct: route.query.redirct },
@@ -72,15 +81,9 @@ onBeforeMount(async () => {
     access: AccessData,
     cache: false,
   });
-
-  // 特别处理一下 AccessRouteTagData
-  // const { data: AccessRouteTagData } = await dispatch(
-  //   'SourceAccessRouteTag.Find',
-  //   { remote: false }
-  // );
+  // 更新一下 SourceAccessRouteTag
   await dispatch('SourceAccessRouteTag.UpdateByAccess', {
     access: AccessData,
-    // routeTag: AccessRouteTagData,
     cache: true,
   });
 
@@ -95,7 +98,7 @@ onBeforeMount(async () => {
   // 没有 redirct
   if (route.query.redirct === '/' || !route.query.redirct) {
     console.log('我要去首页 /', scopeKey);
-    router.push({ name: scopeKey });
+    router.push({ name: 'Demo/Fixed' });
     return;
   }
   const routeRedirct = router.resolve(String(route.query.redirct));
@@ -109,7 +112,7 @@ onBeforeMount(async () => {
     return;
   } else {
     console.log('我要去具体的', routeRedirct);
-    router.push({ name: String(routeRedirct.name) });
+    router.push({ ...routeRedirct });
     return;
   }
 });
