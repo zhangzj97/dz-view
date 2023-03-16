@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TableVxe from './components/TableVxe/index.vue';
-
 import { useSchemaTable } from './hooks/useSchemaTable';
 
 const props = defineProps<{
@@ -13,10 +12,6 @@ const props = defineProps<{
 }>();
 
 const schemaOption = reactive({
-  required: false,
-  readonly: false,
-  visible: true,
-
   cellOption: {},
 
   labelOption: {
@@ -47,15 +42,13 @@ const { rawToFixedSchema } = useSchemaTable({
 });
 
 const schemaState = reactive<any>({
-  version: new Date().getTime(),
-  raw: null,
+  version: { code: '0', value: Date.now() },
   fixed: [],
 });
 
-const refreshWhenSchemaUpdate = () => {
-  schemaState.raw = props.schema;
-  schemaState.fixed = rawToFixedSchema({ list: schemaState.raw });
-  schemaState.version = new Date().getTime();
+const refreshWhenSchemaUpdate = async () => {
+  schemaState.fixed = await rawToFixedSchema({ list: props.schema });
+  schemaState.version = { code: '0', value: Date.now() };
 };
 
 watch(() => props.schema, refreshWhenSchemaUpdate, { immediate: true });
@@ -63,12 +56,10 @@ watch(() => props.schema, refreshWhenSchemaUpdate, { immediate: true });
 
 <template>
   <TableVxe
-    :class="[]"
     :schema="schemaState.fixed"
     :baseList="baseList"
     :dataModel="dataModel"
     :moduleName="moduleName"
     :option="option"
-    :key="schemaState.version"
   />
 </template>

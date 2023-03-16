@@ -1,11 +1,10 @@
-import { useSourcePluginStore } from '@/hooks/useSourceStore';
-import { isString, isFunction } from '@vueuse/core';
+import { useService } from '@/hooks/useService';
+import { isFunction } from '@vueuse/core';
 
-const { findPlugin } = useSourcePluginStore();
+const { dispatch } = useService();
 
 export const useSchemaTable = ({ moduleName, option, config }) => {
   const { ViewName } = config;
-  const { pluginOption } = option as any;
 
   const loggerState = reactive<any>({ list: [] });
 
@@ -17,20 +16,13 @@ export const useSchemaTable = ({ moduleName, option, config }) => {
     }
   };
 
-  const fixComponent = ({ component }) => {
-    if (!component) {
-      return findPlugin({ code: pluginOption.cellPluginCode });
-    } else if (isString(component) && component.match(/@/)) {
-      return findPlugin({ code: component });
-    } else if (isString(component) && !component.match(/@/)) {
-      return findPlugin({ code: `@SourcePluginApp/Cell${component}` });
-    } else if (isFunction(component)) {
-      return component;
-    } else {
-      loggerState.list.push({
-        message: `[warn] [${moduleName}] [fixComponent]`,
-      });
-    }
+  const fixComponent = async ({ component }) => {
+    if (isFunction(component)) return component;
+    const pluginCode = component.replace(/^([^@])/, '@SourcePluginApp/Cell$1');
+    const { data } = await dispatch('SourcePlugin.FindModule', {
+      moduleName: pluginCode,
+    });
+    return () => data;
   };
 
   const fixLabel = ({ code, alias }) => {
@@ -110,13 +102,11 @@ export const useSchemaTable = ({ moduleName, option, config }) => {
     return width || 200;
   };
 
-  const fixSchema = (item: any) => {
+  const fixSchema = async (item: any) => {
     return {
-      // id: fixId(item),
-      // key: fixKey(item),
       code: fixCode(item),
 
-      component: fixComponent(item),
+      component: await fixComponent(item),
 
       label: fixLabel(item),
       tooltip: fixTooltip(item),
@@ -143,9 +133,8 @@ export const useSchemaTable = ({ moduleName, option, config }) => {
     };
   };
 
-  const rawToFixedSchema = ({ list }) => {
-    return list.map(fixSchema);
-  };
+  const rawToFixedSchema = async ({ list }) =>
+    await Promise.all(list.map(fixSchema));
 
   return {
     rawToFixedSchema,
