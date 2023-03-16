@@ -1,7 +1,6 @@
 const ViewName = 'SourcePluginApp';
 const ScopeCode = 'SourcePluginApp';
 const RouteHomePageName = 'Home/Dashboard';
-const i18nSeparator = '.';
 const logoTitle = 'SourcePluginApp';
 
 const SourceThemeCurrentCode = '@SourceThemeApp/Green';
@@ -16,7 +15,6 @@ export const config = {
   ViewName,
   ScopeCode,
   RouteHomePageName,
-  i18nSeparator,
   logoTitle,
 
   // Theme

@@ -1,7 +1,6 @@
 const ViewName = 'Demo';
 const ScopeCode = 'Demo';
 const RouteHomePageName = 'PAGEHOME';
-const i18nSeparator = '.';
 const logoTitle = 'Acro Admin';
 
 const SourceThemeCurrentCode = '@SourceThemeApp/Green';
@@ -16,7 +15,6 @@ export const config = {
   ViewName,
   ScopeCode,
   RouteHomePageName,
-  i18nSeparator,
   logoTitle,
 
   // Theme

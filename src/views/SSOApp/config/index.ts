@@ -1,7 +1,6 @@
 const ViewName = 'SSOApp';
 const ScopeCode = 'SSOApp';
 const RouteHomePageName = 'SSOAppPAGEHOME';
-const i18nSeparator = '.';
 const logoTitle = 'SSOApp';
 
 const SourceThemeCurrentCode = '@SourceThemeApp/Green';
@@ -16,7 +15,6 @@ export const config = {
   ViewName,
   ScopeCode,
   RouteHomePageName,
-  i18nSeparator,
   logoTitle,
 
   // Theme
