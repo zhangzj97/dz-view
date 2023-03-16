@@ -74,13 +74,8 @@ import PaneSearch from './components/PaneSearch/index.vue';
           </dz-view>
           <dz-view one size="w-fit"><PaneRouteTagTool /></dz-view>
         </dz-view>
-        <dz-view
-          one
-          size="h-grow"
-          class="h-0 shrink-0"
-          wrapper-class="w-0"
-          overflow
-        >
+        <h1>body</h1>
+        <dz-view one size="h-grow" class="h-0" wrapper-class="w-0" overflow>
           <slot></slot>
         </dz-view>
       </dz-view>
