@@ -20,17 +20,21 @@ import PaneSearch from './components/PaneSearch/index.vue';
 <template>
   <dz-view col size="w-screen h-screen">
     <!-- 通知栏 -->
-    <dz-view one size="h-fit">
-      <PaneNoticeBar />
-    </dz-view>
+    <template v-if="false">
+      <dz-view one size="h-fit">
+        <PaneNoticeBar />
+      </dz-view>
+    </template>
     <!-- Nav -->
-    <dz-view row size="h-16" wrapper-class="shadow-sm">
-      <dz-view one size="w-64"><PaneLogo /></dz-view>
-      <dz-view one size="w-grow"><PaneAppBar /></dz-view>
-      <dz-view one size="w-fit"><PaneSearch /></dz-view>
-      <dz-view one size="w-fit"><PanePluginBar /></dz-view>
-      <dz-view one size="w-fit"><PaneAvatar /></dz-view>
-    </dz-view>
+    <template v-if="false">
+      <dz-view row size="h-16" wrapper-class="shadow-sm">
+        <dz-view one size="w-64"><PaneLogo /></dz-view>
+        <dz-view one size="w-grow"><PaneAppBar /></dz-view>
+        <dz-view one size="w-fit"><PaneSearch /></dz-view>
+        <dz-view one size="w-fit"><PanePluginBar /></dz-view>
+        <dz-view one size="w-fit"><PaneAvatar /></dz-view>
+      </dz-view>
+    </template>
     <!-- Body -->
     <dz-view row size="h-grow" wrapper-class="shadow-sm">
       <dz-view col size="w-fit" wrapper-class="shadow-sm">
@@ -50,23 +54,36 @@ import PaneSearch from './components/PaneSearch/index.vue';
       <dz-view col size="w-grow">
         <!-- Nav -->
         <dz-view row size="h-16" wrapper-class="shadow-sm">
-          <dz-view one size="w-64"><PaneLogo /></dz-view>
           <dz-view one size="w-grow"><PaneAppBar /></dz-view>
           <dz-view one size="w-fit"><PaneSearch /></dz-view>
           <dz-view one size="w-fit"><PanePluginBar /></dz-view>
           <dz-view one size="w-fit"><PaneAvatar /></dz-view>
         </dz-view>
+        <!-- Nav -->
+        <template v-if="false">
+          <dz-view row size="h-16" wrapper-class="shadow-sm">
+            <dz-view one size="w-64"><PaneLogo /></dz-view>
+            <dz-view one size="w-grow"><PaneAppBar /></dz-view>
+            <dz-view one size="w-fit"><PaneSearch /></dz-view>
+            <dz-view one size="w-fit"><PanePluginBar /></dz-view>
+            <dz-view one size="w-fit"><PaneAvatar /></dz-view>
+          </dz-view>
+        </template>
         <!-- BreadCrumb -->
-        <dz-view row size="h-8" wrapper-class="shadow-sm">
-          <dz-view one size="w-fit"><PaneBreadCrumbBack /></dz-view>
-          <dz-view one size="w-grow"><PaneBreadCrumb /></dz-view>
-        </dz-view>
+        <template v-if="false">
+          <dz-view row size="h-8" wrapper-class="shadow-sm">
+            <dz-view one size="w-fit"><PaneBreadCrumbBack /></dz-view>
+            <dz-view one size="w-grow"><PaneBreadCrumb /></dz-view>
+          </dz-view>
+        </template>
         <!-- MobileNav -->
-        <dz-view row size="h-12" wrapper-class="shadow-sm">
-          <dz-view one size="w-fit"><PaneMobileBack /></dz-view>
-          <dz-view one size="w-grow"><PaneMobileTitle /></dz-view>
-          <dz-view one size="w-fit"><PaneMobileTool /></dz-view>
-        </dz-view>
+        <template v-if="false">
+          <dz-view row size="h-12" wrapper-class="shadow-sm">
+            <dz-view one size="w-fit"><PaneMobileBack /></dz-view>
+            <dz-view one size="w-grow"><PaneMobileTitle /></dz-view>
+            <dz-view one size="w-fit"><PaneMobileTool /></dz-view>
+          </dz-view>
+        </template>
         <!-- RouteTag -->
         <dz-view row size="h-8" wrapper-class="shadow-sm">
           <dz-view one size="w-grow" class="w-0" overflow>
@@ -74,7 +91,6 @@ import PaneSearch from './components/PaneSearch/index.vue';
           </dz-view>
           <dz-view one size="w-fit"><PaneRouteTagTool /></dz-view>
         </dz-view>
-        <h1>body</h1>
         <dz-view one size="h-grow" class="h-0" wrapper-class="w-0" overflow>
           <slot></slot>
         </dz-view>
