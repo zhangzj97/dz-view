@@ -11,6 +11,7 @@ import {
   useSourcePlugin,
   useSourceRoute,
   useSourceTheme,
+  useSourceOther,
 } from '../useSource';
 
 // useService
@@ -28,6 +29,8 @@ export const useService = () => {
     SourcePlugin: useSourcePlugin,
     SourceRoute: useSourceRoute,
     SourceTheme: useSourceTheme,
+
+    SourceOther: useSourceOther,
 
     // 把 api service 解构出来
     // 会把 default 也解构出来

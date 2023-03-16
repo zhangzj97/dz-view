@@ -10,3 +10,5 @@ export { useSourceAuth } from './hooks/useSourceAuth';
 export { useSourcePlugin } from './hooks/useSourcePlugin';
 export { useSourceRoute } from './hooks/useSourceRoute';
 export { useSourceTheme } from './hooks/useSourceTheme';
+
+export { useSourceOther } from './hooks/useSourceOther';
