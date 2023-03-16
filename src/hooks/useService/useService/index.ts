@@ -46,6 +46,18 @@ export const useService = () => {
     }
   };
 
+  // commit
+  const commit = (code, payload) => {
+    const [moduleName, apiName] = code.split('.');
+    try {
+      const { data } = serviceState[moduleName]()[apiName](payload);
+      return { data: data };
+    } catch (e) {
+      console.error('dispatch 发生错误 :', code);
+      return { data: {} };
+    }
+  };
+
   // 测试专用
   const checkAll = async () => {
     console.log({
@@ -70,6 +82,7 @@ export const useService = () => {
   // return
   return {
     dispatch,
+    commit,
 
     // 测试
     checkAll,
