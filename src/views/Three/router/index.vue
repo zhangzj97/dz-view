@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useService } from '@/hooks/useService';
-import { file } from '@babel/types';
 import { config } from '../config';
 const scopeKey = config.ViewName;
 
