@@ -3,48 +3,121 @@ import CellT from './components/CellT/index.vue';
 import { useService } from '@/hooks/useService';
 const { dispatch } = useService();
 
+onMounted(() => {
+  // const { data } = await dispatch('SourcePlugin.FindModule', {
+  //   moduleName: pluginCode,
+  // });
+  // console.log(data);
+  // console.log(pluginCode);
+});
+
 const schemaTable = [
   { code: 'id', component: 'Text' },
   { code: 'avatar', component: () => CellT },
-  { code: 'remark', component: 'Textarea' },
-  { code: 'createTime', component: 'Time' },
-  { code: 'updateTime', component: 'Time' },
-  { code: 'deleteTime', component: 'Time' },
-  {
-    code: 'createUserId',
-    component: 'Find',
-    service: 'Auth/AcUser/Find',
-    props: { coverField: 'createUserNickname' },
-  },
-  {
-    code: 'updateUserId',
-    component: 'Find',
-    service: 'Auth/AcUser/Find',
-    props: { coverField: 'createUserName' },
-  },
-  {
-    code: 'deleteUserId',
-    component: 'Find',
-    service: 'Auth/AcUser/Find',
-    coverField: 'deleteUserName',
-  },
-  { code: 'uuid', component: 'Text' },
-  { code: 'uucode', component: 'Text' },
-  { code: 'username', component: 'Text' },
-  { code: 'password', component: 'Text' },
-  { code: 'salt', component: 'Text' },
-  { code: 'phoneArea', component: 'Text' },
-  { code: 'phone', component: 'Text' },
-  { code: 'email', component: 'Text' },
-  { code: 'firstRegisterTime', component: 'Text' },
-  { code: 'firstRegisterIp', component: 'Text' },
-  { code: 'lastLoginTime', component: 'Text' },
-  { code: 'lastLoginIp', component: 'Text' },
-  { code: 'lastLoginFailTimes', component: 'Text' },
+  // { code: 'remark', component: 'Textarea' },
+  // { code: 'createTime', component: 'Time' },
+  // { code: 'updateTime', component: 'Time' },
+  // { code: 'deleteTime', component: 'Time' },
+  // {
+  //   code: 'createUserId',
+  //   component: 'Find',
+  //   service: 'Auth/AcUser/Find',
+  //   props: { coverField: 'createUserNickname' },
+  // },
+  // {
+  //   code: 'updateUserId',
+  //   component: 'Find',
+  //   service: 'Auth/AcUser/Find',
+  //   props: { coverField: 'createUserName' },
+  // },
+  // {
+  //   code: 'deleteUserId',
+  //   component: 'Find',
+  //   service: 'Auth/AcUser/Find',
+  //   coverField: 'deleteUserName',
+  // },
+  // { code: 'uuid', component: 'Text' },
+  // { code: 'uucode', component: 'Text' },
+  // { code: 'username', component: 'Text' },
+  // { code: 'password', component: 'Text' },
+  // { code: 'salt', component: 'Text' },
+  // { code: 'phoneArea', component: 'Text' },
+  // { code: 'phone', component: 'Text' },
+  // { code: 'email', component: 'Text' },
+  // { code: 'firstRegisterTime', component: 'Text' },
+  // { code: 'firstRegisterIp', component: 'Text' },
+  // { code: 'lastLoginTime', component: 'Text' },
+  // { code: 'lastLoginIp', component: 'Text' },
+  // { code: 'lastLoginFailTimes', component: 'Text' },
 ];
 
 const dataState = reactive({
   list: [
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
+    { id: 'id', avatar: 'avatar' },
     { id: 'id', avatar: 'avatar' },
     { id: 'id', avatar: 'avatar' },
     { id: 'id', avatar: 'avatar' },
@@ -86,7 +159,16 @@ const refresh = async () => {
       pageSize: pageState.pageSize,
     },
   };
-  const { data } = await dispatch(`${moduleState.name}.Select`, payload);
+  // const { data } = await dispatch(`${moduleState.name}.Select`, payload);
+  const data = {
+    list: [
+      { id: '1', avatar: '11' },
+      { id: '2', avatar: '22' },
+    ],
+    page: 1,
+    pageSize: 1,
+    total: 1,
+  };
   dataState.list = data.list;
   pageState.page = data.page;
   pageState.pageSize = data.pageSize;
@@ -103,7 +185,16 @@ const Select = async () => {
       pageSize: pageState.pageSize,
     },
   };
-  const { data } = await dispatch(`${moduleState.name}.Select`, payload);
+  // const { data } = await dispatch(`${moduleState.name}.Select`, payload);
+  const data = {
+    list: [
+      { id: '1', avatar: '11' },
+      { id: '2', avatar: '22' },
+    ],
+    page: 1,
+    pageSize: 1,
+    total: 1,
+  };
   dataState.list = data.list;
   pageState.page = data.page;
   pageState.pageSize = data.pageSize;

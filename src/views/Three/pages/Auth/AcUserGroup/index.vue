@@ -21,9 +21,9 @@ const Option = () => dispatch(`${moduleState.name}.Option`, {});
 </script>
 
 <template>
-  <dz-view>
+  <dz-view col size="w-grow" position="1" overflow wrapper-class="p-4 m-4 border rounded-md shadow">
     <dz-font lg>{{ moduleState.name }}</dz-font>
-    <dz-view row wrapper-class="gap-1">
+    <dz-view grid size="w-full h-fit" wrapper-class="gap-1">
       <dz-button @click="Find" title="Find" />
       <dz-button @click="FindDraft" title="FindDraft" />
       <dz-button @click="FindRecycle" title="FindRecycle" />

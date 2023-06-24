@@ -21,9 +21,149 @@ const Option = () => dispatch(`${moduleState.name}.Option`, {});
 </script>
 
 <template>
-  <dz-view>
+  <dz-view col size="h-grow w-full">
     <dz-font lg>{{ moduleState.name }}</dz-font>
-    <dz-view row wrapper-class="gap-1">
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
+      <dz-button @click="Find" title="Find" />
+      <dz-button @click="FindDraft" title="FindDraft" />
+      <dz-button @click="FindRecycle" title="FindRecycle" />
+      <dz-button @click="Select" title="Select" />
+      <dz-button @click="SelectRecycle" title="SelectRecycle" />
+      <dz-button @click="Create" title="Create" />
+      <dz-button @click="CreateDraft" title="CreateDraft" />
+      <dz-button @click="Update" title="Update" />
+      <dz-button @click="Delete" title="Delete" />
+      <dz-button @click="Restore" title="Restore" />
+      <dz-button @click="DeleteHard" title="DeleteHard" />
+      <dz-button @click="Option" title="Option" />
+    </dz-view>
+    <dz-view row wrapper-class="gap-1 ">
       <dz-button @click="Find" title="Find" />
       <dz-button @click="FindDraft" title="FindDraft" />
       <dz-button @click="FindRecycle" title="FindRecycle" />
