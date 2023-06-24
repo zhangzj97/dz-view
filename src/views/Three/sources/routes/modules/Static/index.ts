@@ -7,7 +7,7 @@ export default {
   Router: {
     name: 'Router',
     path: '/Router',
-    component: () => import('../../../../pages/Router/index.vue'),
+    component: () => import('../../../../router/index.vue'),
     meta: routeMate,
   },
   [scopeKey]: {
