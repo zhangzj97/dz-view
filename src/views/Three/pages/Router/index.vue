@@ -6,7 +6,7 @@ const scopeKey = config.ViewName;
 const router = useRouter();
 const route = useRoute();
 
-onBeforeMount(async () => {
+onMounted(async () => {
   const { dispatch } = useService();
 
   // 先补充 white list 的 permission
@@ -119,5 +119,5 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div></div>
+  <div>加载中</div>
 </template>
