@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <v col class="bb" s="w-[100vw] h-[100vh]">
+  <v col s="w-[100vw] h-[100vh]">
     <v s="w-grow h-grow" desc="body bar">
       <v col s="w-64 h-grow" desc="sider bar">
         <v s="w-64 h-16" desc="logo">
@@ -41,9 +41,3 @@
     </v>
   </v>
 </template>
-
-<style scoped>
-.bb * {
-  @apply border-2 border-red-300;
-}
-</style>
