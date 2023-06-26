@@ -1,4 +1,4 @@
-<script setup lang="ts" name="App1">
+<script setup lang="ts" name="App">
 import LayoutPage from '../LayoutApp/layouts/AdminDz/index.vue';
 import { config } from './config';
 provide('config', config);
@@ -23,10 +23,4 @@ provide('config', config);
 <style lang="scss">
 @import url(./assets/images/index.scss);
 @import url(./assets/icons/index.scss);
-</style>
-
-<style>
-body {
-  overflow: hidden;
-}
 </style>
