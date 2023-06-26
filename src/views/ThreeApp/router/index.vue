@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useService } from '@/hooks/useService';
-import { config } from '../../config';
+import { config } from '../config';
 const scopeKey = config.ViewName;
 
 const router = useRouter();
@@ -62,6 +62,7 @@ onMounted(async () => {
 
   // 更新一下 SourceAccess
   await dispatch('SourceAccess.Update', { value: AccessData, cache: true });
+  console.log('查看更新的 access', AccessData);
   // 更新一下 SourceAccessMenu
   await dispatch('SourceAccessMenu.UpdateByAccess', {
     access: AccessData,
