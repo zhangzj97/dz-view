@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createRouteGuard } from './guard';
-import { OtherRoute } from './modules/Static/';
-
-export const routes = [OtherRoute];
+import { routes } from '@/resources/routes';
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
