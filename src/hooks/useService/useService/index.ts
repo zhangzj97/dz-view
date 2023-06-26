@@ -6,12 +6,6 @@ import {
   useSourceAccessRouteTag,
   useSourceApi,
   useSourceApiService,
-  useSourceAuth,
-  useSourceEnum,
-  useSourcePlugin,
-  useSourceRoute,
-  useSourceTheme,
-  useSourceOther,
 } from '../useSource';
 
 // useService
@@ -24,13 +18,6 @@ export const useService = () => {
     SourceAccessRouteTag: useSourceAccessRouteTag,
     SourceApi: useSourceApi,
     SourceApiService: useSourceApiService,
-    SourceAuth: useSourceAuth,
-    SourceEnum: useSourceEnum,
-    SourcePlugin: useSourcePlugin,
-    SourceRoute: useSourceRoute,
-    SourceTheme: useSourceTheme,
-
-    SourceOther: useSourceOther,
 
     // 把 api service 解构出来
     // 会把 default 也解构出来
@@ -74,11 +61,6 @@ export const useService = () => {
         .data,
       SourceApi: (await useSourceApi().SelectModule()).data,
       SourceApiService: (await useSourceApiService().SelectModule()).data,
-      SourceAuth: (await useSourceAuth().SelectModule()).data,
-      SourceEnum: (await useSourceEnum().SelectModule()).data,
-      SourcePlugin: (await useSourcePlugin().SelectModule()).data,
-      SourceRoute: (await useSourceRoute().SelectModule()).data,
-      SourceTheme: (await useSourceTheme().SelectModule()).data,
     });
   };
 
