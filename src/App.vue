@@ -2,10 +2,6 @@
 
 <template>
   <RouterView />
-
-  <ContainerDrag>
-    <ConsoleRouter />
-  </ContainerDrag>
 </template>
 
 <style lang="scss">
