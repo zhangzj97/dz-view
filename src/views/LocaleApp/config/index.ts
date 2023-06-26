@@ -1,7 +1,7 @@
-const ViewName = 'PluginApp';
-const ScopeCode = 'PluginApp';
+const ViewName = 'LocaleApp';
+const ScopeCode = 'LocaleApp';
 // const RouteHomePageName = 'Home/Dashboard';
-const logoTitle = 'PluginApp';
+const logoTitle = 'LocaleApp';
 
 // const SourceThemeCurrentCode = '@SourceThemeApp/Green';
 

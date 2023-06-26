@@ -1,7 +1,7 @@
-const ViewName = 'PluginApp';
-const ScopeCode = 'PluginApp';
+const ViewName = 'LayoutApp';
+const ScopeCode = 'LayoutApp';
 // const RouteHomePageName = 'Home/Dashboard';
-const logoTitle = 'PluginApp';
+const logoTitle = 'LayoutApp';
 
 // const SourceThemeCurrentCode = '@SourceThemeApp/Green';
 
