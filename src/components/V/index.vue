@@ -36,7 +36,16 @@ defineProps<{
       pointer && 'cursor-pointer',
     ]"
   >
-    <slot></slot>
+    <slot>
+      <div
+        v-if="desc"
+        class="flex items-center justify-center flex-grow overflow-auto bg-stripes-cyan scrollbar-hidden"
+      >
+        <div class="flex text-lg italic font-bold text-gray-600">
+          {{ desc }}
+        </div>
+      </div>
+    </slot>
   </div>
 </template>
 
