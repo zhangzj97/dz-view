@@ -28,3 +28,7 @@ coverage
 *.sw?
 
 # scripts
+
+# Types
+/types/unplugin-auto-import.d.ts
+/types/unplugin-vue-components.d.ts
