@@ -1,5 +1,5 @@
 <script setup lang="ts" name="App">
-import LayoutPage from '../LayoutApp/common/layouts/AdminDz/index.vue';
+import LayoutPage from '../BaseLayout/common/layouts/AdminDz/index.vue';
 import { config } from './common/config';
 provide('config', config);
 </script>
@@ -16,11 +16,11 @@ provide('config', config);
   </LayoutPage>
 </template>
 
-<!-- <style lang="scss">
+<style lang="scss">
 @import url(./common/assets/index.scss);
 </style>
 
 <style lang="scss">
 @import url(./common/assets/images/index.scss);
 @import url(./common/assets/icons/index.scss);
-</style> -->
+</style>
