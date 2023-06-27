@@ -8,8 +8,8 @@ config.layout.logo.icon1 =
   '//iconfont.alicdn.com/p/illus/preview_image/236S9himnWZN/699745e2-fcac-4869-9b1a-92a1169a49db.png';
 config.layout.logo.icon2 = '';
 config.layout.logo.text = '达泽科技';
-config.layout.logo.icon1Style = 'scale-75';
-config.layout.logo.icon2Style = '';
+config.layout.logo.icon1Style = 'scale-90';
+config.layout.logo.icon2Style = 'text-black';
 config.layout.logo.textStyle = 'text-3xl text-gray-500 font-black ';
 
 provide('config', config);
