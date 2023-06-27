@@ -1,28 +1,6 @@
-import {
-  useSourceAccess,
-  useSourceAccessMenu,
-  useSourceAccessPermission,
-  useSourceAccessRoute,
-  useSourceAccessRouteTag,
-  useSourceApi,
-  useSourceApiService,
-} from '../useSource';
-
 // useService
 export const useService = () => {
-  const serviceState = reactive({
-    SourceAccess: useSourceAccess,
-    SourceAccessMenu: useSourceAccessMenu,
-    SourceAccessPermission: useSourceAccessPermission,
-    SourceAccessRoute: useSourceAccessRoute,
-    SourceAccessRouteTag: useSourceAccessRouteTag,
-    SourceApi: useSourceApi,
-    SourceApiService: useSourceApiService,
-
-    // 把 api service 解构出来
-    // 会把 default 也解构出来
-    ...useSourceApiService().SelectModuleStatic().data,
-  });
+  const serviceState = reactive({});
 
   // dispatch
   const dispatch = async (code, payload) => {
@@ -52,15 +30,6 @@ export const useService = () => {
   const checkAll = async () => {
     console.log({
       ...serviceState,
-      SourceAccess: (await useSourceAccess().SelectModule()).data,
-      SourceAccessMenu: (await useSourceAccessMenu().SelectModule()).data,
-      SourceAccessPermission: (await useSourceAccessPermission().SelectModule())
-        .data,
-      SourceAccessRoute: (await useSourceAccessRoute().SelectModule()).data,
-      SourceAccessRouteTag: (await useSourceAccessRouteTag().SelectModule())
-        .data,
-      SourceApi: (await useSourceApi().SelectModule()).data,
-      SourceApiService: (await useSourceApiService().SelectModule()).data,
     });
   };
 
