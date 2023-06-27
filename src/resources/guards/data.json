@@ -1,4 +1,4 @@
-    {
-        "name": "AdminApp",
-        "path": "@/apps/AdminApp/index"
-    }
+{
+    "name": "AdminApp",
+    "path": "@/apps/AdminApp/index"
+}
