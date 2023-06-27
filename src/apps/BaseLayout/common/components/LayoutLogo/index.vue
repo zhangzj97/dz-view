@@ -6,27 +6,19 @@ const config = inject('config');
 
 <template>
   <v s="w-64 h-16" desc="logo">
-    <v s="w-16 h-16" desc="logo-pic">
-      <v
-        s="w-grow h-grow"
-        class="bg-contain"
-        :class="[config.layout.logo.icon1Style]"
-        :style="{
-          backgroundImage: `url(${config.layout.logo.icon1})`,
-        }"
-      ></v>
-    </v>
+    <dz-icon
+      s="w-16 h-16"
+      :src="config.layout.logo.icon1"
+      :class="[config.layout.logo.icon1Style]"
+    />
     <v s="w-48 h-16" desc="logo-name">
-      <v
+      <dz-icon
         v-if="config.layout.logo.icon2"
-        s="w-grow h-grow"
-        class="bg-contain"
+        s="w-fit h-16"
+        :src="config.layout.logo.icon2"
         :class="[config.layout.logo.icon2Style]"
-        :style="{
-          backgroundImage: `url(${config.layout.logo.icon2})`,
-        }"
       />
-      <v s="w-grow h-16">
+      <v v-else s="w-grow h-16">
         <v s="w-grow h-grow" space />
         <dz-text :t="config.layout.logo.textStyle">
           {{ config.layout.logo.text }}
