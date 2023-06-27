@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" name="view">
 defineProps<{
   // Size Css
   // size: string;
@@ -19,6 +19,9 @@ defineProps<{
   // Cursor Css
   pointer?: boolean;
 
+  // Space
+  space?: boolean;
+
   // Test and demo
   desc?: string;
 }>();
@@ -34,12 +37,13 @@ defineProps<{
       hover,
       absolute ? 'absolute' : 'relative',
       pointer && 'cursor-pointer',
+      space && 'dz-view--space',
     ]"
   >
     <slot>
       <div
         v-if="desc"
-        class="flex items-center justify-center flex-grow overflow-auto scrollbar-hidden"
+        class="flex items-center justify-center flex-grow overflow-auto h-grow w-grow dz-view scrollbar-hidden"
         :class="[
           [
             'bg-stripes-cyan',
@@ -65,6 +69,8 @@ defineProps<{
   flex-grow: 0;
 
   &.dz-view-row {
+    @apply items-center;
+
     & > .w-grow {
       @apply w-0;
       flex-grow: 1;
@@ -74,6 +80,8 @@ defineProps<{
     }
   }
   &.dz-view-col {
+    @apply justify-center;
+
     & > .w-grow {
       @apply w-full;
     }
@@ -81,6 +89,10 @@ defineProps<{
       @apply h-0;
       flex-grow: 1;
     }
+  }
+
+  &.dz-view--space {
+    @apply opacity-0;
   }
 }
 .dz-view-v202301.dz-view::-webkit-scrollbar {
