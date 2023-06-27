@@ -147,3 +147,15 @@ const routes = Object.entries(appMap).map(([key, item]) => {
 });
 
 fs.writeFileSync(`${targetPath}/routes/data.json`, JSON.stringify(routes));
+
+// copy 指定的路由守卫
+const MAIN_APP = 'AdminApp';
+const guardIndexTs = fs.readFileSync(
+  `${srcPath}/resources/guards/index.ts.tpl`,
+  { encoding: 'utf8', flag: 'r' }
+);
+console.log(guardIndexTs);
+fs.writeFileSync(
+  `${srcPath}/resources/guards/index.ts`,
+  guardIndexTs.replace(/__MAIN_APP__/, MAIN_APP)
+);
