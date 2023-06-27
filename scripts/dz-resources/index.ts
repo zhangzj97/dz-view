@@ -50,7 +50,10 @@ const getAppMap = () => {
           .replace(/\/index.vue$/, '');
 
       module[key] = {
-        path: item.replace(/^.*?src/, '@').replace(/\\/g, '/'),
+        path: item
+          .replace(/^.*?src/, '@')
+          .replace(/\\/g, '/')
+          .replace(/\/index.vue$/g, ''),
       };
     });
 
@@ -80,10 +83,13 @@ const getAppMap = () => {
         item
           .replace(/__.*?__/g, '')
           .replace(/^.*pages\//, '')
-          .replace(/\/index.vue$/, '');
+          .replace(/\/index.vue$/g, '');
 
       module[key] = {
-        path: item.replace(/^.*?src/, '@').replace(/\\/g, '/'),
+        path: item
+          .replace(/^.*?apps/, '')
+          .replace(/\\/g, '/')
+          .replace(/\/index.vue$/g, ''),
       };
     });
     return module;
@@ -93,7 +99,7 @@ const getAppMap = () => {
     return {
       name: scope,
       path: '/' + scope,
-      component: `@/apps/${scope}/index.vue`,
+      component: `${scope}`,
       children: Object.entries(pageMap).map(([key, item]) => ({
         name: key,
         path: key.replace(scope, '').replace(/\/\//g, '/'),
@@ -139,4 +145,5 @@ fs.writeFileSync(`${targetPath}/apps.json`, JSON.stringify(appMap));
 const routes = Object.entries(appMap).map(([key, item]) => {
   return item.route;
 });
+
 fs.writeFileSync(`${targetPath}/routes/data.json`, JSON.stringify(routes));
