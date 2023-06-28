@@ -8,6 +8,9 @@ defineProps<{
   // Text Css
   t: string;
 
+  // Text
+  text: string;
+
   // Flex Css
   // row?: boolean;
   // col?: boolean;
@@ -39,7 +42,7 @@ defineProps<{
       pointer && 'cursor-pointer',
     ]"
   >
-    <slot></slot>
+    <slot>{{ text }}</slot>
   </div>
 </template>
 
