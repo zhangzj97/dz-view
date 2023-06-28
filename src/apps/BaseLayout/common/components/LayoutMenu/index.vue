@@ -155,6 +155,11 @@ const clickMenu = ({ id }: any) => {
   const item = menuState.map[id];
   const { idPath } = item;
 
+  if (menuState.collapse[id] === true) {
+    menuState.collapse[id] = false;
+    return;
+  }
+
   menuState.collapse = {};
   idPath.split(',').forEach((item: string) => {
     menuState.collapse[item] = true;
@@ -193,7 +198,7 @@ const clickMenu = ({ id }: any) => {
         />
       </MenuLevel2>
     </MenuLevel1>
-    {{ menuState.collapse }}
+
     <v s="w-64 h-grow" space></v>
   </v>
 </template>
