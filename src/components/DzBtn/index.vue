@@ -14,7 +14,7 @@ defineProps<{
   icon?: string;
 
   // Text
-  text: string;
+  text?: string;
 
   // Flex Css
   // row?: boolean;
