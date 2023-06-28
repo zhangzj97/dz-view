@@ -139,8 +139,6 @@ const testState = reactive({
       idPath: '4,42',
     },
   },
-
-  active: {},
 });
 
 const menuState = reactive<any>({
@@ -149,6 +147,8 @@ const menuState = reactive<any>({
   map: testState.map,
 
   collapse: {},
+
+  active: {},
 });
 
 const clickMenu = ({ id }: any) => {
@@ -176,6 +176,8 @@ const clickMenu = ({ id }: any) => {
       :avatar="item.avatar"
       :title="item.title"
       :collapse="!!menuState.collapse[item.id]"
+      :active="!!menuState.active[item.id]"
+      :showRightIcon="item.children?.length >= 0"
       @clickMenu="clickMenu(item)"
     >
       <MenuLevel2
@@ -185,6 +187,8 @@ const clickMenu = ({ id }: any) => {
         :avatar="item2.avatar"
         :title="item2.title"
         :collapse="!!menuState.collapse[item2.id]"
+        :active="!!menuState.active[item2.id]"
+        :showRightIcon="item2.children?.length >= 0"
         @clickMenu="clickMenu(item2)"
       >
         <MenuLevel3
@@ -194,6 +198,8 @@ const clickMenu = ({ id }: any) => {
           :avatar="item3.avatar"
           :title="item3.title"
           :collapse="!!menuState.collapse[item3.id]"
+          :active="!!menuState.active[item3.id]"
+          :showRightIcon="item3.children?.length >= 0"
           @clickMenu="clickMenu(item3)"
         />
       </MenuLevel2>

@@ -5,13 +5,16 @@ defineProps<{
   title: string;
 
   collapse: boolean;
+  active: boolean;
+
+  showRightIcon: boolean;
 }>();
 
 const emit = defineEmits<{
   (e: 'clickMenu', value: any): void;
 }>();
 
-const clickMenu = item => {
+const clickMenu = (item: any) => {
   emit('clickMenu', item);
 };
 </script>
@@ -38,9 +41,11 @@ const clickMenu = item => {
       </dz-text>
     </v>
     <dz-icon
+      v-if="showRightIcon"
       s="w-10 h-10"
       t="text-gray-300"
-      class="scale-50"
+      class="transition-all scale-50"
+      :class="[collapse ? 'rotate-90' : '']"
       icon="el:chevron-right"
     />
   </v>
