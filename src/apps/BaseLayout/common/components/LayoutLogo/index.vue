@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 
-const config = inject('config');
+const config: any = inject('config');
 </script>
 
 <template>
