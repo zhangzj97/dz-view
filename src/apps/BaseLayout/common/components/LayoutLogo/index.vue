@@ -9,7 +9,7 @@ const config: any = inject('config');
       :src="config.layout.logo.icon1"
       :class="[config.layout.logo.icon1Style]"
     />
-    <v s="w-48 h-16">
+    <v s="w-grow h-16">
       <dz-icon
         v-if="config.layout.logo.icon2"
         s="w-fit h-16"
@@ -18,9 +18,10 @@ const config: any = inject('config');
       />
       <v v-else s="w-grow h-16">
         <v s="w-grow h-grow" space />
-        <dz-text :t="config.layout.logo.textStyle">
-          {{ config.layout.logo.text }}
-        </dz-text>
+        <dz-text
+          :t="config.layout.logo.textStyle"
+          :text="config.layout.logo.text"
+        />
         <v s="w-grow h-grow" space />
         <v s="w-grow h-grow" space />
       </v>
