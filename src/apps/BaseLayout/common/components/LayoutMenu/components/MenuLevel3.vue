@@ -23,7 +23,7 @@ const clickMenu = (item: any) => {
   <v
     s="w-64 h-10"
     pointer
-    class="bg-gray-400 border border-gray-300"
+    class="bg-gray-400 border-b-[1px] border-gray-300"
     @click="clickMenu({ id })"
   >
     <v s="w-4 h-grow" space></v>
