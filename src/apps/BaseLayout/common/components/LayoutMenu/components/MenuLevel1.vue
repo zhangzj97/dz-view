@@ -49,7 +49,13 @@ const clickMenu = (item: any) => {
       icon="el:chevron-right"
     />
   </v>
-  <v v-if="collapse" s="w-64 h-fit" col>
+  <v
+    :class="[!collapse ? 'max-h-[0px]' : 'max-h-[1000vh]']"
+    col
+    s="w-64 h-fit"
+    w="overflow-hidden"
+    class="transition-all"
+  >
     <slot></slot>
   </v>
 </template>
