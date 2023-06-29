@@ -31,6 +31,14 @@ const testState = reactive({
               avatar: 'el:address-book',
               title: 't2-2-2',
               idPath: '2,22,222',
+              children: [
+                {
+                  id: '2221',
+                  avatar: 'el:address-book',
+                  title: 't2-2-2-1',
+                  idPath: '2,22,222,2221',
+                },
+              ],
             },
           ],
         },
@@ -115,6 +123,12 @@ const testState = reactive({
       title: 't2-2-2',
       idPath: '2,22,222',
     },
+    2221: {
+      id: '2221',
+      avatar: 'el:address-book',
+      title: 't2-2-2-1',
+      idPath: '2,22,222,2221',
+    },
     3: { id: '3', avatar: 'el:adjust-alt', title: 't3', idPath: '3' },
     4: {
       id: '4',
@@ -146,6 +160,8 @@ const menuState = reactive<any>({
 
   map: testState.map,
 
+  iconMode: false,
+
   collapse: {},
 
   active: {},
@@ -165,10 +181,15 @@ const clickMenu = ({ id }: any) => {
     menuState.collapse[item] = true;
   });
 };
+
+const toggleIconMode = () => {
+  menuState.collapse = {};
+  menuState.iconMode = !menuState.iconMode;
+};
 </script>
 
 <template>
-  <v s="w-64 h-grow" col wrap="overflow-auto">
+  <v s="w-fit h-grow" col wrap="overflow-auto">
     <MenuLevel1
       v-for="(item, index) of menuState.tree"
       :key="index"
@@ -178,6 +199,7 @@ const clickMenu = ({ id }: any) => {
       :collapse="!!menuState.collapse[item.id]"
       :active="!!menuState.active[item.id]"
       :showRightIcon="item.children?.length >= 0"
+      :iconMode="menuState.iconMode"
       @clickMenu="clickMenu(item)"
     >
       <MenuLevel2
@@ -189,6 +211,7 @@ const clickMenu = ({ id }: any) => {
         :collapse="!!menuState.collapse[item2.id]"
         :active="!!menuState.active[item2.id]"
         :showRightIcon="item2.children?.length >= 0"
+        :iconMode="menuState.iconMode"
         @clickMenu="clickMenu(item2)"
       >
         <MenuLevel3
@@ -200,10 +223,25 @@ const clickMenu = ({ id }: any) => {
           :collapse="!!menuState.collapse[item3.id]"
           :active="!!menuState.active[item3.id]"
           :showRightIcon="item3.children?.length >= 0"
+          :iconMode="menuState.iconMode"
           @clickMenu="clickMenu(item3)"
-        />
+        >
+          <MenuLevel3
+            v-for="(item4, index4) of item3.children"
+            :key="index4"
+            :id="item4.id"
+            :avatar="item4.avatar"
+            :title="item4.title"
+            :collapse="!!menuState.collapse[item4.id]"
+            :active="!!menuState.active[item4.id]"
+            :showRightIcon="item4.children?.length >= 0"
+            :iconMode="menuState.iconMode"
+            @clickMenu="clickMenu(item4)"
+          />
+        </MenuLevel3>
       </MenuLevel2>
     </MenuLevel1>
-    <v s="w-64 h-grow" space></v>
+    <dz-btn text="收" @click="toggleIconMode" />
+    <v s="w-fit h-grow" space></v>
   </v>
 </template>
