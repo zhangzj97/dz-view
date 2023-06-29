@@ -44,7 +44,7 @@ defineProps<{
       s,
       w,
       bg,
-      hover,
+      // hover,
       'relative', // absolute ? 'absolute' : 'relative',
       pointer && 'cursor-pointer',
     ]"
@@ -54,7 +54,7 @@ defineProps<{
       }
     "
   >
-    <Icon v-if="icon" class="w-full h-full" :icon="icon" :class="[t]" />
+    <Icon v-if="icon" class="w-full h-full" :icon="icon" :class="[t, hover]" />
   </div>
 </template>
 
