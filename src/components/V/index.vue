@@ -80,7 +80,7 @@ defineProps<{
     }
   }
   &.dz-view-col {
-    @apply justify-center;
+    @apply items-center;
 
     & > .w-grow {
       @apply w-full;
