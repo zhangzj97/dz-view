@@ -35,7 +35,7 @@ defineProps<{
       s,
       w,
       hover,
-      absolute ? 'absolute' : 'relative',
+      absolute ? 'absolute top-0 left-0' : 'relative',
       pointer && 'cursor-pointer',
       space && 'dz-view--space',
     ]"

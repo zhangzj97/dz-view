@@ -6,7 +6,7 @@ defineProps<{
   // Wrap Css
   w?: string;
   // Text Css
-  t: string;
+  t?: string;
 
   // source
   src?: string;
