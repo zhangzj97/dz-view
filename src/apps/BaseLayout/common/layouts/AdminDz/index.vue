@@ -2,7 +2,7 @@
 import LayoutLogo from '@/apps/BaseLayout/common/components/LayoutLogo/index.vue';
 import LayoutMenu from '@/apps/BaseLayout/common/components/LayoutMenu/index.vue';
 import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserProfile/index.vue';
-import LayoutRouteBreadCrumb from '@/apps/BaseLayout/common/components/LayoutRouteBreadCrumb/index.vue';
+import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
 </script>
 
 <template>
@@ -27,7 +27,7 @@ import LayoutRouteBreadCrumb from '@/apps/BaseLayout/common/components/LayoutRou
         <LayoutMenu class="z-50" />
       </v>
       <v col s="w-grow h-grow" desc="body">
-        <LayoutRouteBreadCrumb />
+        <LayoutRouteTag />
         <v s="w-grow h-grow" w="overflow-auto" desc="body">
           <slot></slot>
         </v>
