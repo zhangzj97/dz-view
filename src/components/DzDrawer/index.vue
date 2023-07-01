@@ -1,6 +1,6 @@
 <script setup lang="ts" name="view">
-import { Modal } from '@arco-design/web-vue';
-import '@arco-design/web-vue/es/modal/style/css';
+import { Drawer } from '@arco-design/web-vue';
+import '@arco-design/web-vue/es/drawer/style/css';
 
 const props = defineProps<{
   // Size Css
@@ -27,7 +27,7 @@ const props = defineProps<{
   cache?: boolean;
 
   // position
-  placement?: 'top' | 'bottom' | 'left' | 'right' | undefined;
+  position: 'top' | 'bottom' | 'left' | 'right' | undefined;
 }>();
 
 const emit = defineEmits<{
@@ -48,12 +48,13 @@ const toogleFullscreen = () => {
 </script>
 
 <template>
-  <Modal
-    class="dz-modal-v202301 dz-modal dz-modal-acro"
+  <Drawer
+    class="dz-drawer-v202301 dz-drawer dz-drawer-acro"
+    :class="[`dz-drawer-acro-${position}`]"
     :visible="state.visible"
     :fullscreen="state.fullscreen"
     :defaultVisible="state.visible"
-    :placement="placement"
+    :placement="position"
     :mask="true"
     titleAlign="start"
     :unmountOnClose="cache"
@@ -61,7 +62,6 @@ const toogleFullscreen = () => {
     :closable="false"
     :header="true"
     :footer="true"
-    :draggable="true"
     :escToClose="true"
   >
     <template #title>
@@ -71,7 +71,7 @@ const toogleFullscreen = () => {
         <v s="w-grow h-10" space />
         <v s="w-fit h-10">
           <dz-icon
-            v-if="true"
+            v-if="false"
             s="w-10 h-10"
             class="scale-50"
             hover="hover:bg-gray-100"
@@ -111,50 +111,56 @@ const toogleFullscreen = () => {
 
     <template #default>
       <v
-        :s="
-          state.fullscreen
-            ? 'w-[calc(100vw-16px)] h-[calc(100vh-40px-40px-2px)]'
-            : s
-        "
-        :w="
-          state.fullscreen
-            ? 'max-w-[calc(100vw-16px)] max-h-[calc(100vh-40px-40px-2px)] overflw-auto'
-            : w
-        "
+        :s="state.fullscreen ? s : s"
+        :w="state.fullscreen ? w : w"
         :col="col"
         class="transition-all"
       >
         <slot></slot>
       </v>
     </template>
-  </Modal>
+  </Drawer>
 </template>
 
 <style lang="scss">
-.dz-modal-v202301.dz-modal.dz-modal-acro {
-  .arco-modal {
-    @apply w-fit h-fit;
+.dz-drawer-v202301.dz-drawer.dz-drawer-acro {
+  .arco-drawer {
+    // @apply w-fit h-full;
   }
-  .arco-modal-title {
+  .arco-drawer-title {
     @apply flex shrink-0 select-none;
     @apply flex-row;
     flex-grow: 1; // flex-grow: 0;
   }
 
-  .arco-modal-body > .w-grow,
-  .arco-modal-title > .w-grow {
+  .arco-drawer-body > .w-grow,
+  .arco-drawer-title > .w-grow {
     @apply w-0;
     flex-grow: 1;
   }
-  .arco-modal-body {
-    @apply w-fit h-fit;
+  .arco-drawer-body {
+    // @apply w-fit h-fit;
     @apply p-0;
   }
 
-  .arco-modal-header,
-  .arco-modal-footer {
+  .arco-drawer-header,
+  .arco-drawer-footer {
     @apply w-full h-fit;
     @apply p-0;
+  }
+}
+
+.dz-drawer-acro-right,
+.dz-drawer-acro-left {
+  .arco-drawer {
+    width: fit-content !important;
+  }
+}
+
+.dz-drawer-acro-top,
+.dz-drawer-acro-bottom {
+  .arco-drawer {
+    height: fit-content !important;
   }
 }
 </style>
