@@ -4,6 +4,7 @@ import LayoutMenu from '@/apps/BaseLayout/common/components/LayoutMenu/index.vue
 import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserProfile/index.vue';
 import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
 import PanePluginTestModal from './components/PanePluginTestModal.vue';
+import PanePluginTestDrawer from './components/PanePluginTestDrawer.vue';
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import PanePluginTestModal from './components/PanePluginTestModal.vue';
       <LayoutLogo />
       <v s="w-grow h-16" desc="other"></v>
       <v s="w-fit h-16" desc="plugin">
+        <PanePluginTestDrawer />
         <PanePluginTestModal />
         <v s="w-12 h-16" desc="plugin-modal"></v>
         <v s="w-12 h-16" desc="plugin-search"></v>
