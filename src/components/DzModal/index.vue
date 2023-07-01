@@ -3,65 +3,33 @@ import { Modal } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/modal/style/css';
 
 const props = defineProps<{
-  s: string;
-  w: string;
+  // Size Css
+  // size: string;
+  s?: string;
+  // Wrap Css
+  w?: string;
+  // Text Css
+  t?: string;
+
+  // Text
+  text?: string;
+  title?: string;
+  icon?: string;
+
+  // Flex Css
+  // row?: boolean;
   col?: boolean;
 
+  // state
   state: any;
 
-  visible?: boolean;
-
-  title?: string;
-
-  top?: any;
-
-  mask?: boolean;
-
+  // cache
   cache?: boolean;
 }>();
-
-// const modalState = reactive<any>({
-//   visible: false,
-//   defaultVisible: false,
-//   //   width: '',
-//   //   top: '',
-//   //   mask: '',
-//   //   title: '',
-//   //   titleAlign: '',
-//   //   alignCenter: '',
-//   //   unmountOnClose: '',
-//   //   maskClosable: '',
-//   //   hideCancel: '',
-//   //   simple: '',
-//   //   closable: '',
-//   //   okText: '',
-//   //   cancelText: '',
-//   //   okLoading: '',
-//   //   okButtonProps: '',
-//   //   cancelButtonProps: '',
-//   //   footer: '',
-//   //   renderToBody: '',
-//   //   popupContainer: '',
-//   //   maskStyle: '',
-//   //   modalClass: '',
-//   //   modalStyle: '',
-//   //   onBeforeOk: '',
-//   //   escToClose: '',
-//   //   draggable: '',
-//   //   fullscreen: '',
-//   //   maskAnimationName: '',
-//   //   modalAnimationName: '',
-//   //   bodyClass: '',
-//   //   bodyStyle: '',
-// });
 
 const emit = defineEmits<{
   (e: 'update:state', value: any): void;
 }>();
-
-const update = (item: any) => {
-  emit('update:state', item);
-};
 
 const close = () => {
   const state = props.state;
@@ -78,11 +46,10 @@ const toogleFullscreen = () => {
 
 <template>
   <Modal
-    class="dz-modal-acro"
+    class="dz-modal-v202301 dz-modal dz-modal-acro"
     :visible="state.visible"
     :fullscreen="state.fullscreen"
     :defaultVisible="state.visible"
-    :top="top"
     :mask="true"
     titleAlign="start"
     :unmountOnClose="cache"
@@ -158,7 +125,7 @@ const toogleFullscreen = () => {
 </template>
 
 <style lang="scss">
-.dz-modal-acro {
+.dz-modal-v202301.dz-modal.dz-modal-acro {
   .arco-modal {
     @apply w-fit h-fit;
   }
