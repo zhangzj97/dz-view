@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const modalState = reactive<any>({
+const drawerState = reactive<any>({
   visible: false,
   fullscreen: false,
 });
 
 const toggleVisible = () => {
-  modalState.visible = !modalState.visible;
+  drawerState.visible = !drawerState.visible;
 };
 </script>
 
@@ -21,7 +21,7 @@ const toggleVisible = () => {
   </v>
 
   <dz-modal
-    v-model:state="modalState"
+    v-model:state="drawerState"
     s="w-[70vw] h-fit"
     w="max-h-[60vh] min-h-[30vh]"
     col
