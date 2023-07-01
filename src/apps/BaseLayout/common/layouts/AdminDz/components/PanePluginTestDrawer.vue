@@ -17,13 +17,14 @@ const toggleVisible = () => {
     pointer
     @click="toggleVisible"
   >
-    <dz-icon s="w-12 h-12" icon="mdi:test-tube" class="scale-50" />
+    <dz-icon s="w-12 h-12" icon="ic:round-desk" class="scale-50" />
   </v>
 
-  <dz-modal
+  <dz-drawer
     v-model:state="drawerState"
-    s="w-[70vw] h-fit"
-    w="max-h-[60vh] min-h-[30vh]"
+    position="top"
+    s="w-[80vw] h-[10vh]"
+    w="max-w-[60vw] min-h-[30vh]"
     col
     title="988"
   >
@@ -39,10 +40,10 @@ const toggleVisible = () => {
     <template #footer>
       <v s="w-grow h-10" w="gap-2">
         <v s="w-grow h-10" space />
-        <dz-btn text="确定" />
-        <dz-btn text="取消" />
+        <dz-btn text="确定" @click="toggleVisible" />
+        <dz-btn text="取消" @click="toggleVisible" />
         <v s="w-2 h-10" space />
       </v>
     </template>
-  </dz-modal>
+  </dz-drawer>
 </template>

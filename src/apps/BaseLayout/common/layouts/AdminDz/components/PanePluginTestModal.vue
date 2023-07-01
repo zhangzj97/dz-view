@@ -39,8 +39,8 @@ const toggleVisible = () => {
     <template #footer>
       <v s="w-grow h-10" w="gap-2">
         <v s="w-grow h-10" space />
-        <dz-btn text="确定" />
-        <dz-btn text="取消" />
+        <dz-btn text="确定" @click="toggleVisible" />
+        <dz-btn text="取消" @click="toggleVisible" />
         <v s="w-2 h-10" space />
       </v>
     </template>
