@@ -26,7 +26,7 @@ const tooglePopover = () => {
       col
       absolute
       class="p-2 gap-2 translate-y-[80px] bg-white z-[9999] border-[1px] origin-top transition-all"
-      :class="[profileState.showPopover ? 'scale-0' : '']"
+      :class="[profileState.showPopover ? '' : 'scale-0']"
     >
       <dz-btn text="退出登录" />
       <dz-btn text="重置密码" />
