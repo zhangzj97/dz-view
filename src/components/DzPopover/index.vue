@@ -22,7 +22,7 @@ const props = defineProps<{
   col?: boolean;
 
   // state
-  state: any;
+  state?: any;
 
   // cache
   cache?: boolean;
