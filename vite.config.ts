@@ -5,11 +5,6 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
-import {
-  ArcoResolver,
-  AntDesignVueResolver,
-  ElementPlusResolver,
-} from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,17 +14,13 @@ export default defineConfig({
     AutoImport({
       dts: './types/unplugin-auto-import.d.ts',
       imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
-      resolvers: [
-        ElementPlusResolver(),
-        AntDesignVueResolver(),
-        ArcoResolver(),
-      ],
+      resolvers: [],
     }),
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
       dts: './types/unplugin-vue-components.d.ts',
       globs: ['./src/components/*/index.vue'],
-      resolvers: [ElementPlusResolver(), AntDesignVueResolver()],
+      resolvers: [],
       directoryAsNamespace: false,
       globalNamespaces: [],
       directives: true,
