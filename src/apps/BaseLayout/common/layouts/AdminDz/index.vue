@@ -6,6 +6,7 @@ import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/i
 import PanePluginTestModal from './components/PanePluginTestModal.vue';
 import PanePluginTestDrawer from './components/PanePluginTestDrawer.vue';
 import PanePluginTestButton from './components/PanePluginTestButton.vue';
+import PanePluginTestPopover from './components/PanePluginTestPopover.vue';
 </script>
 
 <template>
@@ -17,6 +18,7 @@ import PanePluginTestButton from './components/PanePluginTestButton.vue';
         <PanePluginTestDrawer />
         <PanePluginTestModal />
         <PanePluginTestButton />
+        <PanePluginTestPopover />
         <v s="w-12 h-16" desc="plugin-modal"></v>
         <v s="w-12 h-16" desc="plugin-search"></v>
         <v s="w-12 h-16" desc="plugin-locale"></v>
