@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { Button } from '@arco-design/web-vue';
+import '@arco-design/web-vue/es/button/style/css';
+
 defineProps<{
   // Size Css
   // size: string;
@@ -15,6 +18,7 @@ defineProps<{
 
   // Text
   text?: string;
+  title?: string;
 
   // Flex Css
   // row?: boolean;
@@ -31,44 +35,33 @@ defineProps<{
 
   // Test and demo
   desc?: string;
+
+  // Arco
+  type?: 'primary' | 'secondary' | 'outline' | 'dashed' | 'text';
+  status?: 'normal' | 'warning' | 'success' | 'danger';
+
+  // state
+  state?: any;
 }>();
 </script>
 
 <template>
-  <div
-    class="dz-btn-v202301 dz-btn"
-    :class="[
-      'flex-row', // col ? 'flex-col dz-view-col' : 'flex-row dz-view-row',
-      'bg-blue-400',
-      // t,
-      'w-fit h-fit', // s,
-      'py-1', // w,
-      'hover:opacity-90', // hover,
-      'active:opacity-75',
-      'relative', // absolute ? 'absolute' : 'relative',
-      'cursor-pointer', //pointer && 'cursor-pointer',
-      'shadow-lg rounded-md',
-      'items-center',
-    ]"
+  <Button
+    :type="type"
+    shape="square"
+    :status="status"
+    size="medium"
+    :long="false"
+    :loading="state?.loading"
+    :disabled="state?.disabled"
   >
-    <v s="w-2 h-grow" space></v>
-    <dz-icon
-      v-if="icon"
-      :icon="icon"
-      s="w-6 h-6"
-      w="min-w-[8px] min-h-[8px]"
-      t="text-white"
-      class="scale-75"
-    />
-    <dz-text t="text-white" :text="text" />
-    <v s="w-2 h-grow" space></v>
-  </div>
+    <template #icon>
+      <slot name="icon">
+        <dz-icon s="w-4 h-4" :icon="icon" class="scale-100 translate-y-[2px]" />
+      </slot>
+    </template>
+    <slot>
+      <dz-text :text="title" />
+    </slot>
+  </Button>
 </template>
-
-<style scoped lang="scss">
-.dz-btn-v202301.dz-btn {
-  @apply flex shrink-0;
-
-  flex-grow: 0;
-}
-</style>
