@@ -28,7 +28,7 @@ import PanePluginTestPopover from './components/PanePluginTestPopover.vue';
         <v s="w-12 h-16" desc="plugin-setting"></v>
         <v s="w-12 h-16" desc="plugin-theme"></v>
       </v>
-      <LayoutUserProfile />
+      <!-- <LayoutUserProfile /> -->
     </v>
     <v s="w-grow h-grow" desc="body">
       <v col s="w-fit h-grow" desc="sidebar">
