@@ -91,6 +91,8 @@ withDefaults(
   display: flex;
   width: auto;
   height: auto;
+  padding: 0px;
+  margin: 0px;
   flex-direction: row;
   flex-grow: 0;
   flex-shrink: 0;
