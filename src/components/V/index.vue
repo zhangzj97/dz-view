@@ -1,4 +1,4 @@
-<script setup lang="ts" name="view">
+<script setup lang="ts">
 defineProps<{
   // Size Css
   // size: string;
@@ -31,7 +31,7 @@ defineProps<{
   <div
     class="dz-view-v202301 dz-view"
     :class="[
-      col ? 'flex-col dz-view-col' : 'flex-row dz-view-row',
+      col ? 'dz-view-col' : 'dz-view-row',
       s,
       w,
       hover,
@@ -69,21 +69,23 @@ defineProps<{
   flex-grow: 0;
 
   &.dz-view-row {
-    @apply items-center;
+    @apply flex-row items-center;
 
     & > .w-grow {
       @apply w-0;
       flex-grow: 1;
     }
     & > .h-grow {
-      @apply h-full;
+      align-self: stretch;
+      height: auto;
     }
   }
   &.dz-view-col {
-    @apply items-center;
+    @apply flex-col items-center;
 
     & > .w-grow {
-      @apply w-full;
+      align-self: stretch;
+      width: auto;
     }
     & > .h-grow {
       @apply h-0;

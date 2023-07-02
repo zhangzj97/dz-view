@@ -13,7 +13,7 @@ defineProps<{
 
   // Flex Css
   // row?: boolean;
-  // col?: boolean;
+  col?: boolean;
 
   // Hover Css
   hover?: string;
@@ -36,16 +36,8 @@ defineProps<{
 
 <template>
   <v :s="s" :w="w" :col="col">
-    <v s="w-grow h-fit">
-      <v s="w-16 h-fit">
-        <dz-text text="label" />
-      </v>
-      <v s="w-grow h-fit">
-        <slot>
-          <v s="w-grow h-16" class="bg-red-300"></v>
-        </slot>
-      </v>
-    </v>
+    <dz-form-item s="w-96 h-fit" />
+    <dz-form-item s="w-96 h-fit" />
   </v>
 </template>
 
