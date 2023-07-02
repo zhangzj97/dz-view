@@ -1,4 +1,42 @@
 <script setup lang="ts">
+interface DzBaseProps {
+  s?: string;
+  w?: string;
+  t?: string;
+  hover?: string;
+}
+
+interface DzEntityProps {
+  id: string;
+  icon: string;
+  avatar: string;
+  title: string;
+}
+
+interface DzViewCursorProps {
+  pointer: boolean;
+}
+
+interface DzViewFlexProps {
+  row?: boolean;
+  col?: boolean;
+
+  grid?: boolean;
+}
+
+interface DzViewPositionProps {
+  absolute?: string;
+  fixed?: string;
+}
+
+interface DzViewSpaceProps {
+  space?: boolean;
+}
+
+interface DzViewTestProps {
+  desc?: string;
+}
+
 defineProps<{
   // Size Css
   // size: string;
