@@ -58,6 +58,7 @@ withDefaults(
       DzViewPositionProps &
       DzViewCursorProps &
       DzViewSpaceProps &
+      DzViewTextProps &
       DzViewTestProps
   >(),
   {
@@ -75,9 +76,9 @@ withDefaults(
       t,
       hover,
       col ? 'dz-view-col' : 'dz-view-row',
-      grid ? 'flex-nowrap' : '',
+      grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
-      pointer && 'cursor-pointer',
+      pointer && 'dz-view-pointer',
     ]"
   >
     <slot></slot>
@@ -88,10 +89,10 @@ withDefaults(
 .dz-view.v202301 {
   position: relative;
   display: flex;
-  width: auto;
-  height: auto;
-  padding: 0px;
-  margin: 0px;
+  // width: auto;
+  // height: auto;
+  // padding: 0px;
+  // margin: 0px;
   flex-direction: row;
   flex-grow: 0;
   flex-shrink: 0;
@@ -102,6 +103,26 @@ withDefaults(
   & > .dz-view-row {
     flex-direction: row;
     align-items: center;
+  }
+  & > .dz-view-col {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &.dz-view-col {
+    flex-direction: column;
+
+    & > .w-grow {
+      width: auto;
+      align-self: stretch;
+    }
+    & > .h-grow {
+      height: 0px;
+      flex-grow: 1;
+    }
+  }
+  &.dz-view-row {
+    flex-direction: row;
 
     & > .w-grow {
       width: 0px;
@@ -112,18 +133,11 @@ withDefaults(
       align-self: stretch;
     }
   }
-  & > .dz-view-col {
-    flex-direction: column;
-    align-items: center;
-
-    & > .w-grow {
-      width: auto;
-      align-self: stretch;
-    }
-    & > .h-grow {
-      height: 0px;
-      flex-grow: 1;
-    }
+  &.dz-view-grid {
+    flex-wrap: wrap;
+  }
+  &.dz-view-pointer {
+    cursor: pointer;
   }
 }
 </style>
