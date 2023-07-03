@@ -2,33 +2,67 @@
 import { Modal } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/modal/style/css';
 
-const props = defineProps<{
-  // Size Css
-  // size: string;
+interface DzBaseProps {
   s?: string;
-  // Wrap Css
   w?: string;
-  // Text Css
   t?: string;
+  trans?: boolean | string;
+}
 
-  // Text
+interface DzViewTextProps {
   text?: string;
-  title?: string;
-  icon?: string;
+}
 
-  // Flex Css
-  // row?: boolean;
+interface DzEntityProps {
+  id?: string;
+  icon?: string;
+  avatar?: string;
+  title?: string;
+  bg?: string;
+}
+
+interface DzViewFlexProps {
+  row?: boolean;
   col?: boolean;
 
-  // state
-  state: any;
+  grid?: boolean;
+}
 
-  // cache
+interface DzViewPositionProps {
+  absolute?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'tl'
+    | 'tr'
+    | 'bl'
+    | 'br'
+    | string;
+  fixed?: string;
+}
+
+interface DzViewCursorProps {
+  pointer?: boolean;
+}
+
+interface DzViewSpaceProps {
+  space?: boolean;
+}
+
+interface DzViewTestProps {
+  desc?: string;
+}
+
+interface DzPopoverProps {
+  state?: any;
   cache?: boolean;
+}
 
-  // position
-  placement?: 'top' | 'bottom' | 'left' | 'right' | undefined;
-}>();
+const props = withDefaults(
+  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzPopoverProps>(),
+  { cache: false }
+);
 
 const emit = defineEmits<{
   (e: 'update:state', value: any): void;
@@ -40,121 +74,139 @@ const close = () => {
   state.fullscreen = false;
   emit('update:state', state);
 };
+
 const toogleFullscreen = () => {
   const state = props.state;
   state.fullscreen = !state.fullscreen;
+  emit('update:state', state);
+};
+
+const toogleVisible = () => {
+  const state = props.state;
+  state.visible = !state.visible;
   emit('update:state', state);
 };
 </script>
 
 <template>
   <Modal
-    class="dz-modal-v202301 dz-modal dz-modal-acro"
+    class="dz-modal v202301"
     :visible="state.visible"
     :fullscreen="state.fullscreen"
     :defaultVisible="state.visible"
-    :placement="placement"
     :mask="true"
     titleAlign="start"
-    :unmountOnClose="cache"
+    :unmountOnClose="true"
     :maskClosable="true"
     :closable="false"
     :header="true"
-    :footer="true"
+    :footer="false"
     :draggable="true"
     :escToClose="true"
   >
     <template #title>
-      <v v-if="title" s="w-grow h-10" w="gap-2">
-        <v s="w-2 h-10" space />
-        <dz-text t="text-base text-black" :text="title" />
-        <v s="w-grow h-10" space />
-        <v s="w-fit h-10">
+      <v s="w-grow h-fit" move>
+        <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
+        <v v-if="icon" s="w-10 h-grow">
+          <dz-icon s="w-10 h-grow" class="scale-50" :icon="icon" />
+        </v>
+        <v-text s="w-fit h-grow" :t="t" :text="title" />
+        <v-space s="w-grow h-grow" />
+        <v
+          s="w-10 h-grow"
+          trans="hover:bg-gray-100"
+          pointer
+          @click="toogleFullscreen"
+        >
           <dz-icon
-            v-if="true"
-            s="w-10 h-10"
+            s="w-10 h-grow"
             class="scale-50"
-            hover="hover:bg-gray-100"
-            :icon="
-              state.fullscreen
-                ? 'ic:round-fullscreen-exit'
-                : 'ic:round-fullscreen'
-            "
             pointer
-            @click="toogleFullscreen"
-          />
-
-          <dz-icon
-            s="w-10 h-10"
-            class="scale-50"
-            hover="hover:bg-gray-100"
-            icon="ic:round-close"
-            pointer
-            @click="close"
+            icon="mdi:fullscreen"
           />
         </v>
-      </v>
-      <slot v-if="!title" name="header"></slot>
-    </template>
-    <template #footer>
-      <div class="arco-modal-title arco-modal-title-align-start">
-        <slot name="footer">
-          <v s="w-grow h-10" w="gap-2">
-            <v s="w-grow h-10" space />
-            <dz-btn text="确定" />
-            <dz-btn text="取消" @click="close" />
-            <v s="w-2 h-10" space />
-          </v>
-        </slot>
-      </div>
-    </template>
 
-    <template #default>
-      <v
-        :s="
-          state.fullscreen
-            ? 'w-[calc(100vw-16px)] h-[calc(100vh-40px-40px-2px)]'
-            : s
-        "
-        :w="
-          state.fullscreen
-            ? 'max-w-[calc(100vw-16px)] max-h-[calc(100vh-40px-40px-2px)] overflw-auto'
-            : w
-        "
-        :col="col"
-        class="transition-all"
-      >
+        <v
+          s="w-10 h-grow"
+          trans="hover:bg-gray-100"
+          pointer
+          @click="toogleFullscreen"
+        >
+          <dz-icon
+            s="w-10 h-grow"
+            class="scale-50"
+            pointer
+            icon="mdi:fullscreen-exit"
+          />
+        </v>
+        <v s="w-8 h-grow" trans="hover:bg-gray-100" pointer @click="close">
+          <dz-icon s="w-8 h-grow" class="scale-50" pointer icon="mdi:close" />
+        </v>
+      </v>
+    </template>
+    <v s="w-grow h-grow" col>
+      <v s="w-fit h-fit">
         <slot></slot>
       </v>
-    </template>
+      <v-space s="w-grow h-grow" />
+      <slot name="footer">
+        <v-space s="w-grow h-2" />
+        <v s="w-grow h-fit" w="gap-2">
+          <v-space s="w-grow h-grow" />
+          <slot name="action">
+            <v s="w-12 h-8" class="bg-red-300"></v>
+            <v s="w-12 h-8" class="bg-red-300"></v>
+          </slot>
+          <v-space s="w-0 h-grow" />
+        </v>
+        <v-space s="w-grow h-2" />
+      </slot>
+    </v>
   </Modal>
 </template>
 
 <style lang="scss">
-.dz-modal-v202301.dz-modal.dz-modal-acro {
-  .arco-modal {
-    @apply w-fit h-fit;
+.dz-modal.v202301.arco-modal-container {
+  & > .arco-modal-mask {
   }
-  .arco-modal-title {
-    @apply flex shrink-0 select-none;
-    @apply flex-row;
-    flex-grow: 1; // flex-grow: 0;
+  & > .arco-modal-wrapper {
+    & > .arco-modal {
+      @apply p-0 m-0;
+      @apply w-fit h-fit;
+
+      & > .arco-modal-header {
+        @apply p-0 m-0;
+        @apply w-auto h-fit;
+
+        & > .arco-modal-title {
+          @apply p-0 m-0 relative flex flex-row flex-nowrap flex-shrink-0;
+
+          @apply w-auto h-fit;
+          @apply flex-grow;
+
+          > .dz-view {
+            flex-grow: 1;
+          }
+        }
+      }
+      & > .arco-modal-body {
+        @apply p-0 m-0 relative flex flex-row flex-nowrap flex-shrink-0;
+
+        @apply w-auto h-fit;
+        @apply flex-grow;
+
+        > .dz-view {
+          flex-grow: 1;
+        }
+      }
+      & > .arco-modal-footer {
+      }
+    }
   }
 
-  .arco-modal-body > .w-grow,
-  .arco-modal-title > .w-grow {
-    @apply w-0;
-    flex-grow: 1;
-  }
-  .arco-modal-body {
-    @apply w-fit h-fit;
-    @apply p-0;
-  }
-
-  .arco-modal-header,
-  .arco-modal-footer {
-    @apply w-full h-fit;
-    @apply p-0;
+  & > .arco-modal-wrapper > .arco-modal.arco-modal-fullscreen {
+    width: 100vw;
+    height: 100vh;
   }
 }
 </style>
