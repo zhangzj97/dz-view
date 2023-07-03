@@ -1,70 +1,149 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 
-defineProps<{
-  // Size Css
-  // size: string;
+interface DzBaseProps {
   s?: string;
-  // Wrap Css
   w?: string;
-  // Text Css
   t?: string;
-  // Backgroud Css
-  bg?: string;
+  trans?: string;
+}
 
-  // source
-  src?: string;
-  // icon 降级选项
+interface DzViewTextProps {
+  text?: string;
+}
+
+interface DzEntityProps {
+  id?: string;
   icon?: string;
+  avatar?: string;
+  title?: string;
+  bg?: string;
+}
 
-  // Flex Css
-  // row?: boolean;
-  // col?: boolean;
+interface DzViewFlexProps {
+  row?: boolean;
+  col?: boolean;
 
-  // Hover Css
-  hover?: string;
+  grid?: boolean;
+}
 
-  // Position Css
-  // absolute?: boolean;
+interface DzViewPositionProps {
+  absolute?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'tl'
+    | 'tr'
+    | 'bl'
+    | 'br'
+    | string;
+  fixed?: string;
+}
 
-  // Cursor Css
+interface DzViewCursorProps {
   pointer?: boolean;
+}
 
-  // Test and demo
+interface DzViewSpaceProps {
+  space?: boolean;
+}
+
+interface DzViewTestProps {
   desc?: string;
-}>();
+}
+
+interface DzIconProps {
+  icon?: string;
+}
+
+defineProps<
+  DzBaseProps &
+    DzViewFlexProps &
+    DzViewPositionProps &
+    DzViewCursorProps &
+    DzIconProps
+>();
 </script>
 
 <template>
   <div
-    class="dz-icon-v202301 dz-icon dz-icon-bg"
+    class="dz-icon dz-view v202301"
     :class="[
-      'flex-row', // col ? 'flex-col dz-view-col' : 'flex-row dz-view-row',
-      // t,
       s,
       w,
-      bg,
-      // hover,
-      'relative', // absolute ? 'absolute' : 'relative',
-      pointer && 'cursor-pointer',
+      t,
+      trans,
+      trans ? 'dz-view-transition' : '',
+      col ? 'dz-view-col' : 'dz-view-row',
+      grid ? 'dz-view-grid' : '',
+      absolute && `dz-view-absolute-${absolute}`,
+      pointer && 'dz-view-pointer',
     ]"
-    :style="
-      src && {
-        backgroundImage: `url(${src})`,
-      }
-    "
   >
-    <Icon v-if="icon" class="w-full h-full" :icon="icon" :class="[t, hover]" />
+    <Icon v-if="icon" class="w-grow h-grow dz-view" :icon="icon" :class="[t]" />
   </div>
 </template>
 
 <style scoped lang="scss">
-.dz-icon-v202301.dz-icon {
-  @apply flex shrink-0;
+.dz-view.v202301 {
+  position: relative;
+  display: flex;
+  // width: auto;
+  // height: auto;
+  // padding: 0px;
+  // margin: 0px;
+  flex-direction: row;
   flex-grow: 0;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  cursor: auto;
+  user-select: none;
 
-  &.dz-icon-bg {
-    @apply bg-no-repeat bg-contain;
+  & > .dz-view-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  & > .dz-view-col {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &.dz-view-col {
+    flex-direction: column;
+
+    & > .w-grow {
+      width: auto;
+      align-self: stretch;
+    }
+    & > .h-grow {
+      height: 0px;
+      flex-grow: 1;
+    }
+  }
+  &.dz-view-row {
+    flex-direction: row;
+
+    & > .w-grow {
+      width: 0px;
+      flex-grow: 1;
+    }
+    & > .h-grow {
+      height: auto;
+      align-self: stretch;
+    }
+  }
+  &.dz-view-grid {
+    flex-wrap: wrap;
+  }
+  &.dz-view-pointer {
+    cursor: pointer;
+  }
+
+  &.dz-view-transition {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
   }
 }
 </style>
