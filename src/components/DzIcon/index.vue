@@ -5,7 +5,7 @@ interface DzBaseProps {
   s?: string;
   w?: string;
   t?: string;
-  trans?: string;
+  trans?: boolean | string;
 }
 
 interface DzViewTextProps {
