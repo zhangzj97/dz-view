@@ -59,8 +59,19 @@ interface DzPopoverProps {
   cache?: boolean;
 }
 
+interface DzModalProps {
+  state?: any;
+  cache?: boolean;
+}
+
+interface DzDrawerProps {
+  state?: any;
+  cache?: boolean;
+  postion?: 'top' | 'bottom' | 'left' | 'right';
+}
+
 const props = withDefaults(
-  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzPopoverProps>(),
+  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzModalProps>(),
   { cache: false }
 );
 
