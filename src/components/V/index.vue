@@ -3,7 +3,7 @@ interface DzBaseProps {
   s?: string;
   w?: string;
   t?: string;
-  hover?: string;
+  trans?: string;
 }
 
 interface DzViewTextProps {
@@ -41,6 +41,7 @@ interface DzViewPositionProps {
 
 interface DzViewCursorProps {
   pointer?: boolean;
+  move?: boolean;
 }
 
 interface DzViewSpaceProps {
@@ -74,11 +75,13 @@ withDefaults(
       s,
       w,
       t,
-      hover,
+      trans,
+      trans ? 'dz-view-transition' : '',
       col ? 'dz-view-col' : 'dz-view-row',
       grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
       pointer && 'dz-view-pointer',
+      move && 'dz-view-move',
     ]"
   >
     <slot></slot>
@@ -86,58 +89,5 @@ withDefaults(
 </template>
 
 <style scoped lang="scss">
-.dz-view.v202301 {
-  position: relative;
-  display: flex;
-  // width: auto;
-  // height: auto;
-  // padding: 0px;
-  // margin: 0px;
-  flex-direction: row;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-wrap: nowrap;
-  cursor: auto;
-  user-select: none;
-
-  & > .dz-view-row {
-    flex-direction: row;
-    align-items: center;
-  }
-  & > .dz-view-col {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  &.dz-view-col {
-    flex-direction: column;
-
-    & > .w-grow {
-      width: auto;
-      align-self: stretch;
-    }
-    & > .h-grow {
-      height: 0px;
-      flex-grow: 1;
-    }
-  }
-  &.dz-view-row {
-    flex-direction: row;
-
-    & > .w-grow {
-      width: 0px;
-      flex-grow: 1;
-    }
-    & > .h-grow {
-      height: auto;
-      align-self: stretch;
-    }
-  }
-  &.dz-view-grid {
-    flex-wrap: wrap;
-  }
-  &.dz-view-pointer {
-    cursor: pointer;
-  }
-}
+@import url(../../assets/styles/dz-view.scss);
 </style>
