@@ -111,9 +111,9 @@ const getAppMap = () => {
   const apps = fs.readdirSync(appsPath);
 
   const appMap = {
-    LayoutApp: { type: '通用' },
-    PluginApp: { type: '通用' },
-    LocaleApp: { type: '通用' },
+    BaseLayout: { type: '通用' },
+    BasePlugin: { type: '通用' },
+    BaseLocale: { type: '通用' },
   };
   apps.forEach(app => {
     if (!appMap[app]) {
