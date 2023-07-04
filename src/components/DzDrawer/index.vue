@@ -46,14 +46,6 @@ interface DzViewCursorProps {
   pointer?: boolean;
 }
 
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewTestProps {
-  desc?: string;
-}
-
 interface DzPopoverProps {
   state?: any;
   cache?: boolean;
@@ -91,12 +83,6 @@ const toogleFullscreen = () => {
   state.fullscreen = !state.fullscreen;
   emit('update:state', state);
 };
-
-const toogleVisible = () => {
-  const state = props.state;
-  state.visible = !state.visible;
-  emit('update:state', state);
-};
 </script>
 
 <template>
@@ -123,7 +109,7 @@ const toogleVisible = () => {
       <v s="w-grow h-fit">
         <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
         <v v-if="icon" s="w-10 h-grow">
-          <v-icon s="w-10 h-grow" class="scale-50" :icon="icon" />
+          <v-icon v="10-50" :icon="icon" />
         </v>
         <v-text s="w-fit h-grow" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
@@ -134,14 +120,12 @@ const toogleVisible = () => {
           @click="toogleFullscreen"
         >
           <v-icon
-            s="w-10 h-grow"
-            class="scale-50"
-            pointer
+            v="10-50"
             :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
           />
         </v>
         <v s="w-8 h-grow" trans="hover:bg-gray-100" pointer @click="close">
-          <v-icon s="w-8 h-grow" class="scale-50" pointer icon="mdi:close" />
+          <v-icon v="8-50" icon="mdi:close" />
         </v>
       </v>
       <v s="w-fit h-fit">
@@ -153,8 +137,17 @@ const toogleVisible = () => {
         <v s="w-grow h-fit" w="gap-2">
           <v-space s="w-grow h-grow" />
           <slot name="action">
-            <v s="w-12 h-8" class="bg-red-300"></v>
-            <v s="w-12 h-8" class="bg-red-300"></v>
+            <v
+              s="w-fit h-8"
+              class="bg-gray-50"
+              trans="hover:bg-gray-100 active:bg-gray-200"
+              pointer
+              @click="close"
+            >
+              <v-icon s="w-4 h-4" icon="mdi:close" />
+              <v-text text="取消" />
+              <v-space s="w-4 h-grow" />
+            </v>
           </slot>
           <v-space s="w-0 h-grow" />
         </v>

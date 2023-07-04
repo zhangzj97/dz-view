@@ -119,7 +119,7 @@ const toogleVisible = () => {
       <v s="w-grow h-fit" move>
         <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
         <v v-if="icon" s="w-10 h-grow">
-          <v-icon s="w-10 h-grow" class="scale-50" :icon="icon" />
+          <v-icon v="10-50" :icon="icon" />
         </v>
         <v-text s="w-fit h-grow" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
@@ -130,9 +130,7 @@ const toogleVisible = () => {
           @click="toogleFullscreen"
         >
           <v-icon
-            s="w-10 h-grow"
-            class="scale-50"
-            pointer
+            v="10-50"
             :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
           />
         </v>
@@ -151,8 +149,17 @@ const toogleVisible = () => {
         <v s="w-grow h-fit" w="gap-2">
           <v-space s="w-grow h-grow" />
           <slot name="action">
-            <v s="w-12 h-8" class="bg-red-300"></v>
-            <v s="w-12 h-8" class="bg-red-300"></v>
+            <v
+              s="w-fit h-8"
+              class="bg-gray-100"
+              trans="hover:bg-gray-200 active:bg-gray-300"
+              pointer
+              @click="close"
+            >
+              <v-icon v="8-50" icon="mdi:close" />
+              <v-text text="取消" />
+              <v-space s="w-4 h-grow" />
+            </v>
           </slot>
           <v-space s="w-0 h-grow" />
         </v>
