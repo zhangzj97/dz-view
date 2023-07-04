@@ -133,21 +133,7 @@ const toogleVisible = () => {
             s="w-10 h-grow"
             class="scale-50"
             pointer
-            icon="mdi:fullscreen"
-          />
-        </v>
-
-        <v
-          s="w-10 h-grow"
-          trans="hover:bg-gray-100"
-          pointer
-          @click="toogleFullscreen"
-        >
-          <dz-icon
-            s="w-10 h-grow"
-            class="scale-50"
-            pointer
-            icon="mdi:fullscreen-exit"
+            :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
           />
         </v>
         <v s="w-8 h-grow" trans="hover:bg-gray-100" pointer @click="close">
