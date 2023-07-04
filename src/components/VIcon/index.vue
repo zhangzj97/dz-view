@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
+
 interface DzBaseProps {
   s?: string;
   w?: string;
@@ -47,19 +49,25 @@ interface DzViewTestProps {
   desc?: string;
 }
 
+interface DzViewIconProps {
+  icon?: string;
+}
+
 withDefaults(
   defineProps<
-    DzBaseProps & DzViewFlexProps & DzViewPositionProps & DzViewCursorProps
+    DzBaseProps &
+      DzViewFlexProps &
+      DzViewPositionProps &
+      DzViewCursorProps &
+      DzViewIconProps
   >(),
-  {
-    s: 'w-grow h-grow',
-  }
+  {}
 );
 </script>
 
 <template>
   <div
-    class="dz-view dz-view-space v202301"
+    class="dz-view dz-view-icon v202301"
     :class="[
       s,
       w,
@@ -72,7 +80,7 @@ withDefaults(
       pointer && 'dz-view-pointer',
     ]"
   >
-    <slot></slot>
+    <Icon v-if="icon" class="w-grow h-grow dz-view" :icon="icon" :class="[t]" />
   </div>
 </template>
 
