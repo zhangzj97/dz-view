@@ -3,43 +3,38 @@ import { useModal } from '@/hooks/useTrigger';
 
 const { state, setVisible } = useModal();
 
-const testState = reactive<any>({
-  count: 0,
+const testState = reactive({
+  tooltip: '过渡Right',
+  triggerIcon: 'mdi:border-right-variant',
+  modalTitle: '过渡Right',
+  modalIcon: 'mdi:file-cad-box',
 });
 
-watch(
-  () => state.visible,
-  () => {
-    setInterval(() => {
-      const t = testState.count + 10;
-      testState.count = t % 100;
-    }, 200);
-  }
-);
+const { counter } = useInterval(200, { controls: true });
 </script>
 
 <template>
-  <dz-popover tooltip="过渡">
+  <dz-popover :tooltip="testState.tooltip">
     <v s="w-16 h-grow" v="mouse-gray" @click="setVisible(true)">
-      <v-icon v="16-50" icon="mdi:border-right-variant" />
+      <v-icon v="16-50" :icon="testState.triggerIcon" />
     </v>
   </dz-popover>
 
-  <dz-drawer :state="state" title="test01" icon="mdi:ab-testing">
+  <dz-drawer
+    :state="state"
+    position="right"
+    :title="testState.modalTitle"
+    :icon="testState.modalIcon"
+  >
     <v
       s="w-fit h-fit"
-      w="max-w-[80vw] max-h-[80vh] overflow-auto"
       class="bg-stripes-sky"
+      :style="{
+        width: `${(counter * 12) % 200}vw`,
+        height: `${(counter * 12) % 200}vh`,
+      }"
+      trans
     >
-      <v
-        s="w-[40vw] h-[40vh]"
-        class="bg-stripes-sky"
-        :style="{
-          width: `${testState.count}vw`,
-        }"
-        trans
-      >
-      </v>
     </v>
   </dz-drawer>
 </template>
