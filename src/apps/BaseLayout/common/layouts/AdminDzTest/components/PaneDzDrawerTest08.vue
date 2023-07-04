@@ -27,12 +27,7 @@ const toggleVisible = () => {
       pointer
       @click="toggleVisible"
     >
-      <v-icon
-        s="w-16 h-16"
-        class="scale-50"
-        pointer
-        icon="mdi:rectangle-outline"
-      />
+      <v-icon v="16-50" icon="mdi:rectangle-outline" />
     </v>
   </dz-popover>
 

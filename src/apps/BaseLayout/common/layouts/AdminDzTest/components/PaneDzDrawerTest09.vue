@@ -14,12 +14,7 @@ const { state: state3, setVisible: setVisible3 } = useModal();
       pointer
       @click="setVisible1(true)"
     >
-      <v-icon
-        s="w-16 h-16"
-        class="scale-50"
-        pointer
-        icon="mdi:border-right-variant"
-      />
+      <v-icon v="16-50" icon="mdi:border-right-variant" />
     </v>
   </dz-popover>
 

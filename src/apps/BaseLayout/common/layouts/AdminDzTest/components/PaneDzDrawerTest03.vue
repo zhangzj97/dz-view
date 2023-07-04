@@ -26,12 +26,7 @@ watch(
       pointer
       @click="setVisible(true)"
     >
-      <v-icon
-        s="w-16 h-16"
-        class="scale-50"
-        pointer
-        icon="mdi:border-right-variant"
-      />
+      <v-icon v="16-50" pointer icon="mdi:border-right-variant" />
     </v>
   </dz-popover>
 
