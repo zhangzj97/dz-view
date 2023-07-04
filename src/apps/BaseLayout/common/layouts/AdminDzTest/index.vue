@@ -13,6 +13,7 @@ import PaneDzModalTest09 from './components/PaneDzModalTest09.vue';
 import PaneDzModalTest10 from './components/PaneDzModalTest10.vue';
 
 import PaneDzIconTest from './components/PaneDzIconTest/index.vue';
+import PaneDzBtnTest from './components/PaneDzBtnTest/index.vue';
 
 import PaneDzDrawerTest01 from './components/PaneDzDrawerTest01.vue';
 import PaneDzDrawerTest02 from './components/PaneDzDrawerTest02.vue';
@@ -92,6 +93,7 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
         <v s="w-grow h-16" text="test1">
           <v s="w-grow h-grow" text="DzOtherTest"></v>
           <PaneDzIconTest />
+          <PaneDzBtnTest />
         </v>
         <v s="w-grow h-16" text="test1">
           <v s="w-grow h-grow" text="DzModalTest"></v>
