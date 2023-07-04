@@ -47,10 +47,6 @@ interface DzViewSpaceProps {
   space?: boolean;
 }
 
-interface DzViewTestProps {
-  desc?: string;
-}
-
 withDefaults(
   defineProps<
     DzBaseProps &
@@ -58,8 +54,7 @@ withDefaults(
       DzViewPositionProps &
       DzViewCursorProps &
       DzViewSpaceProps &
-      DzViewTextProps &
-      DzViewTestProps
+      DzViewTextProps
   >(),
   {
     s: 'w-grow h-grow',
