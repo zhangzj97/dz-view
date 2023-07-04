@@ -142,7 +142,7 @@ withDefaults(
       grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
       pointer && 'dz-view-pointer',
-      v && `v-icon-${v}`,
+      v && `v-icon-${v}`, // 使用场景 : 1. icon 作为 text 的一部分自动创造出 space 2. 减少父元素 添加居中属性
     ]"
   >
     <Icon v-if="icon" class="w-grow h-grow dz-view" :icon="icon" :class="[t]" />
