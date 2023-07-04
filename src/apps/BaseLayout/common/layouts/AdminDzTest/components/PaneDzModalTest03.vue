@@ -1,24 +1,39 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { useModal } from '@/hooks/useTrigger';
 
-const modalState = reactive<any>({
-  visible: false,
-  fullscreen: false,
+const { state, setVisible } = useModal();
+
+const testState = reactive({
+  tooltip: '过渡',
+  triggerIcon: 'mdi:dock-window',
+  title: '过渡',
+  icon: 'mdi:file-cad-box',
 });
 
-const toggleVisible = () => {
-  modalState.visible = !modalState.visible;
-};
+const { counter } = useInterval(200, { controls: true });
 </script>
 
 <template>
-  <dz-popover tooltip="[110vw] x [10vh] 外部滚动">
+  <dz-popover :tooltip="testState.tooltip">
     <v s="w-16 h-grow" v="mouse-gray" @click="setVisible(true)">
-      <v-icon v="16-50" icon="mdi:rectangle-outline" />
+      <v-icon v="16-50" :icon="testState.triggerIcon" />
     </v>
   </dz-popover>
 
-  <dz-modal :state="modalState" title="test01" icon="mdi:ab-testing">
-    <v s="w-[110vw] h-[10vh]" class="bg-stripes-sky"></v>
+  <dz-modal
+    :state="state"
+    position="right"
+    :title="testState.title"
+    :icon="testState.icon"
+  >
+    <v
+      s="w-fit h-fit"
+      class="bg-stripes-sky"
+      :style="{
+        width: `${(counter * 12) % 200}vw`,
+        height: `${(counter * 12) % 200}vh`,
+      }"
+      trans
+    ></v>
   </dz-modal>
 </template>

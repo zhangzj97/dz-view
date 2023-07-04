@@ -1,30 +1,46 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { useModal } from '@/hooks/useTrigger';
 
-const modalState = reactive<any>({
-  visible: false,
-  fullscreen: false,
+const { state: state1, setVisible: setVisible1 } = useModal();
+const { state: state2, setVisible: setVisible2 } = useModal();
+const { state: state3, setVisible: setVisible3 } = useModal();
+
+const testState = reactive({
+  tooltip: '嵌套',
+  triggerIcon: 'mdi:dock-window',
+  title: '嵌套',
+  icon: 'mdi:file-cad-box',
 });
-
-const toggleVisible = () => {
-  modalState.visible = !modalState.visible;
-};
 </script>
 
 <template>
-  <dz-popover tooltip="[110vw] x [110vh] 内部滚动 需要嵌套">
-    <v s="w-16 h-grow" v="mouse-gray" @click="setVisible(true)">
-      <v-icon v="16-50" icon="mdi:rectangle-outline" />
+  <dz-popover :tooltip="testState.tooltip">
+    <v s="w-16 h-grow" v="mouse-gray" @click="setVisible1(true)">
+      <v-icon v="16-50" :icon="testState.triggerIcon" />
     </v>
   </dz-popover>
 
-  <dz-modal :state="modalState" title="test01" icon="mdi:ab-testing">
-    <v
-      s="w-fit h-fit"
-      w="max-w-[80vw] max-h-[80vh] overflow-auto"
-      class="bg-stripes-sky"
-    >
-      <v s="w-[110vw] h-[110vh]" class="bg-stripes-sky"> </v>
+  <dz-modal :state="state1" title="一级嵌套" icon="mdi:dice-1">
+    <v s="w-[80vw] h-96" class="bg-stripes-sky">
+      <v s="w-16 h-grow" v="mouse-gray" @click="setVisible2(true)">
+        <v-icon v="16-50" :icon="testState.triggerIcon" />
+      </v>
+    </v>
+  </dz-modal>
+
+  <dz-modal :state="state2" title="二级嵌套" icon="mdi:dice-2">
+    <v s="w-[60vw] h-48" class="bg-stripes-sky">
+      <v s="w-16 h-grow" v="mouse-gray" @click="setVisible3(true)">
+        <v-icon v="16-50" :icon="testState.triggerIcon" />
+      </v>
+    </v>
+  </dz-modal>
+
+  <dz-modal :state="state3" title="三级嵌套" icon="mdi:dice-3">
+    <v s="w-[40vw] h-24" class="bg-stripes-sky">
+      <v s="w-16 h-grow" v="mouse-gray" @click="setVisible3(false)">
+        <v-icon v="16-50" :icon="testState.triggerIcon" />
+      </v>
     </v>
   </dz-modal>
 </template>

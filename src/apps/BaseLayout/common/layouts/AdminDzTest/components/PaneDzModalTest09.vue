@@ -1,56 +1,27 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { useModal } from '@/hooks/useTrigger';
 
-const modalState = reactive<any>({
-  visible: false,
-  fullscreen: false,
+const { state, setVisible } = useModal();
+
+const testState = reactive({
+  tooltip: '!!!',
+  triggerIcon: 'mdi:clock',
+  title: '!!!',
+  icon: 'mdi:file-cad-box',
 });
-
-const modal2State = reactive<any>({
-  visible: false,
-  fullscreen: false,
-});
-
-const modal3State = reactive<any>({
-  visible: false,
-  fullscreen: false,
-});
-
-const toggleVisible = () => {
-  modalState.visible = !modalState.visible;
-};
 </script>
 
 <template>
-  <dz-popover tooltip="嵌套">
+  <dz-popover :tooltip="testState.tooltip">
     <v s="w-16 h-grow" v="mouse-gray" @click="setVisible(true)">
-      <v-icon v="16-50" icon="mdi:rectangle-outline" />
+      <v-icon v="16-50" :icon="testState.triggerIcon" />
     </v>
   </dz-popover>
 
-  <dz-modal :state="modalState" title="test01" icon="mdi:ab-testing">
-    <v s="w-96 h-96" class="bg-stripes-sky">
-      <v
-        s="w-12 h-12"
-        class="bg-blue-300"
-        @click="modal2State.visible = !modal2State.visible"
-      ></v>
-    </v>
-  </dz-modal>
-
-  <dz-modal :state="modal2State" title="modal2State" icon="mdi:ab-testing">
-    <v s="w-48 h-48" class="bg-stripes-sky">
-      <v
-        s="w-12 h-12"
-        class="bg-blue-300"
-        @click="modal3State.visible = !modal3State.visible"
-      ></v>
-    </v>
-  </dz-modal>
-
-  <dz-modal :state="modal3State" title="modal3State" icon="mdi:ab-testing">
-    <v s="w-48 h-48" class="bg-stripes-sky">
-      <v s="w-12 h-12" class="bg-blue-300"></v>
-    </v>
-  </dz-modal>
+  <dz-modal
+    :state="state"
+    position="right"
+    :title="testState.title"
+    :icon="testState.icon"
+  />
 </template>
