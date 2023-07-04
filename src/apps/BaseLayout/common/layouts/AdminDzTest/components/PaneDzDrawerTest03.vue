@@ -6,8 +6,8 @@ const { state, setVisible } = useDrawer();
 const testState = reactive({
   tooltip: '过渡Right',
   triggerIcon: 'mdi:border-right-variant',
-  modalTitle: '过渡Right',
-  modalIcon: 'mdi:file-cad-box',
+  title: '过渡Right',
+  icon: 'mdi:file-cad-box',
 });
 
 const { counter } = useInterval(200, { controls: true });
@@ -23,8 +23,8 @@ const { counter } = useInterval(200, { controls: true });
   <dz-drawer
     :state="state"
     position="right"
-    :title="testState.modalTitle"
-    :icon="testState.modalIcon"
+    :title="testState.title"
+    :icon="testState.icon"
   >
     <v
       s="w-fit h-fit"

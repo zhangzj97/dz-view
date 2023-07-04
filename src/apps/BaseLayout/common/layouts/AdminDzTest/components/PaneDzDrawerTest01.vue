@@ -4,10 +4,10 @@ import { useDrawer } from '@/hooks/useTrigger';
 const { state, setVisible } = useDrawer();
 
 const testState = reactive({
-  tooltip: '默认 drawer',
+  tooltip: '默认',
   triggerIcon: 'mdi:border-right-variant',
-  modalTitle: '默认 drawer',
-  modalIcon: 'mdi:file-cad-box',
+  title: '默认',
+  icon: 'mdi:file-cad-box',
 });
 </script>
 
@@ -21,7 +21,7 @@ const testState = reactive({
   <dz-drawer
     :state="state"
     position="right"
-    :title="testState.modalTitle"
-    :icon="testState.modalIcon"
+    :title="testState.title"
+    :icon="testState.icon"
   />
 </template>

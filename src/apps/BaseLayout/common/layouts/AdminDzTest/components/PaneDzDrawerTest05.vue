@@ -8,8 +8,8 @@ const { state: state3, setVisible: setVisible3 } = useDrawer();
 const testState = reactive({
   tooltip: '嵌套',
   triggerIcon: 'mdi:border-right-variant',
-  modalTitle: '嵌套',
-  modalIcon: 'mdi:file-cad-box',
+  title: '嵌套',
+  icon: 'mdi:file-cad-box',
 });
 </script>
 

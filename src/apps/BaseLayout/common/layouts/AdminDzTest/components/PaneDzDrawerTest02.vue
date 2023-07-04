@@ -6,8 +6,8 @@ const { state, setVisible } = useDrawer();
 const testState = reactive({
   tooltip: '96 x 96',
   triggerIcon: 'mdi:border-right-variant',
-  modalTitle: '96 x 96',
-  modalIcon: 'mdi:file-cad-box',
+  title: '96 x 96',
+  icon: 'mdi:file-cad-box',
 });
 </script>
 
@@ -21,8 +21,8 @@ const testState = reactive({
   <dz-drawer
     :state="state"
     position="right"
-    :title="testState.modalTitle"
-    :icon="testState.modalIcon"
+    :title="testState.title"
+    :icon="testState.icon"
   >
     <v s="w-96 h-96" class="bg-stripes-sky"></v>
   </dz-drawer>
