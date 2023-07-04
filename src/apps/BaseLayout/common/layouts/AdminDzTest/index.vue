@@ -10,8 +10,6 @@ import PaneDzModalTest07 from './components/PaneDzModalTest07.vue';
 import PaneDzModalTest08 from './components/PaneDzModalTest08.vue';
 import PaneDzModalTest09 from './components/PaneDzModalTest09.vue';
 import PaneDzModalTest10 from './components/PaneDzModalTest10.vue';
-import PaneDzModalTest11 from './components/PaneDzModalTest11.vue';
-import PaneDzModalTest12 from './components/PaneDzModalTest12.vue';
 
 import PaneDzIconTest01 from './components/PaneDzIconTest01.vue';
 import PaneDzIconTest02 from './components/PaneDzIconTest02.vue';
@@ -21,6 +19,19 @@ import PaneDzIconTest05 from './components/PaneDzIconTest05.vue';
 import PaneDzIconTest06 from './components/PaneDzIconTest06.vue';
 import PaneDzIconTest07 from './components/PaneDzIconTest07.vue';
 import PaneDzIconTest08 from './components/PaneDzIconTest08.vue';
+import PaneDzIconTest09 from './components/PaneDzIconTest09.vue';
+import PaneDzIconTest10 from './components/PaneDzIconTest10.vue';
+
+import PaneDzDrawerTest01 from './components/PaneDzDrawerTest01.vue';
+import PaneDzDrawerTest02 from './components/PaneDzDrawerTest02.vue';
+import PaneDzDrawerTest03 from './components/PaneDzDrawerTest03.vue';
+import PaneDzDrawerTest04 from './components/PaneDzDrawerTest04.vue';
+import PaneDzDrawerTest05 from './components/PaneDzDrawerTest05.vue';
+import PaneDzDrawerTest06 from './components/PaneDzDrawerTest06.vue';
+import PaneDzDrawerTest07 from './components/PaneDzDrawerTest07.vue';
+import PaneDzDrawerTest08 from './components/PaneDzDrawerTest08.vue';
+import PaneDzDrawerTest09 from './components/PaneDzDrawerTest09.vue';
+import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
 </script>
 
 <template>
@@ -96,6 +107,8 @@ import PaneDzIconTest08 from './components/PaneDzIconTest08.vue';
           <PaneDzIconTest06 />
           <PaneDzIconTest07 />
           <PaneDzIconTest08 />
+          <PaneDzIconTest09 />
+          <PaneDzIconTest10 />
         </v-desc>
         <v-desc s="w-grow h-16" text="test1">
           <v-desc s="w-grow h-grow" text="DzModalTest"></v-desc>
@@ -109,25 +122,19 @@ import PaneDzIconTest08 from './components/PaneDzIconTest08.vue';
           <PaneDzModalTest08 />
           <PaneDzModalTest09 />
           <PaneDzModalTest10 />
-          <PaneDzModalTest11 />
-          <PaneDzModalTest12 />
         </v-desc>
-        <v-desc s="w-grow h-16" text="test2">
-          <v-desc s="w-grow h-grow" text="space"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
+        <v-desc s="w-grow h-16" text="test1">
+          <v-desc s="w-grow h-grow" text="DzModalTest"></v-desc>
+          <PaneDzDrawerTest01 />
+          <PaneDzDrawerTest02 />
+          <PaneDzDrawerTest03 />
+          <PaneDzDrawerTest04 />
+          <PaneDzDrawerTest05 />
+          <PaneDzDrawerTest06 />
+          <PaneDzDrawerTest07 />
+          <PaneDzDrawerTest08 />
+          <PaneDzDrawerTest09 />
+          <PaneDzDrawerTest10 />
         </v-desc>
         <v-desc s="w-grow h-grow" text="body"></v-desc>
       </v-desc>
