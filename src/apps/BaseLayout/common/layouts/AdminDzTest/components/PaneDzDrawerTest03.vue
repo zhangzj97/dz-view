@@ -20,13 +20,8 @@ watch(
 
 <template>
   <dz-popover tooltip="过渡">
-    <v
-      s="w-16 h-grow"
-      trans="hover:bg-gray-100 active:bg-gray-200"
-      pointer
-      @click="setVisible(true)"
-    >
-      <v-icon v="16-50" pointer icon="mdi:border-right-variant" />
+    <v s="w-16 h-grow" v="mouse-gray" @click="setVisible(true)">
+      <v-icon v="16-50" icon="mdi:border-right-variant" />
     </v>
   </dz-popover>
 
