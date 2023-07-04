@@ -105,7 +105,12 @@ const toogleFullscreen = () => {
     :escToClose="true"
   >
     <template #title> </template>
-    <v s="w-grow h-grow" col>
+    <!-- 关于为什么会有 flex-shrink -->
+    <!-- 1. max-height max-width 无法放在 body 上面否则 calc(100vh - footerheight - headerheight) -->
+    <!-- 2. max-height max-width 放在 .arco-drawer-body 上面, 并且约束 外一层的 flex-shrink 约束垂直方向 -->
+    <!-- 3. max-height max-width 放在 .arco-drawer-body 上面, 并且约束 内一层的 flex-shrink 约束水平方向 -->
+    <!-- flex-shrink overflow -->
+    <v s="w-grow h-grow" w="flex-shrink" col>
       <v s="w-grow h-fit">
         <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
         <v v-if="icon" s="w-10 h-grow">
@@ -113,22 +118,18 @@ const toogleFullscreen = () => {
         </v>
         <v-text s="w-fit h-grow" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
-        <v
-          s="w-10 h-grow"
-          trans="hover:bg-gray-100"
-          pointer
-          @click="toogleFullscreen"
-        >
+        <v s="w-10 h-grow" v="mouse-gray" @click="toogleFullscreen">
           <v-icon
             v="10-50"
             :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
           />
         </v>
-        <v s="w-8 h-grow" trans="hover:bg-gray-100" pointer @click="close">
+        <v s="w-8 h-grow" v="mouse-gray" @click="close">
           <v-icon v="8-50" icon="mdi:close" />
         </v>
       </v>
-      <v s="w-fit h-fit">
+      <!-- flex-shrink overflow instead of calc(100vh - footerheight - headerheight) -->
+      <v s="w-fit h-fit" w="flex-shrink">
         <slot></slot>
       </v>
       <v-space s="w-grow h-grow" />
@@ -137,14 +138,8 @@ const toogleFullscreen = () => {
         <v s="w-grow h-fit" w="gap-2">
           <v-space s="w-grow h-grow" />
           <slot name="action">
-            <v
-              s="w-fit h-8"
-              class="bg-gray-50"
-              trans="hover:bg-gray-100 active:bg-gray-200"
-              pointer
-              @click="close"
-            >
-              <v-icon s="w-4 h-4" icon="mdi:close" />
+            <v s="w-fit h-8" v="mouse-gray" @click="close">
+              <v-icon v="8-50" icon="mdi:close" />
               <v-text text="取消" />
               <v-space s="w-4 h-grow" />
             </v>
@@ -166,7 +161,11 @@ const toogleFullscreen = () => {
       @apply p-0 m-0 relative flex flex-row flex-nowrap flex-shrink-0;
 
       @apply w-auto h-fit;
+
       @apply flex-grow;
+
+      max-width: 100vw;
+      max-height: 100vh;
 
       > .dz-view {
         flex-grow: 1;
