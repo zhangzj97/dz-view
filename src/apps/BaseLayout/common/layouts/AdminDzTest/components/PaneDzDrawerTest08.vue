@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useModal } from '@/hooks/useTrigger';
+import { useDrawer } from '@/hooks/useTrigger';
 
-const { state, setVisible } = useModal();
+const { state, setVisible } = useDrawer();
 
 const testState = reactive({
   tooltip: '!!!',
