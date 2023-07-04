@@ -119,7 +119,7 @@ const toogleVisible = () => {
       <v s="w-grow h-fit" move>
         <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
         <v v-if="icon" s="w-10 h-grow">
-          <dz-icon s="w-10 h-grow" class="scale-50" :icon="icon" />
+          <v-icon s="w-10 h-grow" class="scale-50" :icon="icon" />
         </v>
         <v-text s="w-fit h-grow" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
@@ -129,7 +129,7 @@ const toogleVisible = () => {
           pointer
           @click="toogleFullscreen"
         >
-          <dz-icon
+          <v-icon
             s="w-10 h-grow"
             class="scale-50"
             pointer
@@ -137,7 +137,7 @@ const toogleVisible = () => {
           />
         </v>
         <v s="w-8 h-grow" trans="hover:bg-gray-100" pointer @click="close">
-          <dz-icon s="w-8 h-grow" class="scale-50" pointer icon="mdi:close" />
+          <v-icon s="w-8 h-grow" class="scale-50" pointer icon="mdi:close" />
         </v>
       </v>
     </template>
