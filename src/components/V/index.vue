@@ -41,15 +41,14 @@ interface DzViewPositionProps {
 
 interface DzViewCursorProps {
   pointer?: boolean;
-  move?: boolean;
 }
 
 interface DzViewSpaceProps {
   space?: boolean;
 }
 
-interface DzViewTestProps {
-  desc?: string;
+interface DzViewMouseProps {
+  v?: 'mouse-gray';
 }
 
 withDefaults(
@@ -60,7 +59,7 @@ withDefaults(
       DzViewCursorProps &
       DzViewSpaceProps &
       DzViewTextProps &
-      DzViewTestProps
+      DzViewMouseProps
   >(),
   {
     s: 'w-grow h-grow',
@@ -81,7 +80,7 @@ withDefaults(
       grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
       pointer && 'dz-view-pointer',
-      move && 'dz-view-move',
+      v && `v-view-${v}`,
     ]"
   >
     <slot></slot>
@@ -90,4 +89,7 @@ withDefaults(
 
 <style scoped lang="scss">
 @import url(../../assets/styles/dz-view.scss);
+</style>
+<style scoped lang="scss">
+@import url(../../assets/styles/dz-view-mouse.scss);
 </style>
