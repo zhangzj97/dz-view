@@ -9,6 +9,7 @@
 
 .dz-view.v202301 {
   @apply relative flex flex-row flex-shrink-0 flex-grow-0 flex-nowrap select-none;
+  @apply overflow-auto;
 }
 .dz-view.v202301.dz-view-row {
   flex-direction: row;
@@ -29,6 +30,11 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
+.dz-view.v202301.flex-shrink {
+  flex-shrink: 1;
+}
+
 .dz-view.v202301::-webkit-scrollbar {
   width: 0px;
   height: 0px;
