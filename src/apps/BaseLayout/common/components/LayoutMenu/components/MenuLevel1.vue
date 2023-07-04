@@ -24,42 +24,38 @@ const clickMenu = (item: any) => {
 <template>
   <v s="w-fit h-10" pointer class="bg-gray-600 border-b-[1px] border-gray-500">
     <v s="w-fit h-fit" @click="clickMenu({ id })">
-      <v s="w-0 h-grow" space />
-      <dz-icon
-        s="w-10 h-10"
-        t="text-gray-300"
-        class="scale-50"
-        :icon="avatar"
-      />
+      <v-space s="w-0 h-grow" />
+      <v-icon v="10-50" t="text-gray-300" :icon="avatar" />
       <v
         s="w-[216px] h-10"
         w="overflow-hidden"
-        class="transition-all"
+        trans
         :class="[
           //
           iconMode ? 'max-w-[0px]' : 'max-w-[1000vw]',
         ]"
       >
-        <v s="w-2 h-grow" space />
+        <v-space s="w-2 h-grow" />
         <v s="w-grow h-10">
-          <dz-text t="text-white text-base">{{ title }}</dz-text>
-          <v s="w-grow h-10" space />
+          <v-text t="text-white text-base" :text="title" />
+          <v-space s="w-grow h-10" />
         </v>
-        <dz-icon
-          v-if="showRightIcon"
-          s="w-10 h-10"
-          t="text-gray-500"
-          class="transition-all scale-50"
-          :class="[collapse ? 'rotate-90' : '']"
-          icon="el:chevron-right"
-        />
+        <v s="w-10 h-grow" :class="[collapse ? 'rotate-90' : '']" trans>
+          <v-icon
+            v-if="showRightIcon"
+            v="10-50"
+            t="text-gray-500"
+            icon="el:chevron-right"
+          />
+        </v>
       </v>
     </v>
     <v
       v-if="iconMode"
-      absolute
+      abs=""
       s="w-64 h-fit"
-      class="transition-all origin-left translate-x-12"
+      class="origin-left translate-x-12"
+      trans
       :class="[!collapse ? 'scale-0' : '']"
       col
     >
@@ -71,7 +67,7 @@ const clickMenu = (item: any) => {
     col
     s="w-64 h-fit"
     w="overflow-hidden"
-    class="transition-all"
+    trans
     :class="[!collapse ? 'max-h-[0px]' : 'max-h-[1000vh]']"
   >
     <slot></slot>

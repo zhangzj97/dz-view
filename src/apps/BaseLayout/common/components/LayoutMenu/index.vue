@@ -189,7 +189,7 @@ const toggleIconMode = () => {
 </script>
 
 <template>
-  <v s="w-fit h-grow" col wrap="overflow-auto">
+  <v s="w-fit h-grow" col>
     <MenuLevel1
       v-for="(item, index) of menuState.tree"
       :key="index"
@@ -241,7 +241,6 @@ const toggleIconMode = () => {
         </MenuLevel3>
       </MenuLevel2>
     </MenuLevel1>
-    <dz-btn text="收" @click="toggleIconMode" />
-    <v s="w-fit h-grow" space></v>
+    <v-space s="w-grow h-grow" space />
   </v>
 </template>
