@@ -4,6 +4,7 @@ import V from '@/components/VDesc/index.vue';
 import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserProfile/index.vue';
 import LayoutLogo from '@/apps/BaseLayout/common/components/LayoutLogo/index.vue';
 import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
+import LayoutMenu from '@/apps/BaseLayout/common/components/LayoutMenu/index.vue';
 
 import PaneDzModalTest01 from './components/PaneDzModalTest01.vue';
 import PaneDzModalTest02 from './components/PaneDzModalTest02.vue';
@@ -47,7 +48,7 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
       <v s="w-fit h-grow" col text="sider">
         <LayoutLogo />
 
-        <v s="w-64 h-grow" text="menu"></v>
+        <LayoutMenu />
       </v>
       <v s="w-grow h-grow" col text="body">
         <v s="w-grow h-16" text="navbar">
