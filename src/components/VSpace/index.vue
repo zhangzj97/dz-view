@@ -43,10 +43,6 @@ interface DzViewCursorProps {
   pointer?: boolean;
 }
 
-interface DzViewTestProps {
-  desc?: string;
-}
-
 withDefaults(
   defineProps<
     DzBaseProps & DzViewFlexProps & DzViewPositionProps & DzViewCursorProps
