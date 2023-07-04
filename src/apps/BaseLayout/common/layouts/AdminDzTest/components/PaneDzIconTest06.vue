@@ -1,11 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const testState = reactive({
+  tooltip: 'group变色',
+  triggerIcon: 'mdi:dice-1',
+});
+</script>
 
 <template>
-  <dz-popover tooltip="动态跳动 animate / transform 放在第二级嵌套">
-    <v s="w-16 h-grow" trans="hover:bg-gray-100 active:bg-slate-200" pointer>
-      <v s="w-grow h-grow" trans="animate-bounce" pointer>
-        <v-icon s="w-16 h-16" class="scale-50" pointer icon="mdi:dice-1" />
-      </v>
+  <dz-popover :tooltip="testState.tooltip">
+    <v s="w-16 h-grow" v="mouse-gray" col class="group">
+      <v-icon
+        v="12-50"
+        trans="group-hover:text-red-500"
+        :icon="testState.triggerIcon"
+      />
+      <v-icon
+        v="4-50"
+        trans="group-hover:text-red-500"
+        :icon="testState.triggerIcon"
+      />
     </v>
   </dz-popover>
 </template>

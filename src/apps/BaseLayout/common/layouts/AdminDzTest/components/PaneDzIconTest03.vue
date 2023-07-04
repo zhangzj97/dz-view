@@ -1,20 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const testState = reactive({
+  tooltip: '变大-需要一层动画层',
+  triggerIcon: 'mdi:dice-1',
+});
+</script>
 
 <template>
-  <dz-popover tooltip="trans 属性不应该加在 icon 上, 点击空白处 和icon 不同">
-    <v
-      s="w-16 h-grow"
-      t="text-red-500"
-      trans="hover:bg-gray-100 active:bg-slate-200 active:text-blue-300"
-      pointer
-    >
-      <v-icon
-        s="w-16 h-16"
-        class="scale-50"
-        trans="active:bg-blue-500"
-        pointer
-        icon="mdi:dice-1"
-      />
+  <dz-popover :tooltip="testState.tooltip">
+    <v s="w-16 h-grow" v="mouse-gray">
+      <v s="w-grow h-grow" trans="animate-ping">
+        <v-icon v="16-50" :icon="testState.triggerIcon" />
+      </v>
     </v>
   </dz-popover>
 </template>

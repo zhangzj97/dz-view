@@ -1,10 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const testState = reactive({
+  tooltip: '闪烁-需要一层动画层',
+  triggerIcon: 'mdi:dice-1',
+});
+</script>
 
 <template>
-  <dz-popover tooltip="动态旋转 animate / transform 放在第二级嵌套">
-    <v s="w-16 h-grow" trans="hover:bg-gray-100 active:bg-slate-200" pointer>
-      <v s="w-grow h-grow" trans="animate-spin" pointer>
-        <v-icon s="w-16 h-16" class="scale-50" pointer icon="mdi:dice-1" />
+  <dz-popover :tooltip="testState.tooltip">
+    <v s="w-16 h-grow" v="mouse-gray">
+      <v s="w-grow h-grow" trans="animate-pulse">
+        <v-icon v="16-50" :icon="testState.triggerIcon" />
       </v>
     </v>
   </dz-popover>

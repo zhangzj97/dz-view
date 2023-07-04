@@ -1,5 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const testState = reactive({
+  tooltip: '!!!',
+  triggerIcon: 'mdi:clock',
+});
+</script>
 
 <template>
-  <v-desc s="w-16 h-grow" text="P1"></v-desc>
+  <dz-popover :tooltip="testState.tooltip">
+    <v s="w-16 h-grow" v="mouse-gray">
+      <v-icon v="16-50" :icon="testState.triggerIcon" />
+    </v>
+  </dz-popover>
 </template>
