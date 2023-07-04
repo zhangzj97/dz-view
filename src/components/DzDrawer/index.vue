@@ -104,7 +104,6 @@ const toogleFullscreen = () => {
     :footer="false"
     :escToClose="true"
   >
-    <template #title> </template>
     <!-- 关于为什么会有 flex-shrink -->
     <!-- 1. max-height max-width 无法放在 body 上面否则 calc(100vh - footerheight - headerheight) -->
     <!-- 2. max-height max-width 放在 .arco-drawer-body 上面, 并且约束 外一层的 flex-shrink 约束垂直方向 -->
@@ -167,7 +166,7 @@ const toogleFullscreen = () => {
       max-width: 100vw;
       max-height: 100vh;
 
-      > .dz-view {
+      & > .dz-view {
         flex-grow: 1;
       }
     }
