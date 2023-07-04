@@ -119,7 +119,7 @@ interface DzViewIconProps {
 
 withDefaults(
   defineProps<
-    DzBaseProps &
+    Omit<DzBaseProps, 's'> &
       DzViewFlexProps &
       DzViewPositionProps &
       DzViewCursorProps &
@@ -133,7 +133,7 @@ withDefaults(
   <div
     class="dz-view dz-view-icon v202301"
     :class="[
-      s,
+      // s,
       w,
       t,
       trans,
