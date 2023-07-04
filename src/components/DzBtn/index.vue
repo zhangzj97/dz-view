@@ -2,53 +2,93 @@
 import { Button } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/button/style/css';
 
-defineProps<{
-  // Size Css
-  // size: string;
+interface DzBaseProps {
   s?: string;
-  // Wrap Css
   w?: string;
-  // Text Css
   t?: string;
+  trans?: boolean | string;
+}
 
-  // source
-  src?: string;
-  // icon 降级选项
-  icon?: string;
-
-  // Text
+interface DzViewTextProps {
   text?: string;
+}
+
+interface DzEntityProps {
+  id?: string;
+  icon?: string;
+  avatar?: string;
   title?: string;
+  bg?: string;
+}
 
-  // Flex Css
-  // row?: boolean;
-  // col?: boolean;
+interface DzViewFlexProps {
+  row?: boolean;
+  col?: boolean;
 
-  // Hover Css
-  hover?: string;
+  grid?: boolean;
+}
 
-  // Position Css
-  // absolute?: boolean;
+interface DzViewPositionProps {
+  absolute?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'tl'
+    | 'tr'
+    | 'bl'
+    | 'br'
+    | string;
+  fixed?: string;
+}
 
-  // Cursor Css
+interface DzViewCursorProps {
   pointer?: boolean;
+}
 
-  // Test and demo
+interface DzViewSpaceProps {
+  space?: boolean;
+}
+
+interface DzViewTestProps {
   desc?: string;
+}
 
-  // Arco
+interface DzPopoverProps {
+  state?: any;
+  cache?: boolean;
+}
+
+interface DzModalProps {
+  state?: any;
+  cache?: boolean;
+}
+
+interface DzDrawerProps {
+  state?: any;
+  cache?: boolean;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+}
+
+interface DzBtnProps {
+  state?: any;
+  cache?: boolean;
+
   type?: 'primary' | 'secondary' | 'outline' | 'dashed' | 'text';
   status?: 'normal' | 'warning' | 'success' | 'danger';
+  shape?: 'round' | 'circle' | 'square';
+}
 
-  // state
-  state?: any;
-}>();
+withDefaults(
+  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzBtnProps>(),
+  { cache: false, shape: 'round' }
+);
 </script>
 
 <template>
   <Button
     :type="type"
-    shape="square"
+    :shape="shape"
     :status="status"
     size="medium"
     :long="false"
@@ -57,11 +97,11 @@ defineProps<{
   >
     <template #icon>
       <slot name="icon">
-        <dz-icon s="w-4 h-4" :icon="icon" class="scale-100 translate-y-[2px]" />
+        <v-icon s="w-4 h-4" :icon="icon" class="scale-100 translate-y-[2px]" />
       </slot>
     </template>
     <slot>
-      <dz-text :text="title" />
+      <v-text :text="title" />
     </slot>
   </Button>
 </template>
