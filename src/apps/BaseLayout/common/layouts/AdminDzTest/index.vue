@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import LayoutMenu from '@/apps/BaseLayout/common/components/LayoutMenu/index.vue';
+import V from '@/components/VDesc/index.vue';
+
 import PaneDzModalTest01 from './components/PaneDzModalTest01.vue';
 import PaneDzModalTest02 from './components/PaneDzModalTest02.vue';
 import PaneDzModalTest03 from './components/PaneDzModalTest03.vue';
@@ -35,70 +36,70 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
 </script>
 
 <template>
-  <v-desc s="w-[100vw] h-[100vh]" col text="screen">
-    <v-desc s="w-grow h-16" text="navbar">
-      <v-desc s="w-64 h-grow" text="Logo">
-        <v-desc s="w-16 h-16" text="Icon"></v-desc>
-        <v-desc s="w-grow h-16" text="LogoTitle"></v-desc>
-      </v-desc>
-      <v-desc s="w-grow h-grow" text="App List"></v-desc>
-      <v-desc s="w-16 h-grow" text="P1"></v-desc>
-      <v-desc s="w-16 h-grow" text="P2"></v-desc>
-      <v-desc s="w-16 h-grow" text="P3"></v-desc>
-      <v-desc s="w-16 h-grow" text="P4"></v-desc>
-      <v-desc s="w-48 h-grow" text="Profile">
-        <v-desc s="w-16 h-grow" text="Avatar"></v-desc>
-        <v-desc s="w-grow h-grow" col text="Info">
-          <v-desc s="w-grow h-grow" text="space"></v-desc>
-          <v-desc s="w-grow h-fit" text="Nickname"></v-desc>
-          <v-desc s="w-grow h-fit" text="Status"></v-desc>
-          <v-desc s="w-grow h-grow" text="space"></v-desc>
-        </v-desc>
-      </v-desc>
-    </v-desc>
-    <v-desc s="w-grow h-16" text="Level 1 Menu"></v-desc>
-    <v-desc s="w-grow h-grow" text="body">
-      <v-desc s="w-fit h-grow" col text="sider">
-        <v-desc s="w-grow h-16" text="Logo">
-          <v-desc s="w-16 h-16" text="Icon"></v-desc>
-          <v-desc s="w-grow h-16" text="LogoTitle"></v-desc>
-        </v-desc>
-        <v-desc s="w-64 h-grow" text="menu"></v-desc>
-      </v-desc>
-      <v-desc s="w-grow h-grow" col text="body">
-        <v-desc s="w-grow h-16" text="navbar">
-          <v-desc s="w-64 h-grow" text="Logo">
-            <v-desc s="w-16 h-16" text="Icon"></v-desc>
-            <v-desc s="w-grow h-16" text="LogoTitle"></v-desc>
-          </v-desc>
-          <v-desc s="w-grow h-grow" text="App List"></v-desc>
-          <v-desc s="w-16 h-grow" text="P1"></v-desc>
-          <v-desc s="w-16 h-grow" text="P2"></v-desc>
-          <v-desc s="w-16 h-grow" text="P3"></v-desc>
-          <v-desc s="w-16 h-grow" text="P4"></v-desc>
-          <v-desc s="w-48 h-grow" text="Profile">
-            <v-desc s="w-16 h-grow" text="Avatar"></v-desc>
-            <v-desc s="w-grow h-grow" col text="Info">
-              <v-desc s="w-grow h-grow" text="space"></v-desc>
-              <v-desc s="w-grow h-fit" text="Nickname"></v-desc>
-              <v-desc s="w-grow h-fit" text="Status"></v-desc>
-              <v-desc s="w-grow h-grow" text="space"></v-desc>
-            </v-desc>
-          </v-desc>
-        </v-desc>
-        <v-desc s="w-grow h-12" text="routeTag">
-          <v-desc s="w-grow h-12" w="overflow-auto" text="routeList">
-            <v-desc s="w-fit h-12" text="tag">
-              <v-desc s="w-12 h-12" text="icon"></v-desc>
-              <v-desc s="w-fit h-12" text="title"></v-desc>
-              <v-desc s="w-12 h-12" text="closeIcon"></v-desc>
-            </v-desc>
-          </v-desc>
-          <v-desc s="w-12 h-12" text="refresh"></v-desc>
-          <v-desc s="w-12 h-12" text="closeAll"></v-desc>
-        </v-desc>
-        <v-desc s="w-grow h-16" text="test1">
-          <v-desc s="w-grow h-grow" text="DzIconTest"></v-desc>
+  <v s="w-[100vw] h-[100vh]" col text="screen">
+    <v s="w-grow h-16" text="navbar">
+      <v s="w-64 h-grow" text="Logo">
+        <v s="w-16 h-16" text="Icon"></v>
+        <v s="w-grow h-16" text="LogoTitle"></v>
+      </v>
+      <v s="w-grow h-grow" text="App List"></v>
+      <v s="w-16 h-grow" text="P1"></v>
+      <v s="w-16 h-grow" text="P2"></v>
+      <v s="w-16 h-grow" text="P3"></v>
+      <v s="w-16 h-grow" text="P4"></v>
+      <v s="w-48 h-grow" text="Profile">
+        <v s="w-16 h-grow" text="Avatar"></v>
+        <v s="w-grow h-grow" col text="Info">
+          <v s="w-grow h-grow" text="space"></v>
+          <v s="w-grow h-fit" text="Nickname"></v>
+          <v s="w-grow h-fit" text="Status"></v>
+          <v s="w-grow h-grow" text="space"></v>
+        </v>
+      </v>
+    </v>
+    <v s="w-grow h-16" text="Level 1 Menu"></v>
+    <v s="w-grow h-grow" text="body">
+      <v s="w-fit h-grow" col text="sider">
+        <v s="w-grow h-16" text="Logo">
+          <v s="w-16 h-16" text="Icon"></v>
+          <v s="w-grow h-16" text="LogoTitle"></v>
+        </v>
+        <v s="w-64 h-grow" text="menu"></v>
+      </v>
+      <v s="w-grow h-grow" col text="body">
+        <v s="w-grow h-16" text="navbar">
+          <v s="w-64 h-grow" text="Logo">
+            <v s="w-16 h-16" text="Icon"></v>
+            <v s="w-grow h-16" text="LogoTitle"></v>
+          </v>
+          <v s="w-grow h-grow" text="App List"></v>
+          <v s="w-16 h-grow" text="P1"></v>
+          <v s="w-16 h-grow" text="P2"></v>
+          <v s="w-16 h-grow" text="P3"></v>
+          <v s="w-16 h-grow" text="P4"></v>
+          <v s="w-48 h-grow" text="Profile">
+            <v s="w-16 h-grow" text="Avatar"></v>
+            <v s="w-grow h-grow" col text="Info">
+              <v s="w-grow h-grow" text="space"></v>
+              <v s="w-grow h-fit" text="Nickname"></v>
+              <v s="w-grow h-fit" text="Status"></v>
+              <v s="w-grow h-grow" text="space"></v>
+            </v>
+          </v>
+        </v>
+        <v s="w-grow h-12" text="routeTag">
+          <v s="w-grow h-12" w="overflow-auto" text="routeList">
+            <v s="w-fit h-12" text="tag">
+              <v s="w-12 h-12" text="icon"></v>
+              <v s="w-fit h-12" text="title"></v>
+              <v s="w-12 h-12" text="closeIcon"></v>
+            </v>
+          </v>
+          <v s="w-12 h-12" text="refresh"></v>
+          <v s="w-12 h-12" text="closeAll"></v>
+        </v>
+        <v s="w-grow h-16" text="test1">
+          <v s="w-grow h-grow" text="DzIconTest"></v>
           <PaneDzIconTest01 />
           <PaneDzIconTest02 />
           <PaneDzIconTest03 />
@@ -109,9 +110,9 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
           <PaneDzIconTest08 />
           <PaneDzIconTest09 />
           <PaneDzIconTest10 />
-        </v-desc>
-        <v-desc s="w-grow h-16" text="test1">
-          <v-desc s="w-grow h-grow" text="DzModalTest"></v-desc>
+        </v>
+        <v s="w-grow h-16" text="test1">
+          <v s="w-grow h-grow" text="DzModalTest"></v>
           <PaneDzModalTest01 />
           <PaneDzModalTest02 />
           <PaneDzModalTest03 />
@@ -122,9 +123,9 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
           <PaneDzModalTest08 />
           <PaneDzModalTest09 />
           <PaneDzModalTest10 />
-        </v-desc>
-        <v-desc s="w-grow h-16" text="test1">
-          <v-desc s="w-grow h-grow" text="DzModalTest"></v-desc>
+        </v>
+        <v s="w-grow h-16" text="test1">
+          <v s="w-grow h-grow" text="DzModalTest"></v>
           <PaneDzDrawerTest01 />
           <PaneDzDrawerTest02 />
           <PaneDzDrawerTest03 />
@@ -135,9 +136,9 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
           <PaneDzDrawerTest08 />
           <PaneDzDrawerTest09 />
           <PaneDzDrawerTest10 />
-        </v-desc>
-        <v-desc s="w-grow h-grow" text="body"></v-desc>
-      </v-desc>
-    </v-desc>
-  </v-desc>
+        </v>
+        <v s="w-grow h-grow" text="body"></v>
+      </v>
+    </v>
+  </v>
 </template>
