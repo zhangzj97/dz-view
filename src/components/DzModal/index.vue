@@ -91,12 +91,6 @@ const toogleFullscreen = () => {
   state.fullscreen = !state.fullscreen;
   emit('update:state', state);
 };
-
-const toogleVisible = () => {
-  const state = props.state;
-  state.visible = !state.visible;
-  emit('update:state', state);
-};
 </script>
 
 <template>
@@ -110,13 +104,13 @@ const toogleVisible = () => {
     :unmountOnClose="true"
     :maskClosable="true"
     :closable="false"
-    :header="true"
+    :header="false"
     :footer="false"
     :draggable="true"
     :escToClose="true"
   >
     <template #title>
-      <v s="w-grow h-fit" move>
+      <v s="w-grow h-fit">
         <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
         <v v-if="icon" s="w-10 h-grow">
           <v-icon v="10-50" :icon="icon" />
@@ -134,8 +128,13 @@ const toogleVisible = () => {
         </v>
       </v>
     </template>
+    <!-- 关于为什么会有 flex-shrink -->
+    <!-- 1. max-height max-width 无法放在 body 上面否则 calc(100vh - footerheight - headerheight) -->
+    <!-- 2. max-height max-width 放在 .arco-modal-body 上面, 并且约束 内一层的 flex-shrink 约束垂直方向 -->
+    <!-- 3. max-height max-width 放在 .arco-modal-body 上面, 并且约束 内一层的 max-w-[100vw] 约束水平方向 -->
+    <!-- flex-shrink overflow -->
     <v s="w-grow h-grow" col>
-      <v s="w-fit h-fit">
+      <v s="w-fit h-fit" w="flex-shrink max-w-[100vw]">
         <slot></slot>
       </v>
       <v-space s="w-grow h-grow" />
@@ -162,44 +161,59 @@ const toogleVisible = () => {
 .dz-modal.v202301.arco-modal-container {
   & > .arco-modal-mask {
   }
+
   & > .arco-modal-wrapper {
+    overflow: auto;
     & > .arco-modal {
-      @apply p-0 m-0;
-      @apply w-fit h-fit;
+      width: auto;
+      height: fit-content;
 
       & > .arco-modal-header {
-        @apply p-0 m-0;
-        @apply w-auto h-fit;
+        @apply p-0 m-0 relative flex flex-row flex-nowrap flex-shrink-0;
+        @apply flex-grow;
+
+        @apply w-auto h-auto;
 
         & > .arco-modal-title {
           @apply p-0 m-0 relative flex flex-row flex-nowrap flex-shrink-0;
 
-          @apply w-auto h-fit;
+          @apply w-auto h-auto;
+
           @apply flex-grow;
 
-          > .dz-view {
+          font-size: 14px;
+
+          & > .dz-view {
             flex-grow: 1;
           }
         }
       }
+
       & > .arco-modal-body {
-        @apply p-0 m-0 relative flex flex-row flex-nowrap flex-shrink-0;
+        @apply p-0 m-0 relative flex flex-row flex-nowrap;
 
-        @apply w-auto h-fit;
-        @apply flex-grow;
+        @apply w-auto h-auto;
 
-        > .dz-view {
+        @apply flex-grow flex-shrink;
+
+        overflow: auto;
+
+        max-width: calc(100vw);
+        max-height: calc(100vh - 42px);
+
+        & > .dz-view {
           flex-grow: 1;
         }
-      }
-      & > .arco-modal-footer {
       }
     }
   }
 
-  & > .arco-modal-wrapper > .arco-modal.arco-modal-fullscreen {
-    width: 100vw;
-    height: 100vh;
+  &
+    > .arco-modal-wrapper
+    > .arco-modal.arco-modal-fullscreen
+    > .arco-modal-body {
+    width: calc(100vw);
+    height: calc(100vh - 42px);
   }
 }
 </style>
