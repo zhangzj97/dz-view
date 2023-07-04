@@ -81,7 +81,7 @@ interface DzBtnProps {
 
 withDefaults(
   defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzBtnProps>(),
-  { cache: false, shape: 'round' }
+  { cache: false, shape: 'square' }
 );
 </script>
 
@@ -97,7 +97,7 @@ withDefaults(
   >
     <template #icon>
       <slot name="icon">
-        <v-icon s="w-4 h-4" :icon="icon" class="scale-100 translate-y-[2px]" />
+        <v-icon v="4-100" :icon="icon" class="scale-100 translate-y-[2px]" />
       </slot>
     </template>
     <slot>
