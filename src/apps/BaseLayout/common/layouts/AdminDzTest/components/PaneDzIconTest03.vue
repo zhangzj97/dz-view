@@ -8,7 +8,7 @@
       trans="hover:bg-gray-100 active:bg-slate-200 active:text-blue-300"
       pointer
     >
-      <dz-icon
+      <v-icon
         s="w-16 h-16"
         class="scale-50"
         trans="active:bg-blue-500"

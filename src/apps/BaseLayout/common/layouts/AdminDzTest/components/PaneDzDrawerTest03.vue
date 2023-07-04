@@ -26,7 +26,7 @@ watch(
       pointer
       @click="setVisible(true)"
     >
-      <dz-icon
+      <v-icon
         s="w-16 h-16"
         class="scale-50"
         pointer

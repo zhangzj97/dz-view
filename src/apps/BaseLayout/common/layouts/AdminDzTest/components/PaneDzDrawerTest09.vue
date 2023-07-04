@@ -14,7 +14,7 @@ const { state: state3, setVisible: setVisible3 } = useModal();
       pointer
       @click="setVisible1(true)"
     >
-      <dz-icon
+      <v-icon
         s="w-16 h-16"
         class="scale-50"
         pointer

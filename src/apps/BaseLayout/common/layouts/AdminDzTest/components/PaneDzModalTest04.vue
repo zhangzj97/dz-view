@@ -19,7 +19,7 @@ const toggleVisible = () => {
       pointer
       @click="toggleVisible"
     >
-      <dz-icon
+      <v-icon
         s="w-16 h-16"
         class="scale-50"
         pointer
