@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import V from '@/components/VDesc/index.vue';
 
+import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserProfile/index.vue';
+import LayoutLogo from '@/apps/BaseLayout/common/components/LayoutLogo/index.vue';
+import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
+
 import PaneDzModalTest01 from './components/PaneDzModalTest01.vue';
 import PaneDzModalTest02 from './components/PaneDzModalTest02.vue';
 import PaneDzModalTest03 from './components/PaneDzModalTest03.vue';
@@ -30,66 +34,33 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
 <template>
   <v s="w-[100vw] h-[100vh]" col text="screen">
     <v s="w-grow h-16" text="navbar">
-      <v s="w-64 h-grow" text="Logo">
-        <v s="w-16 h-16" text="Icon"></v>
-        <v s="w-grow h-16" text="LogoTitle"></v>
-      </v>
+      <LayoutLogo />
       <v s="w-grow h-grow" text="App List"></v>
       <v s="w-16 h-grow" text="P1"></v>
       <v s="w-16 h-grow" text="P2"></v>
       <v s="w-16 h-grow" text="P3"></v>
       <v s="w-16 h-grow" text="P4"></v>
-      <v s="w-48 h-grow" text="Profile">
-        <v s="w-16 h-grow" text="Avatar"></v>
-        <v s="w-grow h-grow" col text="Info">
-          <v s="w-grow h-grow" text="space"></v>
-          <v s="w-grow h-fit" text="Nickname"></v>
-          <v s="w-grow h-fit" text="Status"></v>
-          <v s="w-grow h-grow" text="space"></v>
-        </v>
-      </v>
+      <LayoutUserProfile />
     </v>
     <v s="w-grow h-16" text="Level 1 Menu"></v>
     <v s="w-grow h-grow" text="body">
       <v s="w-fit h-grow" col text="sider">
-        <v s="w-grow h-16" text="Logo">
-          <v s="w-16 h-16" text="Icon"></v>
-          <v s="w-grow h-16" text="LogoTitle"></v>
-        </v>
+        <LayoutLogo />
+
         <v s="w-64 h-grow" text="menu"></v>
       </v>
       <v s="w-grow h-grow" col text="body">
         <v s="w-grow h-16" text="navbar">
-          <v s="w-64 h-grow" text="Logo">
-            <v s="w-16 h-16" text="Icon"></v>
-            <v s="w-grow h-16" text="LogoTitle"></v>
-          </v>
+          <LayoutLogo />
           <v s="w-grow h-grow" text="App List"></v>
           <v s="w-16 h-grow" text="P1"></v>
           <v s="w-16 h-grow" text="P2"></v>
           <v s="w-16 h-grow" text="P3"></v>
           <v s="w-16 h-grow" text="P4"></v>
-          <v s="w-48 h-grow" text="Profile">
-            <v s="w-16 h-grow" text="Avatar"></v>
-            <v s="w-grow h-grow" col text="Info">
-              <v s="w-grow h-grow" text="space"></v>
-              <v s="w-grow h-fit" text="Nickname"></v>
-              <v s="w-grow h-fit" text="Status"></v>
-              <v s="w-grow h-grow" text="space"></v>
-            </v>
-          </v>
+          <LayoutUserProfile />
         </v>
-        <v s="w-grow h-12" text="routeTag">
-          <v s="w-grow h-12" w="overflow-auto" text="routeList">
-            <v s="w-fit h-12" text="tag">
-              <v s="w-12 h-12" text="icon"></v>
-              <v s="w-fit h-12" text="title"></v>
-              <v s="w-12 h-12" text="closeIcon"></v>
-            </v>
-          </v>
-          <v s="w-12 h-12" text="refresh"></v>
-          <v s="w-12 h-12" text="closeAll"></v>
-        </v>
+        <LayoutRouteTag />
+
         <v s="w-grow h-16" text="test1">
           <v s="w-grow h-grow" text="DzOtherTest"></v>
           <PaneDzIconTest />
@@ -122,10 +93,6 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
           <PaneDzDrawerTest10 />
         </v>
 
-        <v s="w-grow h-16" text="test1">
-          <v s="w-grow h-grow" text="DzOtherTest"></v>
-          <PaneDzOtherTest01 />
-        </v>
         <v s="w-grow h-grow" text="body"></v>
       </v>
     </v>
