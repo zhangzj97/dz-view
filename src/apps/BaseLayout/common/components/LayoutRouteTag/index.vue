@@ -300,8 +300,7 @@ const showList = computed(() => {
 
 <template>
   <v s="w-grow h-8" class="shadow-lg">
-    <v s="w-grow h-8" w="overflow-auto">
-      <v s="w-0 h-8" space />
+    <v s="w-grow h-grow">
       <RouteTag
         v-for="(item, index) of showList"
         class="scale-90"
@@ -314,16 +313,10 @@ const showList = computed(() => {
         @clickRouteTag="clickRouteTag(item)"
         @closeRouteTag="closeRouteTag(item)"
       />
+      <v-space s="w-grow h-grow" />
     </v>
-    <v s="w-fit h-8">
-      <dz-icon
-        s="w-8 h-8"
-        class="scale-75"
-        hover="hover:opacity-80"
-        pointer
-        icon="carbon:close-outline"
-        @click="closeAll"
-      />
+    <v s="w-fit h-8" v="mouse-gray" @click="closeAll">
+      <v-icon v="8-75" icon="carbon:close-outline" />
     </v>
   </v>
 </template>

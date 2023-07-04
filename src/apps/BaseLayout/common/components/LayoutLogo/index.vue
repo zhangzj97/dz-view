@@ -4,27 +4,17 @@ const config: any = inject('config');
 </script>
 
 <template>
-  <v s="w-fit h-16" class="transition-all bg-gray-700" w="overflow-hidden">
-    <dz-icon
-      s="w-16 h-16"
-      :src="config.layout.logo.icon1"
-      :class="[config.layout.logo.icon1Style]"
-    />
+  <v s="w-fit h-16" w="overflow-hidden" class="bg-gray-500" trans>
+    <v-icon v="16-90" :src="config.layout.logo.icon1" />
     <v s="w-48 h-16">
-      <dz-icon
-        v-if="config.layout.logo.icon2"
-        s="w-16 h-16"
-        :src="config.layout.logo.icon2"
-        :class="[config.layout.logo.icon2Style]"
-      />
-      <v v-else s="w-grow h-16">
-        <v s="w-grow h-16" space />
-        <dz-text
+      <v s="w-grow h-16">
+        <v-space s="w-grow h-grow" />
+        <v-text
           :t="config.layout.logo.textStyle"
           :text="config.layout.logo.text"
         />
-        <v s="w-grow h-16" space />
-        <v s="w-grow h-16" space />
+        <v-space s="w-grow h-grow" />
+        <v-space s="w-grow h-grow" />
       </v>
     </v>
   </v>
