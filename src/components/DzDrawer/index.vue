@@ -124,8 +124,8 @@ const toogleFullscreen = () => {
             :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
           />
         </v>
-        <v s="w-8 h-grow" v="mouse-gray" @click="close">
-          <v-icon v="8-50" icon="mdi:close" />
+        <v s="w-10 h-grow" v="mouse-gray" @click="close">
+          <v-icon v="10-50" icon="mdi:close" />
         </v>
       </v>
       <!-- flex-shrink overflow instead of calc(100vh - footerheight - headerheight) -->
