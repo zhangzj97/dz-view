@@ -134,7 +134,7 @@ const toogleFullscreen = () => {
     <!-- 3. max-height max-width 放在 .arco-modal-body 上面, 并且约束 内一层的 max-w-[100vw] 约束水平方向 -->
     <!-- flex-shrink overflow -->
     <v s="w-grow h-grow" col>
-      <v s="w-fit h-fit" w="flex-shrink max-w-[100vw]">
+      <v s="w-fit h-fit" w="flex-shrink max-w-[100vw] overflow-auto">
         <slot></slot>
       </v>
       <v-space s="w-grow h-grow" />
@@ -163,8 +163,9 @@ const toogleFullscreen = () => {
   }
 
   & > .arco-modal-wrapper {
-    overflow: auto;
     & > .arco-modal {
+      overflow: hidden;
+
       width: auto;
       height: fit-content;
 

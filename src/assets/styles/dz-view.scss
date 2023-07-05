@@ -9,7 +9,6 @@
 
 .dz-view.v202301 {
   @apply relative flex flex-row flex-shrink-0 flex-grow-0 flex-nowrap select-none;
-  @apply overflow-auto;
 }
 .dz-view.v202301.dz-view-row {
   flex-direction: row;
@@ -29,6 +28,31 @@
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.dz-view.v202301.dz-view-absolute-top {
+  @apply absolute top-0;
+}
+.dz-view.v202301.dz-view-absolute-bottom {
+  @apply absolute bottom-0;
+}
+.dz-view.v202301.dz-view-absolute-left {
+  @apply absolute left-0;
+}
+.dz-view.v202301.dz-view-absolute-right {
+  @apply absolute right-0;
+}
+.dz-view.v202301.dz-view-absolute-tl {
+  @apply absolute top-0 left-0;
+}
+.dz-view.v202301.dz-view-absolute-tr {
+  @apply absolute top-0 right-0;
+}
+.dz-view.v202301.dz-view-absolute-bl {
+  @apply absolute bottom-0 left-0;
+}
+.dz-view.v202301.dz-view-absolute-br {
+  @apply absolute bottom-0 right-0;
 }
 
 .dz-view.v202301.flex-shrink {

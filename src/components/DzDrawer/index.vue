@@ -109,7 +109,7 @@ const toogleFullscreen = () => {
     <!-- 2. max-height max-width 放在 .arco-drawer-body 上面, 并且约束 外一层的 flex-shrink 约束垂直方向 -->
     <!-- 3. max-height max-width 放在 .arco-drawer-body 上面, 并且约束 内一层的 flex-shrink 约束水平方向 -->
     <!-- flex-shrink overflow -->
-    <v s="w-grow h-grow" w="flex-shrink" col>
+    <v s="w-grow h-grow" w="flex-shrink overflow-auto" col>
       <v s="w-grow h-fit">
         <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
         <v v-if="icon" s="w-10 h-grow">
@@ -128,7 +128,7 @@ const toogleFullscreen = () => {
         </v>
       </v>
       <!-- flex-shrink overflow instead of calc(100vh - footerheight - headerheight) -->
-      <v s="w-fit h-fit" w="flex-shrink">
+      <v s="w-fit h-fit" w="flex-shrink overflow-auto">
         <slot></slot>
       </v>
       <v-space s="w-grow h-grow" />
