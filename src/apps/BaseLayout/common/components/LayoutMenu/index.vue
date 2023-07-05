@@ -1,175 +1,18 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { useService } from '@/hooks/useService';
 import MenuLevel1 from './components/MenuLevel1.vue';
 import MenuLevel2 from './components/MenuLevel2.vue';
 import MenuLevel3 from './components/MenuLevel3.vue';
 
-const testState = reactive({
-  tree: [
-    { id: '1', avatar: 'el:adjust-alt', title: 't1', idPath: '1' },
-    {
-      id: '2',
-      avatar: 'el:adjust-alt',
-      title: 't2',
-      idPath: '2',
-      children: [
-        { id: '21', avatar: 'el:address-book', title: 't2-1', idPath: '2,21' },
-        {
-          id: '22',
-          avatar: 'el:address-book',
-          title: 't2-2',
-          idPath: '2,22',
-          children: [
-            {
-              id: '221',
-              avatar: 'el:address-book',
-              title: 't2-2-1',
-              idPath: '2,22,221',
-            },
-            {
-              id: '222',
-              avatar: 'el:address-book',
-              title: 't2-2-2',
-              idPath: '2,22,222',
-              children: [
-                {
-                  id: '2221',
-                  avatar: 'el:address-book',
-                  title: 't2-2-2-1',
-                  idPath: '2,22,222,2221',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    { id: '3', avatar: 'el:adjust-alt', title: 't3', idPath: '3' },
-    {
-      id: '4',
-      avatar: 'el:adjust-alt',
-      title: 't4',
-      idPath: '4',
-      children: [
-        { id: '41', avatar: 'el:address-book', title: 't4-1', idPath: '4,41' },
-        { id: '42', avatar: 'el:address-book', title: 't4-2', idPath: '4,42' },
-      ],
-    },
-  ],
+const { getState } = useService();
 
-  list: [],
+const { menuState } = getState('Dz/Route');
 
-  map: {
-    1: { id: '1', avatar: 'el:adjust-alt', title: 't1', idPath: '1' },
-    2: {
-      id: '2',
-      avatar: 'el:adjust-alt',
-      title: 't2',
-      idPath: '2',
-      children: [
-        { id: '21', avatar: 'el:address-book', title: 't2-1', idPath: '2,21' },
-        {
-          id: '22',
-          avatar: 'el:address-book',
-          title: 't2-2',
-          idPath: '2,22',
-          children: [
-            {
-              id: '221',
-              avatar: 'el:address-book',
-              title: 't2-2-1',
-              idPath: '2,22,221',
-            },
-            {
-              id: '222',
-              avatar: 'el:address-book',
-              title: 't2-2-2',
-              idPath: '2,22,222',
-            },
-          ],
-        },
-      ],
-    },
-    21: { id: '21', avatar: 'el:address-book', title: 't2-1', idPath: '2,21' },
-    22: {
-      id: '22',
-      avatar: 'el:address-book',
-      title: 't2-2',
-      idPath: '2,22',
-      children: [
-        {
-          id: '221',
-          avatar: 'el:address-book',
-          title: 't2-2-1',
-          idPath: '2,22,221',
-        },
-        {
-          id: '222',
-          avatar: 'el:address-book',
-          title: 't2-2-2',
-          idPath: '2,22,222',
-        },
-      ],
-    },
-    221: {
-      id: '221',
-      avatar: 'el:address-book',
-      title: 't2-2-1',
-      idPath: '2,22,221',
-    },
-    222: {
-      id: '222',
-      avatar: 'el:address-book',
-      title: 't2-2-2',
-      idPath: '2,22,222',
-    },
-    2221: {
-      id: '2221',
-      avatar: 'el:address-book',
-      title: 't2-2-2-1',
-      idPath: '2,22,222,2221',
-    },
-    3: { id: '3', avatar: 'el:adjust-alt', title: 't3', idPath: '3' },
-    4: {
-      id: '4',
-      avatar: 'el:adjust-alt',
-      title: 't4',
-      idPath: '4',
-      children: [
-        { id: '41', avatar: 'el:address-book', title: 't4-1', idPath: '4,41' },
-        { id: '42', avatar: 'el:address-book', title: 't4-2', idPath: '4,42' },
-      ],
-    },
-    41: {
-      id: '41',
-      avatar: 'el:address-book',
-      title: 't4-1',
-      idPath: '4,41',
-    },
-    42: {
-      id: '42',
-      avatar: 'el:address-book',
-      title: 't4-2',
-      idPath: '4,42',
-    },
-  },
-});
-
-const menuState = reactive<any>({
-  tree: testState.tree,
-
-  map: testState.map,
-
-  iconMode: false,
-
-  collapse: {},
-
-  active: {},
-});
+console.log(menuState);
 
 const clickMenu = ({ id }: any) => {
   const item = menuState.map[id];
-  const { idPath } = item;
+  const { treePath } = item;
 
   if (menuState.collapse[id] === true) {
     menuState.collapse[id] = false;
@@ -177,7 +20,7 @@ const clickMenu = ({ id }: any) => {
   }
 
   menuState.collapse = {};
-  idPath.split(',').forEach((item: string) => {
+  treePath.split(',').forEach((item: string) => {
     menuState.collapse[item] = true;
   });
 };
