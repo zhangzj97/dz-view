@@ -52,7 +52,7 @@ const clickMenu = (item: any) => {
     </v>
     <v
       v-if="iconMode"
-      abs=""
+      absolute="tr"
       s="w-64 h-fit"
       class="origin-left translate-x-[272px]"
       trans

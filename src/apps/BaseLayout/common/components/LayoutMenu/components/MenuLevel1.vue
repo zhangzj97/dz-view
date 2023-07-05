@@ -52,12 +52,12 @@ const clickMenu = (item: any) => {
     </v>
     <v
       v-if="iconMode"
-      abs=""
+      absolute="tl"
       s="w-64 h-fit"
       class="origin-left translate-x-12"
+      col
       trans
       :class="[!collapse ? 'scale-0' : '']"
-      col
     >
       <slot></slot>
     </v>
