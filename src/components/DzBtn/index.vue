@@ -95,9 +95,9 @@ withDefaults(
     :loading="state?.loading"
     :disabled="state?.disabled"
   >
-    <template #icon>
+    <template v-if="icon" #icon>
       <slot name="icon">
-        <v-icon v="4-100" :icon="icon" class="scale-100 translate-y-[2px]" />
+        <v-icon v="4-100" :icon="icon" class="translate-y-[2px]" />
       </slot>
     </template>
     <slot>
