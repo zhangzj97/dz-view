@@ -5,6 +5,10 @@ import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserPro
 import LayoutLogo from '@/apps/BaseLayout/common/components/LayoutLogo/index.vue';
 import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
 import LayoutMenu from '@/apps/BaseLayout/common/components/LayoutMenu/index.vue';
+import LayoutMenuLevelTop from '@/apps/BaseLayout/common/components/LayoutMenuLevelTop/index.vue';
+
+import PaneDzRouteTest01 from './components/PaneDzRouteTest01.vue';
+import PaneDzRouteTest02 from './components/PaneDzRouteTest02.vue';
 
 import PaneDzModalTest01 from './components/PaneDzModalTest01.vue';
 import PaneDzModalTest02 from './components/PaneDzModalTest02.vue';
@@ -36,7 +40,7 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
   <v s="w-[100vw] h-[100vh]" col text="screen">
     <v s="w-grow h-16" text="navbar">
       <LayoutLogo />
-      <v s="w-grow h-grow" text="App List"></v>
+      <LayoutMenuLevelTop />
       <v s="w-16 h-grow" text="P1"></v>
       <v s="w-16 h-grow" text="P2"></v>
       <v s="w-16 h-grow" text="P3"></v>
@@ -45,15 +49,15 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
     </v>
     <v s="w-grow h-16" text="Level 1 Menu"></v>
     <v s="w-grow h-grow" text="body">
-      <v s="w-fit h-grow" col text="sider">
+      <v s="w-fit h-grow" col w="overflow-visible">
         <LayoutLogo />
 
-        <LayoutMenu />
+        <LayoutMenu class="z-[999]" />
       </v>
       <v s="w-grow h-grow" col text="body">
         <v s="w-grow h-16" text="navbar">
           <LayoutLogo />
-          <v s="w-grow h-grow" text="App List"></v>
+          <LayoutMenuLevelTop />
           <v s="w-16 h-grow" text="P1"></v>
           <v s="w-16 h-grow" text="P2"></v>
           <v s="w-16 h-grow" text="P3"></v>
@@ -62,6 +66,11 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
         </v>
         <LayoutRouteTag />
 
+        <v s="w-grow h-16" text="test1">
+          <v s="w-grow h-grow" text="DzRouteTest"></v>
+          <PaneDzRouteTest01 />
+          <PaneDzRouteTest02 />
+        </v>
         <v s="w-grow h-16" text="test1">
           <v s="w-grow h-grow" text="DzOtherTest"></v>
           <PaneDzIconTest />
