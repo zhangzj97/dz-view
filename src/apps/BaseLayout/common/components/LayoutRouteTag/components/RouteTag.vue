@@ -21,6 +21,7 @@ const closeRouteTag = (item: any) => {
 <template>
   <v
     s="w-fit h-8"
+    w="overflow-hidden"
     class="border-[1px] border-gray-300 rounded-md group"
     hover="hover:bg-gray-100"
     pointer
