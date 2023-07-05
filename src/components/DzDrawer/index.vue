@@ -117,12 +117,12 @@ const toogleFullscreen = () => {
         </v>
         <v-text s="w-fit h-grow" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
-        <v s="w-10 h-grow" v="mouse-gray" @click="toogleFullscreen">
+        <!-- <v s="w-10 h-grow" v="mouse-gray" @click="toogleFullscreen">
           <v-icon
             v="10-50"
             :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
           />
-        </v>
+        </v> -->
         <v s="w-10 h-grow" v="mouse-gray" @click="close">
           <v-icon v="10-50" icon="mdi:close" />
         </v>
