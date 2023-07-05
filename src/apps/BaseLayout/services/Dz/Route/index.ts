@@ -17,6 +17,9 @@ export const useStore = defineStore('Dz/Route', () => {
     tree: tree,
     map: map,
 
+    levelTopModa: false,
+    levelTopMenuId: '0',
+
     iconMode: false,
 
     collapse: {},
