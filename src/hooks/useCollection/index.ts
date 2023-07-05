@@ -97,7 +97,6 @@ export const useCollection = () => {
     const treeMap = {};
     tree.forEach(loopToMap({}));
 
-    console.log({ tree, treeMap });
     return {
       map: treeMap,
       tree,
