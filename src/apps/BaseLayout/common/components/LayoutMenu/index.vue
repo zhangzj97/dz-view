@@ -8,8 +8,6 @@ const { getState } = useService();
 
 const { menuState } = getState('Dz/Route');
 
-console.log(menuState);
-
 const clickMenu = ({ id }: any) => {
   const item = menuState.map[id];
   const { treePath } = item;
@@ -25,23 +23,29 @@ const clickMenu = ({ id }: any) => {
   });
 };
 
-const toggleIconMode = () => {
-  menuState.collapse = {};
-  menuState.iconMode = !menuState.iconMode;
-};
+const menuTree = computed(() => {
+  if (menuState.levelTopMode) {
+    return (
+      menuState.tree.find(item => item.id === menuState.levelTopMenuId)
+        ?.children || []
+    );
+  } else {
+    return menuState.tree;
+  }
+});
 </script>
 
 <template>
   <v s="w-fit h-grow" col>
     <MenuLevel1
-      v-for="(item, index) of menuState.tree"
+      v-for="(item, index) of menuTree"
       :key="index"
       :id="item.id"
       :avatar="item.avatar"
       :title="item.title"
       :collapse="!!menuState.collapse[item.id]"
       :active="!!menuState.active[item.id]"
-      :showRightIcon="item.children?.length >= 0"
+      :showRightIcon="item.children?.length > 0"
       :iconMode="menuState.iconMode"
       @clickMenu="clickMenu(item)"
     >
@@ -53,7 +57,7 @@ const toggleIconMode = () => {
         :title="item2.title"
         :collapse="!!menuState.collapse[item2.id]"
         :active="!!menuState.active[item2.id]"
-        :showRightIcon="item2.children?.length >= 0"
+        :showRightIcon="item2.children?.length > 0"
         :iconMode="menuState.iconMode"
         @clickMenu="clickMenu(item2)"
       >
@@ -65,7 +69,7 @@ const toggleIconMode = () => {
           :title="item3.title"
           :collapse="!!menuState.collapse[item3.id]"
           :active="!!menuState.active[item3.id]"
-          :showRightIcon="item3.children?.length >= 0"
+          :showRightIcon="item3.children?.length > 0"
           :iconMode="menuState.iconMode"
           @clickMenu="clickMenu(item3)"
         >
@@ -77,7 +81,7 @@ const toggleIconMode = () => {
             :title="item4.title"
             :collapse="!!menuState.collapse[item4.id]"
             :active="!!menuState.active[item4.id]"
-            :showRightIcon="item4.children?.length >= 0"
+            :showRightIcon="item4.children?.length > 0"
             :iconMode="menuState.iconMode"
             @clickMenu="clickMenu(item4)"
           />
