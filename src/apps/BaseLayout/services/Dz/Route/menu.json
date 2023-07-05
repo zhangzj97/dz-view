@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "parentId": "0",
+    "avatar": "el:adjust-alt",
+    "title": "t1"
+  },
+  {
+    "id": "2",
+    "parentId": "0",
+    "avatar": "el:adjust-alt",
+    "title": "t2"
+  },
+  {
+    "id": "21",
+    "parentId": "2",
+    "avatar": "el:address-book",
+    "title": "t2-1"
+  },
+  {
+    "id": "22",
+    "parentId": "2",
+    "avatar": "el:address-book",
+    "title": "t2-2"
+  },
+  {
+    "id": "221",
+    "parentId": "22",
+    "avatar": "el:address-book",
+    "title": "t2-2-1"
+  },
+  {
+    "id": "222",
+    "parentId": "22",
+    "avatar": "el:address-book",
+    "title": "t2-2-2"
+  },
+  {
+    "id": "2221",
+    "parentId": "222",
+    "avatar": "el:address-book",
+    "title": "t2-2-2-1"
+  },
+  {
+    "id": "3",
+    "parentId": "0",
+    "avatar": "el:adjust-alt",
+    "title": "t3"
+  },
+  {
+    "id": "4",
+    "parentId": "0",
+    "avatar": "el:adjust-alt",
+    "title": "t4"
+  },
+  {
+    "id": "41",
+    "parentId": "4",
+    "avatar": "el:address-book",
+    "title": "t4-1"
+  },
+  {
+    "id": "42",
+    "parentId": "4",
+    "avatar": "el:address-book",
+    "title": "t4-2"
+  }
+]
