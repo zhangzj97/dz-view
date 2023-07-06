@@ -11,10 +11,14 @@ defineProps<{
 
 const emit = defineEmits<{
   (e: 'removeRouteTag', value: any): void;
+  (e: 'clickRouteTag', value: any): void;
 }>();
 
 const removeRouteTag = (item: any) => {
   emit('removeRouteTag', item);
+};
+const clickRouteTag = (item: any) => {
+  emit('clickRouteTag', item);
 };
 </script>
 
@@ -25,6 +29,7 @@ const removeRouteTag = (item: any) => {
     class="border-[1px] border-gray-300 rounded-md group"
     hover="hover:bg-gray-100"
     pointer
+    @click="clickRouteTag({ id })"
   >
     <v-space s="w-4 h-grow" />
     <v-text

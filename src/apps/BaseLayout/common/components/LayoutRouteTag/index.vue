@@ -21,7 +21,9 @@ onBeforeRouteUpdate(async (to, form, next) => {
 
 const clickRouteTag = ({ id }: any) => {
   const item = menuState.map[id];
-  const { path } = item;
+  const { code } = item;
+
+  router.push({ name: code });
 };
 
 const removeRouteTag = async ({ id }: any) => {
@@ -49,8 +51,8 @@ const openList = computed(() => {
         :title="menuState.map[id].title"
         :active="!!routeTagState.active[id]"
         :showRightIcon="!menuState.map[id].fixedTag"
-        @click="clickRouteTag(menuState.map[id])"
-        @removeRouteTag="removeRouteTag(menuState.map[id])"
+        @clickRouteTag="clickRouteTag"
+        @removeRouteTag="removeRouteTag"
       />
       <v-space s="w-grow h-grow" />
     </v>
