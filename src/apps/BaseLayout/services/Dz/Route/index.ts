@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { menuList } from './data';
-import { useCollection } from '@/hooks/useCollection';
 
 const { formatTree } = useCollection();
+const { debug } = useLog({ module: 'Dz/Route', color: 'blue' });
 
 export const useStore = defineStore('Dz/Route', () => {
   const menuState = reactive<any>({
@@ -10,14 +10,11 @@ export const useStore = defineStore('Dz/Route', () => {
     tree: [],
     map: {},
 
-    levelTopModa: false,
-    levelTopMenuId: '0',
-
-    iconMode: false,
-
-    collapse: {},
-    active: {},
-    show: {},
+    levelTopModa: false, // [顶级菜单模式] Switch
+    levelTopMenuId: '0', // [顶级菜单模式] 选择的 Id
+    iconMode: false, // [图标模式] Switch
+    collapse: {}, // [收缩] State
+    active: {}, // [高亮] State
   });
 
   const routeTagState = reactive<any>({
@@ -25,11 +22,9 @@ export const useStore = defineStore('Dz/Route', () => {
     tree: [],
     map: {},
 
-    collapse: {},
-    active: {},
-
-    fixed: [],
-    open: [],
+    active: {}, // [高亮] State
+    fixed: [], // [展示列表] 固定
+    open: [], // [展示列表] 非固定
   });
 
   const Test = payload => {
@@ -40,11 +35,14 @@ export const useStore = defineStore('Dz/Route', () => {
 
   const RefreshMenu = payload => {
     return new Promise(resolve => {
+      debug('获取数据并 formatTree', 'RefreshMenu');
+      debug('menuState 更新 format 后的数据', 'RefreshMenu');
       const { list, map, tree } = formatTree({ list: menuList });
       menuState.list = list;
       menuState.tree = tree;
       menuState.map = map;
 
+      debug('routeTagState 更新 展示列表固定 fixed 的数据', 'RefreshMenu');
       routeTagState.fixed = list
         .filter(item => item.fixedTag)
         .map(item => item.id);
@@ -56,24 +54,17 @@ export const useStore = defineStore('Dz/Route', () => {
   const AddRouteTag = payload => {
     const { id } = payload;
     return new Promise(resolve => {
-      if (id && routeTagState.fixed.includes(id)) {
-        console.log('[1] fixed 存在');
-        resolve({ data: {} });
-        return;
-      }
-
-      if (id && routeTagState.open.includes(id)) {
-        console.log('[1] open 存在');
-        resolve({ data: {} });
-        return;
-      }
-
-      if (id && !routeTagState.open.includes(id)) {
-        console.log('[1] open 不存在');
+      if (!id) {
+        debug('失败: id 错误', 'AddRouteTag');
+      } else if (id && routeTagState.fixed.includes(id)) {
+        debug('失败: routeTagState.fixed 存在', 'AddRouteTag');
+      } else if (id && routeTagState.open.includes(id)) {
+        debug('失败: routeTagState.open 存在', 'AddRouteTag');
+      } else if (id && !routeTagState.open.includes(id)) {
+        debug('成功: routeTagState.open', 'AddRouteTag');
         routeTagState.open.push(id);
-        resolve({ data: {} });
-        return;
       }
+      resolve({ data: {} });
     });
   };
 
