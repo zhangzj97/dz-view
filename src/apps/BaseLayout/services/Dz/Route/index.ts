@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import menuList from '@/resources/menus/data.json';
+import { menuList } from './data';
 import { useCollection } from '@/hooks/useCollection';
 
 const { formatTree } = useCollection();
