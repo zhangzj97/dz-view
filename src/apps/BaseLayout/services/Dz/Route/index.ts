@@ -1,21 +1,14 @@
 import { defineStore } from 'pinia';
-import routesList from '@/resources/routes/data.json';
-import menuList from './menu.json';
+import menuList from '@/resources/menus/data.json';
 import { useCollection } from '@/hooks/useCollection';
 
 const { formatTree } = useCollection();
 
-const { tree, map } = formatTree({ list: menuList });
-
 export const useStore = defineStore('Dz/Route', () => {
-  const routeState = reactive({
-    list: routesList,
-  });
-
-  const menuState = reactive({
-    list: menuList,
-    tree: tree,
-    map: map,
+  const menuState = reactive<any>({
+    list: [],
+    tree: [],
+    map: {},
 
     levelTopModa: false,
     levelTopMenuId: '0',
@@ -27,13 +20,16 @@ export const useStore = defineStore('Dz/Route', () => {
     show: {},
   });
 
-  const routeTagState = reactive({
-    list: menuList,
-    map: map,
+  const routeTagState = reactive<any>({
+    list: [],
+    tree: [],
+    map: {},
 
     collapse: {},
     active: {},
-    show: {},
+
+    fixed: [],
+    open: [],
   });
 
   const Test = payload => {
@@ -42,14 +38,75 @@ export const useStore = defineStore('Dz/Route', () => {
     });
   };
 
-  const GetState = () => ({ menuState, routeState, routeTagState });
+  const RefreshMenu = payload => {
+    return new Promise(resolve => {
+      const { list, map, tree } = formatTree({ list: menuList });
+      menuState.list = list;
+      menuState.tree = tree;
+      menuState.map = map;
+
+      routeTagState.fixed = list
+        .filter(item => item.fixedTag)
+        .map(item => item.id);
+
+      resolve({ data: { menu: list } });
+    });
+  };
+
+  const AddRouteTag = payload => {
+    const { id } = payload;
+    return new Promise(resolve => {
+      if (id && routeTagState.fixed.includes(id)) {
+        console.log('[1] fixed 存在');
+        resolve({ data: {} });
+        return;
+      }
+
+      if (id && routeTagState.open.includes(id)) {
+        console.log('[1] open 存在');
+        resolve({ data: {} });
+        return;
+      }
+
+      if (id && !routeTagState.open.includes(id)) {
+        console.log('[1] open 不存在');
+        routeTagState.open.push(id);
+        resolve({ data: {} });
+        return;
+      }
+    });
+  };
+
+  const RemoveRouteTag = payload => {
+    const { id } = payload;
+    return new Promise(resolve => {
+      routeTagState.open = routeTagState.open.filter((item: any) => item != id);
+
+      resolve({ data: {} });
+    });
+  };
+
+  const RemoveAllRouteTag = payload => {
+    return new Promise(resolve => {
+      routeTagState.open = [];
+
+      resolve({ data: {} });
+    });
+  };
+
+  const GetState = () => ({ menuState, routeTagState });
 
   return {
-    routeState,
     routeTagState,
     menuState,
 
     Test,
+    RefreshMenu,
+
+    AddRouteTag,
+    RemoveRouteTag,
+    RemoveAllRouteTag,
+
     GetState,
   };
 });
