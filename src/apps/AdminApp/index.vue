@@ -1,6 +1,6 @@
 <script setup lang="ts" name="App">
 // import LayoutPage from '../BaseLayout/common/layouts/AdminDz/index.vue';
-import LayoutPage from '../BaseLayout/common/layouts/AdminDz/index.vue';
+import LayoutPage from '../BaseLayout/common/layouts/AdminDzTest/index.vue';
 import { config } from './common/config';
 
 // 处理layout相关
@@ -10,7 +10,7 @@ config.layout.logo.icon2 = '';
 config.layout.logo.text = '达泽科技';
 config.layout.logo.icon1Style = 'scale-90';
 config.layout.logo.icon2Style = 'text-black';
-config.layout.logo.textStyle = 'text-3xl text-gray-500 font-black ';
+config.layout.logo.textStyle = 'text-3xl text-gray-300 font-black ';
 
 provide('config', config);
 </script>
