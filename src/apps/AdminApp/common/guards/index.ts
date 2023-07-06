@@ -1,4 +1,3 @@
-import { useService } from '@/hooks/useService';
 import { router } from '@/router';
 
 import NProgress from 'nprogress';
@@ -8,11 +7,9 @@ import 'nprogress/nprogress.css';
 NProgress.configure({ showSpinner: false });
 
 const { dispatch } = useService();
+const { debug } = useLog({ module: 'AdminApp/Guard', color: 'blue' });
 
 export const beforeEnter = async (to, from, next) => {
-  NProgress.start();
-  console.log('NProgress.start');
-
   const { redirectedFrom } = to;
 
   // 判断参数
@@ -22,60 +19,58 @@ export const beforeEnter = async (to, from, next) => {
   const fromPath = from.path;
   const reName = redirectedFrom?.name;
   const rePath = redirectedFrom?.path;
+  // console.table({ toName, toPath, fromName, fromPath, reName, rePath });
 
-  console.log({ toName, toPath, fromName, fromPath, reName, rePath });
+  // 循环后存在
+  if (reName === 'Other' && toPath === rePath) {
+    console.log('第二轮 可以访问路由');
 
-  console.log('[Step 0]: 路由');
+    next();
+    return;
+  } else {
+    debug('开始 beforeEnter');
+  }
 
-  // 404
   if (toName === 'NotFound') {
-    console.log('[Step 1]: 404');
-
+    debug('直接访问 /404');
     next();
     return;
   }
 
-  // 已经存在的路由
   if (!reName) {
-    console.log('[Step 1]: 已经存在的路由');
+    debug('直接方位 已经注册的路由');
     next();
     return;
   }
 
-  // 根路由
   if (reName === 'Root') {
-    console.log('[Step 1]: 根路由');
+    debug('直接访问 /');
     next();
     return;
   }
 
-  // 未存在的路由
   if (reName === 'Other' && toPath !== rePath) {
-    console.log('[Step 1]: 未存在的路由');
+    debug('未注册的路由');
 
     const { data } = await dispatch('Dz/Route.RefreshMenu', {});
 
     let redirectName = '';
 
+    debug('开始注册路由', 'RegisterRoute');
     data.menu.forEach(item => {
       const { component, code, appName, path, id, title } = item;
 
       if (!component) {
-        console.log('[Step 2]: 不是路由', code, title, id);
+        debug(`无法注册: 不是路由 ${code}-${id}`, 'RegisterRoute');
         return;
       }
-
-      console.log('[Step 2]: 是路由', code, title, id);
 
       if (!router.hasRoute(appName)) {
-        console.log('[Step 2]: 没有 appName', code, title, id);
+        debug(`无法注册: 没有 appName ${code}-${id}`, 'RegisterRoute');
         return;
       }
 
-      // console.log({
-      //   x: String(redirectedFrom.path).toLowerCase(),
-      //   y: String(path).toLowerCase(),
-      // });
+      debug(`可以注册 ${code}-${id}`, 'RegisterRoute');
 
       if (
         String(redirectedFrom.path).toLowerCase() === String(path).toLowerCase()
@@ -93,32 +88,20 @@ export const beforeEnter = async (to, from, next) => {
     });
 
     if (!redirectName) {
-      console.log('[Step 3]: 还是没有 去 404');
+      debug(`注册完后没有该数据 访问/404`);
 
       next({ name: 'NotFound' });
       return;
     }
 
     if (redirectName) {
-      console.log('[Step 3]: 更新后有了');
+      debug(`注册完后存在该数据 访问路由`);
       next({ name: redirectName });
       return;
     }
   }
-
-  // 循环后存在
-  if (reName === 'Other' && toPath === rePath) {
-    console.log('[Step 1]: 循环后存在');
-
-    next();
-    return;
-  }
-
-  next();
-  return;
 };
 
 export const beforeEach = async () => {
   NProgress.start();
-  console.log('NProgress.start');
 };
