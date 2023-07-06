@@ -1,6 +1,5 @@
 <script setup lang="ts" name="App">
-// import LayoutPage from '../BaseLayout/common/layouts/AdminDz/index.vue';
-import LayoutPage from '../BaseLayout/common/layouts/AdminDzTest/index.vue';
+import LayoutPage from '../BaseLayout/common/layouts/AdminDz/index.vue';
 import { config } from './common/config';
 
 // 处理layout相关
