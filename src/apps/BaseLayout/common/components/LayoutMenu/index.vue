@@ -8,9 +8,12 @@ const { getState } = useService();
 
 const { menuState } = getState('Dz/Route');
 
+const router = useRouter();
+const route = useRoute();
+
 const clickMenu = ({ id }: any) => {
   const item = menuState.map[id];
-  const { treePath } = item;
+  const { treePath, path } = item;
 
   if (menuState.collapse[id] === true) {
     menuState.collapse[id] = false;
@@ -21,6 +24,10 @@ const clickMenu = ({ id }: any) => {
   treePath.split(',').forEach((item: string) => {
     menuState.collapse[item] = true;
   });
+
+  if (path) {
+    router.push({ path });
+  }
 };
 
 const menuTree = computed(() => {
