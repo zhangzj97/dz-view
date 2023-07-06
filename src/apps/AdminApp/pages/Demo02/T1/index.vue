@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ControlInput from './components/ControlInput.vue';
+import NProgress from 'nprogress';
 
 import { useForm } from './useForm';
 
@@ -43,6 +44,13 @@ const schema = reactive({
 
   // 事件
   event: {},
+});
+
+onMounted(() => {
+  setTimeout(() => {
+    NProgress.done();
+    console.log('NProgress.done');
+  }, 3000);
 });
 </script>
 
