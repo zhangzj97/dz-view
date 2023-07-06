@@ -10,11 +10,11 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'closeRouteTag', value: any): void;
+  (e: 'removeRouteTag', value: any): void;
 }>();
 
-const closeRouteTag = (item: any) => {
-  emit('closeRouteTag', item);
+const removeRouteTag = (item: any) => {
+  emit('removeRouteTag', item);
 };
 </script>
 
@@ -33,7 +33,12 @@ const closeRouteTag = (item: any) => {
       :text="title"
     />
     <v-space s="w-4 h-grow" />
-    <v s="w-8 h-8" v="mouse-gray" @click="closeRouteTag({ id })">
+    <v
+      v-if="showRightIcon"
+      s="w-8 h-8"
+      v="mouse-gray"
+      @click="removeRouteTag({ id })"
+    >
       <v-icon
         v="8-50"
         t="text-gray-300"
