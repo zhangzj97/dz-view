@@ -15,6 +15,7 @@ export default defineConfig({
       dts: './types/unplugin-auto-import.d.ts',
       imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
       resolvers: [],
+      dirs: ['./src/hooks/useLog'],
     }),
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
