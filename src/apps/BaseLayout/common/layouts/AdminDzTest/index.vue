@@ -9,6 +9,9 @@ import LayoutMenuLevelTop from '@/apps/BaseLayout/common/components/LayoutMenuLe
 
 import PaneDzRouteTest01 from './components/PaneDzRouteTest01.vue';
 import PaneDzRouteTest02 from './components/PaneDzRouteTest02.vue';
+import PaneDzRouteTest03 from './components/PaneDzRouteTest03.vue';
+import PaneDzRouteTest04 from './components/PaneDzRouteTest04.vue';
+import PaneDzRouteTest05 from './components/PaneDzRouteTest05.vue';
 
 import PaneDzModalTest01 from './components/PaneDzModalTest01.vue';
 import PaneDzModalTest02 from './components/PaneDzModalTest02.vue';
@@ -70,6 +73,9 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
           <v s="w-grow h-grow" text="DzRouteTest"></v>
           <PaneDzRouteTest01 />
           <PaneDzRouteTest02 />
+          <PaneDzRouteTest03 />
+          <PaneDzRouteTest04 />
+          <PaneDzRouteTest05 />
         </v>
         <v s="w-grow h-16" text="test1">
           <v s="w-grow h-grow" text="DzOtherTest"></v>
@@ -103,7 +109,9 @@ import PaneDzDrawerTest10 from './components/PaneDzDrawerTest10.vue';
           <PaneDzDrawerTest10 />
         </v>
 
-        <v s="w-grow h-grow" text="body"></v>
+        <v s="w-grow h-grow" text="body">
+          <slot></slot>
+        </v>
       </v>
     </v>
   </v>
