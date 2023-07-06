@@ -7,16 +7,20 @@ export const useLog = ({ module, color }) => {
     console.log(`[Trace] ${text}`, 'background: #222; color: #bada55');
   };
 
-  const debug = (text, module2 = false) => {
+  const debug = (text, module2 = '') => {
     const module3 = module2 || module;
+
+    if (!logMap[module3]) {
+      logMap[module3] = 1;
+    }
     console.log(
-      `%c[Debug]%c[${module}]%c[Step ${logMap[module3]}] %c${text}`,
+      `%c[Debug]%c[${module3}]%c[Step ${logMap[module3]}] %c${text}`,
       'color: green',
       'color: green',
       '',
       `color: ${color || 'blue'}`
     );
-    logMap[module] += 1;
+    logMap[module3] += 1;
   };
 
   const info = (text, module) => {
