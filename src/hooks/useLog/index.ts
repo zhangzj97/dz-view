@@ -31,6 +31,8 @@ export const useLog = ({ module, color }) => {
   };
 
   return {
+    trace,
+    info,
     debug,
     warn,
     error,
