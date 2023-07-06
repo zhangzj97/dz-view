@@ -78,27 +78,55 @@ export const useCollection = () => {
     };
     const tree = treeIndexMap[0].map(loopFixTree({ level: 1, treePath: '' }));
 
+    // TODO 性能测试
+    // tree 先转map 再转lit
     const loopToMap = option => item => {
       const { id, children } = item;
 
       if (children?.length === 0) {
-        treeMap[id] = {
+        formatedMap[id] = {
           ...item,
           children: [],
         };
       } else {
         children.forEach(loopToMap({}));
-        treeMap[id] = {
+        formatedMap[id] = {
           ...item,
           children: children.map(item => item.id),
         };
       }
     };
-    const treeMap = {};
+    const formatedMap = {};
     tree.forEach(loopToMap({}));
+    const formatedList = Object.entries(formatedMap).map(([, value]) => value);
+
+    // /// tree 先转list 再转map
+    // const loopToList = option => item => {
+    //   const { id, children } = item;
+
+    //   if (children?.length === 0) {
+    //     formatedList.push({
+    //       ...item,
+    //       children: [],
+    //     });
+    //   } else {
+    //     children.forEach(loopToList({}));
+    //     formatedList.push({
+    //       ...item,
+    //       children: children.map(item => item.id),
+    //     });
+    //   }
+    // };
+    // const formatedList: any[] = [];
+    // tree.forEach(loopToList({}));
+    // const formatedMap2 = Object.fromEntries(
+    //   formatedList.map(item => [item?.id, item])
+    // );
+    // ///
 
     return {
-      map: treeMap,
+      list: formatedList,
+      map: formatedMap,
       tree,
     };
   };
