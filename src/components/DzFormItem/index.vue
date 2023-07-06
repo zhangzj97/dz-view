@@ -44,7 +44,8 @@ defineExpose({
 </script>
 
 <template>
-  <v :s="s ? s : 'w-fit h-fit'" :w="w">
+  <h1>123</h1>
+  <!-- <v :s="s ? s : 'w-fit h-fit'" :w="w">
     <v s="w-grow h-grow">
       <v s="w-24 h-grow">
         <v s="w-grow h-grow" space />
@@ -67,7 +68,7 @@ defineExpose({
       </v>
       <slot></slot>
     </v>
-  </v>
+  </v> -->
 </template>
 
 <style scoped lang="scss"></style>
