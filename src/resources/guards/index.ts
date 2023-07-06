@@ -9,5 +9,5 @@ NProgress.configure({ showSpinner: false });
 
 export const createRouteGuard = (router: Router) => {
   // 路由
-  setupBaseGuard(router);
+  // setupBaseGuard(router);
 };
