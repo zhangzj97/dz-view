@@ -71,7 +71,7 @@ const emit = defineEmits<{
 
 <template>
   <v class="dz-card v202301" :s="s" :w="w" col>
-    <v s="w-grow h-fit">
+    <v v-if="title" s="w-grow h-fit">
       <v-space :s="icon ? 'w-2 h-grow' : 'w-4 h-grow'" />
       <v v-if="icon" s="w-10 h-grow">
         <v-icon v="10-50" :icon="icon" />
