@@ -67,11 +67,13 @@ const props = withDefaults(
     s: 'w-grow h-grow',
   }
 );
+const slotDefault = !!useSlots().default;
 </script>
 
 <template>
+  <v-desc v-if="text && !slotDefault" v-bind="props" />
   <div
-    v-if="text"
+    v-else
     class="dz-view v202301"
     :class="[
       s,
@@ -88,9 +90,6 @@ const props = withDefaults(
   >
     <slot></slot>
   </div>
-  <v-desc v-else v-bind="props">
-    <slot></slot>
-  </v-desc>
 </template>
 
 <style scoped lang="scss">
