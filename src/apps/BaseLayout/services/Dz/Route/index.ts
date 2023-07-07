@@ -6,9 +6,9 @@ const { debug } = useLog({ module: 'Dz/Route', color: 'blue' });
 
 export const useStore = defineStore('Dz/Route', () => {
   const menuState = reactive<any>({
-    list: [],
-    tree: [],
-    map: {},
+    list: [], // [数据]
+    tree: [], // [数据]
+    map: {}, // [数据]
 
     levelTopModa: false, // [顶级菜单模式] Switch
     levelTopMenuId: '0', // [顶级菜单模式] 选择的 Id
@@ -18,9 +18,9 @@ export const useStore = defineStore('Dz/Route', () => {
   });
 
   const routeTagState = reactive<any>({
-    list: [],
-    tree: [],
-    map: {},
+    list: [], // [数据]
+    tree: [], // [数据]
+    map: {}, // [数据]
 
     active: {}, // [高亮] State
     fixed: [], // [展示列表] 固定
@@ -44,8 +44,8 @@ export const useStore = defineStore('Dz/Route', () => {
 
       debug('routeTagState 更新 展示列表固定 fixed 的数据', 'RefreshMenu');
       routeTagState.fixed = list
-        .filter(item => item.fixedTag)
-        .map(item => item.id);
+        .filter((item: any) => item.fixedTag)
+        .map((item: any) => item.id);
 
       resolve({ data: { menu: list } });
     });
