@@ -55,11 +55,11 @@ export const useStore = defineStore('Dz/Route', () => {
     const { id } = payload;
     return new Promise(resolve => {
       if (!id) {
-        debug('失败: id 错误', 'AddRouteTag');
+        debug('失败: id 错误', 'AddRouteTag', { payload });
       } else if (id && routeTagState.fixed.includes(id)) {
-        debug('失败: routeTagState.fixed 存在', 'AddRouteTag');
+        debug('失败: routeTagState.fixed 存在', 'AddRouteTag', { payload });
       } else if (id && routeTagState.open.includes(id)) {
-        debug('失败: routeTagState.open 存在', 'AddRouteTag');
+        debug('失败: routeTagState.open 存在', 'AddRouteTag', { payload });
       } else if (id && !routeTagState.open.includes(id)) {
         debug('成功: routeTagState.open', 'AddRouteTag');
         routeTagState.open.push(id);
