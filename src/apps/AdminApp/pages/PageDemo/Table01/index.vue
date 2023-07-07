@@ -19,54 +19,32 @@ const handleVisibleQuery = () => {
 </script>
 
 <template>
-  <v s="w-grow h-grow" col class="p-4">
+  <v s="w-grow h-grow" w="overflow-auto p-4" col>
     <v s="w-grow h-16" text="tab"></v>
     <v s="w-grow h-grow">
       <v s="w-grow h-grow" col text="list">
-        <v s="w-grow h-fit" grid text="query">
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item1" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item2" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
-          <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
+        <dz-card s="w-grow h-fit" icon="mdi:close">
+          <v s="w-grow h-fit" grid text="query">
+            <v s="w-fit h-16" w="min-w-[160px]" text="form-item1" />
+            <v s="w-fit h-16" w="min-w-[160px]" text="form-item2" />
+            <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
+            <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
+            <v s="w-fit h-16" w="min-w-[160px]" text="form-item4" />
+          </v>
 
-          <v s="w-grow h-16" w="min-w-[160px] gap-2">
-            <v-space s="w-grow h-grow" />
+          <template #action>
             <dz-btn type="primary" title="确认" @click="handleOkQuery" />
             <dz-btn title="重置" @clic="handleResetQuery" />
-          </v>
-        </v>
+          </template>
+        </dz-card>
+
         <v s="w-grow h-grow" text="list"> </v>
         <v s="w-grow h-footer" text="page"></v>
       </v>
 
-      <dz-card
-        s="w-grow h-grow"
-        class="bg-red-200"
-        title="编辑"
-        icon="mdi:close"
-      >
-        <v
-          s="w-grow h-grow"
-          w="min-w-[200px] min-h-[30vh] overflow-auto"
-          class="shadow-inner"
-          col
-          text="form"
-        >
+      <dz-card s="w-[520px] h-grow" class="card-lg" title="编辑">
+        <v s="w-grow h-grow" w="overflow-auto" class="shadow-inner" col>
           <v s="w-grow h-fit" col>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
-            <v s="w-grow h-16" text="form-item"></v>
             <v s="w-grow h-16" text="form-item"></v>
             <v s="w-grow h-16" text="form-item"></v>
             <v s="w-grow h-16" text="form-item"></v>
