@@ -75,6 +75,7 @@ withDefaults(
       grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
       pointer && 'dz-view-pointer',
+      'overflow-hidden',
     ]"
   >
     <slot>
