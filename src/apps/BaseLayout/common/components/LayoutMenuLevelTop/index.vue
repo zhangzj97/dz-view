@@ -6,7 +6,13 @@ const { getState } = useService();
 const { menuState } = getState('Dz/Route');
 
 const clickMenu = ({ id }: any) => {
-  menuState.levelTopMenuId = id;
+  if (menuState.levelTopMenuId === id) {
+    menuState.levelTopMode = false;
+    menuState.levelTopMenuId = '';
+  } else {
+    menuState.levelTopMode = true;
+    menuState.levelTopMenuId = id;
+  }
 };
 </script>
 
