@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import V from '@/components/VDesc/index.vue';
-
 import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserProfile/index.vue';
 import LayoutLogo from '@/apps/BaseLayout/common/components/LayoutLogo/index.vue';
 import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
