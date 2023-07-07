@@ -7,19 +7,31 @@ export const useLog = ({ module, color }) => {
     console.log(`[Trace] ${text}`, 'background: #222; color: #bada55');
   };
 
-  const debug = (text, module2 = '') => {
+  const debug = (text, module2 = '', debugData: any = false) => {
     const module3 = module2 || module;
 
     if (!logMap[module3]) {
       logMap[module3] = 1;
     }
-    console.log(
-      `%c[Debug]%c[${module3}]%c[Step ${logMap[module3]}] %c${text}`,
-      'color: green',
-      'color: green',
-      '',
-      `color: ${color || 'blue'}`
-    );
+    if (debugData) {
+      console.warn(
+        `%c[Debug]%c[${module3}]%c[Step ${logMap[module3]}] %c${text}`,
+        'color: green',
+        'color: green',
+        '',
+        `color: ${color || 'blue'}`
+      );
+      console.log('   Trace: ', debugData);
+    } else {
+      console.log(
+        `%c[Debug]%c[${module3}]%c[Step ${logMap[module3]}] %c${text}`,
+        'color: green',
+        'color: green',
+        '',
+        `color: ${color || 'blue'}`
+      );
+    }
+
     logMap[module3] += 1;
   };
 
