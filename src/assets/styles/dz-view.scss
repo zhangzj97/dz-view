@@ -20,6 +20,7 @@
 }
 .dz-view.v202301.dz-view-grid {
   flex-wrap: wrap;
+  align-content: flex-start;
 }
 .dz-view.v202301.dz-view-pointer {
   cursor: pointer;
@@ -28,6 +29,10 @@
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.dz-view.v202301.fixed {
+  position: fixed;
 }
 
 .dz-view.v202301.dz-view-absolute-top {
@@ -62,6 +67,11 @@
 .dz-view.v202301::-webkit-scrollbar {
   width: 0px;
   height: 0px;
+}
+
+.dz-view.v202301.scrollbar::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
 }
 
 .dz-view.v202301.dz-view-col > .w-grow {
