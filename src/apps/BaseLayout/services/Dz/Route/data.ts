@@ -1,3 +1,27 @@
+const AdminAppPageDemo = [
+  'PageDemo/Card01',
+  'PageDemo/Card02',
+  'PageDemo/Card03',
+  'PageDemo/Card04',
+  'PageDemo/Card05',
+  'PageDemo/Card06',
+  'PageDemo/Card07',
+  'PageDemo/Card08',
+  'PageDemo/Card09',
+  'PageDemo/Card10',
+].map((item, index) => ({
+  id: `9${index}`,
+  parentId: '9',
+  avatar: 'el:address-book',
+  title: `${item}`,
+
+  appName: 'AdminApp',
+
+  code: `AdminApp.${item}`,
+  path: `/${item}`,
+  component: `/AdminApp/pages/${item}`,
+}));
+
 export const menuList = [
   {
     id: '9',
@@ -7,31 +31,7 @@ export const menuList = [
     path: '',
   },
 
-  {
-    id: '91',
-    parentId: '9',
-    avatar: 'el:address-book',
-    title: 'Table01',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp.PageDemo/Table01',
-    path: '/PageDemo/Table01',
-    component: '/AdminApp/pages/PageDemo/Table01',
-  },
-
-  {
-    id: '92',
-    parentId: '9',
-    avatar: 'el:address-book',
-    title: 'Table02',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp.PageDemo/Table02',
-    path: '/PageDemo/Table02',
-    component: '/AdminApp/pages/PageDemo/Table02',
-  },
+  ...AdminAppPageDemo,
 
   {
     id: '2221',
