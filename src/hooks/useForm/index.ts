@@ -45,6 +45,10 @@ export const useForm = ({ module }) => {
     schema.dom[code].setValue(value, option);
   };
 
+  const getValue = code => {
+    return data.value[code];
+  };
+
   const validate = code => async option => {
     return await schema.dom[code].validate(option);
   };
@@ -57,6 +61,7 @@ export const useForm = ({ module }) => {
     bind,
     setState,
     setValue,
+    getValue,
     validate,
 
     itemVm,
