@@ -1,4 +1,4 @@
-const AdminAppPageDemo = [
+const AdminAppPageDemoCard = [
   'PageDemo/Card01',
   'PageDemo/Card02',
   'PageDemo/Card03',
@@ -10,8 +10,32 @@ const AdminAppPageDemo = [
   'PageDemo/Card09',
   'PageDemo/Card10',
 ].map((item, index) => ({
-  id: `9${index}`,
-  parentId: '9',
+  id: `AdminAppPageDemoCard${index}`,
+  parentId: 'AdminAppPageDemoCard',
+  avatar: 'el:address-book',
+  title: `${item}`,
+
+  appName: 'AdminApp',
+
+  code: `AdminApp.${item}`,
+  path: `/${item}`,
+  component: `/AdminApp/pages/${item}`,
+}));
+
+const AdminAppPageDemoForm = [
+  'PageDemo/Form01',
+  'PageDemo/Form02',
+  'PageDemo/Form03',
+  'PageDemo/Form04',
+  'PageDemo/Form05',
+  'PageDemo/Form06',
+  'PageDemo/Form07',
+  'PageDemo/Form08',
+  'PageDemo/Form09',
+  'PageDemo/Form10',
+].map((item, index) => ({
+  id: `AdminAppPageDemoForm${index}`,
+  parentId: 'AdminAppPageDemoForm',
   avatar: 'el:address-book',
   title: `${item}`,
 
@@ -24,14 +48,23 @@ const AdminAppPageDemo = [
 
 export const menuList = [
   {
-    id: '9',
+    id: 'AdminAppPageDemoCard',
     parentId: '0',
     avatar: 'el:adjust-alt',
-    title: 'AdminAppTest',
+    title: 'Card',
     path: '',
   },
 
-  ...AdminAppPageDemo,
+  {
+    id: 'AdminAppPageDemoForm',
+    parentId: '0',
+    avatar: 'el:adjust-alt',
+    title: 'Form',
+    path: '',
+  },
+
+  ...AdminAppPageDemoForm,
+  ...AdminAppPageDemoCard,
 
   {
     id: '2221',
