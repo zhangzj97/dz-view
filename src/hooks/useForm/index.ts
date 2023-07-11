@@ -13,39 +13,52 @@ export const useForm = ({ module }) => {
     value: {},
   });
 
-  const bind = (field, plugin) => {
-    let [code] = [null];
-    if (typeof field === 'string') {
-      code = field;
-    } else {
-      code = field.code;
-    }
-    return {
-      ref: el => {
-        schema.dom[code] = el;
-      },
-      field,
-      plugin,
-      state: schema.state[code] || {},
-      layout: schema.layout[code] || {},
-      tooltip: schema.tooltip[code] || {},
-      validator: schema.validator[code] || {},
+  const bind =
+    field =>
+    (plugin, option = {}) => {
+      let [code] = [null];
+      if (typeof field === 'string') {
+        code = field;
+      } else {
+        code = field.code;
+      }
+      return {
+        ref: el => {
+          schema.dom[code] = el;
+        },
+        field,
+        plugin,
+        state: schema.state[code] || {},
+        layout: schema.layout[code] || {},
+        tooltip: schema.tooltip[code] || {},
+        validator: schema.validator[code] || {},
 
-      data: data,
+        data: data,
+      };
     };
+
+  const setState = code => (value, option) => {
+    schema.dom[code].setState(value, option);
   };
 
-  const setState = code => (key, value) => {
-    schema.dom[code].setState(key, value);
+  const setValue = code => (value, option) => {
+    schema.dom[code].setValue(value, option);
   };
 
-  const setValue = code => value => {
-    schema.dom[code].setValue(key, value);
+  const validate = code => async option => {
+    return await schema.dom[code].validate(option);
   };
 
-  const validate = code => () => {
-    schema.dom[code].validate(key, value);
-  };
+  const itemVm = code => schema.dom[code].plugin;
 
-  return { schema, bind, setState, data };
+  return {
+    schema,
+    data,
+    bind,
+    setState,
+    setValue,
+    validate,
+
+    itemVm,
+  };
 };
