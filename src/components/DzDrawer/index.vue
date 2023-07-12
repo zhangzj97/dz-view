@@ -6,7 +6,7 @@ import '@arco-design/web-vue/es/drawer/style/css';
 
 import type { DzDrawerComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state: DzViewStateProps;
+  state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});

@@ -3,7 +3,7 @@ defineOptions({ name: 'DzCard' });
 
 import type { DzCardComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state: DzViewStateProps;
+  state?: DzViewStateProps;
   footer?: boolean;
 }
 const props = withDefaults(defineProps<DzCardComponentProps & Props>(), {});

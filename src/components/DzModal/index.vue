@@ -6,7 +6,7 @@ import '@arco-design/web-vue/es/modal/style/css';
 
 import type { DzModalComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state: DzViewStateProps;
+  state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzModalComponentProps & Props>(), {});

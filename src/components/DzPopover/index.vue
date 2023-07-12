@@ -10,7 +10,7 @@ import type {
   DzViewStateProps,
 } from '@/types/dz-view';
 interface Props {
-  state: DzViewStateProps;
+  state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
   tooltip?: string;
   trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
