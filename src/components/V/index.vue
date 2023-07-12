@@ -1,79 +1,15 @@
 <script setup lang="ts">
-import VDesc from './components/VDesc.vue';
+// eslint-disable-next-line vue/multi-word-component-names
+defineOptions({ name: 'V' });
 
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
-}
+import DescText from './components/DescText.vue';
 
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewMouseProps {
-  v?: 'mouse-gray';
-}
-
-const props = withDefaults(
-  defineProps<
-    DzBaseProps &
-      DzViewFlexProps &
-      DzViewPositionProps &
-      DzViewCursorProps &
-      DzViewSpaceProps &
-      DzViewTextProps &
-      DzViewMouseProps
-  >(),
-  {
-    s: 'w-grow h-grow',
-  }
-);
-const slotDefault = !!useSlots().default;
+import type { DzViewComponentProps } from '@/types/dz-view';
+withDefaults(defineProps<DzViewComponentProps>(), {});
 </script>
 
 <template>
-  <v-desc v-if="text && !slotDefault" v-bind="props" />
   <div
-    v-else
     class="dz-view v202301"
     :class="[
       s,
@@ -88,7 +24,9 @@ const slotDefault = !!useSlots().default;
       v && `v-view-${v}`,
     ]"
   >
-    <slot></slot>
+    <slot>
+      <DescText v-if="text" :text="text" />
+    </slot>
   </div>
 </template>
 
