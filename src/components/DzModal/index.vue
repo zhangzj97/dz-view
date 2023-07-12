@@ -4,92 +4,33 @@ defineOptions({ name: 'DzModal' });
 import { Modal } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/modal/style/css';
 
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
+import type { DzModalComponentProps } from '@/types/dz-view';
+type StateProps = {
+  visible?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  fullscreen?: boolean;
+};
+interface Props {
+  state: StateProps;
+  position?: 'top' | 'bottom' | 'left' | 'right';
 }
-
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewTestProps {
-  desc?: string;
-}
-
-interface DzPopoverProps {
-  state?: any;
-  cache?: boolean;
-}
-
-interface DzModalProps {
-  state?: any;
-  cache?: boolean;
-}
-
-interface DzDrawerProps {
-  state?: any;
-  cache?: boolean;
-  postion?: 'top' | 'bottom' | 'left' | 'right';
-}
-
-const props = withDefaults(
-  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzModalProps>(),
-  { cache: false }
-);
+const props = withDefaults(defineProps<DzModalComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  (e: 'update:state', value: any): void;
+  'update:state': [value: StateProps];
 }>();
 
 const close = () => {
-  const state = props.state;
+  const state = { ...props.state };
   state.visible = false;
   state.fullscreen = false;
   emit('update:state', state);
 };
 
+// TODO test
 const toogleFullscreen = () => {
-  const state = props.state;
+  const state = { ...props.state };
   state.fullscreen = !state.fullscreen;
   emit('update:state', state);
 };

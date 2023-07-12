@@ -4,85 +4,28 @@ defineOptions({ name: 'DzDrawer' });
 import { Drawer } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/drawer/style/css';
 
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
-}
-
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzPopoverProps {
-  state?: any;
-  cache?: boolean;
-}
-
-interface DzModalProps {
-  state?: any;
-  cache?: boolean;
-}
-
-interface DzDrawerProps {
-  state?: any;
-  cache?: boolean;
+import type { DzDrawerComponentProps } from '@/types/dz-view';
+type StateProps = {
+  visible?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  fullscreen?: boolean;
+};
+interface Props {
+  state: StateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
-
-const props = withDefaults(
-  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps & DzDrawerProps>(),
-  { cache: false }
-);
+const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  (e: 'update:state', value: any): void;
+  'update:state': [value: StateProps];
 }>();
 
+// TODO test
 const close = () => {
-  const state = props.state;
+  const state = { ...props.state };
   state.visible = false;
   state.fullscreen = false;
-  emit('update:state', state);
-};
-
-const toogleFullscreen = () => {
-  const state = props.state;
-  state.fullscreen = !state.fullscreen;
   emit('update:state', state);
 };
 </script>
@@ -99,7 +42,7 @@ const toogleFullscreen = () => {
     height="auto"
     :mask="true"
     titleAlign="start"
-    :unmountOnClose="cache"
+    :unmountOnClose="false"
     :maskClosable="true"
     :closable="false"
     :header="false"

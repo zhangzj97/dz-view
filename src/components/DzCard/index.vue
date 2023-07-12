@@ -1,74 +1,16 @@
 <script setup lang="ts" name="view">
 defineOptions({ name: 'DzCard' });
 
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
+import type { DzCardComponentProps } from '@/types/dz-view';
+interface Props {
+  state?: {
+    visble?: boolean;
+    loading?: boolean;
+    disabled?: boolean;
+  };
+  footer?: boolean;
 }
-
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzPopoverProps {
-  state?: any;
-  cache?: boolean;
-}
-
-interface DzModalProps {
-  state?: any;
-  cache?: boolean;
-}
-
-interface DzDrawerProps {
-  state?: any;
-  cache?: boolean;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-}
-
-const props = withDefaults(
-  defineProps<DzBaseProps & DzEntityProps & DzViewFlexProps>(),
-  {}
-);
-
-const emit = defineEmits<{
-  (e: 'update:state', value: any): void;
-}>();
+withDefaults(defineProps<DzCardComponentProps & Props>(), {});
 </script>
 
 <template>
@@ -85,7 +27,7 @@ const emit = defineEmits<{
       </v>
     </v>
     <slot></slot>
-    <slot name="footer">
+    <slot v-if="footer" name="footer">
       <v-space s="w-grow h-2" />
       <v s="w-grow h-fit" w="gap-2">
         <v-space s="w-grow h-grow" />
