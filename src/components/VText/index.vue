@@ -14,7 +14,6 @@ withDefaults(defineProps<DzViewTextComponentProps>(), {});
       t,
       trans,
       trans ? 'dz-view-transition' : '',
-      absolute && `dz-view-absolute-${absolute}`,
       pointer && 'dz-view-pointer',
     ]"
   >

@@ -16,6 +16,7 @@ const emit = defineEmits<{
 }>();
 
 const { setState, getState } = useComponentState({ props, emit });
+defineExpose({ setState, getState });
 
 const close = () => {
   setState({ visible: false, fullscreen: false });

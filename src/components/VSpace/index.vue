@@ -8,14 +8,7 @@ withDefaults(defineProps<DzViewSpaceComponentProps>(), {});
 <template>
   <div
     class="dz-view dz-view-space v202301"
-    :class="[
-      s,
-      w,
-      t,
-      trans,
-      trans ? 'dz-view-transition' : '',
-      absolute && `dz-view-absolute-${absolute}`,
-    ]"
+    :class="[s, w, t, trans, trans ? 'dz-view-transition' : '']"
   >
     <slot></slot>
   </div>
