@@ -12,11 +12,13 @@ interface Props {
   status?: 'normal' | 'warning' | 'success' | 'danger';
   shape?: 'round' | 'circle' | 'square';
 }
-withDefaults(defineProps<DzBtnComponentProps & Props>(), {});
+const props = withDefaults(defineProps<DzBtnComponentProps & Props>(), {});
 
 const emit = defineEmits<{
   'update:state': [value: DzViewStateProps];
 }>();
+
+useComponentState({ props, emit });
 </script>
 
 <template>

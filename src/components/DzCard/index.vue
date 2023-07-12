@@ -6,7 +6,13 @@ interface Props {
   state: DzViewStateProps;
   footer?: boolean;
 }
-withDefaults(defineProps<DzCardComponentProps & Props>(), {});
+const props = withDefaults(defineProps<DzCardComponentProps & Props>(), {});
+
+const emit = defineEmits<{
+  'update:state': [value: DzViewStateProps];
+}>();
+
+useComponentState({ props, emit });
 </script>
 
 <template>

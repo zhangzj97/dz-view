@@ -15,12 +15,11 @@ const emit = defineEmits<{
   'update:state': [value: DzViewStateProps];
 }>();
 
+const { setState } = useComponentState({ props, emit });
+
 // TODO test
 const close = () => {
-  const state = { ...props.state };
-  state.visible = false;
-  state.fullscreen = false;
-  emit('update:state', state);
+  setState({ visible: false, fullscreen: false });
 };
 </script>
 

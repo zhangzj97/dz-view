@@ -15,7 +15,13 @@ interface Props {
   tooltip?: string;
   trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
 }
-withDefaults(defineProps<DzPopoverComponentProps & Props>(), {});
+const props = withDefaults(defineProps<DzPopoverComponentProps & Props>(), {});
+
+const emit = defineEmits<{
+  'update:state': [value: DzViewStateProps];
+}>();
+
+useComponentState({ props, emit });
 </script>
 
 <template>
