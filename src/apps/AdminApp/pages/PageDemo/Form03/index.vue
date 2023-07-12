@@ -83,18 +83,20 @@ const {
           </TestItem>
 
           <!-- plugin -->
+          <!-- prettier-ignore -->
           <TestItem title="plugin">
-            <dz-btn title="focus" @click="itemVm('id').focus()" />
-            <dz-btn title="blur" @click="itemVm('id').blur()" />
-            <dz-btn title="reset" @click="itemVm('id').reset()" />
-            <dz-btn title="clear" @click="itemVm('id').clear()" />
-            <dz-btn
-              title="validate"
-              @click="itemVm('id').validate({ error: true })"
-            />
-            <dz-btn
-              title="validate"
-              @click="itemVm('id').validate({ error: false })"
+            <dz-btn 
+              v-for="(item, index) of [
+                { title: 'focus'   , click: (() => itemVm('id').focus()                   ) },
+                { title: 'blur'    , click: (() => itemVm('id').blur()                    ) },
+                { title: 'reset'   , click: (() => itemVm('id').reset()                   ) },
+                { title: 'clear'   , click: (() => itemVm('id').clear()                   ) },
+                { title: 'validate', click: (() => itemVm('id').validate({ error: true }) ) },
+                { title: 'validate', click: (() => itemVm('id').validate({ error: false })) },
+              ]" 
+              :key="index"
+              :title="item.title"
+              @click="item.click"
             />
           </TestItem>
         </v>
