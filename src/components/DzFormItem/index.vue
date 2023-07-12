@@ -89,9 +89,7 @@ const props = withDefaults(
       DzFormSchemaProps &
       DzFormDataProps
   >(),
-  {
-    s: 'w-grow h-grow',
-  }
+  {}
 );
 
 const schemaFormated = reactive({
@@ -102,16 +100,6 @@ const schemaFormated = reactive({
 });
 
 const { debug } = useLog({ module: 'Form', color: 'blue' });
-
-const formatSchema = () => {
-  schemaFormated.field = formatSchemaField();
-  schemaFormated.plugin = formatSchemaPlugin();
-  schemaFormated.state = formatSchemaState();
-  schemaFormated.layout = formatSchemaLayout();
-
-  debug('结束');
-  console.log(schemaFormated);
-};
 
 const isString = value => {
   return typeof value === 'string';
@@ -133,92 +121,25 @@ const isEmpty = value => {
 const component = shallowRef(null);
 const plugin = ref(null);
 
-const formatSchemaField = () => {
-  let [code, alias, title] = [null, null, null, null] as any;
-  if (isUndefined(props.field)) debug('错误: field 参数异常', 'Form', props);
-
-  if (isString(props.field)) {
-    code = props.field;
-    alias = props.field;
-    title = props.field;
-  } else if (!isString(props.field)) {
-    code = props.field.code;
-    alias = props.field.alias || props.field.code;
-    title = props.field.title || props.field.code;
-  }
-
-  return { code, alias, title };
-};
-
-const formatSchemaPlugin = () => {
-  let [code, _props] = [null, null, null, null] as any;
-  if (isUndefined(props.plugin)) debug('错误: plugin 参数异常', 'Form', props);
-
-  if (isString(props.plugin)) {
-    code = props.plugin;
-    _props = {};
-  } else if (!isString(props.plugin)) {
-    code = props.plugin.code;
-    _props = props.plugin.props || {};
-  }
-
-  // 智能优化
-  if (!code.match(/\//)) {
-    code = `BasePlugin/${code}`;
-  }
-
-  if (!plugins.Control[code]) {
-    debug('错误: 没有 plugin: ', 'Form', code);
-  } else {
-    component.value = plugins.Control[code];
-  }
-
-  return { code, props: _props };
-};
-
-const formatSchemaState = () => {
-  let [required, disabled, visible] = [null, null, null, null] as any;
-
-  if (isUndefined(props.state)) {
-    required = true;
-    disabled = false;
-    visible = true;
-  } else if (!isUndefined(props.state)) {
-    required = isUndefined(props.state.required) ? true : props.state.required;
-    disabled = isUndefined(props.state.disabled) ? false : props.state.disabled;
-    visible = isUndefined(props.state.visible) ? true : props.state.visible;
-  }
-
-  return { required, disabled, visible };
-};
-
-const formatSchemaLayout = () => {
-  let [s] = [null, null, null, null] as any;
-
-  if (isUndefined(props.layout)) {
-    s = 'w-grow h-fit';
-  } else if (!isUndefined(props.layout)) {
-    s = isUndefined(props.layout.s) ? 'w-grow h-fit' : props.layout.s;
-  }
-
-  return { s };
-};
-
 onMounted(() => {
-  formatSchema();
+  if (!plugins.Control[props.field.code]) {
+    debug('错误: 没有 plugin: ', 'Form', props.field.code);
+  } else {
+    component.value = plugins.Control[props.field.code];
+  }
 });
 
-const setState = (key, value, option = {}) => {
-  schemaFormated.state[key] = value;
-};
-
-const setValue = (value, option = {}) => {
-  plugin.value.setValue(value);
-};
+// prettier-ignore
+const pluginMethod  = {
+    getState: code => async (       option = {}) => await schema.dom[code]?.getState(       option),
+    setState: code => async (value, option = {}) => await schema.dom[code]?.setState(value, option),
+    getValue: code => async (       option = {}) => await schema.dom[code]?.getValue(       option),
+    setValue: code => async (value, option = {}) => await schema.dom[code]?.setValue(value, option),
+    validate: code => async (       option = {}) => await schema.dom[code]?.validate(       option),
+  }
 
 defineExpose({
-  setState,
-  setValue,
+  ...pluginMethod,
 
   plugin,
 });
@@ -262,8 +183,9 @@ const updateData = value => {
           :is="component"
           ref="plugin"
           :props="schemaFormated.plugin.props"
-          :data="data"
           :code="schemaFormated.field.code"
+          :state="schemaFormated.state"
+          :data="data"
           @update:data="updateData"
         />
       </slot>
