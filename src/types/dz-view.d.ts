@@ -64,6 +64,18 @@ interface DzViewAssetProps {
 }
 
 /**
+ * DzView State
+ */
+export type DzViewStateProps = {
+  visible?: boolean;
+  required?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  fullscreen?: boolean;
+  error?: boolean;
+};
+
+/**
  * DzView V 组件 Props
  */
 export type DzViewViewComponentProps = DzViewBaseProps &

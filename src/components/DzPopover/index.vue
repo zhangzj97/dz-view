@@ -5,15 +5,12 @@ import { Popover, Tooltip } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/popover/style/css';
 import '@arco-design/web-vue/es/tooltip/style/css';
 
-import type { DzPopoverComponentProps } from '@/types/dz-view';
-type StateProps = {
-  visible?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  fullscreen?: boolean;
-};
+import type {
+  DzPopoverComponentProps,
+  DzViewStateProps,
+} from '@/types/dz-view';
 interface Props {
-  state: StateProps;
+  state: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
   tooltip?: string;
   trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';

@@ -4,18 +4,19 @@ defineOptions({ name: 'DzBtn' });
 import { Button } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/button/style/css';
 
-import type { DzBtnComponentProps } from '@/types/dz-view';
+import type { DzBtnComponentProps, DzViewStateProps } from '@/types/dz-view';
+
 interface Props {
-  state?: {
-    visble?: boolean;
-    loading?: boolean;
-    disabled?: boolean;
-  };
+  state: DzViewStateProps;
   type?: 'primary' | 'secondary' | 'outline' | 'dashed' | 'text';
   status?: 'normal' | 'warning' | 'success' | 'danger';
   shape?: 'round' | 'circle' | 'square';
 }
 withDefaults(defineProps<DzBtnComponentProps & Props>(), {});
+
+const emit = defineEmits<{
+  'update:state': [value: DzViewStateProps];
+}>();
 </script>
 
 <template>

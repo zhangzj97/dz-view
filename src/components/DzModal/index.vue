@@ -4,21 +4,15 @@ defineOptions({ name: 'DzModal' });
 import { Modal } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/modal/style/css';
 
-import type { DzModalComponentProps } from '@/types/dz-view';
-type StateProps = {
-  visible?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  fullscreen?: boolean;
-};
+import type { DzModalComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state: StateProps;
+  state: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzModalComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [value: StateProps];
+  'update:state': [value: DzViewStateProps];
 }>();
 
 const close = () => {

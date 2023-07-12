@@ -1,13 +1,9 @@
 <script setup lang="ts" name="view">
 defineOptions({ name: 'DzCard' });
 
-import type { DzCardComponentProps } from '@/types/dz-view';
+import type { DzCardComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state?: {
-    visble?: boolean;
-    loading?: boolean;
-    disabled?: boolean;
-  };
+  state: DzViewStateProps;
   footer?: boolean;
 }
 withDefaults(defineProps<DzCardComponentProps & Props>(), {});

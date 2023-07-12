@@ -4,21 +4,15 @@ defineOptions({ name: 'DzDrawer' });
 import { Drawer } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/drawer/style/css';
 
-import type { DzDrawerComponentProps } from '@/types/dz-view';
-type StateProps = {
-  visible?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  fullscreen?: boolean;
-};
+import type { DzDrawerComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state: StateProps;
+  state: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [value: StateProps];
+  'update:state': [value: DzViewStateProps];
 }>();
 
 // TODO test
