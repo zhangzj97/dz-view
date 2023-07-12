@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'DzFormItem' });
+
 import { plugins } from '@/resources/plugins';
 
 interface DzBaseProps {

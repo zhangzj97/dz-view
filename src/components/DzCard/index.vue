@@ -1,4 +1,6 @@
 <script setup lang="ts" name="view">
+defineOptions({ name: 'DzCard' });
+
 interface DzBaseProps {
   s?: string;
   w?: string;
