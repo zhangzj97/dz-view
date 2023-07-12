@@ -5,7 +5,10 @@ defineOptions({ name: 'V' });
 import DescText from './components/DescText.vue';
 
 import type { DzViewViewComponentProps } from '@/types/dz-view';
-withDefaults(defineProps<DzViewViewComponentProps>(), {});
+interface ExperimentalProps {
+  v?: 'mouse-gray';
+}
+withDefaults(defineProps<DzViewViewComponentProps & ExperimentalProps>(), {});
 </script>
 
 <template>
