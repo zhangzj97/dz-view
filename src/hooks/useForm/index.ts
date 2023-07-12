@@ -38,11 +38,12 @@ export const useForm = ({ module }, option = {}) => {
   const bindField =
     code =>
     (pluginCode, option = {}) => {
-      schema.field[code] = {};
-      schema.field[code].code  = findDefined([code, option.field?.code      ]);
-      schema.field[code].alias = findDefined([      option.field?.alias, code]);
-      schema.field[code].title = findDefined([      option.field?.title, code]);
-      return schema.field;
+      schema.field[code] = {
+        code : findDefined([code, option.field?.code       ]),
+        alias: findDefined([      option.field?.alias, code]),
+        title: findDefined([      option.field?.title, code]),
+      };
+      return schema.field[code];
     };
 
   // prettier-ignore
@@ -51,48 +52,65 @@ export const useForm = ({ module }, option = {}) => {
   (pluginCode, option = {}) => {
     const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `BasePlugin/${pluginCode}`;
 
-    schema.plugin[code] = {};
-    schema.plugin[code].code  = findDefined([pluginFullname,                       'BasePlugin/Text']);
-    schema.plugin[code].props = findDefined([                option.plugin?.props, {}               ]);
+    schema.plugin[code] = {
+      code : findDefined([pluginFullname,                       'BasePlugin/Text']),
+      props: findDefined([                option.plugin?.props, {}               ])
+    };
 
-    return schema.plugin;
+    return schema.plugin[code];
   };
 
   // prettier-ignore
   const bindState =
     code =>
     (pluginCode, option = {}) => {
-      schema.state[code] = {};
-      schema.state[code].required = findDefined([option.state?.required, false]);
-      schema.state[code].disabled = findDefined([option.state?.disabled, false]);
-      schema.state[code].visible  = findDefined([option.state?.visible , true ]);
-      schema.state[code].error    = findDefined([option.state?.error   , false]);
+      schema.state[code] = {
+        required : findDefined([option.state?.required, false]),
+        disabled : findDefined([option.state?.disabled, false]),
+        visible  : findDefined([option.state?.visible , true ]),
+        error    : findDefined([option.state?.error   , false]),
+      };
 
-      return schema.state;
+      return schema.state[code];
+    };
+
+  const bindData =
+    code =>
+    (pluginCode, option = {}) => {
+      data.value[code] = null;
+
+      return data;
     };
 
   const bind =
     code =>
     (pluginCode, option = {}) => {
+      // prettier-ignore
       return {
-        ref: el => (schema.dom[code] = el),
+        ref   : el => (schema.dom[code] = el),
 
-        field: bindField(code)(pluginCode, option),
+        field : bindField(code)(pluginCode, option),
         plugin: bindPlugin(code)(pluginCode, option),
-        state: bindState(code)(pluginCode, option),
+        state : bindState(code)(pluginCode, option),
 
-        dom: data,
-      };
+        data: bindData(code)(pluginCode, option),
+        };
     };
 
-  // prettier-ignore
-  const itemVmMethod  = {
-    getState: code => async (       option = {}) => await schema.dom[code]?.getState(       option),
-    setState: code => async (value, option = {}) => await schema.dom[code]?.setState(value, option),
-    getValue: code => async (       option = {}) => await schema.dom[code]?.getValue(       option),
-    setValue: code => async (value, option = {}) => await schema.dom[code]?.setValue(value, option),
-    validate: code => async (       option = {}) => await schema.dom[code]?.validate(             ),
-  }
+  const getState = code => schema.dom[code]?.getState(option);
+  const setState =
+    code =>
+    (value, option = {}) =>
+      schema.dom[code]?.setState(value, option);
+  const getValue = code => schema.dom[code]?.getValue(option);
+  const setValue =
+    code =>
+    (value, option = {}) =>
+      schema.dom[code]?.setValue(value, option);
+  const validate =
+    code =>
+    (option = {}) =>
+      schema.dom[code]?.validate(option);
 
   const itemVm = code => schema.dom[code].plugin;
 
@@ -101,7 +119,11 @@ export const useForm = ({ module }, option = {}) => {
     data,
     bind,
 
-    ...itemVmMethod,
+    getState,
+    setState,
+    getValue,
+    setValue,
+    validate,
 
     itemVm,
   };
