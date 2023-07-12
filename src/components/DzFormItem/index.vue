@@ -60,11 +60,8 @@ interface DzFormItemProps {
 }
 
 interface DzFormSchemaProps {
-  schema?: any;
-
-  field: string | any;
-  plugin: string | any;
-
+  field: any;
+  plugin: any;
   state?: any;
 
   layout?: any;
@@ -92,50 +89,27 @@ const props = withDefaults(
   {}
 );
 
-const schemaFormated = reactive({
-  field: {},
-  plugin: {},
-  state: {},
-  layout: {},
-});
-
 const { debug } = useLog({ module: 'Form', color: 'blue' });
-
-const isString = value => {
-  return typeof value === 'string';
-};
-
-const isBoolean = value => {
-  return typeof value === 'boolean';
-};
-
-const isUndefined = value => {
-  return typeof value === 'undefined';
-};
-
-const isEmpty = value => {
-  if (!Array.isArray(value)) return true;
-  return value.length > 0;
-};
 
 const component = shallowRef(null);
 const plugin = ref(null);
 
 onMounted(() => {
-  if (!plugins.Control[props.field.code]) {
-    debug('错误: 没有 plugin: ', 'Form', props.field.code);
+  if (!plugins.Control[props.plugin.code]) {
+    debug('错误: 没有 plugin: ', 'Form', props.plugin.code);
   } else {
-    component.value = plugins.Control[props.field.code];
+    debug(`使用 plugin: ${props.plugin.code}`);
+    component.value = plugins.Control[props.plugin.code];
   }
 });
 
 // prettier-ignore
 const pluginMethod  = {
-    getState: code => async (       option = {}) => await schema.dom[code]?.getState(       option),
-    setState: code => async (value, option = {}) => await schema.dom[code]?.setState(value, option),
-    getValue: code => async (       option = {}) => await schema.dom[code]?.getValue(       option),
-    setValue: code => async (value, option = {}) => await schema.dom[code]?.setValue(value, option),
-    validate: code => async (       option = {}) => await schema.dom[code]?.validate(       option),
+    getState: (       option = {}) => plugin.value?.getState(       option),
+    setState: (value, option = {}) => plugin.value?.setState(value, option),
+    getValue: (       option = {}) => plugin.value?.getValue(       option),
+    setValue: (value, option = {}) => plugin.value?.setValue(value, option),
+    validate: (       option = {}) => plugin.value?.validate(       option),
   }
 
 defineExpose({
@@ -143,25 +117,20 @@ defineExpose({
 
   plugin,
 });
-
-const updateData = value => {
-  console.log('dz-from-item', value);
-};
 </script>
 
 <template>
   <v
     class="dz-form-item v202301"
-    v-bind="props"
-    :s="schemaFormated.state.visible ? props.s : 'w-0 h-0'"
-    :w="schemaFormated.state.visible ? props.w : 'overflow-hidden'"
+    :s="props.state.visible ? props.s : 'w-0 h-0'"
+    :w="props.state.visible ? props.w : 'overflow-hidden'"
   >
     <!-- label -->
     <v s="w-16 h-grow">
       <v-space s="w-grow h-grow" />
       <v-text
         s="w-fit h-fit"
-        :text="schemaFormated.field.title"
+        :text="props.field.title"
         class="self-start"
         trans="translate-y-1"
       />
@@ -171,7 +140,7 @@ const updateData = value => {
         t="text-red-500"
         text="*"
         class="self-start"
-        :class="[schemaFormated.state.required ? 'opacity-100' : 'opacity-0']"
+        :class="[props.state.required ? 'opacity-100' : 'opacity-0']"
         trans="translate-y-1"
       />
       <v-space s="w-2 h-grow" />
@@ -182,11 +151,11 @@ const updateData = value => {
         <Component
           :is="component"
           ref="plugin"
-          :props="schemaFormated.plugin.props"
-          :code="schemaFormated.field.code"
-          :state="schemaFormated.state"
-          :data="data"
-          @update:data="updateData"
+          :code="props.field.code"
+          :field="props.field"
+          :option="props.plugin.option"
+          :state="props.state"
+          :data="props.data"
         />
       </slot>
     </v>
