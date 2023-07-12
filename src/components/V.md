@@ -5,10 +5,9 @@
 ✅
 ❌
 
-| Name   | Base | Text | Flex | Position | Cursor | Entity | Experimental |
-| :----- | :--: | :--: | :--: | :------: | :----: | :----: | :----------: |
-| V      |  ✅  |  ✅  |  ✅  |    ✅    |   ✅   |   ✅   |      ✅      |
-| VDesc  |      |      |      |          |        |        |              |
-| VSpace |      |      |      |          |        |        |              |
-| VText  |      |      |      |          |        |        |              |
-| VIcon  |      |      |      |          |        |        |              |
+| Name   | Base | Text | Flex | Position | Cursor | Asset | Experimental |
+| :----- | :--: | :--: | :--: | :------: | :----: | :---: | :----------: |
+| V      |  ✅  |  ✅  |  ✅  |    ✅    |   ✅   |  ✅   |      ✅      |
+| VSpace |  ✅  |  ❌  |  ❌  |    ✅    |   ❌   |  ✅   |      ❌      |
+| VText  |  ✅  |  ✅  |  ❌  |    ✅    |   ✅   |  ✅   |      ❌      |
+| VIcon  |  ✅  |  ❌  |  ❌  |    ✅    |   ✅   |  ✅   |      ✅      |

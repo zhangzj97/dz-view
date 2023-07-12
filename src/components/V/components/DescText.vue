@@ -1,5 +1,7 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ text: string }>(), { text: 'Text' });
+defineOptions({ name: 'DescText' });
+
+withDefaults(defineProps<{ text: string }>(), { text: 'TEXT' });
 </script>
 
 <template>

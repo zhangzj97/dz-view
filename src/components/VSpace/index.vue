@@ -1,56 +1,8 @@
 <script setup lang="ts">
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
-}
+defineOptions({ name: 'VSpace' });
 
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-withDefaults(
-  defineProps<
-    DzBaseProps & DzViewFlexProps & DzViewPositionProps & DzViewCursorProps
-  >(),
-  {
-    s: 'w-grow h-grow',
-  }
-);
+import type { DzViewSpaceComponentProps } from '@/types/dz-view';
+withDefaults(defineProps<DzViewSpaceComponentProps>(), {});
 </script>
 
 <template>
@@ -62,10 +14,7 @@ withDefaults(
       t,
       trans,
       trans ? 'dz-view-transition' : '',
-      col ? 'dz-view-col' : 'dz-view-row',
-      grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
-      pointer && 'dz-view-pointer',
     ]"
   >
     <slot></slot>

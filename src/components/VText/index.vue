@@ -1,70 +1,8 @@
 <script setup lang="ts">
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
-}
+defineOptions({ name: 'VText' });
 
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewTestProps {
-  desc?: string;
-}
-
-withDefaults(
-  defineProps<
-    DzBaseProps &
-      DzViewFlexProps &
-      DzViewPositionProps &
-      DzViewCursorProps &
-      DzViewSpaceProps &
-      DzViewTextProps &
-      DzViewTestProps
-  >(),
-  {
-    s: 'w-fit h-fit',
-  }
-);
+import type { DzViewTextComponentProps } from '@/types/dz-view';
+withDefaults(defineProps<DzViewTextComponentProps>(), {});
 </script>
 
 <template>
@@ -76,8 +14,6 @@ withDefaults(
       t,
       trans,
       trans ? 'dz-view-transition' : '',
-      col ? 'dz-view-col' : 'dz-view-row',
-      grid ? 'dz-view-grid' : '',
       absolute && `dz-view-absolute-${absolute}`,
       pointer && 'dz-view-pointer',
     ]"

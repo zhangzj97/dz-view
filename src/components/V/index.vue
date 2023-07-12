@@ -4,8 +4,8 @@ defineOptions({ name: 'V' });
 
 import DescText from './components/DescText.vue';
 
-import type { DzViewComponentProps } from '@/types/dz-view';
-withDefaults(defineProps<DzViewComponentProps>(), {});
+import type { DzViewViewComponentProps } from '@/types/dz-view';
+withDefaults(defineProps<DzViewViewComponentProps>(), {});
 </script>
 
 <template>
