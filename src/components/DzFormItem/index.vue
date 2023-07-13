@@ -3,136 +3,77 @@ defineOptions({ name: 'DzFormItem' });
 
 import { plugins } from '@/resources/plugins';
 
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
-}
-
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewMouseProps {
-  v?: 'mouse-gray';
-}
-
-interface DzFormItemProps {
-  preset?: string;
-
-  simple?: boolean;
-}
-
-interface DzFormSchemaProps {
+import type {
+  DzFromItemComponentProps,
+  DzViewStateProps,
+} from '@/types/dz-view';
+interface Props {
+  state: DzViewStateProps;
   field: any;
-  plugin: any;
-  state?: any;
-
-  layout?: any;
-}
-
-interface DzFormDataProps {
+  pluginCode: string;
+  pluginOption: any;
   value?: any;
-
+  formStyle?: any;
+  tooltip?: any;
   data?: any;
 }
+const props = withDefaults(defineProps<DzFromItemComponentProps & Props>(), {});
 
-const props = withDefaults(
-  defineProps<
-    DzBaseProps &
-      DzViewFlexProps &
-      DzEntityProps &
-      DzViewPositionProps &
-      DzViewCursorProps &
-      DzViewSpaceProps &
-      DzViewTextProps &
-      DzFormItemProps &
-      DzFormSchemaProps &
-      DzFormDataProps
-  >(),
-  {}
-);
+const emit = defineEmits<{
+  'update:state': [value: DzViewStateProps];
+  'update:value': [value: any];
+  'update:option': [value: any];
+}>();
 
 const { debug } = useLog({ module: 'Form', color: 'blue' });
 
-const component = shallowRef(null);
-const plugin = ref(null);
-
 onMounted(() => {
-  if (!plugins.Control[props.plugin.code]) {
-    debug('错误: 没有 plugin: ', 'Form', props.plugin.code);
-  } else {
-    debug(`使用 plugin: ${props.plugin.code}`);
-    component.value = plugins.Control[props.plugin.code];
-  }
+  const registerPlugin = () => {
+    if (!plugins.Control[props.pluginCode]) {
+      debug('错误: 没有 plugin: ', 'Form', props.pluginCode);
+    } else {
+      debug(`使用 plugin: ${props.pluginCode}`);
+      pluginComponent.value = plugins.Control[props.pluginCode];
+    }
+  };
+  registerPlugin();
 });
 
-// prettier-ignore
-const pluginMethod  = {
-    getState: (       option = {}) => plugin.value?.getState(       option),
-    setState: (value, option = {}) => plugin.value?.setState(value, option),
-    getValue: (       option = {}) => plugin.value?.getValue(       option),
-    setValue: (value, option = {}) => plugin.value?.setValue(value, option),
-    validate: (       option = {}) => plugin.value?.validate(       option),
-  }
+const pluginComponent = shallowRef(null);
+const pluginDom = ref(null);
+
+const getState = () => pluginDom?.value?.getState();
+const setState = (state: DzViewStateProps) => pluginDom.value?.setState(state);
+const getValue = () => pluginDom?.value?.getValue();
+const setValue = (value: any) => pluginDom?.value?.setValue(value);
+const getOption = () => pluginDom?.value?.getOption();
+const setOption = (value: any) => pluginDom?.value?.setOption(value);
+const validate = () => pluginDom?.value?.validate();
 
 defineExpose({
-  ...pluginMethod,
-
-  plugin,
+  pluginDom,
+  getState,
+  setState,
+  getValue,
+  setValue,
+  getOption,
+  setOption,
+  validate,
 });
 </script>
 
 <template>
   <v
     class="dz-form-item v202301"
-    :s="props.state.visible ? props.s : 'w-0 h-0'"
-    :w="props.state.visible ? props.w : 'overflow-hidden'"
+    :s="state.visible ? s : 'w-0 h-0'"
+    :w="state.visible ? w : 'overflow-hidden'"
   >
     <!-- label -->
     <v s="w-16 h-grow">
       <v-space s="w-grow h-grow" />
       <v-text
         s="w-fit h-fit"
-        :text="props.field.title"
+        :text="field.title"
         class="self-start"
         trans="translate-y-1"
       />
@@ -142,28 +83,23 @@ defineExpose({
         t="text-red-500"
         text="*"
         class="self-start"
-        :class="[props.state.required ? 'opacity-100' : 'opacity-0']"
+        :class="[state.required ? 'opacity-100' : 'opacity-0']"
         trans="translate-y-1"
       />
       <v-space s="w-2 h-grow" />
     </v>
     <!-- control -->
     <v s="w-grow h-fit">
-      <slot>
-        <Component
-          :is="component"
-          ref="plugin"
-          :code="props.field.code"
-          :field="props.field"
-          :option="props.plugin.option"
-          :state="props.state"
-          :data="props.data"
-        />
-      </slot>
+      <Component
+        :is="pluginComponent"
+        ref="pluginDom"
+        :code="field.code"
+        :field="field"
+        :option="pluginOption"
+        :state="state"
+        :value="value"
+        :data="data"
+      />
     </v>
   </v>
 </template>
-
-<style scoped lang="scss">
-@import url(../../assets/styles/dz-view.scss);
-</style>
