@@ -6,7 +6,7 @@ import '@arco-design/web-vue/es/drawer/style/css';
 
 import type { DzDrawerComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  state?: DzViewStateProps;
+  state: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});
@@ -18,10 +18,15 @@ const emit = defineEmits<{
 const { setState, getState } = useComponentState({ props, emit });
 defineExpose({ setState, getState });
 
-// TODO test
-const close = () => {
-  setState({ visible: false, fullscreen: false });
-};
+const store = reactive({
+  iconClose: 'mdi:close',
+  iconFullscreen: 'mdi:fullscreen',
+  iconExitFullscreen: 'mdi:exit-fullscreen-exit',
+  textCancle: 'Cancle',
+
+  close: () => setState({ visible: false, fullscreen: false }),
+  toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
+});
 </script>
 
 <template>
@@ -56,14 +61,9 @@ const close = () => {
         </v>
         <v-text s="w-fit h-grow" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
-        <!-- <v s="w-10 h-grow" v="mouse-gray" @click="toogleFullscreen">
-          <v-icon
-            v="10-50"
-            :icon="!state.fullscreen ? 'mdi:fullscreen' : 'mdi:fullscreen-exit'"
-          />
-        </v> -->
-        <v s="w-10 h-grow" v="mouse-gray" @click="close">
-          <v-icon v="10-50" icon="mdi:close" />
+
+        <v s="w-10 h-grow" v="mouse-gray" @click="store.close">
+          <v-icon v="10-50" :icon="store.iconClose" />
         </v>
       </v>
       <!-- flex-shrink overflow instead of calc(100vh - footerheight - headerheight) -->
@@ -76,9 +76,9 @@ const close = () => {
         <v s="w-grow h-fit" w="gap-2">
           <v-space s="w-grow h-grow" />
           <slot name="action">
-            <v s="w-fit h-8" v="mouse-gray" @click="close">
-              <v-icon v="8-50" icon="mdi:close" />
-              <v-text text="取消" />
+            <v s="w-fit h-8" v="mouse-gray" @click="store.close">
+              <v-icon v="8-50" :icon="store.iconClose" />
+              <v-text :text="store.textCancle" />
               <v-space s="w-4 h-grow" />
             </v>
           </slot>
