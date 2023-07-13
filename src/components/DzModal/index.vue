@@ -79,6 +79,7 @@ const store = reactive({
       </v>
       <v-space s="w-grow h-grow" />
       <slot name="footer">
+        <!-- slot 顶层 可以使用 margin -->
         <v s="w-grow h-fit" w="gap-2 my-2">
           <v-space s="w-grow h-grow" />
           <slot name="action">
