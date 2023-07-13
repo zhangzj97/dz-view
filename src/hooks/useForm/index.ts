@@ -1,130 +1,147 @@
-const isString = value => {
-  return typeof value === 'string';
-};
+const { findDefined } = useValidate();
+import type { DzViewStateProps } from '@/types/dz-view';
 
-const isBoolean = value => {
-  return typeof value === 'boolean';
-};
-
-const isUndefined = value => {
-  return typeof value === 'undefined';
-};
-
-const isEmpty = value => {
-  if (!Array.isArray(value)) return true;
-  return value.length > 0;
-};
-
-const findDefined = list => list.find(item => !isUndefined(item));
-
-const { debug } = useLog({ module: 'Form', color: 'blue' });
-
-export const useForm = ({ module }, option = {}) => {
-  const schema = reactive({
-    field: {},
+export const useForm = ({ schema }, option = {}) => {
+  const store = reactive({
     state: {},
-    plugin: {},
-    layout: {},
-    tooltip: {},
+
+    field: {},
+    pluginCode: '',
+    pluginOption: {},
+
+    tooltip: '',
     validator: {},
+
+    value: {},
+
     dom: {},
   });
 
-  const data = reactive({
-    value: {},
-  });
-
   // prettier-ignore
-  const bindField =
-    code =>
-    (pluginCode, option = {}) => {
-      schema.field[code] = {
-        code : findDefined([code, option.field?.code       ]),
-        alias: findDefined([      option.field?.alias, code]),
-        title: findDefined([      option.field?.title, code]),
+  const initField =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) => 
+    (state, option = {}) => {
+      store.field[code] = {
+        code : findDefined([code,                                                        ]),
+        alias: findDefined([      schema?.[code].field?.alias, option?.field?.alias, code]),
+        title: findDefined([      schema?.[code].field?.title, option?.field?.title, code]),
       };
-      return schema.field[code];
+      return store.field[code];
     };
 
   // prettier-ignore
-  const bindPlugin =
-  code =>
-  (pluginCode, option = {}) => {
-    const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `BasePlugin/${pluginCode}`;
-
-    schema.plugin[code] = {
-      code : findDefined([pluginFullname,                       'BasePlugin/Text']),
-      props: findDefined([                option.plugin?.props, {}               ])
+  const initPluginCode =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) => 
+    (state, option = {}) => {
+      const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `BasePlugin/${pluginCode}`;
+      store.pluginCode[code] = findDefined([pluginFullname, schema?.[code]?.pluginCode, 'BasePlugin/Text']);
+      return store.pluginCode[code];
     };
 
-    return schema.plugin[code];
-  };
+  // prettier-ignore
+  const initPluginOption =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) => 
+    (state, option = {}) => {
+      store.pluginOption[code] = findDefined([pluginOption, schema?.[code]?.pluginOption, {}]);
+      return store.pluginCode[code];
+    }
 
   // prettier-ignore
-  const bindState =
-    code =>
-    (pluginCode, option = {}) => {
-      schema.state[code] = {
-        required : findDefined([option.state?.required, false]),
-        disabled : findDefined([option.state?.disabled, false]),
-        visible  : findDefined([option.state?.visible , true ]),
-        error    : findDefined([option.state?.error   , false]),
+  const initState =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) => 
+    (state, option = {}) => {
+      store.state[code] = {
+        required : findDefined([state?.required, schema?.[code].state.required]),
+        disabled : findDefined([state?.disabled, schema?.[code].state.disabled]),
+        visible  : findDefined([state?.visible , schema?.[code].state.visible ]),
+        error    : findDefined([state?.error   , schema?.[code].state.error   ]),
       };
-
-      return schema.state[code];
+      return store.state[code];
     };
 
-  const bindData =
-    code =>
-    (pluginCode, option = {}) => {
-      data.value[code] = null;
-
-      return data;
+  // prettier-ignore
+  const initValue =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) =>
+    (state, option = {}) => {
+      store.value[code] = findDefined([schema?.[code].value, option?.value]);
+      return store.value[code];
     };
 
+  // prettier-ignore
+  const initData =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) =>
+    (state, option = {}) => {
+      return store.value;
+    };
+
+  // prettier-ignore
   const bind =
-    code =>
-    (pluginCode, option = {}) => {
-      // prettier-ignore
-      return {
-        ref   : el => (schema.dom[code] = el),
-
-        field : bindField(code)(pluginCode, option),
-        plugin: bindPlugin(code)(pluginCode, option),
-        state : bindState(code)(pluginCode, option),
-
-        data: bindData(code)(pluginCode, option),
+    (code: string) =>
+    (pluginCode, pluginOption = {}) =>
+    (state, option = {}) => {
+      if (store.dom[code])
+        return {
+          ref         : el => (store.dom[code] = el),
+          field       : store.field[code],
+          pluginCode  : store.pluginCode[code],
+          pluginOption: store.pluginOption[code],
+          state       : store.state[code],
+          value       : store.value[code],
+          data        : store.value,
         };
+
+      return {
+        ref         : el => (store.dom[code] = el),
+        field       : initField(       code)(pluginCode, pluginOption)(state, option),
+        pluginCode  : initPluginCode(  code)(pluginCode, pluginOption)(state, option),
+        pluginOption: initPluginOption(code)(pluginCode, pluginOption)(state, option),
+        state       : initState(       code)(pluginCode, pluginOption)(state, option),
+        value       : initValue(       code)(pluginCode, pluginOption)(state, option),
+        data        : initData(        code)(pluginCode, pluginOption)(state, option),
+      };
     };
 
-  const getState = code => schema.dom[code]?.getState(option);
+  const getState = (code: string): DzViewStateProps =>
+    store.dom[code]?.getState();
   const setState =
-    code =>
-    (value, option = {}) =>
-      schema.dom[code]?.setState(value, option);
-  const getValue = code => schema.dom[code]?.getValue(option);
+    (code: string) =>
+    (state: DzViewStateProps = {}) =>
+      store.dom[code]?.setState(state);
+  const getValue = code => store.dom[code]?.getValue(option);
   const setValue =
     code =>
     (value, option = {}) =>
-      schema.dom[code]?.setValue(value, option);
+      store.dom[code]?.setValue(value, option);
+  const getOption = code => store.dom[code]?.getOption(option);
+  const setOption =
+    code =>
+    (value, option = {}) =>
+      store.dom[code]?.setOption(value, option);
+
   const validate =
     code =>
     (option = {}) =>
-      schema.dom[code]?.validate(option);
+      store.dom[code]?.validate(option);
 
-  const itemVm = code => schema.dom[code].plugin;
+  const pluginDom = code => store.dom[code].pluginDom;
 
   return {
-    schema,
-    data,
     bind,
 
-    getState,
     setState,
-    getValue,
+    getState,
     setValue,
+    getValue,
+    setOption,
+    getOption,
     validate,
 
-    itemVm,
+    pluginDom,
   };
 };
