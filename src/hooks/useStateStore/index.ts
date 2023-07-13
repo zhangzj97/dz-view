@@ -1,7 +1,7 @@
 const { findDefined } = useValidate();
 import type { DzViewStateProps } from '@/types/dz-view';
 
-export const useStateStore = (option = {}) => {
+export const useStateStore = () => {
   const store = reactive<{
     state: { [index: BindCode]: DzViewStateProps };
     dom: any;
@@ -13,14 +13,14 @@ export const useStateStore = (option = {}) => {
   // prettier-ignore
   const initState =
     (code: BindCode) =>
-    (option: DzViewStateProps = {}) => {
+    (state: DzViewStateProps = {}) => {
       store.state[code] = {
-        fullscreen: findDefined([option.fullscreen, false]),
-        loading   : findDefined([option.loading   , false]),
-        visible   : findDefined([option.visible   , false]),
-        required  : findDefined([option.required  , false]),
-        disabled  : findDefined([option.disabled  , false]),
-        error     : findDefined([option.error     , false]),
+        fullscreen: findDefined([state.fullscreen, false]),
+        loading   : findDefined([state.loading   , false]),
+        visible   : findDefined([state.visible   , false]),
+        required  : findDefined([state.required  , false]),
+        disabled  : findDefined([state.disabled  , false]),
+        error     : findDefined([state.error     , false]),
       };
 
       return store.state[code];
@@ -28,7 +28,7 @@ export const useStateStore = (option = {}) => {
 
   const bind =
     (code: BindCode) =>
-    (option: DzViewStateProps = {}) => {
+    (state: DzViewStateProps = {}) => {
       if (store.dom[code])
         return {
           ref: el => (store.dom[code] = el),
@@ -37,26 +37,25 @@ export const useStateStore = (option = {}) => {
 
       return {
         ref: el => (store.dom[code] = el),
-        state: initState(code)(option),
+        state: initState(code)(state),
       };
     };
 
   const getState = (code: BindCode): DzViewStateProps =>
-    store.dom[code]?.getState(option);
+    store.dom[code]?.getState();
   const setState =
     (code: BindCode) =>
-    (option: DzViewStateProps = {}) =>
-      store.dom[code]?.setState(option);
+    (state: DzViewStateProps = {}) =>
+      store.dom[code]?.setState(state);
 
-  return [bind, setState, getState, { store }] as [
-    (code: BindCode) => (option?: DzViewStateProps) => {
+  return { bind0: bind, setState0: setState, getState0: getState } as {
+    bind0: (code: BindCode) => (state?: DzViewStateProps) => {
       ref: (el: any) => any;
       state: DzViewStateProps;
-    },
-    (code: BindCode) => (option?: DzViewStateProps) => any,
-    (code: BindCode) => DzViewStateProps,
-    any
-  ];
+    };
+    setState0: (code: BindCode) => (state?: DzViewStateProps) => any;
+    getState0: (code: BindCode) => DzViewStateProps;
+  };
 };
 
 // prettier-ignore
