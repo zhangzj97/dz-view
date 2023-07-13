@@ -21,7 +21,7 @@ defineExpose({ setState, getState });
 const store = reactive({
   iconClose: 'mdi:close',
   iconFullscreen: 'mdi:fullscreen',
-  iconExitFullscreen: 'mdi:exit-fullscreen-exit',
+  iconExitFullscreen: 'mdi:fullscreen-exit',
   textCancle: 'Cancle',
 
   close: () => setState({ visible: false, fullscreen: false }),
@@ -59,7 +59,7 @@ const store = reactive({
         <v v-if="icon" s="w-10 h-grow">
           <v-icon v="10-50" :icon="icon" />
         </v>
-        <v-text s="w-fit h-grow" :t="t" :text="title" />
+        <v-text s="w-fit h-fit" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
 
         <v s="w-10 h-grow" v="mouse-gray" @click="store.close">
@@ -72,8 +72,8 @@ const store = reactive({
       </v>
       <v-space s="w-grow h-grow" />
       <slot name="footer">
-        <v-space s="w-grow h-2" />
-        <v s="w-grow h-fit" w="gap-2">
+        <!-- slot 顶层 可以使用 margin -->
+        <v s="w-grow h-fit" w="gap-2 my-2">
           <v-space s="w-grow h-grow" />
           <slot name="action">
             <v s="w-fit h-8" v="mouse-gray" @click="store.close">
@@ -84,7 +84,6 @@ const store = reactive({
           </slot>
           <v-space s="w-0 h-grow" />
         </v>
-        <v-space s="w-grow h-2" />
       </slot>
     </v>
   </Drawer>
