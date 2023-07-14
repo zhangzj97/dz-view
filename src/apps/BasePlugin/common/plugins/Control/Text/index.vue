@@ -1,126 +1,30 @@
 <script setup lang="ts">
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
+import type { DzPluginControlComponentProps } from '@/types/dz-view';
+interface Props {
+  option: any;
 }
-
-interface DzViewTextProps {
-  text?: string;
-}
-
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewMouseProps {
-  v?: 'mouse-gray';
-}
-
-interface DzFormItemProps {
-  preset?: string;
-
-  simple?: boolean;
-}
-
-interface DzFormSchemaProps {
-  schema?: any;
-
-  field: string | any;
-  plugin: string | any;
-
-  state?: any;
-
-  layout?: any;
-}
-
-interface DzPluginControlProps {
-  code?: any;
-  state?: any;
-
-  data?: any;
-}
-
 const props = withDefaults(
-  defineProps<DzBaseProps & DzPluginControlProps>(),
+  defineProps<DzPluginControlComponentProps & Props>(),
   {}
 );
-
 const emit = defineEmits<{
-  (e: 'onFocus', value: any): void;
-  (e: 'onBlur', value: any): void;
+  'update:value': [value: any];
 }>();
 
-const {
-  plugin,
-
-  onInput,
-  onFocus,
-  onBlur,
-
-  getState,
-  setState,
-  getValue,
-  setValue,
-  validate,
-} = usePluginControl({ props, emit });
-
-const focus = () => {
-  plugin.value.focus();
-};
-const blur = () => {
-  plugin.value.blur();
-};
-
-const reset = () => {
-  props.data.value[props.code] = null;
-};
-
-defineExpose({
-  ...{ getState, setState, getValue, setValue, validate },
-  ...{ focus, blur, reset },
+const { pluginDom, ExposeMethod, onInput, onFocus, onBlur } = usePluginControl({
+  props,
+  emit,
 });
+defineExpose({ ...ExposeMethod });
+
+onMounted(() => {});
 </script>
 
 <template>
   <v s="w-grow h-grow" col>
-    <v s="w-grow h-fit" text="ControlInput">
+    <v s="w-grow h-fit">
       <input
-        ref="plugin"
+        ref="pluginDom"
         :class="[
           'dz-plugin-control-text',
           state?.error &&
@@ -128,7 +32,7 @@ defineExpose({
           state?.disabled && 'dz-plugin-control--disabled',
         ]"
         :disabled="state.disabled"
-        :value="data.value[code]"
+        :value="value"
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
