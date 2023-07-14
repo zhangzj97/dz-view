@@ -1,7 +1,7 @@
 import type { DzViewStateProps } from '@/types/dz-view';
 
 export const useComponentState = ({ props, emit }) => {
-  const getState = () => props.state;
+  const getState = (): DzViewStateProps => props.state;
   const setState = (state: DzViewStateProps) => {
     Object.assign(props.state, state);
     // TODO 思考
