@@ -87,23 +87,25 @@ export const useForm = ({ schema }, option = {}) => {
     (state, option = {}) => {
       if (store.dom[code])
         return {
-          ref         : el => (store.dom[code] = el),
-          field       : store.field[code],
-          pluginCode  : store.pluginCode[code],
-          pluginOption: store.pluginOption[code],
-          state       : store.state[code],
-          value       : store.value[code],
-          data        : store.value,
+          field        : store.field[code],
+          pluginCode   : store.pluginCode[code],
+          pluginOption : store.pluginOption[code],
+          state        : store.state[code],
+          value        : store.value[code],
+          data         : store.value,
+          ref          : el => (store.dom[code] = el),
+          onUpdateValue: (value: any) => store.value[code] = value
         };
 
       return {
-        ref         : el => (store.dom[code] = el),
-        field       : initField(       code)(pluginCode, pluginOption)(state, option),
-        pluginCode  : initPluginCode(  code)(pluginCode, pluginOption)(state, option),
-        pluginOption: initPluginOption(code)(pluginCode, pluginOption)(state, option),
-        state       : initState(       code)(pluginCode, pluginOption)(state, option),
-        value       : initValue(       code)(pluginCode, pluginOption)(state, option),
-        data        : initData(        code)(pluginCode, pluginOption)(state, option),
+        field        : initField(       code)(pluginCode, pluginOption)(state, option),
+        pluginCode   : initPluginCode(  code)(pluginCode, pluginOption)(state, option),
+        pluginOption : initPluginOption(code)(pluginCode, pluginOption)(state, option),
+        state        : initState(       code)(pluginCode, pluginOption)(state, option),
+        value        : initValue(       code)(pluginCode, pluginOption)(state, option),
+        data         : initData(        code)(pluginCode, pluginOption)(state, option),
+        ref          : el => (store.dom[code] = el),
+        onUpdateValue: (value: any) => store.value[code] = value
       };
     };
 
