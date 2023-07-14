@@ -1,39 +1,15 @@
-// TODO
-// 关于 props 双向绑定的问题
+import type { DzViewStateProps } from '@/types/dz-view';
 
-const isString = value => {
-  return typeof value === 'string';
-};
-
-const isBoolean = value => {
-  return typeof value === 'boolean';
-};
-
-const isUndefined = value => {
-  return typeof value === 'undefined';
-};
-
-const isEmpty = value => {
-  if (!Array.isArray(value)) return true;
-  return value.length > 0;
-};
-
-const findDefined = list => list.find(item => !isUndefined(item));
-
-const { debug } = useLog({ module: 'ControlInput', color: 'blue' });
+const { debug } = useLog({ module: 'usePluginControl', color: 'blue' });
 
 export const usePluginControl = ({ props, emit }) => {
-  const plugin = ref(null);
+  const pluginDom = ref(null);
 
-  const onUpdateData = () => {
-    debug('onUpdateData');
-  };
   const onUpdateValue = () => {
     debug('onUpdateValue');
   };
   const onInput = el => {
     debug('onInput');
-    props.data.value[props.code] = el.target.value;
   };
   const onFocus = () => {
     debug('onFocus');
@@ -42,23 +18,20 @@ export const usePluginControl = ({ props, emit }) => {
     debug('onBlur');
   };
 
-  const getState = (option = {}) => props.state;
-  const setState = (value, option = {}) => {
-    const state = props.state;
-    const { required, disabled, visible, error } = value;
-
-    !isUndefined(required) && (state.required = required);
-    !isUndefined(disabled) && (state.disabled = disabled);
-    !isUndefined(visible) && (state.visible = visible);
-    !isUndefined(error) && (state.error = error);
-    debug('setState');
+  const getState = (): DzViewStateProps => props.state;
+  const setState = (state: DzViewStateProps) => {
+    Object.assign(props.state, state);
   };
 
-  const getValue = (option = {}) => props.data.value[props.code];
-  const setValue = (value, option = {}) => {
-    debug('setValue');
+  const getValue = (): any => props.value;
+  const setValue = (value: any) => {
+    // props.data[props.code] = value;
+    emit('update:value', value);
+  };
 
-    props.data.value[props.code] = value;
+  const getOption = (): any => props.option;
+  const setOption = (option: any) => {
+    Object.assign(props.option, option);
   };
 
   const validate = (option = {}) => {
@@ -88,19 +61,33 @@ export const usePluginControl = ({ props, emit }) => {
     return true;
   };
 
-  return {
-    plugin,
+  const focus = () => pluginDom?.value?.focus();
+  const blur = () => pluginDom?.value?.blur();
+  const reset = () => emit('update:value', null);
 
+  const ExposeMethod = {
     getState,
     setState,
     getValue,
     setValue,
+    getOption,
+    setOption,
     validate,
+    focus,
+    blur,
+    reset,
+  };
 
-    onUpdateData,
+  const CommonEvent = {
     onUpdateValue,
     onInput,
     onFocus,
     onBlur,
+  };
+
+  return {
+    pluginDom,
+    ExposeMethod,
+    ...CommonEvent,
   };
 };
