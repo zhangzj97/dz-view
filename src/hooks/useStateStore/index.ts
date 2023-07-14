@@ -31,13 +31,13 @@ export const useStateStore = () => {
     (state: DzViewStateProps = {}) => {
       if (store.dom[code])
         return {
-          ref: el => (store.dom[code] = el),
           state: store.state[code],
+          ref: el => (store.dom[code] = el),
         };
 
       return {
-        ref: el => (store.dom[code] = el),
         state: initState(code)(state),
+        ref: el => (store.dom[code] = el),
       };
     };
 
@@ -48,14 +48,7 @@ export const useStateStore = () => {
     (state: DzViewStateProps = {}) =>
       store.dom[code]?.setState(state);
 
-  return { bind0: bind, setState0: setState, getState0: getState } as {
-    bind0: (code: BindCode) => (state?: DzViewStateProps) => {
-      ref: (el: any) => any;
-      state: DzViewStateProps;
-    };
-    setState0: (code: BindCode) => (state?: DzViewStateProps) => any;
-    getState0: (code: BindCode) => DzViewStateProps;
-  };
+  return { bind0: bind, setState0: setState, getState0: getState, store };
 };
 
 // prettier-ignore
