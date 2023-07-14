@@ -13,6 +13,7 @@ interface Props {
   pluginCode: string;
   pluginOption: any;
   value?: any;
+  validtor?: any;
   formStyle?: any;
   tooltip?: any;
   data?: any;
