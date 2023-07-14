@@ -2,7 +2,12 @@ import type { DzViewStateProps } from '@/types/dz-view';
 
 const { debug } = useLog({ module: 'usePluginControl', color: 'blue' });
 
-export const usePluginControl = ({ props, emit }) => {
+export const usePluginControl = ({
+  props,
+  emit,
+  getValue = false as any,
+  setValue = false as any,
+}) => {
   const pluginDom = ref(null);
 
   const onUpdateValue = () => {
@@ -10,6 +15,7 @@ export const usePluginControl = ({ props, emit }) => {
   };
   const onInput = el => {
     debug('onInput');
+    emit('update:value', el.target.value);
   };
   const onFocus = () => {
     debug('onFocus');
@@ -23,11 +29,8 @@ export const usePluginControl = ({ props, emit }) => {
     Object.assign(props.state, state);
   };
 
-  const getValue = (): any => props.value;
-  const setValue = (value: any) => {
-    // props.data[props.code] = value;
-    emit('update:value', value);
-  };
+  if (!getValue) getValue = (): any => props.value;
+  if (!setValue) setValue = (value: any) => emit('update:value', value);
 
   const getOption = (): any => props.option;
   const setOption = (option: any) => {
@@ -65,6 +68,8 @@ export const usePluginControl = ({ props, emit }) => {
   const blur = () => pluginDom?.value?.blur();
   const reset = () => emit('update:value', null);
 
+  const modelValue = computed(() => getValue());
+
   const ExposeMethod = {
     getState,
     setState,
@@ -87,6 +92,8 @@ export const usePluginControl = ({ props, emit }) => {
 
   return {
     pluginDom,
+
+    modelValue,
     ExposeMethod,
     ...CommonEvent,
   };
