@@ -11,11 +11,25 @@ const emit = defineEmits<{
   'update:value': [value: any];
 }>();
 
-const { pluginDom, ExposeMethod, onInput, onFocus, onBlur } = usePluginControl({
-  props,
-  emit,
-});
-defineExpose({ ...ExposeMethod });
+const getValue = () => {
+  const value = props.value;
+  if (value === undefined) return null;
+  if (value === null) return null;
+  if (typeof value === 'object') return null;
+  if (Array.isArray(value)) return null;
+  if (typeof value === 'number') return String(value);
+  if (typeof value === 'boolean') return String(value);
+  return value;
+};
+
+const { pluginDom, ExposeMethod, onInput, onFocus, onBlur, modelValue } =
+  usePluginControl({
+    props,
+    emit,
+    getValue,
+  });
+
+defineExpose({ ...ExposeMethod, getValue });
 
 onMounted(() => {});
 </script>
@@ -32,7 +46,7 @@ onMounted(() => {});
           state?.disabled && 'dz-plugin-control--disabled',
         ]"
         :disabled="state.disabled"
-        :value="value"
+        :value="modelValue"
         @input="onInput"
         @focus="onFocus"
         @blur="onBlur"
