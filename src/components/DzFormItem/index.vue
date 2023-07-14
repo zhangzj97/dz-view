@@ -39,6 +39,10 @@ onMounted(() => {
   registerPlugin();
 });
 
+const onUpdateValue = (value: any) => {
+  emit('update:value', value);
+};
+
 const pluginComponent = shallowRef(null);
 const pluginDom = ref(null);
 
@@ -97,8 +101,11 @@ defineExpose({
         :field="field"
         :option="pluginOption"
         :state="state"
+        :formStyle="formStyle"
+        :validtor="validtor"
         :value="value"
         :data="data"
+        @update:value="onUpdateValue"
       />
     </v>
   </v>
