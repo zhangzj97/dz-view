@@ -141,3 +141,16 @@ export type DzTableComponentProps = DzViewBaseProps;
  * DzFromItem 组件 Props
  */
 export type DzFromItemComponentProps = DzViewBaseProps;
+
+/**
+ * DzPluginControl 组件 Props
+ */
+export type DzPluginControlComponentProps = {
+  state: DzViewStateProps;
+  code: string;
+  field: any;
+  option: any;
+  value?: any;
+  data?: any;
+  formStyle?: any;
+};
