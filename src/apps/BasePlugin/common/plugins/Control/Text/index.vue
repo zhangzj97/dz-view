@@ -1,25 +1,19 @@
 <script setup lang="ts">
-import type { DzPluginControlComponentProps } from '@/types/dz-view';
-interface Props {
-  option: any;
-}
-const props = withDefaults(
-  defineProps<DzPluginControlComponentProps & Props>(),
-  {}
-);
+import type { DzPluginControlProps } from '@/types/dz-view';
+type Option = {};
+const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
 const emit = defineEmits<{
-  'update:value': [value: any];
+  'update:value': [value: string | null];
 }>();
 
-const getValue = () => {
-  const value = props.value;
-  if (value === undefined) return null;
-  if (value === null) return null;
-  if (typeof value === 'object') return null;
-  if (Array.isArray(value)) return null;
-  if (typeof value === 'number') return String(value);
-  if (typeof value === 'boolean') return String(value);
-  return value;
+const { isString, isNumber, isBoolean } = useValidate();
+const getValue = (): string | null => props.value;
+const setValue = (value: unknown) => {
+  let newValue = null;
+  if (isString(value) || isNumber(value) || isBoolean(value)) {
+    newValue = String(value);
+  }
+  emit('update:value', newValue);
 };
 
 const { pluginDom, ExposeMethod, onInput, onFocus, onBlur, modelValue } =
@@ -27,11 +21,13 @@ const { pluginDom, ExposeMethod, onInput, onFocus, onBlur, modelValue } =
     props,
     emit,
     getValue,
+    setValue,
   });
+defineExpose({ ...ExposeMethod });
 
-defineExpose({ ...ExposeMethod, getValue });
-
-onMounted(() => {});
+onMounted(() => {
+  emit('update:value', null);
+});
 </script>
 
 <template>
@@ -41,10 +37,10 @@ onMounted(() => {});
         ref="pluginDom"
         :class="[
           'dz-plugin-control-text',
-          state?.error &&
-            'dz-plugin-control--error animate-[pulse_1s_ease-in-out_3]',
+          state?.error && 'dz-plugin-control--error',
           state?.disabled && 'dz-plugin-control--disabled',
         ]"
+        type="text"
         :disabled="state.disabled"
         :value="modelValue"
         @input="onInput"
@@ -52,8 +48,18 @@ onMounted(() => {});
         @blur="onBlur"
       />
     </v>
-    <v s="w-grow h-8">
-      <!-- {{ validator.result[0].msg }} -->
+
+    <v
+      s="w-grow h-fit"
+      w="min-h-[4px]"
+      :trans="state.error ? 'max-h-[20px]' : 'max-h-[4px]'"
+    >
+      <v-text
+        v-if="state?.error"
+        t="text-red-500 text-sm"
+        class="animate-[shakeX_1s_ease-in-out_1]"
+        :text="validator?.result?.message"
+      />
     </v>
   </v>
 </template>
