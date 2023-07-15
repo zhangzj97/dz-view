@@ -13,7 +13,7 @@ interface Props {
   pluginCode: string;
   pluginOption: any;
   value?: any;
-  validtor?: any;
+  validator?: any;
   formStyle?: any;
   tooltip?: any;
   data?: any;
@@ -103,7 +103,7 @@ defineExpose({
         :option="pluginOption"
         :state="state"
         :formStyle="formStyle"
-        :validtor="validtor"
+        :validator="validator"
         :value="value"
         :data="data"
         @update:value="onUpdateValue"
