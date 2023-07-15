@@ -151,7 +151,7 @@ export type DzPluginControlComponentProps = {
   field: any;
   option: any;
   value?: any;
-  validtor?: any;
+  validator?: any;
   formStyle?: any;
   data?: any;
 };
