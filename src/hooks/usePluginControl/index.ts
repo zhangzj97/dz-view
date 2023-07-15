@@ -2,25 +2,30 @@ import type { DzViewStateProps } from '@/types/dz-view';
 
 const { debug } = useLog({ module: 'usePluginControl', color: 'blue' });
 
-export const usePluginControl = ({
+const { isUndefined, isNull, isArrayExist } = useValidate();
+
+export const usePluginControl = <T>({
   props,
   emit,
-  getValue = false as any,
-  setValue = false as any,
+  getValue = null as any,
+  setValue = null as any,
+  validate = null as any,
 }) => {
-  const pluginDom = ref(null);
+  const pluginDom = ref<HTMLInputElement | null>(null);
 
   const onUpdateValue = () => {
     debug('onUpdateValue');
   };
-  const onInput = el => {
+  const onInput = async el => {
     debug('onInput');
-    emit('update:value', el.target.value);
+    await emit('update:value', el.target.value);
+    validate({ error: false });
   };
   const onFocus = () => {
     debug('onFocus');
   };
   const onBlur = () => {
+    validate();
     debug('onBlur');
   };
 
@@ -29,40 +34,56 @@ export const usePluginControl = ({
     Object.assign(props.state, state);
   };
 
-  if (!getValue) getValue = (): any => props.value;
-  if (!setValue) setValue = (value: any) => emit('update:value', value);
+  if (!getValue) getValue = (): unknown => props.value;
+  if (!setValue) setValue = (value: unknown) => emit('update:value', value);
 
-  const getOption = (): any => props.option;
-  const setOption = (option: any) => {
+  const getOption = (): T => props.option;
+  const setOption = (option: T) => {
     Object.assign(props.option, option);
   };
 
-  const validate = (option = {}) => {
-    const state = props.state;
-    const { error } = option;
-    const value = props.data.value[props.code];
+  if (!validate)
+    validate = (option = { error: true, failFast: true }) => {
+      const { state, value, validator } = props;
+      const { required } = state;
+      const { error, failFast } = option;
 
-    if (props.state?.required && value === undefined) {
-      state.error = true;
-      return false;
-    } else if (props.state?.required && value === null) {
-      state.error = true;
-      return false;
-    } else if (props.state?.required && value === '') {
-      state.error = true;
-      return false;
-    } else if (
-      props.state?.required &&
-      Array.isArray(value) &&
-      value.length === 0
-    ) {
-      state.error = true;
-      return false;
-    }
+      validator.result = {
+        error: false,
+        message: null,
+        list: [],
+      };
 
-    state.error = false;
-    return true;
-  };
+      if (required) {
+        if (isNull(value) || isUndefined(value) || value === '') {
+          validator.result.error = true;
+          validator.result.message = '必填';
+          validator.result.list.push({ message: '必填' });
+          if (error) props.state.error = true;
+          if (failFast) return validator.result;
+        }
+      }
+
+      if (isArrayExist(validator.rule)) {
+        validator.rule.forEach(item => {
+          const { pattern, message } = item;
+          if (
+            (!isUndefined(value) || !isNull(value)) &&
+            !value.match(pattern)
+          ) {
+            validator.result.error = true;
+            validator.result.message = message;
+            validator.result.list.push({ message });
+            if (error) props.state.error = true;
+            if (failFast) return validator.result;
+          }
+        });
+      }
+
+      if (!validator.result.error) props.state.error = false;
+      console.log(validator);
+      return validator.result;
+    };
 
   const focus = () => pluginDom?.value?.focus();
   const blur = () => pluginDom?.value?.blur();
