@@ -1,15 +1,15 @@
 const { findDefined } = useValidate();
 import type { DzViewStateProps } from '@/types/dz-view';
 
-export const useForm = ({ schema }, option = {}) => {
+export const useForm = ({ schema = {}, service = '' }, option = {}) => {
   const store = reactive({
     state: {},
 
     field: {},
-    pluginCode: '',
+    pluginCode: {},
     pluginOption: {},
 
-    tooltip: '',
+    tooltip: {},
     validator: {},
 
     value: {},
@@ -24,8 +24,8 @@ export const useForm = ({ schema }, option = {}) => {
     (state, option = {}) => {
       store.field[code] = {
         code : findDefined([code,                                                        ]),
-        alias: findDefined([      schema?.[code].field?.alias, option?.field?.alias, code]),
-        title: findDefined([      schema?.[code].field?.title, option?.field?.title, code]),
+        alias: findDefined([      schema?.[code]?.field?.alias, option?.field?.alias, code]),
+        title: findDefined([      schema?.[code]?.field?.title, option?.field?.title, code]),
       };
       return store.field[code];
     };
@@ -50,15 +50,30 @@ export const useForm = ({ schema }, option = {}) => {
     }
 
   // prettier-ignore
+  const initValidator =
+    (code: string) =>
+    (pluginCode, pluginOption = {}) => 
+    (state, option = {}) => {
+      console.log(option?.validtor?.rule, 9999)
+      store.validator[code] = {
+        result: findDefined([{ error: false, message: null, list: [] }]),
+        rule  : findDefined([option?.validator?.rule, schema?.[code]?.validator.rule, []])
+      }
+      console.log(store.validator[code])
+
+      return store.validator[code];
+    }
+
+  // prettier-ignore
   const initState =
     (code: string) =>
     (pluginCode, pluginOption = {}) => 
     (state, option = {}) => {
       store.state[code] = {
-        required : findDefined([state?.required, schema?.[code].state.required]),
-        disabled : findDefined([state?.disabled, schema?.[code].state.disabled]),
-        visible  : findDefined([state?.visible , schema?.[code].state.visible ]),
-        error    : findDefined([state?.error   , schema?.[code].state.error   ]),
+        required : findDefined([state?.required, schema?.[code]?.state?.required, false]),
+        disabled : findDefined([state?.disabled, schema?.[code]?.state?.disabled, false]),
+        visible  : findDefined([state?.visible , schema?.[code]?.state?.visible , true ]),
+        error    : findDefined([state?.error   , schema?.[code]?.state?.error   , false]),
       };
       return store.state[code];
     };
@@ -68,7 +83,7 @@ export const useForm = ({ schema }, option = {}) => {
     (code: string) =>
     (pluginCode, pluginOption = {}) =>
     (state, option = {}) => {
-      store.value[code] = findDefined([schema?.[code].value, option?.value]);
+      store.value[code] = findDefined([schema?.[code]?.value, option?.value]);
       return store.value[code];
     };
 
@@ -90,22 +105,24 @@ export const useForm = ({ schema }, option = {}) => {
           field        : store.field[code],
           pluginCode   : store.pluginCode[code],
           pluginOption : store.pluginOption[code],
+          validator    : store.validator[code],
           state        : store.state[code],
           value        : store.value[code],
           data         : store.value,
           ref          : el => (store.dom[code] = el),
-          onUpdateValue: (value: any) => store.value[code] = value
+          'onUpdate:value': (value: any) => store.value[code] = value
         };
 
       return {
         field        : initField(       code)(pluginCode, pluginOption)(state, option),
         pluginCode   : initPluginCode(  code)(pluginCode, pluginOption)(state, option),
         pluginOption : initPluginOption(code)(pluginCode, pluginOption)(state, option),
+        validator    : initValidator(   code)(pluginCode, pluginOption)(state, option),
         state        : initState(       code)(pluginCode, pluginOption)(state, option),
         value        : initValue(       code)(pluginCode, pluginOption)(state, option),
         data         : initData(        code)(pluginCode, pluginOption)(state, option),
         ref          : el => (store.dom[code] = el),
-        onUpdateValue: (value: any) => store.value[code] = value
+        'onUpdate:value': (value: any) => store.value[code] = value
       };
     };
 
@@ -118,8 +135,9 @@ export const useForm = ({ schema }, option = {}) => {
   const getValue = code => store.dom[code]?.getValue(option);
   const setValue =
     code =>
-    (value, option = {}) =>
-      store.dom[code]?.setValue(value, option);
+    (value, option = {}) => {
+      store.dom[code]?.setValue(value);
+    };
   const getOption = code => store.dom[code]?.getOption(option);
   const setOption =
     code =>
@@ -136,6 +154,8 @@ export const useForm = ({ schema }, option = {}) => {
   return {
     bind,
 
+    pluginDom,
+
     setState,
     getState,
     setValue,
@@ -144,6 +164,6 @@ export const useForm = ({ schema }, option = {}) => {
     getOption,
     validate,
 
-    pluginDom,
+    store,
   };
 };
