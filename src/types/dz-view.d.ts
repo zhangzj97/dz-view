@@ -145,11 +145,11 @@ export type DzFromItemComponentProps = DzViewBaseProps;
 /**
  * DzPluginControl 组件 Props
  */
-export type DzPluginControlComponentProps = {
+export type DzPluginControlComponentProps<T> = {
   state: DzViewStateProps;
   code: string;
   field: any;
-  option: any;
+  option: T;
   value?: any;
   validator?: any;
   formStyle?: any;
