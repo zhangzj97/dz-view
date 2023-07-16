@@ -3,10 +3,7 @@ defineOptions({ name: 'DzFormItem' });
 
 import { plugins } from '@/resources/plugins';
 
-import type {
-  DzFromItemComponentProps,
-  DzViewStateProps,
-} from '@/types/dz-view';
+import type { DzFromItemComponentProps, DzViewStateProps } from '@/types/dz-view'; // prettier-ignore
 interface Props {
   state: DzViewStateProps;
   field: any;
@@ -20,8 +17,7 @@ interface Props {
   data?: any;
 }
 const props = withDefaults(defineProps<DzFromItemComponentProps & Props>(), {});
-
-const emit = defineEmits<{
+const emits = defineEmits<{
   'update:state': [value: DzViewStateProps];
   'update:value': [value: any];
   'update:option': [value: any];
@@ -42,19 +38,19 @@ onMounted(() => {
 });
 
 const onUpdateValue = (value: any) => {
-  emit('update:value', value);
+  emits('update:value', value);
 };
 
 const pluginComponent = shallowRef(null);
-const pluginDom = ref(null);
+const pluginDom = ref<HTMLLIElement | null>(null);
 
 const getState = () => pluginDom?.value?.getState();
 const setState = (state: DzViewStateProps) => pluginDom.value?.setState(state);
 const getValue = () => pluginDom?.value?.getValue();
-const setValue = (value: any) => pluginDom?.value?.setValue(value);
+const setValue = (v: unknown) => pluginDom?.value?.setValue(v);
 const getOption = () => pluginDom?.value?.getOption();
-const setOption = (value: any) => pluginDom?.value?.setOption(value);
-const validate = () => pluginDom?.value?.validate();
+const setOption = (option: any) => pluginDom?.value?.setOption(option);
+const validate = (option: any) => pluginDom?.value?.validate(option);
 
 defineExpose({
   pluginDom,
