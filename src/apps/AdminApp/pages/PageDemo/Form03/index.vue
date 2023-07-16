@@ -74,20 +74,26 @@ test();
 <template>
   <v s="w-grow h-grow" w="gap-1">
     <dz-card s="w-grow h-grow" class="card-lg" title="Form">
+      <!-- prettier-ignore -->
       <v s="w-grow h-grow" grid>
-        <!-- prettier-ignore -->
         <dz-form-item
           s="w-full h-fit"
           v-bind="
-            bind('id')
+            bind('Text')
             ('Text', {},  { onAfterInput: () => setValue('age')(1), onBeforeInput: () => console.log('beforeInput') })
             ({}, { validator: { rule: [{ pattern: /123/, message: '123' }] } })
           "
         />
-        <dz-form-item
-          s="w-full h-fit"
-          v-bind="bind('age')('Number')({ required: true }, {})"
-        />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Number')('Number')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Pwd')('Password')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Date')('Date')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Time')('Time')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('DT')('Datetime')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Week')('Week')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Month')('Month')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Color')('Color')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Range')('Range')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('File')('File')({ required: true })" />
       </v>
     </dz-card>
 
@@ -193,6 +199,7 @@ test();
               @click="item.click"
             />
           </TestItem>
+
           <!-- plugin -->
           <!-- prettier-ignore -->
           <TestItem title="plugin">
@@ -204,6 +211,25 @@ test();
                 { title: 'clear'   , click: (() => pluginDom('age').clear()                   ) },
                 { title: 'validate', click: (() => pluginDom('age').validate({ error: true }) ) },
                 { title: 'validate', click: (() => pluginDom('age').validate({ error: false })) },
+              ]" 
+              :key="index"
+              :title="item.title"
+              @click="item.click"
+            />
+          </TestItem>
+
+          <!-- plugin -->
+          <!-- prettier-ignore -->
+          <TestItem title="plugin">
+            <dz-btn 
+              v-for="(item, index) of [
+                { title: 'focus'   , click: (() => pluginDom('age').focus()                   ) },
+                { title: 'blur'    , click: (() => pluginDom('age').blur()                    ) },
+                { title: 'reset'   , click: (() => pluginDom('age').reset()                   ) },
+                { title: 'clear'   , click: (() => pluginDom('age').clear()                   ) },
+                { title: 'Color-vali', click: (() => pluginDom('Color').validate({ error: true }) ) },
+                { title: 'Range-vali', click: (() => pluginDom('Range').validate({ error: true }) ) },
+                { title: 'File-vali', click: (() => pluginDom('File').validate({ error: true }) ) },
               ]" 
               :key="index"
               :title="item.title"
