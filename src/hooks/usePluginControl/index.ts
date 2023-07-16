@@ -6,7 +6,7 @@ const { isUndefined, isNull, isArrayExist } = useValidate();
 
 export const usePluginControl = <T>({
   props,
-  emit,
+  emits,
   getValue = null as any,
   setValue = null as any,
   validate = null as any,
@@ -17,22 +17,22 @@ export const usePluginControl = <T>({
     debug('onUpdateValue');
   };
   const onInput = async el => {
-    emit('beforeInput');
+    emits('beforeInput');
     debug('onInput');
-    await emit('update:value', el.target.value);
+    await emits('update:value', el.target.value);
     validate({ error: false });
-    emit('afterInput');
+    emits('afterInput');
   };
   const onFocus = () => {
-    emit('beforeFocus');
+    emits('beforeFocus');
     debug('onFocus');
-    emit('afterFocus');
+    emits('afterFocus');
   };
   const onBlur = () => {
-    emit('beforeBlur');
+    emits('beforeBlur');
     validate();
     debug('onBlur');
-    emit('afterBlur');
+    emits('afterBlur');
   };
 
   const getState = (): DzViewStateProps => props.state;
@@ -41,7 +41,7 @@ export const usePluginControl = <T>({
   };
 
   if (!getValue) getValue = (): unknown => props.value;
-  if (!setValue) setValue = (value: unknown) => emit('update:value', value);
+  if (!setValue) setValue = (value: unknown) => emits('update:value', value);
 
   const getOption = (): T => props.option;
   const setOption = (option: T) => {
@@ -73,10 +73,7 @@ export const usePluginControl = <T>({
       if (isArrayExist(validator.rule)) {
         validator.rule.forEach(item => {
           const { pattern, message } = item;
-          if (
-            (!isUndefined(value) || !isNull(value)) &&
-            !value.match(pattern)
-          ) {
+          if (!isUndefined(value) && !isNull(value) && !value.match(pattern)) {
             validator.result.error = true;
             validator.result.message = message;
             validator.result.list.push({ message });
@@ -93,7 +90,7 @@ export const usePluginControl = <T>({
 
   const focus = () => pluginDom?.value?.focus();
   const blur = () => pluginDom?.value?.blur();
-  const reset = () => emit('update:value', null);
+  const reset = () => emits('update:value', null);
 
   const modelValue = computed(() => getValue());
 
@@ -122,6 +119,6 @@ export const usePluginControl = <T>({
 
     modelValue,
     ExposeMethod,
-    ...CommonEvent,
+    CommonEvent,
   };
 };
