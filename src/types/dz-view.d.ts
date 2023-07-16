@@ -155,3 +155,14 @@ export type DzPluginControlProps<T> = {
   formStyle?: any;
   data?: any;
 };
+
+export type DzPluginControlEmits = {
+  'update:value': [value: string | null];
+  'update:option': [value: string | null];
+  beforeInput: [];
+  afterInput: [];
+  beforeFocus: [];
+  afterFocus: [];
+  beforeBlur: [];
+  afterBlur: [];
+};

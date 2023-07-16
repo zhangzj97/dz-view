@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { DzPluginControlProps } from '@/types/dz-view';
+import type { DzPluginControlProps, DzPluginControlEmits } from '@/types/dz-view'; // prettier-ignore
 type Option = {};
+type Event = {};
 const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
-const emit = defineEmits<{
-  'update:value': [value: string | null];
-}>();
+const emit = defineEmits<DzPluginControlEmits & Event>();
 
 const { isString, isNumber, isBoolean } = useValidate();
 const getValue = (): string | null => props.value;
