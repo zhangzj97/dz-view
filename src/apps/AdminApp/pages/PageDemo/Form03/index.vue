@@ -80,7 +80,7 @@ test();
           s="w-full h-fit"
           v-bind="
             bind('id')
-            ('Text', {},  { onAfterInput: () => console.log('afterInput'), onBeforeInput: () => console.log('beforeInput') })
+            ('Text', {},  { onAfterInput: () => setValue('age')(1), onBeforeInput: () => console.log('beforeInput') })
             ({}, { validator: { rule: [{ pattern: /123/, message: '123' }] } })
           "
         />
