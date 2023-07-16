@@ -11,6 +11,7 @@ interface Props {
   pluginOption: any;
   pluginEvent: any;
   value?: any;
+  service?: any;
   validator?: any;
   formStyle?: any;
   tooltip?: any;
@@ -100,6 +101,7 @@ defineExpose({
         :option="pluginOption"
         :state="state"
         :formStyle="formStyle"
+        :service="service"
         :validator="validator"
         :value="value"
         :data="data"

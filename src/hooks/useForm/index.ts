@@ -1,7 +1,7 @@
 const { findDefined } = useValidate();
 import type { DzViewStateProps } from '@/types/dz-view';
 
-export const useForm = ({ schema = {}, service = '' }, option = {}) => {
+export const useForm = ({ schema = {} }, option = {}) => {
   const store = reactive({
     state: {},
 
@@ -11,6 +11,7 @@ export const useForm = ({ schema = {}, service = '' }, option = {}) => {
     pluginEvent: {},
 
     tooltip: {},
+    service: {},
     validator: {},
 
     value: {},
@@ -24,7 +25,7 @@ export const useForm = ({ schema = {}, service = '' }, option = {}) => {
     (pluginCode, pluginOption = {}, pluginEvent = {}) =>
     (state, option = {}) => {
       store.field[code] = {
-        code : findDefined([code,                                                        ]),
+        code : findDefined([code,                                                         ]),
         alias: findDefined([      schema?.[code]?.field?.alias, option?.field?.alias, code]),
         title: findDefined([      schema?.[code]?.field?.title, option?.field?.title, code]),
       };
@@ -65,11 +66,22 @@ export const useForm = ({ schema = {}, service = '' }, option = {}) => {
     (pluginCode, pluginOption = {}, pluginEvent = {}) =>
     (state, option = {}) => {
       store.validator[code] = {
-        result: findDefined([{ error: false, message: null, list: [] }]),
-        rule  : findDefined([option?.validator?.rule, schema?.[code]?.validator.rule, []])
+        result: findDefined([                                                         { error: false, message: null, list: [] }]),
+        rule  : findDefined([option?.validator?.rule, schema?.[code]?.validator.rule, []                                       ]),
       }
-
       return store.validator[code];
+    }
+
+  // prettier-ignore
+  const initService =
+    (code: string) =>
+    (pluginCode, pluginOption = {}, pluginEvent = {}) =>
+    (state, option = {}) => {
+      store.service[code] = {
+        code: findDefined([option?.service?.code, null]),
+        list: findDefined([option?.service?.list, []]),
+      }
+      return store.service[code];
     }
 
   // prettier-ignore
@@ -114,6 +126,7 @@ export const useForm = ({ schema = {}, service = '' }, option = {}) => {
           pluginCode   : store.pluginCode[code],
           pluginOption : store.pluginOption[code],
           pluginEvent  : store.pluginEvent[code],
+          service      : store.service[code],
           validator    : store.validator[code],
           state        : store.state[code],
           value        : store.value[code],
@@ -127,6 +140,7 @@ export const useForm = ({ schema = {}, service = '' }, option = {}) => {
         pluginCode   : initPluginCode(  code)(pluginCode, pluginOption, pluginEvent)(state, option),
         pluginOption : initPluginOption(code)(pluginCode, pluginOption, pluginEvent)(state, option),
         pluginEvent  : initPluginEvent( code)(pluginCode, pluginOption, pluginEvent)(state, option),
+        service      : initService(     code)(pluginCode, pluginOption, pluginEvent)(state, option),
         validator    : initValidator(   code)(pluginCode, pluginOption, pluginEvent)(state, option),
         state        : initState(       code)(pluginCode, pluginOption, pluginEvent)(state, option),
         value        : initValue(       code)(pluginCode, pluginOption, pluginEvent)(state, option),
