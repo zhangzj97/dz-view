@@ -12,6 +12,7 @@ interface Props {
   field: any;
   pluginCode: string;
   pluginOption: any;
+  pluginEvent: any;
   value?: any;
   validator?: any;
   formStyle?: any;
@@ -106,6 +107,7 @@ defineExpose({
         :validator="validator"
         :value="value"
         :data="data"
+        v-bind="pluginEvent"
         @update:value="onUpdateValue"
       />
     </v>
