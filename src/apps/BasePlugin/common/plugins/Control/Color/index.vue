@@ -1,11 +1,13 @@
 <script setup lang="ts">
+defineOptions({ name: 'ControlColor' });
+
+import PluginControl from '../../../components/PluginControl.vue';
+
 import type { DzPluginControlProps, DzPluginControlEmits } from '@/types/dz-view'; // prettier-ignore
 type Option = {};
 type Event = {};
 const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
-const emit = defineEmits<DzPluginControlEmits & Event>();
-
-import PluginControl from '../../../components/PluginControl.vue';
+const emits = defineEmits<DzPluginControlEmits & Event>();
 
 const { isString, isNumber, isBoolean } = useValidate();
 const getValue = (): string | null => props.value;
@@ -14,20 +16,14 @@ const setValue = (value: unknown) => {
   if (isString(value) || isNumber(value) || isBoolean(value)) {
     newValue = String(value);
   }
-  emit('update:value', newValue);
+  emits('update:value', newValue);
 };
 
-const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({
-  props,
-  emit,
-  getValue,
-  setValue,
-});
+const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({ props, emits, getValue, setValue }); // prettier-ignore
+
 defineExpose({ ...ExposeMethod });
 
-onMounted(() => {
-  emit('update:value', null);
-});
+onMounted(() => emits('update:value', null));
 </script>
 
 <template>
