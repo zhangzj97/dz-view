@@ -21,6 +21,11 @@ const setValue = (value: unknown) => {
 
 const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({ props, emits, getValue, setValue }); // prettier-ignore
 
+const onBlur = () => {
+  emits('beforeBlur');
+  emits('afterBlur');
+};
+
 defineExpose({ ...ExposeMethod });
 
 onMounted(() => emits('update:value', null));
@@ -41,7 +46,7 @@ onMounted(() => emits('update:value', null));
       :value="modelValue"
       @input="CommonEvent.onInput"
       @focus="CommonEvent.onFocus"
-      @blur="CommonEvent.onBlur"
+      @blur="onBlur"
     />
   </PluginControl>
 </template>
