@@ -75,13 +75,13 @@ test();
   <v s="w-grow h-grow" w="gap-1">
     <dz-card s="w-grow h-grow" class="card-lg" title="Form">
       <v s="w-grow h-grow" grid>
+        <!-- prettier-ignore -->
         <dz-form-item
           s="w-full h-fit"
           v-bind="
-            bind('id')('Text')(
-              {},
-              { validator: { rule: [{ pattern: /123/, message: '123' }] } }
-            )
+            bind('id')
+            ('Text', {},  { onAfterInput: () => console.log('afterInput'), onBeforeInput: () => console.log('beforeInput') })
+            ({}, { validator: { rule: [{ pattern: /123/, message: '123' }] } })
           "
         />
         <dz-form-item
