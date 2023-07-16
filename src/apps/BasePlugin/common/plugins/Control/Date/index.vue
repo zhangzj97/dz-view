@@ -45,7 +45,3 @@ onMounted(() => emits('update:value', null));
     />
   </PluginControl>
 </template>
-
-<style lang="scss">
-@import url(../../../assets/index.scss);
-</style>

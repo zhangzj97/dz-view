@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: 'ControlDatetime' });
+defineOptions({ name: 'ControlMonth' });
 
 import PluginControl from '../../../components/PluginControl.vue';
 
@@ -36,7 +36,7 @@ onMounted(() => emits('update:value', null));
         state?.error && 'dz-plugin-control-input--error',
         state?.disabled && 'dz-plugin-control-input--disabled',
       ]"
-      type="datetime-local"
+      type="month"
       :disabled="state.disabled"
       :value="modelValue"
       @input="CommonEvent.onInput"
