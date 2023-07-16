@@ -31,7 +31,7 @@ onMounted(() => emits('update:value', null));
     <input
       ref="pluginDom"
       :class="[
-        'w-24 h-8',
+        'w-grow h-8',
         'dz-plugin-control-input',
         state?.error && 'dz-plugin-control-input--error',
         state?.disabled && 'dz-plugin-control-input--disabled',
@@ -44,6 +44,9 @@ onMounted(() => emits('update:value', null));
       @blur="CommonEvent.onBlur"
     />
     <v-space s="w-2 h-grow" />
-    <v-text :text="modelValue || 'No Color'" />
+    <v s="w-16 h-fit">
+      <v-text :text="modelValue || 'No Data'" />
+    </v>
+    <v-space s="w-2 h-grow" />
   </PluginControl>
 </template>
