@@ -36,7 +36,7 @@ onMounted(() => emits('update:value', null));
         state?.error && 'dz-plugin-control-input--error',
         state?.disabled && 'dz-plugin-control-input--disabled',
       ]"
-      type="number"
+      type="password"
       :disabled="state.disabled"
       :value="modelValue"
       @input="CommonEvent.onInput"

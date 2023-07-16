@@ -47,7 +47,3 @@ onMounted(() => emits('update:value', null));
     <v-text :text="modelValue || 'No Color'" />
   </PluginControl>
 </template>
-
-<style lang="scss">
-@import url(../../../assets/index.scss);
-</style>
