@@ -93,8 +93,10 @@ test();
         <dz-form-item s="w-full h-fit" v-bind="bind('Color')('Color')({ required: true })" />
         <dz-form-item s="w-full h-fit" v-bind="bind('Range')('Range')({ required: true })" />
         <dz-form-item s="w-full h-fit" v-bind="bind('File')('File')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Radio')('Radio')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜'}] } })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Checkbox')('Checkbox')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜'}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Radio')('Radio')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Checkbox')('Checkbox')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Select')('Select')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('SelectMul')('SelectMul')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
       </v>
     </dz-card>
 

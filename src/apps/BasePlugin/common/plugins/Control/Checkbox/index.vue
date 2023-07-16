@@ -46,14 +46,18 @@ onMounted(() => emits('update:value', null));
       <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
         <input
           type="checkbox"
+          :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
           :id="`${code}__${String(item.value)}`"
           :name="code"
           :value="String(item.value)"
           :checked="modelValue?.includes(String(item.value))"
-          class="cursor-pointer"
+          :disabled="item.disabled"
           @input="onInput"
         />
-        <label :for="`${code}__${String(item.value)}`" class="cursor-pointer">
+        <label
+          :for="`${code}__${String(item.value)}`"
+          :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
+        >
           {{ item.title }}
         </label>
       </v>

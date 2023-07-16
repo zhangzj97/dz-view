@@ -11,6 +11,8 @@ import ControlRange from './Control/Range/index.vue';
 import ControlColor from './Control/Color/index.vue';
 import ControlCheckbox from './Control/Checkbox/index.vue';
 import ControlRadio from './Control/Radio/index.vue';
+import ControlSelect from './Control/Select/index.vue';
+import ControlSelectMul from './Control/SelectMul/index.vue';
 
 export const plugins = {
   Cell: {},
@@ -28,5 +30,7 @@ export const plugins = {
     'BasePlugin/Color': ControlColor,
     'BasePlugin/Checkbox': ControlCheckbox,
     'BasePlugin/Radio': ControlRadio,
+    'BasePlugin/Select': ControlSelect,
+    'BasePlugin/SelectMul': ControlSelectMul,
   },
 };

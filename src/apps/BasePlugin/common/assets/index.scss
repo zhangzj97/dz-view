@@ -17,3 +17,23 @@
     @apply text-gray-400;
   }
 }
+
+.dz-plugin-control-select {
+  @apply rounded pl-3 pr-5 py-1 transition-all;
+  @apply bg-gray-100 hover:bg-gray-200 active:bg-gray-300;
+  @apply outline-gray-300 focus:outline-blue-500 focus-visible:outline-blue-500;
+  @apply cursor-auto;
+  @apply text-black;
+  &.dz-plugin-control-select--error {
+    @apply bg-red-100 hover:bg-red-200 active:bg-red-300;
+    @apply outline-red-300 focus:outline-red-500 focus-visible:outline-red-500;
+    @apply cursor-auto;
+    @apply text-black;
+  }
+  &.dz-plugin-control-select--disabled {
+    @apply bg-gray-200 hover:bg-gray-200 active:bg-gray-200;
+    @apply outline-gray-300 focus:outline-gray-500 focus-visible:outline-gray-500;
+    @apply cursor-not-allowed;
+    @apply text-gray-400;
+  }
+}

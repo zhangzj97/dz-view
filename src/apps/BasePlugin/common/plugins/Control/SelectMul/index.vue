@@ -9,7 +9,7 @@ type Event = {};
 const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
 const emits = defineEmits<DzPluginControlEmits & Event>();
 
-const { isString, isNumber, isBoolean } = useValidate();
+const { isString, isNumber, isBoolean, isNull } = useValidate();
 const getValue = (): string | null => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
@@ -23,36 +23,55 @@ const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({ 
 
 defineExpose({ ...ExposeMethod });
 
+const onInput = async el => {
+  if (isNull(getValue())) {
+    await emits('update:value', []);
+  }
+  let v = [...getValue()];
+  if (v.includes(el.target.value)) {
+    v = v.filter(item => item !== el.target.value);
+  } else {
+    v.push(el.target.value);
+  }
+  await emits('update:value', v);
+};
+
 onMounted(() => emits('update:value', null));
 </script>
 
 <template>
   <PluginControl :state="state" :validator="validator">
     <v s="w-grow h-fit" grid w="gap-1">
-      <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
-        <input
-          type="radio"
+      <select
+        :class="[
+          'w-full h-fit',
+          'dz-plugin-control-select',
+          state?.error && 'dz-plugin-control-select--error',
+          state?.disabled && 'dz-plugin-control-select--disabled',
+        ]"
+        :name="code"
+        :disabled="state?.disabled"
+        multiple
+        @input="onInput"
+      >
+        <option
+          v-for="(item, index) of service.list"
           :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-          :id="`${code}__${item.value}`"
-          :name="code"
-          :value="item.value"
-          :checked="modelValue === item.value"
+          :key="index"
+          :value="String(item.value)"
+          :selected="modelValue === String(item.value)"
           :disabled="item.disabled"
-          @input="CommonEvent.onInput"
-        />
-        <label
-          :for="`${code}__${item.value}`"
-          :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
         >
           {{ item.title }}
-        </label>
-      </v>
+        </option>
+      </select>
     </v>
     <v s="w-fit h-fit" v="mouse-gray" @click="setValue(null)">
       <v-icon v="8-50" icon="mdi:close-circle" />
     </v>
     <v s="w-16 h-fit">
-      <v-text :text="modelValue || 'No Data'" />
+      <template v-if="modelValue">{{ modelValue }}</template>
+      <v-text v-else text="No Data" />
     </v>
   </PluginControl>
 </template>
