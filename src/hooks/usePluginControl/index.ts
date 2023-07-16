@@ -17,16 +17,22 @@ export const usePluginControl = <T>({
     debug('onUpdateValue');
   };
   const onInput = async el => {
+    emit('beforeInput');
     debug('onInput');
     await emit('update:value', el.target.value);
     validate({ error: false });
+    emit('afterInput');
   };
   const onFocus = () => {
+    emit('beforeFocus');
     debug('onFocus');
+    emit('afterFocus');
   };
   const onBlur = () => {
+    emit('beforeBlur');
     validate();
     debug('onBlur');
+    emit('afterBlur');
   };
 
   const getState = (): DzViewStateProps => props.state;
