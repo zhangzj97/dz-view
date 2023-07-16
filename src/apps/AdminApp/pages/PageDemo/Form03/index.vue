@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { DzViewStateProps } from '@/types/dz-view';
 import TestItem from './components/TestItem.vue';
 const {
   bind,
@@ -75,7 +74,7 @@ test();
   <v s="w-grow h-grow" w="gap-1">
     <dz-card s="w-grow h-grow" class="card-lg" title="Form">
       <!-- prettier-ignore -->
-      <v s="w-grow h-grow" grid>
+      <v s="w-grow h-grow" w="overflow-auto" grid>
         <dz-form-item
           s="w-full h-fit"
           v-bind="
@@ -94,6 +93,8 @@ test();
         <dz-form-item s="w-full h-fit" v-bind="bind('Color')('Color')({ required: true })" />
         <dz-form-item s="w-full h-fit" v-bind="bind('Range')('Range')({ required: true })" />
         <dz-form-item s="w-full h-fit" v-bind="bind('File')('File')({ required: true })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Radio')('Radio')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜'}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Checkbox')('Checkbox')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜'}] } })" />
       </v>
     </dz-card>
 

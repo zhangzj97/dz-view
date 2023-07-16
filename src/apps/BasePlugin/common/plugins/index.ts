@@ -9,6 +9,8 @@ import ControlMonth from './Control/Month/index.vue';
 import ControlFile from './Control/File/index.vue';
 import ControlRange from './Control/Range/index.vue';
 import ControlColor from './Control/Color/index.vue';
+import ControlCheckbox from './Control/Checkbox/index.vue';
+import ControlRadio from './Control/Radio/index.vue';
 
 export const plugins = {
   Cell: {},
@@ -24,5 +26,7 @@ export const plugins = {
     'BasePlugin/File': ControlFile,
     'BasePlugin/Range': ControlRange,
     'BasePlugin/Color': ControlColor,
+    'BasePlugin/Checkbox': ControlCheckbox,
+    'BasePlugin/Radio': ControlRadio,
   },
 };
