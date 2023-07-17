@@ -48,5 +48,8 @@ onMounted(() => emits('update:value', null));
       @focus="CommonEvent.onFocus"
       @blur="onBlur"
     />
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
+    </v>
   </PluginControl>
 </template>

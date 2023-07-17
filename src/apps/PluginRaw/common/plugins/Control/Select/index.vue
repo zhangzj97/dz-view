@@ -61,11 +61,12 @@ onMounted(() => emits('update:value', null));
         </option>
       </select>
     </v>
-    <v s="w-fit h-fit" v="mouse-gray" @click="setValue(null)">
-      <v-icon v="8-50" icon="mdi:close-circle" />
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.refreshService">
+      <v-icon v="8-50" icon="mdi:refresh" />
     </v>
-    <v s="w-16 h-fit">
-      <v-text :text="modelValue || 'No Data'" />
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
     </v>
   </PluginControl>
 </template>

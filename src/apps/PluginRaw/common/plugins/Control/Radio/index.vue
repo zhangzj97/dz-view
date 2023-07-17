@@ -30,29 +30,29 @@ onMounted(() => emits('update:value', null));
   <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
     <v s="w-grow h-fit" grid w="gap-1">
       <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
-        <input
-          type="radio"
-          :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-          :id="`${code}__${item.value}`"
-          :name="code"
-          :value="item.value"
-          :checked="modelValue === item.value"
-          :disabled="item.disabled"
-          @input="CommonEvent.onInput"
-        />
         <label
-          :for="`${code}__${item.value}`"
+          class="flex flex-row"
           :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
         >
-          {{ item.title }}
+          <input
+            type="radio"
+            :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
+            :name="code"
+            :value="String(item.value)"
+            :checked="modelValue === String(item.value)"
+            :disabled="item.disabled"
+            @input="CommonEvent.onInput"
+          />
+          <v-text :text="item.title" />
         </label>
       </v>
     </v>
-    <v s="w-fit h-fit" v="mouse-gray" @click="setValue(null)">
-      <v-icon v="8-50" icon="mdi:close-circle" />
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.refreshService">
+      <v-icon v="8-50" icon="mdi:refresh" />
     </v>
-    <v s="w-16 h-fit">
-      <v-text :text="modelValue || 'No Data'" />
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
     </v>
   </PluginControl>
 </template>

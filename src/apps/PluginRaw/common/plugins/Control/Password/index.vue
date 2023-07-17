@@ -24,6 +24,10 @@ const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({ 
 defineExpose({ ...ExposeMethod });
 
 onMounted(() => emits('update:value', null));
+
+const store = reactive({
+  isText: false,
+});
 </script>
 
 <template>
@@ -36,12 +40,24 @@ onMounted(() => emits('update:value', null));
         state?.error && 'dz-plugin-control-input--error',
         state?.disabled && 'dz-plugin-control-input--disabled',
       ]"
-      type="password"
+      :type="store.isText ? 'text' : 'password'"
       :disabled="state.disabled"
       :value="modelValue"
       @input="CommonEvent.onInput"
       @focus="CommonEvent.onFocus"
       @blur="CommonEvent.onBlur"
     />
+
+    <!-- prettier-ignore -->
+    <v v-if="store.isText" s="w-fit h-fit" v="mouse-gray" @click="store.isText = false" >
+      <v-icon v="8-50" icon="mdi:eye-off-outline" />
+    </v>
+    <v v-else s="w-fit h-fit" v="mouse-gray" @click="store.isText = true">
+      <v-icon v="8-50" icon="mdi:eye-outline" />
+    </v>
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
+    </v>
   </PluginControl>
 </template>

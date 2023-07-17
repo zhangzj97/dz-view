@@ -44,33 +44,35 @@ onMounted(() => emits('update:value', null));
   <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
     <v s="w-grow h-fit" grid w="gap-1">
       <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
-        <input
-          type="checkbox"
-          :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-          :id="`${code}__${String(item.value)}`"
-          :name="code"
-          :value="String(item.value)"
-          :checked="modelValue?.includes(String(item.value))"
-          :disabled="item.disabled"
-          @input="onInput"
-        />
         <label
-          :for="`${code}__${String(item.value)}`"
+          class="flex"
           :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
         >
+          <input
+            type="checkbox"
+            :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
+            :name="code"
+            :value="String(item.value)"
+            :checked="modelValue?.includes(String(item.value))"
+            :disabled="item.disabled"
+            @input="onInput"
+          />
+
           {{ item.title }}
         </label>
       </v>
     </v>
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.refreshService">
+      <v-icon v="8-50" icon="mdi:refresh" />
+    </v>
+
     <v s="w-fit h-fit" v="mouse-gray" @click="setValue([])">
-      <v-icon v="8-50" icon="mdi:close-circle" />
+      <v-icon v="8-50" icon="mdi:code-brackets" />
     </v>
-    <v s="w-fit h-fit" v="mouse-gray" @click="setValue(null)">
-      <v-icon v="8-50" icon="mdi:close-circle" />
-    </v>
-    <v s="w-16 h-fit">
-      <template v-if="modelValue">{{ modelValue }}</template>
-      <v-text v-else text="No Data" />
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
     </v>
   </PluginControl>
 </template>

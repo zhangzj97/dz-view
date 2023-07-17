@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: 'ControlPassword' });
+defineOptions({ name: 'ControlText' });
 
 import PluginControl from '../../../components/PluginControl.vue';
 
@@ -38,6 +38,7 @@ onMounted(() => emits('update:value', null));
       ]"
       type="text"
       :disabled="state.disabled"
+      :readonly="true"
       :value="modelValue"
       @input="CommonEvent.onInput"
       @focus="CommonEvent.onFocus"

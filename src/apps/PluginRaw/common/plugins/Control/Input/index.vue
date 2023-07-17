@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: 'ControlPassword' });
+defineOptions({ name: 'ControlInput' });
 
 import PluginControl from '../../../components/PluginControl.vue';
 
@@ -43,5 +43,9 @@ onMounted(() => emits('update:value', null));
       @focus="CommonEvent.onFocus"
       @blur="CommonEvent.onBlur"
     />
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
+    </v>
   </PluginControl>
 </template>
