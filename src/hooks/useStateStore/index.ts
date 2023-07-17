@@ -3,7 +3,7 @@ import type { DzViewStateProps } from '@/types/dz-view';
 
 export const useStateStore = () => {
   const store = reactive<{
-    state: { [index: BindCode]: DzViewStateProps };
+    state: { [index: string]: DzViewStateProps };
     dom: any;
   }>({
     state: {},
@@ -52,4 +52,4 @@ export const useStateStore = () => {
 };
 
 // prettier-ignore
-type BindCode = 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | 'P7' | 'P8' | 'P9' | 'B1' | 'B2' | 'B3' | 'B4' | 'B5' | 'B6' | 'B7' | 'B8' | 'B9' | string;
+type BindCode = 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | 'P7' | 'P8' | 'P9' | 'B1' | 'B2' | 'B3' | 'B4' | 'B5' | 'B6' | 'B7' | 'B8' | 'B9';
