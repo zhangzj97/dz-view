@@ -1,15 +1,6 @@
 <script setup lang="ts">
 import TestItem from './components/TestItem.vue';
-const {
-  bind,
-  getValue,
-  setState,
-  setValue,
-  validate,
-  getState,
-  pluginDom,
-  store,
-} = useForm({});
+const { bind, getValue, setState, setValue, validate, getState, pluginDom, store } = useForm({ pluginSet: 'PluginRaw' }); // prettier-ignore
 
 const test = () => {
   console.table(
