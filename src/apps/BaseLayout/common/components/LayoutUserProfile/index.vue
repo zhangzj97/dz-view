@@ -18,10 +18,10 @@
 
     <template #body>
       <v s="w-fit h-fit" col>
-        <dz-btn status="normal" title="用户信息" />
-        <dz-btn status="normal" title="修改密码" />
+        <dz-btn type="text" title="用户信息" />
+        <dz-btn type="text" title="修改密码" />
         <v s="w-grow h-[0.5px]" class="bg-gray-300" />
-        <dz-btn status="normal" title="退出登录" />
+        <dz-btn type="text" title="退出登录" />
       </v>
     </template>
   </dz-popover>
