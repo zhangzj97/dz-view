@@ -1,7 +1,10 @@
 const { findDefined } = useValidate();
 import type { DzViewStateProps } from '@/types/dz-view';
 
-export const useForm = ({ schema = {} }, option = {}) => {
+export const useForm = (
+  { schema = {}, pluginSet = null as string | null },
+  option = {}
+) => {
   const store = reactive({
     state: {},
 
@@ -37,7 +40,7 @@ export const useForm = ({ schema = {} }, option = {}) => {
     (code: string) =>
     (pluginCode, pluginOption = {}, pluginEvent = {}) =>
     (state, option = {}) => {
-      const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `BasePlugin/${pluginCode}`;
+      const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `${pluginSet}/${pluginCode}`;
       store.pluginCode[code] = findDefined([pluginFullname, schema?.[code]?.pluginCode, 'BasePlugin/Text']);
       return store.pluginCode[code];
     };
