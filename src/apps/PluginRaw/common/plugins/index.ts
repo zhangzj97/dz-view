@@ -1,4 +1,7 @@
+import ControlHidden from './Control/Hidden/index.vue';
 import ControlText from './Control/Text/index.vue';
+import ControlTextarea from './Control/Textarea/index.vue';
+import ControlInput from './Control/Input/index.vue';
 import ControlNumber from './Control/Number/index.vue';
 import ControlPassword from './Control/Password/index.vue';
 import ControlDate from './Control/Date/index.vue';
@@ -17,7 +20,10 @@ import ControlSelectMul from './Control/SelectMul/index.vue';
 export const plugins = {
   Cell: {},
   Control: {
+    'PluginRaw/Hidden': ControlHidden,
     'PluginRaw/Text': ControlText,
+    'PluginRaw/Textarea': ControlTextarea,
+    'PluginRaw/Input': ControlInput,
     'PluginRaw/Number': ControlNumber,
     'PluginRaw/Password': ControlPassword,
     'PluginRaw/Date': ControlDate,
