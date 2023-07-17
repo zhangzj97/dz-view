@@ -28,6 +28,10 @@ onMounted(() => emits('update:value', null));
 
 <template>
   <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
+    <v s="w-fit h-fit" v="mouse-gray" @click="pluginDom.showPicker()">
+      <v-icon v="8-50" icon="mdi:clock-outline" />
+    </v>
+
     <input
       ref="pluginDom"
       :class="[
@@ -43,5 +47,9 @@ onMounted(() => emits('update:value', null));
       @focus="CommonEvent.onFocus"
       @blur="CommonEvent.onBlur"
     />
+
+    <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
+      <v-icon v="8-50" icon="mdi:close-circle-outline" />
+    </v>
   </PluginControl>
 </template>
