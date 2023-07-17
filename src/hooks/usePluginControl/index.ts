@@ -89,7 +89,12 @@ export const usePluginControl = <T>({
 
   const focus = () => pluginDom?.value?.focus();
   const blur = () => pluginDom?.value?.blur();
-  const reset = () => emits('update:value', null);
+  const reset = () => {
+    emits('update:value', null);
+    validate({ error: false });
+  };
+
+  const refreshService = () => {};
 
   const modelValue = computed(() => getValue());
 
@@ -104,6 +109,7 @@ export const usePluginControl = <T>({
     focus,
     blur,
     reset,
+    refreshService,
   };
 
   const CommonEvent = {
