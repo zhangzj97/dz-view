@@ -84,7 +84,6 @@ export const usePluginControl = <T>({
       }
 
       if (!validator.result.error) props.state.error = false;
-      console.log(validator);
       return validator.result;
     };
 
