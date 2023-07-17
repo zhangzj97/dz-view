@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TestItem from './components/TestItem.vue';
-const { bind, getValue, setState, setValue, validate, getState, pluginDom, store } = useForm({ pluginSet: 'PluginRaw' }); // prettier-ignore
+const { bind, getValue, setState, setValue, validate, getState, pluginDom, store } = useForm({}, { pluginSet: 'PluginRaw', state: { test: false, required: true } }); // prettier-ignore
 
 const test = () => {
   console.table(
@@ -66,28 +66,31 @@ test();
     <dz-card s="w-grow h-grow" class="card-lg" title="Form">
       <!-- prettier-ignore -->
       <v s="w-grow h-grow" w="overflow-auto" grid>
+        <dz-form-item s="w-full h-fit" v-bind="bind('Text')('Text')({ required: false })" />
         <dz-form-item
           s="w-full h-fit"
           v-bind="
-            bind('Text')
-            ('Text', {},  { onAfterInput: () => setValue('age')(1), onBeforeInput: () => console.log('beforeInput') })
+            bind('Rule')
+            ('Input', {},  { onAfterInput: () => setValue('age')(1), onBeforeInput: () => console.log('beforeInput') })
             ({}, { validator: { rule: [{ pattern: /123/, message: '123' }] } })
           "
         />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Number')('Number')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Pwd')('Password')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Date')('Date')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Time')('Time')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('DT')('Datetime')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Week')('Week')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Month')('Month')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Color')('Color')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Range')('Range')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('File')('File')({ required: true })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Radio')('Radio')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Checkbox')('Checkbox')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('Select')('Select')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
-        <dz-form-item s="w-full h-fit" v-bind="bind('SelectMul')('SelectMul')({ required: true }, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Input')('Input')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('TA')('Textarea')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Number')('Number')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Pwd')('Password')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Date')('Date')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Time')('Time')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('DT')('Datetime')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Week')('Week')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Month')('Month')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Color')('Color')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Range')('Range')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('File')('File')({})" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Radio')('Radio')({}, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Checkbox')('Checkbox')({}, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('Select')('Select')({}, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
+        <dz-form-item s="w-full h-fit" v-bind="bind('SelectMul')('SelectMul')({}, { service: { list: [{value: 1, title: '香蕉'}, {value: '2', title: '苹果'}, {value: '3', title: '西瓜', disabled: true}] } })" />
       </v>
     </dz-card>
 
@@ -122,9 +125,9 @@ test();
                 { value: '中文'   , title: '中文'      },
               ]"
               :key="index"
-              :type="getValue('id') === item.value ? 'primary' : 'outline'"
+              :type="getValue('Text') === item.value ? 'primary' : 'outline'"
               :title="item.title"
-              @click="setValue('id')(item.value)"
+              @click="setValue('Text')(item.value)"
             />
           </TestItem>
 
@@ -172,7 +175,7 @@ test();
               ]"
               :key="index"
               :title="item.title"
-              @click="setValue('id')(`${getValue('id')}${item.value}`)"
+              @click="setValue('Text')(`${getValue('Text')}${item.value}`)"
             />
           </TestItem>
 
@@ -181,12 +184,12 @@ test();
           <TestItem title="plugin">
             <dz-btn 
               v-for="(item, index) of [
-                { title: 'focus'   , click: (() => pluginDom('id').focus()                   ) },
-                { title: 'blur'    , click: (() => pluginDom('id').blur()                    ) },
-                { title: 'reset'   , click: (() => pluginDom('id').reset()                   ) },
-                { title: 'clear'   , click: (() => pluginDom('id').clear()                   ) },
-                { title: 'validate', click: (() => pluginDom('id').validate({ error: true }) ) },
-                { title: 'validate', click: (() => pluginDom('id').validate({ error: false })) },
+                { title: 'focus'   , click: (() => pluginDom('Text').focus()                   ) },
+                { title: 'blur'    , click: (() => pluginDom('Text').blur()                    ) },
+                { title: 'reset'   , click: (() => pluginDom('Text').reset()                   ) },
+                { title: 'clear'   , click: (() => pluginDom('Text').clear()                   ) },
+                { title: 'validate', click: (() => pluginDom('Text').validate({ error: true }) ) },
+                { title: 'validate', click: (() => pluginDom('Text').validate({ error: false })) },
               ]" 
               :key="index"
               :title="item.title"
@@ -230,21 +233,6 @@ test();
               @click="item.click"
             />
           </TestItem>
-        </v>
-      </dz-card>
-    </v>
-
-    <v s="w-grow h-grow" w="gap-1" col>
-      <dz-card s="w-grow h-grow" class="card-lg" title="Test">
-        <v s="w-grow h-grow" w="gap-1 overflow-auto" col>
-          <dz-btn title="value-1" @click="setValue('id')('1')" />
-          <dz-btn title="value-[empty]" @click="setValue('id')('')" />
-          <dz-btn
-            title="append-1"
-            @click="setValue('id')(getValue('id') + '1')"
-          />
-          <dz-btn title="focus" @click="itemVm('id').focus()" />
-          <dz-btn title="blur" @click="itemVm('id').blur()" />
         </v>
       </dz-card>
       <dz-card
