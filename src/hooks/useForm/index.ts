@@ -2,8 +2,11 @@ const { findDefined } = useValidate();
 import type { DzViewStateProps } from '@/types/dz-view';
 
 export const useForm = (
-  { schema = {}, pluginSet = null as string | null },
-  option = {}
+  schema = {},
+  formOption = {
+    pluginSet: null as string | null,
+    state: {} as DzViewStateProps,
+  }
 ) => {
   const store = reactive({
     state: {},
@@ -40,7 +43,7 @@ export const useForm = (
     (code: string) =>
     (pluginCode, pluginOption = {}, pluginEvent = {}) =>
     (state, option = {}) => {
-      const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `${pluginSet}/${pluginCode}`;
+      const pluginFullname = pluginCode.match(/\//g) ? pluginCode : `${formOption.pluginSet}/${pluginCode}`;
       store.pluginCode[code] = findDefined([pluginFullname, schema?.[code]?.pluginCode, 'BasePlugin/Text']);
       return store.pluginCode[code];
     };
@@ -93,10 +96,11 @@ export const useForm = (
     (pluginCode, pluginOption = {}, pluginEvent = {}) =>
     (state, option = {}) => {
       store.state[code] = {
-        required : findDefined([state?.required, schema?.[code]?.state?.required, false]),
-        disabled : findDefined([state?.disabled, schema?.[code]?.state?.disabled, false]),
-        visible  : findDefined([state?.visible , schema?.[code]?.state?.visible , true ]),
-        error    : findDefined([state?.error   , schema?.[code]?.state?.error   , false]),
+        required : findDefined([state?.required, schema?.[code]?.state?.required, formOption.state.required, false]),
+        disabled : findDefined([state?.disabled, schema?.[code]?.state?.disabled, formOption.state.disabled, false]),
+        visible  : findDefined([state?.visible , schema?.[code]?.state?.visible , formOption.state.visible , true ]),
+        error    : findDefined([state?.error   , schema?.[code]?.state?.error   , formOption.state.error   , false]),
+        test     : findDefined([state?.test    , schema?.[code]?.state?.test    , formOption.state.test    , false]),
       };
       return store.state[code];
     };
@@ -159,13 +163,13 @@ export const useForm = (
     (code: string) =>
     (state: DzViewStateProps = {}) =>
       store.dom[code]?.setState(state);
-  const getValue = code => store.dom[code]?.getValue(option);
+  const getValue = code => store.dom[code]?.getValue();
   const setValue =
     code =>
     (value, option = {}) => {
       store.dom[code]?.setValue(value);
     };
-  const getOption = code => store.dom[code]?.getOption(option);
+  const getOption = code => store.dom[code]?.getOption();
   const setOption =
     code =>
     (value, option = {}) =>
