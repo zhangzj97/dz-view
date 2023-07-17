@@ -1,178 +1,47 @@
 <script setup lang="ts">
-import { Input } from '@arco-design/web-vue';
-import '@arco-design/web-vue/es/button/style/css';
+defineOptions({ name: 'ControlPassword' });
 
-interface DzBaseProps {
-  s?: string;
-  w?: string;
-  t?: string;
-  trans?: boolean | string;
-}
+import PluginControl from '../../../components/PluginControl.vue';
 
-interface DzViewTextProps {
-  text?: string;
-}
+import type { DzPluginControlProps, DzPluginControlEmits } from '@/types/dz-view'; // prettier-ignore
+type Option = {};
+type Event = {};
+const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
+const emits = defineEmits<DzPluginControlEmits & Event>();
 
-interface DzEntityProps {
-  id?: string;
-  icon?: string;
-  avatar?: string;
-  title?: string;
-  bg?: string;
-}
-
-interface DzViewFlexProps {
-  row?: boolean;
-  col?: boolean;
-
-  grid?: boolean;
-}
-
-interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
-  fixed?: string;
-}
-
-interface DzViewCursorProps {
-  pointer?: boolean;
-}
-
-interface DzViewSpaceProps {
-  space?: boolean;
-}
-
-interface DzViewMouseProps {
-  v?: 'mouse-gray';
-}
-
-interface DzFormItemProps {
-  preset?: string;
-
-  simple?: boolean;
-}
-
-interface DzFormSchemaProps {
-  schema?: any;
-
-  field: string | any;
-  plugin: string | any;
-
-  state?: any;
-
-  layout?: any;
-}
-
-interface DzPluginControlProps {
-  code?: any;
-  value?: any;
-  state?: any;
-
-  data?: any;
-}
-
-const props = withDefaults(defineProps<DzBaseProps & DzPluginControlProps>(), {
-  s: 'w-grow h-grow',
-});
-
-const emit = defineEmits<{
-  (e: 'update:data', value: any): void;
-  (e: 'onFocus', value: any): void;
-  (e: 'onBlur', value: any): void;
-}>();
-
-const plugin = ref(null);
-const { debug } = useLog({ module: 'ControlInput', color: 'blue' });
-
-const onInput = value => {
-  debug(`[onInput      ] ${value}`);
-};
-const onChange = value => {
-  debug(`[onChange     ] ${value}`);
+const { isString, isNumber, isBoolean } = useValidate();
+const getValue = (): string | null => props.value;
+const setValue = (value: unknown) => {
+  let newValue = null;
+  if (isString(value) || isNumber(value) || isBoolean(value)) {
+    newValue = String(value);
+  }
+  emits('update:value', newValue);
 };
 
-const onPressEnter = value => {
-  debug(`[onPressEnter ] ${value}`);
-};
+const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({ props, emits, getValue, setValue }); // prettier-ignore
 
-const onClear = value => {
-  debug(`[onClear      ] ${value}`);
-};
+defineExpose({ ...ExposeMethod });
 
-const onFocus = value => {
-  debug(`[onFocus      ] ${value}`);
-};
-
-const onBlur = value => {
-  debug(`[onBlur       ] ${value}`);
-};
-
-const onUpdateValue = value => {
-  debug(`[onUpdateValue] ${value}`);
-  props.data.value[props.code] = value;
-  emit('update:data', props.data);
-};
-
-const setState = (key, value) => {};
-
-const setValue = value => {
-  debug(`[setValue     ] ${value}`);
-  props.data.value[props.code] = value;
-  emit('update:data', props.data);
-};
-
-const validate = () => {};
-
-const focus = value => {
-  plugin.value.focus(value);
-};
-const blur = value => {
-  console.log(plugin.value);
-  plugin.value.blur(value);
-};
-
-const clear = value => {
-  plugin.value.clear(value);
-};
-
-defineExpose({
-  setState,
-  setValue,
-  validate,
-
-  focus,
-  blur,
-  clear,
-});
+onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <v s="w-grow h-grow" col>
-    <v s="w-grow h-fit" text="ControlInput">
-      <Input
-        ref="plugin"
-        :modelValue="data.value[code]"
-        allowClear
-        :readonly="false"
-        :error="false"
-        placeholder="请输入"
-        @update:modelValue="onUpdateValue"
-        @input="onInput"
-        @change="onChange"
-        @pressEnter="onPressEnter"
-        @clear="onClear"
-        @focus="onFocus"
-        @blur="onBlur"
-      />
-    </v>
-    <v s="w-grow h-8" text="Msg"></v>
-  </v>
+  <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
+    <input
+      ref="pluginDom"
+      :class="[
+        'w-full h-fit',
+        'dz-plugin-control-input',
+        state?.error && 'dz-plugin-control-input--error',
+        state?.disabled && 'dz-plugin-control-input--disabled',
+      ]"
+      type="text"
+      :disabled="state.disabled"
+      :value="modelValue"
+      @input="CommonEvent.onInput"
+      @focus="CommonEvent.onFocus"
+      @blur="CommonEvent.onBlur"
+    />
+  </PluginControl>
 </template>

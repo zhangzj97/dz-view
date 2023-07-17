@@ -41,7 +41,7 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <PluginControl :state="state" :validator="validator">
+  <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
     <v s="w-grow h-fit" grid w="gap-1">
       <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
         <input

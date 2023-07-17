@@ -32,7 +32,7 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <PluginControl :state="state" :validator="validator">
+  <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
     <input
       ref="pluginDom"
       :class="[
