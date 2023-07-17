@@ -73,6 +73,7 @@ export type DzViewStateProps = {
   loading?: boolean;
   fullscreen?: boolean;
   error?: boolean;
+  test?: boolean;
 };
 
 /**
