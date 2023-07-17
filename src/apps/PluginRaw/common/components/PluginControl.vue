@@ -6,6 +6,7 @@ withDefaults(
       reset?: any;
       setState?: any;
       setValue?: any;
+      getValue?: any;
     }
   >(),
   {}
@@ -19,37 +20,49 @@ const { bind0 } = useStateStore();
     <v s="w-grow h-fit">
       <slot></slot>
 
-      <!-- prettier-ignore -->
-      <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.required && 'bg-blue-400']"
+      <template v-if="state.test">
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.required && 'bg-blue-400']"
         @click="setState({ required: !state.required })">
         <v-text text="必" />
       </v>
 
-      <!-- prettier-ignore -->
-      <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.disabled && 'bg-blue-400']"
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.disabled && 'bg-blue-400']"
         @click="setState({ disabled: !state.disabled })">
         <v-text text="禁" />
       </v>
 
-      <!-- prettier-ignore -->
-      <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.error && 'bg-blue-400']"
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.error && 'bg-blue-400']"
         @click="setState({ error: !state.error })">
         <v-text text="错" />
       </v>
 
-      <!-- prettier-ignore -->
-      <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="validate({ error: true })"><v-text text="验" /></v>
-      <!-- prettier-ignore -->
-      <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="reset"><v-text text="清" /></v>
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="validate({ error: true })"><v-text text="验" /></v>
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue('')"><v-text text="''" /></v>
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue(null)"><v-text text="Nu" /></v>
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue([])"><v-text text="[]" /></v>
+        <!-- prettier-ignore -->
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue({})"><v-text text="{}" /></v>
 
-      <dz-popover v-bind="bind0('P1')()" trigger="hover">
-        <v s="w-fit h-fit" v="mouse-gray">
-          <v-icon v="8-50" icon="mdi:test-tube" />
-        </v>
-        <template #body>
-          <slot name="test"></slot>
-        </template>
-      </dz-popover>
+        <dz-popover v-bind="bind0('P1')()" trigger="hover">
+          <v s="w-fit h-fit" v="mouse-gray">
+            <v-icon v="8-50" icon="mdi:test-tube" />
+          </v>
+          <template #body>
+            <slot name="test">
+              <v s="w-fit h-fit" w="p-2">
+                {{ getValue() }}
+              </v>
+            </slot>
+          </template>
+        </dz-popover>
+      </template>
     </v>
 
     <v
