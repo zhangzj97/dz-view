@@ -1,0 +1,586 @@
+{
+  "auth_user": {
+    "tableName": "auth_user",
+    "tableComment": "[User]Data",
+    "fieldList": [
+      { "field": "uuid", "type": "VARCHAR256", "comment": "唯一标识" },
+      { "field": "username", "type": "VARCHAR256", "comment": "用户名" },
+      { "field": "password", "type": "VARCHAR256", "comment": "密码" },
+      { "field": "salt", "type": "CHAR8", "comment": "密码盐" },
+      {
+        "field": "last_login_ip",
+        "type": "VARCHAR256",
+        "comment": "最近登录IP"
+      },
+      {
+        "field": "login_fail_times",
+        "type": "CHAR8",
+        "comment": "登录失败次数"
+      },
+      {
+        "field": "last_change_pwd_time",
+        "type": "DATETIME",
+        "comment": "最近修改密码时间"
+      }
+    ]
+  },
+  "auth_user_profile": {
+    "tableName": "auth_user_profile",
+    "tableComment": "[User]ProfileVObj",
+    "fieldList": [
+      { "field": "nickname", "comment": "昵称", "type": "VARCHAR256" },
+      { "field": "bio", "comment": "个人简介", "type": "VARCHAR256" },
+      { "field": "avatar", "comment": "头像", "type": "VARCHAR256" },
+      { "field": "realname", "comment": "真实姓名", "type": "VARCHAR256" }
+    ]
+  },
+  "auth_user_security": {
+    "tableName": "auth_user_security",
+    "tableComment": "[User]SecurityVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "type", "comment": "认证类型", "type": "CHAR8" },
+      { "field": "public_key", "comment": "公钥", "type": "VARCHAR256" },
+      { "field": "private_key", "comment": "私钥", "type": "VARCHAR256" },
+      { "field": "expire_time", "comment": "有效时间", "type": "DATETIME" },
+      { "field": "salt", "comment": "盐", "type": "CHAR8" }
+    ]
+  },
+  "auth_user_security_type_username": {
+    "tableName": "auth_user_security_type_username",
+    "tableComment": "[User]SecurityVObj type=username",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "public_key", "comment": "公钥", "type": "VARCHAR256" },
+      { "field": "private_key", "comment": "私钥", "type": "VARCHAR256" },
+      { "field": "expire_time", "comment": "有效时间", "type": "DATETIME" },
+      { "field": "salt", "comment": "盐", "type": "CHAR8" }
+    ]
+  },
+  "auth_user_security_type_mobile": {
+    "tableName": "auth_user_security_type_mobile",
+    "tableComment": "[User]SecurityVObj type=mobile",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "public_key", "comment": "公钥", "type": "VARCHAR256" },
+      { "field": "private_key", "comment": "私钥", "type": "VARCHAR256" },
+      { "field": "expire_time", "comment": "有效时间", "type": "DATETIME" },
+      { "field": "salt", "comment": "盐", "type": "CHAR8" }
+    ]
+  },
+  "auth_user_security_log": {
+    "tableName": "auth_user_security_log",
+    "tableComment": "[User]SecurityLog",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "oper_type", "comment": "操作类型", "type": "CHAR8" },
+      { "field": "oper_ip", "comment": "操作IP", "type": "VARCHAR256" },
+      { "field": "oper_area", "comment": "操作地区", "type": "CHAR8" },
+      { "field": "oper_time", "comment": "操作时间", "type": "DATETIME" },
+      {
+        "field": "oper_result_code",
+        "comment": "操作结果Code",
+        "type": "CHAR8"
+      }
+    ]
+  },
+  "auth_tenant": {
+    "tableName": "auth_tenant",
+    "tableComment": "[Tenant]Data",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "is_deleted", "type": "CHAR8", "comment": "[Delete]删除标记" },
+      {
+        "field": "delete_user_id",
+        "type": "LONG",
+        "comment": "[Delete]删除者 UserId"
+      },
+      {
+        "field": "delete_time",
+        "type": "DATETIME",
+        "comment": "[Delete]删除时间"
+      },
+      { "field": "name", "comment": "租户名称", "type": "VARCHAR256" },
+      { "field": "address", "comment": "租户地址", "type": "VARCHAR256" },
+      { "field": "mobile", "comment": "联系电话", "type": "VARCHAR256" },
+      { "field": "email", "comment": "邮箱", "type": "VARCHAR256" },
+      { "field": "wechat", "comment": "微信", "type": "VARCHAR256" },
+      { "field": "qq", "comment": "QQ", "type": "VARCHAR256" }
+    ]
+  },
+  "auth_tenant_profile": {
+    "tableName": "auth_tenant_profile",
+    "tableComment": "[Tenant]ProfileVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      }
+    ]
+  },
+  "auth_dept": {
+    "tableName": "auth_dept",
+    "tableComment": "[Dept]Data",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "is_deleted", "type": "CHAR8", "comment": "[Delete]删除标记" },
+      {
+        "field": "delete_user_id",
+        "type": "LONG",
+        "comment": "[Delete]删除者 UserId"
+      },
+      {
+        "field": "delete_time",
+        "type": "DATETIME",
+        "comment": "[Delete]删除时间"
+      },
+      { "field": "parent_id", "type": "LONG", "comment": "[Tree]上级 Id" },
+      {
+        "field": "parent_code",
+        "type": "VARCHAR256",
+        "comment": "[Tree]上级 Code"
+      },
+      {
+        "field": "tree_ancestor",
+        "type": "VARCHAR256",
+        "comment": "[Tree]祖先 IdPath"
+      },
+      {
+        "field": "tree_code_path",
+        "type": "VARCHAR256",
+        "comment": "[Tree]祖先 CodePath"
+      },
+      { "field": "tree_level", "type": "CHAR8", "comment": "[Tree]层级" },
+      {
+        "field": "contact_mobile",
+        "comment": "联系人电话",
+        "type": "VARCHAR256"
+      },
+      {
+        "field": "contact_realname",
+        "comment": "联系人姓名",
+        "type": "VARCHAR256"
+      }
+    ]
+  },
+  "auth_dept_profile": {
+    "tableName": "auth_dept_profile",
+    "tableComment": "[Dept]ProfileVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      }
+    ]
+  },
+  "auth_post": {
+    "tableName": "auth_post",
+    "tableComment": "[Post]Data",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "is_deleted", "type": "CHAR8", "comment": "[Delete]删除标记" },
+      {
+        "field": "delete_user_id",
+        "type": "LONG",
+        "comment": "[Delete]删除者 UserId"
+      },
+      {
+        "field": "delete_time",
+        "type": "DATETIME",
+        "comment": "[Delete]删除时间"
+      },
+      { "field": "name", "comment": "岗位名称", "type": "VARCHAR256" }
+    ]
+  },
+  "auth_post_profile": {
+    "tableName": "auth_post_profile",
+    "tableComment": "[Post]ProfileVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      }
+    ]
+  },
+  "auth_role": {
+    "tableName": "auth_role",
+    "tableComment": "[Role]Data",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "is_deleted", "type": "CHAR8", "comment": "[Delete]删除标记" },
+      {
+        "field": "delete_user_id",
+        "type": "LONG",
+        "comment": "[Delete]删除者 UserId"
+      },
+      {
+        "field": "delete_time",
+        "type": "DATETIME",
+        "comment": "[Delete]删除时间"
+      },
+      { "field": "name", "comment": "角色名称", "type": "VARCHAR256" },
+      { "field": "" }
+    ]
+  },
+  "auth_role_profile": {
+    "tableName": "auth_role_profile",
+    "tableComment": "[Role]ProfileVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      }
+    ]
+  },
+  "auth_resourece": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_resourece_type_menu": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_resourece_profile": {
+    "tableName": "auth_resourece_profile",
+    "tableComment": "[Resource]ProfileVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      }
+    ]
+  },
+  "auth_link_post_user": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_resourece_role": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_role_user": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_role_dept": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_post_user_log": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_resourece_role_log": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_role_user_log": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_role_dept_log": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  }
+}
