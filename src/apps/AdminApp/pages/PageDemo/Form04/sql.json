@@ -39,23 +39,6 @@
         "type": "DATETIME",
         "comment": "[Delete]删除时间"
       },
-      { "field": "parent_id", "type": "LONG", "comment": "[Tree]上级 Id" },
-      {
-        "field": "parent_code",
-        "type": "VARCHAR256",
-        "comment": "[Tree]上级 Code"
-      },
-      {
-        "field": "tree_ancestor",
-        "type": "VARCHAR256",
-        "comment": "[Tree]祖先 IdPath"
-      },
-      {
-        "field": "tree_code_path",
-        "type": "VARCHAR256",
-        "comment": "[Tree]祖先 CodePath"
-      },
-      { "field": "tree_level", "type": "CHAR8", "comment": "[Tree]层级" },
       { "field": "uuid", "type": "VARCHAR256", "comment": "唯一标识" },
       { "field": "username", "type": "VARCHAR256", "comment": "用户名" },
       { "field": "password", "type": "VARCHAR256", "comment": "密码" },
@@ -298,23 +281,6 @@
         "type": "DATETIME",
         "comment": "[Delete]删除时间"
       },
-      { "field": "parent_id", "type": "LONG", "comment": "[Tree]上级 Id" },
-      {
-        "field": "parent_code",
-        "type": "VARCHAR256",
-        "comment": "[Tree]上级 Code"
-      },
-      {
-        "field": "tree_ancestor",
-        "type": "VARCHAR256",
-        "comment": "[Tree]祖先 IdPath"
-      },
-      {
-        "field": "tree_code_path",
-        "type": "VARCHAR256",
-        "comment": "[Tree]祖先 CodePath"
-      },
-      { "field": "tree_level", "type": "CHAR8", "comment": "[Tree]层级" },
       { "field": "name", "comment": "租户名称", "type": "VARCHAR256" },
       { "field": "address", "comment": "租户地址", "type": "VARCHAR256" },
       { "field": "mobile", "comment": "联系电话", "type": "VARCHAR256" },
