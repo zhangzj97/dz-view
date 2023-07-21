@@ -77,7 +77,41 @@
       }
     ]
   },
-  "auth_user_profile": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_user_profile": {
+    "tableName": "auth_user_profile",
+    "tableComment": "[User]ProfileVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "nickname", "comment": "昵称", "type": "VARCHAR256" },
+      { "field": "bio", "comment": "个人简介", "type": "VARCHAR256" },
+      { "field": "avatar", "comment": "头像", "type": "VARCHAR256" },
+      { "field": "realname", "comment": "真实姓名", "type": "VARCHAR256" }
+    ]
+  },
   "auth_user_security": {
     "tableName": "",
     "tableComment": "",
