@@ -762,9 +762,55 @@
     ]
   },
   "auth_resource_menu": {
-    "tableName": "",
-    "tableComment": "",
-    "fieldList": []
+    "tableName": "auth_resource_menu",
+    "tableComment": "[Resource]MenuVObj",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "resource_id", "comment": "资源Id", "type": "LONG" },
+      { "field": "path", "comment": "路由", "type": "VARCHAR256" },
+      { "field": "component", "comment": "路由组件", "type": "VARCHAR256" },
+      {
+        "field": "is_fixed_tag",
+        "comment": "是否默认固定标签",
+        "type": "CHAR8"
+      },
+      {
+        "field": "is_show_menu",
+        "comment": "是否作为菜单显示",
+        "type": "CHAR8"
+      },
+      { "field": "title", "comment": "菜单标题", "type": "VARCHAR256" },
+      { "field": "icon", "comment": "菜单图标", "type": "VARCHAR256" },
+      { "field": "avatar", "comment": "菜单头像", "type": "VARCHAR256" },
+      { "field": "background", "comment": "菜单背景", "type": "VARCHAR256" },
+      { "field": "menu_type", "comment": "菜单类型", "type": "CHAR8" }
+    ]
   },
   "auth_resource_api": { "tableName": "", "tableComment": "", "fieldList": [] },
   "auth_resource_extend": {
