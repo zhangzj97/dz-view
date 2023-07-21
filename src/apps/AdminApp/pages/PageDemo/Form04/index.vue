@@ -155,7 +155,8 @@ const resetTable = async ({ tableName, tableComment, type }) => {
 
     // prettier-ignore
     const indexList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
-    tableFieldList.reduce((_, { field, type, comment }) => {
+    tableFieldList.unshift({});
+    tableFieldList.reduce((_, { field, type, comment }, currentIndex) => {
       // prettier-ignore
       if ([
         'id', 'remark',
@@ -167,7 +168,6 @@ const resetTable = async ({ tableName, tableComment, type }) => {
         setValue(field)({ field, type, comment });
         return
       }
-
       setValue(indexList[index])({ field, type, comment });
       index += 1;
     });
