@@ -964,9 +964,29 @@
     ]
   },
   "auth_link_post_user_log": {
-    "tableName": "",
-    "tableComment": "",
-    "fieldList": []
+    "tableName": "auth_link_post_user_log",
+    "tableComment": "[Link][Post][User]Log",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "link_post_user_id",
+        "comment": "LinkPostUserId",
+        "type": "LONG"
+      },
+      { "field": "user_id", "comment": "用户Id", "type": "LONG" },
+      { "field": "post_id", "comment": "岗位Id", "type": "LONG" }
+    ]
   },
   "auth_link_resource_role_log": {
     "tableName": "",
