@@ -255,14 +255,26 @@
     "tableName": "auth_user_security_log",
     "tableComment": "[User]SecurityLog",
     "fieldList": [
-      { "field": "oper_type", "comment": "操作类型", "type": "CHAR8" },
-      { "field": "oper_ip", "comment": "操作IP", "type": "VARCHAR256" },
-      { "field": "oper_area", "comment": "操作地区", "type": "CHAR8" },
-      { "field": "oper_time", "comment": "操作时间", "type": "DATETIME" },
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      { "field": "oper_type", "type": "CHAR8", "comment": "操作类型" },
+      { "field": "oper_ip", "type": "VARCHAR256", "comment": "操作IP" },
+      { "field": "oper_area", "type": "CHAR8", "comment": "操作地区" },
+      { "field": "oper_time", "type": "DATETIME", "comment": "操作时间" },
       {
         "field": "oper_result_code",
-        "comment": "操作结果Code",
-        "type": "CHAR8"
+        "type": "CHAR8",
+        "comment": "操作结果Code"
       }
     ]
   },
