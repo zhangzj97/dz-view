@@ -24,9 +24,9 @@
       }
     ]
   },
-  "auth_user_profile": {
-    "tableName": "auth_user_profile",
-    "tableComment": "[User]ProfileVObj",
+  "auth_user_extend": {
+    "tableName": "auth_user_extend",
+    "tableComment": "[User]ExtendVObj",
     "fieldList": [
       { "field": "nickname", "comment": "昵称", "type": "VARCHAR256" },
       { "field": "bio", "comment": "个人简介", "type": "VARCHAR256" },
@@ -93,9 +93,9 @@
       { "field": "qq", "comment": "QQ", "type": "VARCHAR256" }
     ]
   },
-  "auth_tenant_profile": {
-    "tableName": "auth_tenant_profile",
-    "tableComment": "[Tenant]ProfileVObj",
+  "auth_tenant_extend": {
+    "tableName": "auth_tenant_extend",
+    "tableComment": "[Tenant]ExtendVObj",
     "fieldList": []
   },
   "auth_dept": {
@@ -114,9 +114,9 @@
       }
     ]
   },
-  "auth_dept_profile": {
-    "tableName": "auth_dept_profile",
-    "tableComment": "[Dept]ProfileVObj",
+  "auth_dept_extend": {
+    "tableName": "auth_dept_extend",
+    "tableComment": "[Dept]ExtendVObj",
     "fieldList": []
   },
   "auth_post": {
@@ -124,9 +124,9 @@
     "tableComment": "[Post]Data",
     "fieldList": []
   },
-  "auth_post_profile": {
-    "tableName": "auth_post_profile",
-    "tableComment": "[Post]ProfileVObj",
+  "auth_post_extend": {
+    "tableName": "auth_post_extend",
+    "tableComment": "[Post]ExtendVObj",
     "fieldList": []
   },
   "auth_role": {
@@ -134,9 +134,9 @@
     "tableComment": "[Role]Data",
     "fieldList": []
   },
-  "auth_role_profile": {
-    "tableName": "auth_role_profile",
-    "tableComment": "[Role]ProfileVObj",
+  "auth_role_extend": {
+    "tableName": "auth_role_extend",
+    "tableComment": "[Role]ExtendVObj",
     "fieldList": []
   },
   "auth_resourece": { "tableName": "", "tableComment": "", "fieldList": [] },
@@ -145,9 +145,9 @@
     "tableComment": "",
     "fieldList": []
   },
-  "auth_resourece_profile": {
-    "tableName": "auth_resourece_profile",
-    "tableComment": "[Resource]ProfileVObj",
+  "auth_resourece_extend": {
+    "tableName": "auth_resourece_extend",
+    "tableComment": "[Resource]ExtendVObj",
     "fieldList": []
   },
   "auth_link_post_user": {
