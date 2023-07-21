@@ -1,9 +1,9 @@
---------------------------------------------
------ auth_user                        -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user                        -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user;
 
-CREATE TABLE IF NOT EXISTS [User] Data (
+CREATE TABLE IF NOT EXISTS auth_user (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -24,12 +24,12 @@ CREATE TABLE IF NOT EXISTS [User] Data (
     PRIMARY KEY (id)
 ) COMMENT '[User]Data';
 
---------------------------------------------
------ auth_user_profile                -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user_profile                -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user_profile;
 
-CREATE TABLE IF NOT EXISTS [User] ProfileVObj (
+CREATE TABLE IF NOT EXISTS auth_user_profile (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -45,12 +45,12 @@ CREATE TABLE IF NOT EXISTS [User] ProfileVObj (
     PRIMARY KEY (id)
 ) COMMENT '[User]ProfileVObj';
 
---------------------------------------------
------ auth_user_extend                 -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user_extend                 -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user_extend;
 
-CREATE TABLE IF NOT EXISTS [User] ExtendVObj (
+CREATE TABLE IF NOT EXISTS auth_user_extend (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -62,12 +62,12 @@ CREATE TABLE IF NOT EXISTS [User] ExtendVObj (
     PRIMARY KEY (id)
 ) COMMENT '[User]ExtendVObj';
 
---------------------------------------------
------ auth_user_security               -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user_security               -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user_security;
 
-CREATE TABLE IF NOT EXISTS [User] SecurityVObj (
+CREATE TABLE IF NOT EXISTS auth_user_security (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -84,12 +84,12 @@ CREATE TABLE IF NOT EXISTS [User] SecurityVObj (
     PRIMARY KEY (id)
 ) COMMENT '[User]SecurityVObj';
 
---------------------------------------------
------ auth_user_security_type_username -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user_security_type_username -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user_security_type_username;
 
-CREATE TABLE IF NOT EXISTS [User] SecurityVObj type = username (
+CREATE TABLE IF NOT EXISTS auth_user_security_type_username (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -106,12 +106,12 @@ CREATE TABLE IF NOT EXISTS [User] SecurityVObj type = username (
     PRIMARY KEY (id)
 ) COMMENT '[User]SecurityVObj type=username';
 
---------------------------------------------
------ auth_user_security_type_mobile   -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user_security_type_mobile   -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user_security_type_mobile;
 
-CREATE TABLE IF NOT EXISTS [User] SecurityVObj type = mobile (
+CREATE TABLE IF NOT EXISTS auth_user_security_type_mobile (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -128,12 +128,12 @@ CREATE TABLE IF NOT EXISTS [User] SecurityVObj type = mobile (
     PRIMARY KEY (id)
 ) COMMENT '[User]SecurityVObj type=mobile';
 
---------------------------------------------
------ auth_user_security_log           -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_user_security_log           -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_user_security_log;
 
-CREATE TABLE IF NOT EXISTS [User] SecurityLog (
+CREATE TABLE IF NOT EXISTS auth_user_security_log (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -148,12 +148,12 @@ CREATE TABLE IF NOT EXISTS [User] SecurityLog (
     PRIMARY KEY (id)
 ) COMMENT '[User]SecurityLog';
 
---------------------------------------------
------ auth_tenant                      -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_tenant                      -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_tenant;
 
-CREATE TABLE IF NOT EXISTS [Tenant] Data (
+CREATE TABLE IF NOT EXISTS auth_tenant (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -173,12 +173,12 @@ CREATE TABLE IF NOT EXISTS [Tenant] Data (
     PRIMARY KEY (id)
 ) COMMENT '[Tenant]Data';
 
---------------------------------------------
------ auth_tenant_extend               -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_tenant_extend               -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_tenant_extend;
 
-CREATE TABLE IF NOT EXISTS [Tenant] ExtendVObj (
+CREATE TABLE IF NOT EXISTS auth_tenant_extend (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -190,12 +190,12 @@ CREATE TABLE IF NOT EXISTS [Tenant] ExtendVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Tenant]ExtendVObj';
 
---------------------------------------------
------ auth_dept                        -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_dept                        -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_dept;
 
-CREATE TABLE IF NOT EXISTS [Dept] Data (
+CREATE TABLE IF NOT EXISTS auth_dept (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -216,12 +216,12 @@ CREATE TABLE IF NOT EXISTS [Dept] Data (
     PRIMARY KEY (id)
 ) COMMENT '[Dept]Data';
 
---------------------------------------------
------ auth_dept_extend                 -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_dept_extend                 -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_dept_extend;
 
-CREATE TABLE IF NOT EXISTS [Dept] ExtendVObj (
+CREATE TABLE IF NOT EXISTS auth_dept_extend (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -233,12 +233,12 @@ CREATE TABLE IF NOT EXISTS [Dept] ExtendVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Dept]ExtendVObj';
 
---------------------------------------------
------ auth_post                        -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_post                        -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_post;
 
-CREATE TABLE IF NOT EXISTS [Post] Data (
+CREATE TABLE IF NOT EXISTS auth_post (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -254,12 +254,12 @@ CREATE TABLE IF NOT EXISTS [Post] Data (
     PRIMARY KEY (id)
 ) COMMENT '[Post]Data';
 
---------------------------------------------
------ auth_post_extend                 -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_post_extend                 -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_post_extend;
 
-CREATE TABLE IF NOT EXISTS [Post] ExtendVObj (
+CREATE TABLE IF NOT EXISTS auth_post_extend (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -271,12 +271,12 @@ CREATE TABLE IF NOT EXISTS [Post] ExtendVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Post]ExtendVObj';
 
---------------------------------------------
------ auth_role                        -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_role                        -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_role;
 
-CREATE TABLE IF NOT EXISTS [Role] Data (
+CREATE TABLE IF NOT EXISTS auth_role (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -292,12 +292,12 @@ CREATE TABLE IF NOT EXISTS [Role] Data (
     PRIMARY KEY (id)
 ) COMMENT '[Role]Data';
 
---------------------------------------------
------ auth_role_extend                 -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_role_extend                 -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_role_extend;
 
-CREATE TABLE IF NOT EXISTS [Role] ExtendVObj (
+CREATE TABLE IF NOT EXISTS auth_role_extend (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -309,12 +309,12 @@ CREATE TABLE IF NOT EXISTS [Role] ExtendVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Role]ExtendVObj';
 
---------------------------------------------
------ auth_resource                    -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_resource                    -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_resource;
 
-CREATE TABLE IF NOT EXISTS [Resource] Data (
+CREATE TABLE IF NOT EXISTS auth_resource (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -334,9 +334,9 @@ CREATE TABLE IF NOT EXISTS [Resource] Data (
     PRIMARY KEY (id)
 ) COMMENT '[Resource]Data';
 
---------------------------------------------
------                                  -----
---------------------------------------------
+-- ------------------------------------------
+-- ---                                  -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS;
 
 CREATE TABLE IF NOT EXISTS (
@@ -359,12 +359,12 @@ CREATE TABLE IF NOT EXISTS (
     PRIMARY KEY (id)
 ) COMMENT '';
 
---------------------------------------------
------ auth_resource_menu               -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_resource_menu               -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_resource_menu;
 
-CREATE TABLE IF NOT EXISTS [Resource] MenuVObj (
+CREATE TABLE IF NOT EXISTS auth_resource_menu (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -385,12 +385,12 @@ CREATE TABLE IF NOT EXISTS [Resource] MenuVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Resource]MenuVObj';
 
---------------------------------------------
------ auth_resource_api                -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_resource_api                -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_resource_api;
 
-CREATE TABLE IF NOT EXISTS [Resource] ApiVObj (
+CREATE TABLE IF NOT EXISTS auth_resource_api (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -404,12 +404,12 @@ CREATE TABLE IF NOT EXISTS [Resource] ApiVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Resource]ApiVObj';
 
---------------------------------------------
------ auth_resource_extend             -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_resource_extend             -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_resource_extend;
 
-CREATE TABLE IF NOT EXISTS [Resource] ExtendVObj (
+CREATE TABLE IF NOT EXISTS auth_resource_extend (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -421,12 +421,12 @@ CREATE TABLE IF NOT EXISTS [Resource] ExtendVObj (
     PRIMARY KEY (id)
 ) COMMENT '[Resource]ExtendVObj';
 
---------------------------------------------
------ auth_link_post_user              -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_post_user              -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_post_user;
 
-CREATE TABLE IF NOT EXISTS [Link] [Post] [User] (
+CREATE TABLE IF NOT EXISTS auth_link_post_user (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -436,12 +436,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Post] [User] (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Post][User]';
 
---------------------------------------------
------ auth_link_resource_role          -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_resource_role          -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_resource_role;
 
-CREATE TABLE IF NOT EXISTS [Link] [Resource] [Role] (
+CREATE TABLE IF NOT EXISTS auth_link_resource_role (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -451,12 +451,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Resource] [Role] (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Resource][Role]';
 
---------------------------------------------
------ auth_link_role_user              -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_role_user              -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_role_user;
 
-CREATE TABLE IF NOT EXISTS [Link] [Role] [User] (
+CREATE TABLE IF NOT EXISTS auth_link_role_user (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -466,12 +466,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Role] [User] (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Role][User]';
 
---------------------------------------------
------ auth_link_role_dept              -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_role_dept              -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_role_dept;
 
-CREATE TABLE IF NOT EXISTS [Link] [Role] [Dept] (
+CREATE TABLE IF NOT EXISTS auth_link_role_dept (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -481,12 +481,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Role] [Dept] (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Role][Dept]';
 
---------------------------------------------
------ auth_link_post_user_log          -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_post_user_log          -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_post_user_log;
 
-CREATE TABLE IF NOT EXISTS [Link] [Post] [User] Log (
+CREATE TABLE IF NOT EXISTS auth_link_post_user_log (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -497,12 +497,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Post] [User] Log (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Post][User]Log';
 
---------------------------------------------
------ auth_link_resource_role_log      -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_resource_role_log      -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_resource_role_log;
 
-CREATE TABLE IF NOT EXISTS [Link] [Resource] [Role] Log (
+CREATE TABLE IF NOT EXISTS auth_link_resource_role_log (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -513,12 +513,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Resource] [Role] Log (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Resource][Role]Log';
 
---------------------------------------------
------ auth_link_role_user_log          -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_role_user_log          -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_role_user_log;
 
-CREATE TABLE IF NOT EXISTS [Link] [Role] [User] Log (
+CREATE TABLE IF NOT EXISTS auth_link_role_user_log (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',
@@ -529,12 +529,12 @@ CREATE TABLE IF NOT EXISTS [Link] [Role] [User] Log (
     PRIMARY KEY (id)
 ) COMMENT '[Link][Role][User]Log';
 
---------------------------------------------
------ auth_link_role_dept_log          -----
---------------------------------------------
+-- ------------------------------------------
+-- --- auth_link_role_dept_log          -----
+-- ------------------------------------------
 DROP TABLE IF EXISTS auth_link_role_dept_log;
 
-CREATE TABLE IF NOT EXISTS [Link] [Role] [Dept] Log (
+CREATE TABLE IF NOT EXISTS auth_link_role_dept_log (
     id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Default]Id',
     remark VARCHAR(255) NOT NULL DEFAULT "" COMMENT '[Default]备注',
     create_user_id BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '[Create]创建者 UserId',

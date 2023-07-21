@@ -204,7 +204,7 @@ const sql = async () => {
   };
 
   sql.push(`DROP TABLE IF EXISTS ${tableName};`);
-  sql.push(`CREATE TABLE IF NOT EXISTS ${tableComment} (`);
+  sql.push(`CREATE TABLE IF NOT EXISTS ${tableName} (`);
 
   // prettier-ignore
   {
@@ -276,11 +276,11 @@ const sql2 = async () => {
 
   const sql = tableList.map(({tableName,tableComment,fieldList}) => {
     const createTableSql = []
-    createTableSql.push(`--------------------------------------------`);
-    createTableSql.push(`----- ${tableName.padEnd(32, ' ')} -----`);
-    createTableSql.push(`--------------------------------------------`);
+    createTableSql.push(`-- ------------------------------------------`);
+    createTableSql.push(`-- --- ${tableName.padEnd(32, ' ')} -----`);
+    createTableSql.push(`-- ------------------------------------------`);
     createTableSql.push(`DROP TABLE IF EXISTS ${tableName};`);
-    createTableSql.push(`CREATE TABLE IF NOT EXISTS ${tableComment} (`);
+    createTableSql.push(`CREATE TABLE IF NOT EXISTS ${tableName} (`);
 
     fieldList.reduce((_, { field, type, comment }) => {
       createTableSql.push(format({ field, type, comment }));
