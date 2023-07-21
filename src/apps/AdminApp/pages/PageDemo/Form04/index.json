@@ -107,10 +107,35 @@
     "tableName": "auth_user_extend",
     "tableComment": "[User]ExtendVObj",
     "fieldList": [
-      { "field": "nickname", "comment": "昵称", "type": "VARCHAR256" },
-      { "field": "bio", "comment": "个人简介", "type": "VARCHAR256" },
-      { "field": "avatar", "comment": "头像", "type": "VARCHAR256" },
-      { "field": "realname", "comment": "真实姓名", "type": "VARCHAR256" }
+      {},
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "extend", "type": "VARCHAR256", "comment": "拓展" }
     ]
   },
   "auth_user_security": {
@@ -175,7 +200,36 @@
   "auth_tenant_extend": {
     "tableName": "auth_tenant_extend",
     "tableComment": "[Tenant]ExtendVObj",
-    "fieldList": []
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+    ]
   },
   "auth_dept": {
     "tableName": "auth_dept",
@@ -196,7 +250,36 @@
   "auth_dept_extend": {
     "tableName": "auth_dept_extend",
     "tableComment": "[Dept]ExtendVObj",
-    "fieldList": []
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+    ]
   },
   "auth_post": {
     "tableName": "auth_post",
@@ -206,7 +289,36 @@
   "auth_post_extend": {
     "tableName": "auth_post_extend",
     "tableComment": "[Post]ExtendVObj",
-    "fieldList": []
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+    ]
   },
   "auth_role": {
     "tableName": "auth_role",
@@ -216,7 +328,36 @@
   "auth_role_extend": {
     "tableName": "auth_role_extend",
     "tableComment": "[Role]ExtendVObj",
-    "fieldList": []
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+    ]
   },
   "auth_resourece": { "tableName": "", "tableComment": "", "fieldList": [] },
   "auth_resourece_type_menu": {
@@ -227,7 +368,36 @@
   "auth_resourece_extend": {
     "tableName": "auth_resourece_extend",
     "tableComment": "[Resource]ExtendVObj",
-    "fieldList": []
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+    ]
   },
   "auth_link_post_user": {
     "tableName": "",
