@@ -1,67 +1,87 @@
 {
-  "auth_user": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_user_profile": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_user_security": { "tableName": "", "tableComment": "", "field": [] },
+  "auth_user": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_user_profile": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_user_security": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
   "auth_user_security_type_username": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
   "auth_user_security_type_mobile": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
   "auth_user_security_log": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
-  "auth_tenant": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_tenant_profile": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_dept": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_dept_profile": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_post": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_post_profile": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_role": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_role_profile": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_resourece": { "tableName": "", "tableComment": "", "field": [] },
+  "auth_tenant": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_tenant_profile": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_dept": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_dept_profile": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_post": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_post_profile": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_role": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_role_profile": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_resourece": { "tableName": "", "tableComment": "", "fieldList": [] },
   "auth_resourece_type_menu": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
   "auth_resourece_profile": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
-  "auth_link_post_user": { "tableName": "", "tableComment": "", "field": [] },
+  "auth_link_post_user": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
   "auth_link_resourece_role": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
-  "auth_link_role_user": { "tableName": "", "tableComment": "", "field": [] },
-  "auth_link_role_dept": { "tableName": "", "tableComment": "", "field": [] },
+  "auth_link_role_user": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
+  "auth_link_role_dept": {
+    "tableName": "",
+    "tableComment": "",
+    "fieldList": []
+  },
   "auth_link_post_user_log": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
   "auth_link_resourece_role_log": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
   "auth_link_role_user_log": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   },
   "auth_link_role_dept_log": {
     "tableName": "",
     "tableComment": "",
-    "field": []
+    "fieldList": []
   }
 }
