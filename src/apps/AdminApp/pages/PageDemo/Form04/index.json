@@ -370,6 +370,57 @@
     "tableName": "auth_dept",
     "tableComment": "[Dept]Data",
     "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      {
+        "field": "delete_user_id",
+        "type": "LONG",
+        "comment": "[Delete]删除者 UserId"
+      },
+      {
+        "field": "delete_time",
+        "type": "DATETIME",
+        "comment": "[Delete]删除时间"
+      },
+      {
+        "field": "delete_flag",
+        "type": "CHAR8",
+        "comment": "[Delete]删除标记"
+      },
+      { "field": "tree_pid", "type": "LONG", "comment": "[Tree]上级 Id" },
+      { "field": "tree_level", "type": "CHAR8", "comment": "[Tree]层级" },
+      {
+        "field": "tree_ancestor",
+        "type": "VARCHAR256",
+        "comment": "[Tree]祖先 IdPath"
+      },
+      { "field": "name", "type": "VARCHAR256", "comment": "部门名称" },
+      { "field": "code", "type": "VARCHAR256", "comment": "部门Code" },
       {
         "field": "contact_mobile",
         "comment": "联系人电话",
