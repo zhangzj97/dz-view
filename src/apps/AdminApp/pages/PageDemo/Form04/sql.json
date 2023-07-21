@@ -219,9 +219,44 @@
     ]
   },
   "auth_user_security_log": {
-    "tableName": "",
-    "tableComment": "",
-    "fieldList": []
+    "tableName": "auth_user_security_log",
+    "tableComment": "[User]SecurityLog",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Log]新建时间"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Log]更新时间"
+      },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Log]创建者 UserId"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Log]更新者 UserId"
+      },
+      { "field": "oper_type", "comment": "操作类型", "type": "CHAR8" },
+      { "field": "oper_ip", "comment": "操作IP", "type": "VARCHAR256" },
+      { "field": "oper_area", "comment": "操作地区", "type": "CHAR8" },
+      { "field": "oper_time", "comment": "操作时间", "type": "DATETIME" },
+      {
+        "field": "oper_result_code",
+        "comment": "操作结果Code",
+        "type": "CHAR8"
+      }
+    ]
   },
   "auth_tenant": { "tableName": "", "tableComment": "", "fieldList": [] },
   "auth_tenant_profile": {
