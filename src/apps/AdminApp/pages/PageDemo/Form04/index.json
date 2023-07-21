@@ -135,7 +135,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "extend", "type": "VARCHAR256", "comment": "拓展" }
+      { "field": "user_id", "type": "LONG", "comment": "用户Id" }
     ]
   },
   "auth_user_security": {
@@ -364,7 +364,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+      { "field": "tenant_id", "type": "LONG", "comment": "租户Id" }
     ]
   },
   "auth_dept": {
@@ -465,7 +465,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+      { "field": "dept_id", "type": "LONG", "comment": "部门Id" }
     ]
   },
   "auth_post": {
@@ -549,7 +549,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+      { "field": "post_id", "type": "LONG", "comment": "岗位Id" }
     ]
   },
   "auth_role": {
@@ -633,7 +633,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+      { "field": "role_id", "type": "LONG", "comment": "角色Id" }
     ]
   },
   "auth_resource": {
@@ -789,7 +789,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
+      { "field": "resource_id", "type": "LONG", "comment": "资源Id" }
     ]
   },
   "auth_link_post_user": {
