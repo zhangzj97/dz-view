@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Alert } from '@arco-design/web-vue';
-import data from './sql.json';
+import data from './index.json';
 
 const { isArrayExist, isNull } = useValidate();
 
