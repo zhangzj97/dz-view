@@ -141,7 +141,6 @@
         "type": "LONG",
         "comment": "[Log]更新者 UserId"
       },
-      { "field": "type", "comment": "认证类型", "type": "CHAR8" },
       { "field": "public_key", "comment": "公钥", "type": "VARCHAR256" },
       { "field": "private_key", "comment": "私钥", "type": "VARCHAR256" },
       { "field": "expire_time", "comment": "有效时间", "type": "DATETIME" },
