@@ -97,10 +97,11 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      { "field": "nickname", "comment": "昵称", "type": "VARCHAR256" },
-      { "field": "bio", "comment": "个人简介", "type": "VARCHAR256" },
-      { "field": "avatar", "comment": "头像", "type": "VARCHAR256" },
-      { "field": "realname", "comment": "真实名称", "type": "VARCHAR256" }
+      { "field": "user_id", "type": "LONG", "comment": "用户Id" },
+      { "field": "nickname", "type": "VARCHAR256", "comment": "昵称" },
+      { "field": "bio", "type": "VARCHAR256", "comment": "个人简介" },
+      { "field": "avatar", "type": "VARCHAR256", "comment": "头像" },
+      { "field": "realname", "type": "VARCHAR256", "comment": "真实名称" }
     ]
   },
   "auth_user_extend": {
@@ -756,12 +757,7 @@
     "tableComment": "",
     "fieldList": []
   },
-  "auth_resource_api": {
-    "tableName": "",
-    "tableComment": "",
-    "fieldList": []
-  },
-
+  "auth_resource_api": { "tableName": "", "tableComment": "", "fieldList": [] },
   "auth_resource_extend": {
     "tableName": "auth_resource_extend",
     "tableComment": "[Resource]ExtendVObj",
