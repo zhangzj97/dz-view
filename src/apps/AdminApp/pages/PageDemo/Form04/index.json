@@ -107,7 +107,6 @@
     "tableName": "auth_user_extend",
     "tableComment": "[User]ExtendVObj",
     "fieldList": [
-      {},
       { "field": "id", "type": "LONG", "comment": "[Default]Id" },
       { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
       {
