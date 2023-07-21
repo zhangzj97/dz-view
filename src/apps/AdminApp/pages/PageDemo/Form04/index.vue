@@ -33,6 +33,8 @@ const store = reactive({
     { tableName: 'auth_role_extend'                , tableComment:'[Role]ExtendVObj'        , type: 'VObj' },
     { tableName: 'auth_resource'                   , tableComment:'[Resource]Data'           , type: 'Tree' },
     { tableName: 'auth_resource_type_menu'               , tableComment:'[Resource]Data type=menu'           , type: 'Tree' },
+    { tableName: 'auth_resource_menu'                   , tableComment:'[Resource]MenuVObj'           , type: 'VObj' },
+    { tableName: 'auth_resource_api'                   , tableComment:'[Resource]ApiVObj'           , type: 'VObj' },
     { tableName: 'auth_resource_extend'            , tableComment:'[Resource]ExtendVObj'    , type: 'Link' },
     { tableName: 'auth_link_post_user'               , tableComment:'[Link][Post][User]'       , type: 'Link' },
     { tableName: 'auth_link_resource_role'          , tableComment:'[Link][Resource][Role]'   , type: 'Link' },
@@ -198,10 +200,10 @@ const sql = async () => {
     return `  ${field.trim().padEnd(32, ' ')} ${FieldTypeSql[type].padEnd(
       64,
       ' '
-    )} COMMENT '${comment.trim()}'`;
+    )} COMMENT '${comment.trim()}';`;
   };
 
-  sql.push(`DROP TABLE IF EXISTS ${tableName}`);
+  sql.push(`DROP TABLE IF EXISTS ${tableName};`);
   sql.push(`CREATE TABLE IF NOT EXISTS ${tableComment} (`);
 
   // prettier-ignore
@@ -258,6 +260,46 @@ const sql = async () => {
   setValue('JSON')(JSON.stringify(store.data));
 
 };
+
+// prettier-ignore
+const sql2 = async () => {
+
+  const format = ({ field, comment, type }) => {
+    if (!field) return '';
+    return `  ${field.trim().padEnd(32, ' ')} ${FieldTypeSql[type].padEnd(
+      64,
+      ' '
+    )} COMMENT '${comment.trim()}',`;
+  };
+
+  const tableList = Object.values(store.data);
+
+  const sql = tableList.map(({tableName,tableComment,fieldList}) => {
+    const createTableSql = []
+    createTableSql.push(`--------------------------------------------`);
+    createTableSql.push(`----- ${tableName.padEnd(32, ' ')} -----`);
+    createTableSql.push(`--------------------------------------------`);
+    createTableSql.push(`DROP TABLE IF EXISTS ${tableName};`);
+    createTableSql.push(`CREATE TABLE IF NOT EXISTS ${tableComment} (`);
+
+    fieldList.reduce((_, { field, type, comment }) => {
+      createTableSql.push(format({ field, type, comment }));
+    }, {});
+
+    createTableSql.push(`PRIMARY KEY (id)`);
+    createTableSql.push(`) COMMENT '${tableComment}';`);
+
+    return createTableSql.join('\n');
+  });
+
+
+
+  setValue('SQL')(sql.join('\n'));
+
+
+
+
+};
 </script>
 
 <template>
@@ -270,6 +312,7 @@ const sql = async () => {
 
     <v s="w-grow h-fit">
       <dz-btn title="sql" @click="sql" />
+      <dz-btn title="sql2" @click="sql2" />
     </v>
     <dz-card s="w-grow h-grow" class="card-lg" grid title="Form">
       <v s="w-grow h-grow">
