@@ -169,6 +169,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
+      { "field": "user_id", "type": "LONG", "comment": "用户Id" },
       { "field": "security_type", "type": "CHAR8", "comment": "认证类型" },
       { "field": "public_key", "type": "VARCHAR256", "comment": "公钥" },
       { "field": "private_key", "type": "VARCHAR256", "comment": "私钥" },
@@ -207,6 +208,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
+      { "field": "user_id", "type": "LONG", "comment": "用户Id" },
       { "field": "security_type", "type": "CHAR8", "comment": "认证类型" },
       { "field": "public_key", "type": "VARCHAR256", "comment": "公钥" },
       { "field": "private_key", "type": "VARCHAR256", "comment": "私钥" },
@@ -245,6 +247,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
+      { "field": "user_id", "type": "LONG", "comment": "用户Id" },
       { "field": "security_type", "type": "CHAR8", "comment": "认证类型" },
       { "field": "public_key", "type": "VARCHAR256", "comment": "公钥" },
       { "field": "private_key", "type": "VARCHAR256", "comment": "私钥" },
