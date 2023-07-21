@@ -989,9 +989,29 @@
     ]
   },
   "auth_link_resource_role_log": {
-    "tableName": "",
-    "tableComment": "",
-    "fieldList": []
+    "tableName": "auth_link_resource_role_log",
+    "tableComment": "[Link][Resource][Role]Log",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "link_resource_role_id",
+        "comment": "LinkResourceRoleId",
+        "type": "LONG"
+      },
+      { "field": "resource_id", "comment": "资源Id", "type": "LONG" },
+      { "field": "role_id", "comment": "角色Id", "type": "LONG" }
+    ]
   },
   "auth_link_role_user_log": {
     "tableName": "",
