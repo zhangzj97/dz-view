@@ -141,22 +141,76 @@
     "tableName": "auth_user_security",
     "tableComment": "[User]SecurityVObj",
     "fieldList": [
-      { "field": "type", "comment": "认证类型", "type": "CHAR8" },
-      { "field": "public_key", "comment": "公钥", "type": "VARCHAR256" },
-      { "field": "private_key", "comment": "私钥", "type": "VARCHAR256" },
-      { "field": "expire_time", "comment": "有效时间", "type": "DATETIME" },
-      { "field": "salt", "comment": "盐", "type": "CHAR8" }
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "security_type", "type": "CHAR8", "comment": "认证类型" },
+      { "field": "public_key", "type": "VARCHAR256", "comment": "公钥" },
+      { "field": "private_key", "type": "VARCHAR256", "comment": "私钥" },
+      { "field": "expire_time", "type": "DATETIME", "comment": "有效时间" },
+      { "field": "salt", "type": "CHAR8", "comment": "盐" }
     ]
   },
   "auth_user_security_type_username": {
     "tableName": "auth_user_security_type_username",
     "tableComment": "[User]SecurityVObj type=username",
     "fieldList": [
-      { "field": "type", "comment": "认证类型", "type": "CHAR8" },
-      { "field": "public_key", "comment": "公钥", "type": "VARCHAR256" },
-      { "field": "private_key", "comment": "私钥", "type": "VARCHAR256" },
-      { "field": "expire_time", "comment": "有效时间", "type": "DATETIME" },
-      { "field": "salt", "comment": "盐", "type": "CHAR8" }
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      {
+        "field": "update_user_id",
+        "type": "LONG",
+        "comment": "[Update]更新者 UserId"
+      },
+      {
+        "field": "update_time",
+        "type": "DATETIME",
+        "comment": "[Update]更新时间"
+      },
+      {
+        "field": "update_version",
+        "type": "CHAR8",
+        "comment": "[Update]乐观锁"
+      },
+      { "field": "security_type", "type": "CHAR8", "comment": "认证类型" },
+      { "field": "public_key", "type": "VARCHAR256", "comment": "公钥" },
+      { "field": "private_key", "type": "VARCHAR256", "comment": "私钥" },
+      { "field": "expire_time", "type": "DATETIME", "comment": "有效时间" },
+      { "field": "salt", "type": "CHAR8", "comment": "盐" }
     ]
   },
   "auth_user_security_type_mobile": {
