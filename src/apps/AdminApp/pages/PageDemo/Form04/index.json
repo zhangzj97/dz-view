@@ -635,14 +635,14 @@
       { "field": "extend", "comment": "拓展", "type": "VARCHAR256" }
     ]
   },
-  "auth_resourece": { "tableName": "", "tableComment": "", "fieldList": [] },
-  "auth_resourece_type_menu": {
+  "auth_resource": { "tableName": "", "tableComment": "", "fieldList": [] },
+  "auth_resource_type_menu": {
     "tableName": "",
     "tableComment": "",
     "fieldList": []
   },
-  "auth_resourece_extend": {
-    "tableName": "auth_resourece_extend",
+  "auth_resource_extend": {
+    "tableName": "auth_resource_extend",
     "tableComment": "[Resource]ExtendVObj",
     "fieldList": [
       { "field": "id", "type": "LONG", "comment": "[Default]Id" },
@@ -680,7 +680,7 @@
     "tableComment": "",
     "fieldList": []
   },
-  "auth_link_resourece_role": {
+  "auth_link_resource_role": {
     "tableName": "",
     "tableComment": "",
     "fieldList": []
@@ -700,7 +700,7 @@
     "tableComment": "",
     "fieldList": []
   },
-  "auth_link_resourece_role_log": {
+  "auth_link_resource_role_log": {
     "tableName": "",
     "tableComment": "",
     "fieldList": []

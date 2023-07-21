@@ -31,15 +31,15 @@ const store = reactive({
     { tableName: 'auth_post_extend'                , tableComment:'[Post]ExtendVObj'        , type: 'VObj' },
     { tableName: 'auth_role'                        , tableComment:'[Role]Data'               , type: 'Data' },
     { tableName: 'auth_role_extend'                , tableComment:'[Role]ExtendVObj'        , type: 'VObj' },
-    { tableName: 'auth_resourece'                   , tableComment:'[Resource]Data'           , type: 'Tree' },
-    { tableName: 'auth_resourece_type_menu'               , tableComment:'[Resource]Data type=menu'           , type: 'Tree' },
-    { tableName: 'auth_resourece_extend'            , tableComment:'[Resource]ExtendVObj'    , type: 'Link' },
+    { tableName: 'auth_resource'                   , tableComment:'[Resource]Data'           , type: 'Tree' },
+    { tableName: 'auth_resource_type_menu'               , tableComment:'[Resource]Data type=menu'           , type: 'Tree' },
+    { tableName: 'auth_resource_extend'            , tableComment:'[Resource]ExtendVObj'    , type: 'Link' },
     { tableName: 'auth_link_post_user'               , tableComment:'[Link][Post][User]'       , type: 'Link' },
-    { tableName: 'auth_link_resourece_role'          , tableComment:'[Link][Resource][Role]'   , type: 'Link' },
+    { tableName: 'auth_link_resource_role'          , tableComment:'[Link][Resource][Role]'   , type: 'Link' },
     { tableName: 'auth_link_role_user'               , tableComment:'[Link][Role][User]'       , type: 'Link' },
     { tableName: 'auth_link_role_dept'               , tableComment:'[Link][Role][Dept]'       , type: 'Link' },
     { tableName: 'auth_link_post_user_log'           , tableComment:'[Link][Post][User]Log'    , type: 'Log'  },
-    { tableName: 'auth_link_resourece_role_log'      , tableComment:'[Link][Resource][Role]Log', type: 'Log'  },
+    { tableName: 'auth_link_resource_role_log'      , tableComment:'[Link][Resource][Role]Log', type: 'Log'  },
     { tableName: 'auth_link_role_user_log'           , tableComment:'[Link][Role][User]Log'    , type: 'Log'  },
     { tableName: 'auth_link_role_dept_log'           , tableComment:'[Link][Role][Dept]Log'    , type: 'Log'  },
   ],
@@ -155,8 +155,7 @@ const resetTable = async ({ tableName, tableComment, type }) => {
 
     // prettier-ignore
     const indexList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
-    tableFieldList.unshift({});
-    tableFieldList.reduce((_, { field, type, comment }, currentIndex) => {
+    tableFieldList.reduce((_, { field, type, comment }) => {
       // prettier-ignore
       if ([
         'id', 'remark',
@@ -170,7 +169,7 @@ const resetTable = async ({ tableName, tableComment, type }) => {
       }
       setValue(indexList[index])({ field, type, comment });
       index += 1;
-    });
+    }, {});
   }
 };
 
