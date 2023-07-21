@@ -944,9 +944,24 @@
     ]
   },
   "auth_link_role_dept": {
-    "tableName": "",
-    "tableComment": "",
-    "fieldList": []
+    "tableName": "auth_link_role_dept",
+    "tableComment": "[Link][Role][Dept]",
+    "fieldList": [
+      { "field": "id", "type": "LONG", "comment": "[Default]Id" },
+      { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
+      {
+        "field": "create_user_id",
+        "type": "LONG",
+        "comment": "[Create]创建者 UserId"
+      },
+      {
+        "field": "create_time",
+        "type": "DATETIME",
+        "comment": "[Create]新建时间"
+      },
+      { "field": "dept_id", "comment": "部门Id", "type": "LONG" },
+      { "field": "role_id", "comment": "角色Id", "type": "LONG" }
+    ]
   },
   "auth_link_post_user_log": {
     "tableName": "",
