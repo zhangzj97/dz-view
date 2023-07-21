@@ -5,7 +5,7 @@
     "fieldList": [
       { "field": "id", "type": "LONG", "comment": "[Default]Id" },
       { "field": "code", "type": "VARCHAR256", "comment": "[Default]Code" },
-      { "field": "type", "type": "CHAR8", "comment": "类型" },
+      { "field": "type", "type": "CHAR8", "comment": "[Default]Type" },
       { "field": "remark", "type": "VARCHAR256", "comment": "[Default]备注" },
       { "field": "version", "type": "CHAR8", "comment": "[Lock]乐观锁" },
       {
