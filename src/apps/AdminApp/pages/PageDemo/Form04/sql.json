@@ -56,7 +56,31 @@
         "comment": "[Tree]祖先 CodePath"
       },
       { "field": "tree_level", "type": "CHAR8", "comment": "[Tree]层级" },
-      { "field": "123", "comment": "123", "type": "CHAR8" }
+      { "field": "uuid", "comment": "唯一标识", "type": "VARCHAR256" },
+      { "field": "username", "type": "VARCHAR256", "comment": "123" },
+      { "field": "password", "comment": "密码", "type": "VARCHAR256" },
+      { "field": "salt", "comment": "密码盐", "type": "CHAR8" },
+      { "field": "type", "comment": "类型", "type": "CHAR8" },
+      {
+        "field": "last_login_ip",
+        "comment": "最近登录IP",
+        "type": "VARCHAR256"
+      },
+      {
+        "field": "last_login_time",
+        "comment": "最近登录时间",
+        "type": "DATETIME"
+      },
+      {
+        "field": "login_fail_times",
+        "comment": "登录失败次数",
+        "type": "CHAR8"
+      },
+      {
+        "field": "last_change_pwd_time",
+        "comment": "最近修改密码时间",
+        "type": "DATETIME"
+      }
     ]
   },
   "auth_user_profile": { "tableName": "", "tableComment": "", "fieldList": [] },
