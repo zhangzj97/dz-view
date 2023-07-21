@@ -271,6 +271,12 @@
         "type": "DATETIME",
         "comment": "[Create]新建时间"
       },
+      { "field": "user_id", "type": "LONG", "comment": "用户Id" },
+      {
+        "field": "user_security_id",
+        "type": "LONG",
+        "comment": "UserSecurityId"
+      },
       { "field": "oper_type", "type": "CHAR8", "comment": "操作类型" },
       { "field": "oper_ip", "type": "VARCHAR256", "comment": "操作IP" },
       { "field": "oper_area", "type": "CHAR8", "comment": "操作地区" },
