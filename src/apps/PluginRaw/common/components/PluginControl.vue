@@ -4,9 +4,14 @@ withDefaults(
     { state: any; validator: any } & {
       validate?: any;
       reset?: any;
+      getState?: any;
       setState?: any;
       setValue?: any;
       getValue?: any;
+
+      getOption?: any;
+      setOption?: any;
+      refreshService?: any;
     }
   >(),
   {}
@@ -23,21 +28,21 @@ const { bind0 } = useStateStore();
       <template v-if="state.test">
         <!-- prettier-ignore -->
         <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.required && 'bg-blue-400']"
-        @click="setState({ required: !state.required })">
-        <v-text text="必" />
-      </v>
+          @click="setState({ required: !state.required })">
+          <v-text text="必" />
+        </v>
 
         <!-- prettier-ignore -->
         <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.disabled && 'bg-blue-400']"
-        @click="setState({ disabled: !state.disabled })">
-        <v-text text="禁" />
-      </v>
+          @click="setState({ disabled: !state.disabled })">
+          <v-text text="禁" />
+        </v>
 
         <!-- prettier-ignore -->
         <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.error && 'bg-blue-400']"
-        @click="setState({ error: !state.error })">
-        <v-text text="错" />
-      </v>
+          @click="setState({ error: !state.error })">
+          <v-text text="错" />
+        </v>
 
         <!-- prettier-ignore -->
         <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="validate({ error: true })"><v-text text="验" /></v>
