@@ -17,6 +17,8 @@ import ControlRadio from './Control/Radio/index.vue';
 import ControlSelect from './Control/Select/index.vue';
 import ControlSelectMul from './Control/SelectMul/index.vue';
 
+import ControlSqlField from './Control/SqlField/index.vue';
+
 export const plugins = {
   Cell: {},
   Control: {
@@ -38,5 +40,7 @@ export const plugins = {
     'PluginRaw/Radio': ControlRadio,
     'PluginRaw/Select': ControlSelect,
     'PluginRaw/SelectMul': ControlSelectMul,
+
+    'PluginRaw/SqlField': ControlSqlField,
   },
 };
