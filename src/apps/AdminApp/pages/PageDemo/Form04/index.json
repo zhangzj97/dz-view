@@ -31,16 +31,6 @@
         "comment": "[Update]乐观锁"
       },
       {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
-      {
         "field": "delete_flag",
         "type": "CHAR8",
         "comment": "[Delete]删除标记"
@@ -319,16 +309,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
+
       {
         "field": "delete_flag",
         "type": "CHAR8",
@@ -407,16 +388,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
+
       {
         "field": "delete_flag",
         "type": "CHAR8",
@@ -508,16 +480,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
+
       {
         "field": "delete_flag",
         "type": "CHAR8",
@@ -592,16 +555,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
+
       {
         "field": "delete_flag",
         "type": "CHAR8",
@@ -676,16 +630,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
+
       {
         "field": "delete_flag",
         "type": "CHAR8",
@@ -734,16 +679,7 @@
         "type": "CHAR8",
         "comment": "[Update]乐观锁"
       },
-      {
-        "field": "delete_user_id",
-        "type": "LONG",
-        "comment": "[Delete]删除者 UserId"
-      },
-      {
-        "field": "delete_time",
-        "type": "DATETIME",
-        "comment": "[Delete]删除时间"
-      },
+
       {
         "field": "delete_flag",
         "type": "CHAR8",

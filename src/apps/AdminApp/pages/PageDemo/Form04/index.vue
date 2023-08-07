@@ -61,7 +61,7 @@ const FieldTypeSql = {
   CHAR1256   : 'CHAR(255)        NOT NULL DEFAULT ""',
   VARCHAR256 : 'VARCHAR(255)     NOT NULL DEFAULT ""',
   TEXT       : 'VARCHAR(8191)    NOT NULL DEFAULT ""',
-  DATETIME   : 'DATETIME         NOT NULL            ',
+  DATETIME   : 'DATETIME         NULL     DEFAULT NULL',
 };
 
 const resetTable = async ({ tableName, tableComment, type }) => {
@@ -110,13 +110,9 @@ const resetTable = async ({ tableName, tableComment, type }) => {
 
   // prettier-ignore
   if(Data || Tree) {
-    setValue('delete_user_id')({ field:'delete_user_id', type:'LONG'      , comment: '[Delete]删除者 UserId'  });
-    setValue('delete_time'   )({ field:'delete_time'   , type:'DATETIME'  , comment: '[Delete]删除时间'      });
     setValue('delete_flag'   )({ field:'delete_flag'   , type:'CHAR8'     , comment: '[Delete]删除标记'      });
   } else {
-    setValue('delete_user_id' )(null);
-    setValue('delete_time'    )(null);
-    setValue('delete_flag'    )(null);
+    setValue('delete_flag'   )(null);
   }
 
   // prettier-ignore
@@ -163,7 +159,7 @@ const resetTable = async ({ tableName, tableComment, type }) => {
         'id', 'remark',
         'create_user_id', 'create_time',
         'update_user_id', 'update_time', 'update_version',
-        'delete_user_id', 'delete_time', 'delete_flag',
+        'delete_flag',
         'tree_pid',  'tree_level', 'tree_ancestor',
       ].includes(field)) {
         setValue(field)({ field, type, comment });
@@ -215,8 +211,6 @@ const sql = async () => {
     getValue('update_user_id') && sql.push(format(getValue('update_user_id' ))) && jsonSqlField.push(getValue('update_user_id' ));
     getValue('update_time'   ) && sql.push(format(getValue('update_time'    ))) && jsonSqlField.push(getValue('update_time'    ));
     getValue('update_version') && sql.push(format(getValue('update_version' ))) && jsonSqlField.push(getValue('update_version' ));
-    getValue('delete_user_id') && sql.push(format(getValue('delete_user_id' ))) && jsonSqlField.push(getValue('delete_user_id' ));
-    getValue('delete_time'   ) && sql.push(format(getValue('delete_time'    ))) && jsonSqlField.push(getValue('delete_time'    ));
     getValue('delete_flag'   ) && sql.push(format(getValue('delete_flag'    ))) && jsonSqlField.push(getValue('delete_flag'    ));
     getValue('tree_pid'      ) && sql.push(format(getValue('tree_pid'       ))) && jsonSqlField.push(getValue('tree_pid'       ));
     getValue('tree_level'    ) && sql.push(format(getValue('tree_level'     ))) && jsonSqlField.push(getValue('tree_level'     ));
@@ -328,8 +322,6 @@ const sql2 = async () => {
           <dz-form-item s="w-full h-fit" v-bind="bind('update_version' )('SqlField')({}, {service: {list: store.typeList}})" />
           <dz-form-item s="w-full h-fit" v-bind="bind('update_user_id' )('SqlField')({}, {service: {list: store.typeList}})" />
           <dz-form-item s="w-full h-fit" v-bind="bind('delete_flag'    )('SqlField')({}, {service: {list: store.typeList}})" />
-          <dz-form-item s="w-full h-fit" v-bind="bind('delete_user_id' )('SqlField')({}, {service: {list: store.typeList}})" />
-          <dz-form-item s="w-full h-fit" v-bind="bind('delete_time'    )('SqlField')({}, {service: {list: store.typeList}})" />
           <dz-form-item s="w-full h-fit" v-bind="bind('tree_pid'       )('SqlField')({}, {service: {list: store.typeList}})" />
           <dz-form-item s="w-full h-fit" v-bind="bind('tree_ancestor'  )('SqlField')({}, {service: {list: store.typeList}})" />
           <dz-form-item s="w-full h-fit" v-bind="bind('tree_level'     )('SqlField')({}, {service: {list: store.typeList}})" />         
