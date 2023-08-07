@@ -18,6 +18,7 @@ import ControlSelect from './Control/Select/index.vue';
 import ControlSelectMul from './Control/SelectMul/index.vue';
 
 import ControlSqlField from './Control/SqlField/index.vue';
+import ControlJson from './Control/Json/index.vue';
 
 export const plugins = {
   Cell: {},
@@ -42,5 +43,6 @@ export const plugins = {
     'PluginRaw/SelectMul': ControlSelectMul,
 
     'PluginRaw/SqlField': ControlSqlField,
+    'PluginRaw/Json': ControlJson,
   },
 };
