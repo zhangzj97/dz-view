@@ -1,0 +1,1103 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "description": "API接口文档，及相关接口的说明",
+      "version": "1.0.0",
+      "title": "API接口文档"
+  },
+  "host": "localhost:9001",
+  "basePath": "/",
+  "tags": [
+      {
+          "name": "Bar Controller",
+          "description": "Bar Controller"
+      }
+  ],
+  "paths": {
+      "/Bar/count": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "count",
+              "operationId": "countUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "query",
+                      "description": "query",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Query«object»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«long»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/create": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "create",
+              "operationId": "createUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«BarCmd»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«long»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/createSimple": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "createSimple",
+              "operationId": "createSimpleUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«BarCmd»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«long»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/delete": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "delete",
+              "operationId": "deleteUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«object»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«boolean»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/deleteHard": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "deleteLogic",
+              "operationId": "deleteLogicUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«object»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«boolean»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/find": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "find",
+              "operationId": "findUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "query",
+                      "description": "query",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Query«object»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«BarEntity»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/restore": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "restore",
+              "operationId": "restoreUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«object»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«boolean»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/select": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "select",
+              "operationId": "selectUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "query",
+                      "description": "query",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Query«object»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«Selector«BarEntity»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/update": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "update",
+              "operationId": "updateUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«BarCmd»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«boolean»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/Bar/updateSimple": {
+          "post": {
+              "tags": [
+                  "Bar Controller"
+              ],
+              "summary": "updateSimple",
+              "operationId": "updateSimpleUsingPOST",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "*/*"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "cmd",
+                      "description": "cmd",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/Cmd«BarCmd»"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/R«CmdR«boolean»»"
+                      }
+                  },
+                  "201": {
+                      "description": "Created"
+                  },
+                  "401": {
+                      "description": "Unauthorized"
+                  },
+                  "403": {
+                      "description": "Forbidden"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+      "BarCmd": {
+          "type": "object",
+          "properties": {
+              "barManyList": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/BarManyCmd"
+                  }
+              },
+              "barOne": {
+                  "$ref": "#/definitions/BarOneCmd"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "BarCmd"
+      },
+      "BarEntity": {
+          "type": "object",
+          "properties": {
+              "barManyList": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/BarManyPo"
+                  }
+              },
+              "barOne": {
+                  "$ref": "#/definitions/BarOnePo"
+              },
+              "createTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "createUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "deleteFlag": {
+                  "type": "string"
+              },
+              "fooList": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/FooPo"
+                  }
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "updateUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "BarEntity"
+      },
+      "BarManyCmd": {
+          "type": "object",
+          "properties": {
+              "barId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "BarManyCmd"
+      },
+      "BarManyPo": {
+          "type": "object",
+          "properties": {
+              "barId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "createTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "createUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "updateUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "BarManyPo"
+      },
+      "BarOneCmd": {
+          "type": "object",
+          "properties": {
+              "barId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "BarOneCmd"
+      },
+      "BarOnePo": {
+          "type": "object",
+          "properties": {
+              "barId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "createTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "createUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "updateUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "BarOnePo"
+      },
+      "CmdR«boolean»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "type": "boolean",
+                  "description": "响应数据"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "CmdR«boolean»"
+      },
+      "CmdR«long»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应数据"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "CmdR«long»"
+      },
+      "Cmd«BarCmd»": {
+          "type": "object",
+          "required": [
+              "body"
+          ],
+          "properties": {
+              "body": {
+                  "$ref": "#/definitions/BarCmd"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "idList": {
+                  "type": "array",
+                  "items": {
+                      "type": "integer",
+                      "format": "int64"
+                  }
+              }
+          },
+          "title": "Cmd«BarCmd»"
+      },
+      "Cmd«object»": {
+          "type": "object",
+          "required": [
+              "body"
+          ],
+          "properties": {
+              "body": {
+                  "type": "object"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "idList": {
+                  "type": "array",
+                  "items": {
+                      "type": "integer",
+                      "format": "int64"
+                  }
+              }
+          },
+          "title": "Cmd«object»"
+      },
+      "FooPo": {
+          "type": "object",
+          "properties": {
+              "createTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "createUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "deleteFlag": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "remark": {
+                  "type": "string"
+              },
+              "updateTime": {
+                  "type": "string",
+                  "format": "date-time"
+              },
+              "updateUserId": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "updateVersion": {
+                  "type": "string"
+              }
+          },
+          "title": "FooPo"
+      },
+      "OrderBy": {
+          "type": "object",
+          "properties": {
+              "value": {
+                  "type": "string"
+              }
+          },
+          "title": "OrderBy"
+      },
+      "Page": {
+          "type": "object",
+          "properties": {
+              "cursor": {
+                  "type": "string"
+              },
+              "limit": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "offset": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "pageNum": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "pageNumMax": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "pageNumMin": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "pageSize": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "pageTotal": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "total": {
+                  "type": "integer",
+                  "format": "int64"
+              }
+          },
+          "title": "Page"
+      },
+      "Query«object»": {
+          "type": "object",
+          "properties": {
+              "body": {
+                  "type": "object"
+              },
+              "id": {
+                  "type": "integer",
+                  "format": "int64"
+              },
+              "idList": {
+                  "type": "array",
+                  "items": {
+                      "type": "integer",
+                      "format": "int64"
+                  }
+              },
+              "orderBy": {
+                  "$ref": "#/definitions/OrderBy"
+              },
+              "page": {
+                  "$ref": "#/definitions/Page"
+              }
+          },
+          "title": "Query«object»"
+      },
+      "R«BarEntity»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "description": "响应数据",
+                  "$ref": "#/definitions/BarEntity"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "R«BarEntity»"
+      },
+      "R«CmdR«boolean»»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "description": "响应数据",
+                  "$ref": "#/definitions/CmdR«boolean»"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "R«CmdR«boolean»»"
+      },
+      "R«CmdR«long»»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "description": "响应数据",
+                  "$ref": "#/definitions/CmdR«long»"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "R«CmdR«long»»"
+      },
+      "R«Selector«BarEntity»»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "description": "响应数据",
+                  "$ref": "#/definitions/Selector«BarEntity»"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "R«Selector«BarEntity»»"
+      },
+      "R«long»": {
+          "type": "object",
+          "properties": {
+              "code": {
+                  "type": "string",
+                  "description": "响应编码:0/200-请求处理成功"
+              },
+              "data": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应数据"
+              },
+              "extra": {
+                  "type": "object",
+                  "description": "附加数据"
+              },
+              "isError": {
+                  "type": "boolean"
+              },
+              "isSuccess": {
+                  "type": "boolean"
+              },
+              "msg": {
+                  "type": "string",
+                  "description": "提示消息"
+              },
+              "path": {
+                  "type": "string",
+                  "description": "请求路径"
+              },
+              "timestamp": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "响应时间戳"
+              }
+          },
+          "title": "R«long»"
+      },
+      "Selector«BarEntity»": {
+          "type": "object",
+          "properties": {
+              "list": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/BarEntity"
+                  }
+              },
+              "orderBy": {
+                  "$ref": "#/definitions/OrderBy"
+              },
+              "page": {
+                  "$ref": "#/definitions/Page"
+              }
+          },
+          "title": "Selector«BarEntity»"
+      }
+  }
+}

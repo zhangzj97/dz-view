@@ -1,3 +1,16 @@
+const AdminAppPageTest = ['ApiTest/Bar', 'ApiTest/Foo'].map((item, index) => ({
+  id: `AdminAppPageTest${index}`,
+  parentId: 'AdminAppPageTest',
+  avatar: 'el:address-book',
+  title: `${item}`,
+
+  appName: 'AdminApp',
+
+  code: `AdminApp.${item}`,
+  path: `/${item}`,
+  component: `/AdminApp/pages/${item}`,
+}));
+
 const AdminAppPageDemoCard = [
   'PageDemo/Card01',
   'PageDemo/Card02',
@@ -48,6 +61,13 @@ const AdminAppPageDemoForm = [
 
 export const menuList = [
   {
+    id: 'AdminAppPageTest',
+    parentId: '0',
+    avatar: 'el:adjust-alt',
+    title: 'Api',
+    path: '',
+  },
+  {
     id: 'AdminAppPageDemoCard',
     parentId: '0',
     avatar: 'el:adjust-alt',
@@ -63,6 +83,7 @@ export const menuList = [
     path: '',
   },
 
+  ...AdminAppPageTest,
   ...AdminAppPageDemoForm,
   ...AdminAppPageDemoCard,
 
