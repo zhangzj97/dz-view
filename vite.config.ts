@@ -28,11 +28,7 @@ export default defineConfig({
       importPathTransform: v => v,
       allowOverrides: false,
       include: [/\.vue$/, /\.vue\?vue/],
-      exclude: [
-        /[\\/]node_modules[\\/]/,
-        /[\\/]\.git[\\/]/,
-        /[\\/]\.nuxt[\\/]/,
-      ],
+      exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
     }),
   ],
   resolve: {
