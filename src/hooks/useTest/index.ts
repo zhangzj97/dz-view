@@ -2,7 +2,7 @@ export const useTest = () => {
   class AssertClass {
     value: unknown = null;
     message: string = '';
-    data: unknown = { json1: null, json2: null };
+    data = { json1: null, json2: null } as any;
     code: string = '0';
     group: string = 'default';
 
@@ -16,7 +16,7 @@ export const useTest = () => {
 
       if (value !== target) this.code = 'Fail';
 
-      return this;
+      return this.log();
     };
 
     neq = (target: unknown) => {
@@ -25,7 +25,7 @@ export const useTest = () => {
 
       if (value === target) this.code = 'Fail';
 
-      return this;
+      return this.log();
     };
 
     in = (target: unknown[]) => {
@@ -34,7 +34,7 @@ export const useTest = () => {
 
       if (!target.includes(value)) this.code = 'Fail';
 
-      return this;
+      return this.log();
     };
 
     notIn = (target: unknown[]) => {
@@ -43,7 +43,7 @@ export const useTest = () => {
 
       if (target.includes(value)) this.code = 'Fail';
 
-      return this;
+      return this.log();
     };
 
     between = (min: number, max: number) => {
@@ -53,7 +53,7 @@ export const useTest = () => {
       if (value < min) this.code = 'Fail';
       else if (value > max) this.code = 'Fail';
 
-      return this;
+      return this.log();
     };
 
     notBetween = (min: number, max: number) => {
@@ -62,7 +62,7 @@ export const useTest = () => {
 
       if (value > min && value < max) this.code = 'Fail';
 
-      return this;
+      return this.log();
     };
 
     reset = (value: unknown) => {
@@ -72,6 +72,13 @@ export const useTest = () => {
       this.data = { json1: null, json2: null };
     };
 
+    /**
+     *
+     * @deprecated
+     * @param resqeust
+     * @param response
+     * @returns
+     */
     post = (resqeust: any, response: any) => {
       this.data = { json1: resqeust, json2: response };
 
@@ -93,7 +100,19 @@ export const useTest = () => {
       return this;
     };
 
-    r = () => {
+    log = (json1: any = null, json2: any = null) => {
+      if (json1 !== null && json2 !== null) {
+        this.data = { json1, json2 };
+      }
+
+      if (typeof this.data.json1 !== 'object') {
+        this.data.json1 = { 期望: this.data.json1 };
+      }
+
+      if (typeof this.data.json2 !== 'object') {
+        this.data.json2 = { 实际: this.data.json2 };
+      }
+
       const r = {
         isError: this.code != '0',
         code: this.code,
@@ -110,7 +129,7 @@ export const useTest = () => {
 
   let single: AssertClass | null = null;
 
-  const Assert = (value: unknown) => {
+  const Assert = (value: unknown = null) => {
     if (!single) single = new AssertClass(value);
     single.reset(value);
     return single;
