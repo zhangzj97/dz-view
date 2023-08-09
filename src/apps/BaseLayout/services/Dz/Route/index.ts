@@ -43,9 +43,7 @@ export const useStore = defineStore('Dz/Route', () => {
       menuState.map = map;
 
       debug('routeTagState 更新 展示列表固定 fixed 的数据', 'RefreshMenu');
-      routeTagState.fixed = list
-        .filter((item: any) => item.fixedTag)
-        .map((item: any) => item.id);
+      routeTagState.fixed = list.filter((item: any) => item.fixedTag).map((item: any) => item.id);
 
       resolve({ data: { menu: list } });
     });
