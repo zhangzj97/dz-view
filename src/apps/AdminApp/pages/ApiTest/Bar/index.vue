@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { bind, getValue, setState, setValue, validate, getState, pluginDom } = useForm({}, { pluginSet: 'PluginRaw', state: { test: false, required: false } }); // prettier-ignore
+const { bind, getValue, setState, setValue, validate, getState, pluginDom, FormItem } = useForm({}, { pluginSet: 'PluginRaw', state: { test: false, required: false } }); // prettier-ignore
 
 const { Assert } = useTest();
 
@@ -36,14 +36,8 @@ const apiState = reactive<any>({
 
 onMounted(async () => {
   apiState.pathList = Object.entries(api.paths).map(([k, v]) => {
-    const requestIndex = v.post?.parameters?.[0]?.schema.$ref.replace(
-      /#\/definitions\//,
-      ''
-    );
-    const responseIndex = v.post?.responses[200].schema.$ref.replace(
-      /#\/definitions\//,
-      ''
-    );
+    const requestIndex = v.post?.parameters?.[0]?.schema.$ref.replace(/#\/definitions\//, '');
+    const responseIndex = v.post?.responses[200].schema.$ref.replace(/#\/definitions\//, '');
     return {
       code: k,
       summary: v.post?.summary,
@@ -56,9 +50,7 @@ onMounted(async () => {
     };
   });
 
-  apiState.pathMap = Object.fromEntries(
-    apiState.pathList.map(i => [i.code, i])
-  );
+  apiState.pathMap = Object.fromEntries(apiState.pathList.map(i => [i.code, i]));
 
   apiState.definitionList = Object.entries(api.definitions).map(([k, v]) => {
     return { code: k, ...v };
@@ -94,18 +86,10 @@ const chooseApiPath = async item => {
       } else if (v?.type === 'array' && v?.items.$ref) {
         address[k] = [];
         address[k].push({});
-        loop(
-          apiState.definitions[v?.items.$ref.replace(/#\/definitions\//, '')]
-            .properties,
-          address[k][0]
-        );
+        loop(apiState.definitions[v?.items.$ref.replace(/#\/definitions\//, '')].properties, address[k][0]);
       } else if (v?.$ref) {
         address[k] = {};
-        loop(
-          apiState.definitions[v?.$ref.replace(/#\/definitions\//, '')]
-            .properties,
-          address[k]
-        );
+        loop(apiState.definitions[v?.$ref.replace(/#\/definitions\//, '')].properties, address[k]);
       } else if (v?.type == 'object' && v?.properties && !v?.$ref) {
         address[k] = {};
         loop(v?.properties, address[k]);
@@ -168,36 +152,21 @@ const apiTestState = computed(() => item => {
       </v>
 
       <v s="w-grow h-10" w="border-y-2  p-2 shadow-inner gap-2">
-        <dz-btn
-          title="单元测试"
-          icon="mdi:flower"
-          @click="apiState.testMode = 'api'"
-        />
-        <dz-btn
-          title="集成测试"
-          icon="mdi:flower"
-          @click="apiState.testMode = 'test'"
-        />
+        <dz-btn title="单元测试" icon="mdi:flower" @click="apiState.testMode = 'api'" />
+        <dz-btn title="集成测试" icon="mdi:flower" @click="apiState.testMode = 'test'" />
         {{ apiState.testMode }}
         <v-space s="w-grow" />
         <v-text :text="String(apiState.pathList.length)" />
       </v>
 
       <!-- 单元测试 -->
-      <v
-        v-if="apiState.testMode === 'api'"
-        s="w-grow h-grow"
-        w="overflow-auto"
-        col
-      >
+      <v v-if="apiState.testMode === 'api'" s="w-grow h-grow" w="overflow-auto" col>
         <template v-for="(item, index) of apiState.pathList" :key="index">
           <v
             s="w-grow h-fit"
             w="border-b-2 p-2"
             col
-            :class="[
-              apiState.pathCode == item.code ? 'bg-blue-100' : 'bg-white',
-            ]"
+            :class="[apiState.pathCode == item.code ? 'bg-blue-100' : 'bg-white']"
             pointer
             trans="hover:bg-gray-200"
             @click="chooseApiPath(item)"
@@ -215,11 +184,7 @@ const apiTestState = computed(() => item => {
             <v s="w-grow h-fit">
               <v s="w-1/2 h-fit">
                 <v-text
-                  :class="[
-                    getTypeAmongWarpper(item.requestIndex) === 'object'
-                      ? 'text-red-400'
-                      : '',
-                  ]"
+                  :class="[getTypeAmongWarpper(item.requestIndex) === 'object' ? 'text-red-400' : '']"
                   :text="getTypeAmongWarpper(item.requestIndex)"
                 />
               </v>
@@ -232,20 +197,13 @@ const apiTestState = computed(() => item => {
       </v>
 
       <!-- 集成测试 -->
-      <v
-        v-if="apiState.testMode === 'test'"
-        s="w-grow h-grow"
-        w="overflow-auto"
-        col
-      >
+      <v v-if="apiState.testMode === 'test'" s="w-grow h-grow" w="overflow-auto" col>
         <template v-for="(item, index) of apiState.testList" :key="index">
           <v
             s="w-grow h-fit"
             w="border-b-2 p-2"
             col
-            :class="[
-              apiState.pathCode == item.code ? 'bg-blue-100' : 'bg-white',
-            ]"
+            :class="[apiState.pathCode == item.code ? 'bg-blue-100' : 'bg-white']"
             pointer
             trans="hover:bg-gray-200"
             @click="chooseTest(item)"
@@ -267,43 +225,17 @@ const apiTestState = computed(() => item => {
     </v>
 
     <v v-if="apiState.testMode === 'api'" s="w-grow h-grow" grid>
-      <dz-form-item
-        s="w-full h-fit"
-        v-bind="bind('apiPath')('Input')({}, {})"
-      />
-      <dz-form-item
-        s="w-1/2 h-fit"
-        v-bind="bind('request')('Json', { bodyClass: 'h-[60vh]' })({}, {})"
-      />
-      <dz-form-item
-        s="w-1/2 h-fit"
-        v-bind="bind('response')('Json', { bodyClass: 'h-[60vh]' })({}, {})"
-      />
+      <dz-form-item s="w-full h-fit" v-bind="bind('apiPath')('Input')({}, {})" />
+      <dz-form-item s="w-1/2 h-fit" v-bind="bind('request')('Json', { bodyClass: 'h-[60vh]' })({}, {})" />
+      <dz-form-item s="w-1/2 h-fit" v-bind="bind('response')('Json', { bodyClass: 'h-[60vh]' })({}, {})" />
     </v>
 
     <!-- stage -->
-    <v
-      v-if="apiState.testMode === 'test'"
-      s="w-96 h-grow"
-      w="overflow-auto"
-      col
-    >
-      <dz-form-item
-        s="w-full h-fit"
-        v-bind="bind('testCode')('Input', {})({}, {})"
-      />
-      <template
-        v-for="(item, index) of apiState.testMap[apiState.testCode]?.stage"
-        :key="index"
-      >
+    <v v-if="apiState.testMode === 'test'" s="w-96 h-grow" w="overflow-auto" col>
+      <dz-form-item s="w-full h-fit" v-bind="bind('testCode')('Input', {})({}, {})" />
+      <template v-for="(item, index) of apiState.testMap[apiState.testCode]?.stage" :key="index">
         <v s="w-grow h-fit" w="border-b-2" col>
-          <v
-            s="w-grow h-8"
-            w="bg-white p-2"
-            pointer
-            trans="hover:bg-gray-200"
-            @click="testStage(item)"
-          >
+          <v s="w-grow h-8" w="bg-white p-2" pointer trans="hover:bg-gray-200" @click="testStage(item)">
             <v-text :text="item.code" />
           </v>
           <v s="w-grow h-fit" grid>
@@ -323,31 +255,20 @@ const apiTestState = computed(() => item => {
             <v
               s="w-fit h-fit"
               v="mouse-gray"
-              @click="
-                apiState.testStageStepMap[item.code] =
-                  !apiState.testStageStepMap[item.code]
-              "
+              @click="apiState.testStageStepMap[item.code] = !apiState.testStageStepMap[item.code]"
             >
               <v-icon v="8-75" icon="mdi:more" />
             </v>
           </v>
           <v
-            :class="[
-              apiState.testStageStepMap[item.code]
-                ? 'max-h-[9999px]'
-                : 'max-h-0',
-            ]"
+            :class="[apiState.testStageStepMap[item.code] ? 'max-h-[9999px]' : 'max-h-0']"
             w="overflow-hidden"
             s="w-grow h-fit"
             col
             trans
           >
             <template v-for="(item2, index2) of apiTestLog(item)" :key="index2">
-              <v
-                s="w-grow h-fit"
-                v="mouse-gray"
-                @click="checkJson1AndJson2(item2)"
-              >
+              <v s="w-grow h-fit" v="mouse-gray" @click="checkJson1AndJson2(item2)">
                 <dz-popover :tooltip="item2.message">
                   <v-icon
                     v="8-75"
@@ -363,20 +284,9 @@ const apiTestState = computed(() => item => {
       </template>
     </v>
 
-    <v
-      v-if="apiState.testMode === 'test'"
-      s="w-grow h-grow"
-      w="overflow-auto"
-      grid
-    >
-      <dz-form-item
-        s="w-full h-fit"
-        v-bind="bind('json1')('Json', { bodyClass: 'h-[40vh]' })({}, {})"
-      />
-      <dz-form-item
-        s="w-full h-fit"
-        v-bind="bind('json2')('Json', { bodyClass: 'h-[40vh]' })({}, {})"
-      />
+    <v v-if="apiState.testMode === 'test'" s="w-grow h-grow" w="overflow-auto" grid>
+      <dz-form-item s="w-full h-fit" v-bind="bind('json1')('Json', { bodyClass: 'h-[40vh]' })({}, {})" />
+      <dz-form-item s="w-full h-fit" v-bind="bind('json2')('Json', { bodyClass: 'h-[40vh]' })({}, {})" />
     </v>
   </v>
 </template>
