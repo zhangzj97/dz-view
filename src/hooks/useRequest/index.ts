@@ -30,7 +30,17 @@ export const useRequest = () => {
     return axios({ method, url, data: payload });
   };
 
+  const post = async <T1, T2>(url: string, payload: T1): Promise<T2> => {
+    return axios({
+      method: 'post',
+      url,
+      data: payload,
+    }) as any as Promise<T2>;
+  };
+
   return {
     request,
+
+    post,
   };
 };
