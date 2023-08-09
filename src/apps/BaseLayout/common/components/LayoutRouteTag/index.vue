@@ -2,20 +2,20 @@
 import { useService } from '@/hooks/useService';
 import RouteTag from './components/RouteTag.vue';
 
-const { dispatch, getState } = useService();
+const { dispatch, getState, Service } = useService();
 
 const { routeTagState, menuState } = getState('Dz/Route');
 
-const router = useRouter();
+const router: any = useRouter();
 
 onMounted(async () => {
   const toId = router.currentRoute?.value?.meta?.menu?.id;
-  await dispatch('Dz/Route.AddRouteTag', { id: toId });
+  await dispatch(Service.Dz.Route.AddRouteTag)({ id: toId });
 });
 
 onBeforeRouteUpdate(async (to, form, next) => {
   const toId = to?.meta?.menu?.id;
-  await dispatch('Dz/Route.AddRouteTag', { id: toId });
+  await dispatch(Service.Dz.Route.AddRouteTag)({ id: toId });
   next();
 });
 
@@ -27,11 +27,11 @@ const clickRouteTag = ({ id }: any) => {
 };
 
 const removeRouteTag = async ({ id }: any) => {
-  await dispatch('Dz/Route.RemoveRouteTag', { id });
+  await dispatch(Service.Dz.Route.RemoveRouteTag)({ id });
 };
 
 const removeAll = async () => {
-  await dispatch('Dz/Route.RemoveAllRouteTag', {});
+  await dispatch(Service.Dz.Route.RemoveRouteTag)({});
 };
 
 const openList = computed(() => {

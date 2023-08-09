@@ -6,11 +6,11 @@ import 'nprogress/nprogress.css';
 // NProgress
 NProgress.configure({ showSpinner: false });
 
-const { dispatch } = useService();
+const { dispatch, Service } = useService();
 const { debug } = useLog({ module: 'AdminApp/Guard', color: 'blue' });
 
 const refreshMenuAndRedirectName = async rePath => {
-  const { data } = await dispatch('Dz/Route.RefreshMenu', {});
+  const { data } = await dispatch(Service.Dz.Route.RefreshMenu)({});
 
   let redirectName = '';
 
