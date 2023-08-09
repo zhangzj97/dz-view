@@ -10,7 +10,6 @@ export const Service = {
       restore: { code: 'Auth/Bar.restore', url: '/Bar/restore' },
       select: { code: 'Auth/Bar.select', url: '/Bar/select' },
       update: { code: 'Auth/Bar.update', url: '/Bar/update' },
-
       updateSimple: { code: 'Auth/Bar.updateSimple', url: '/Bar/updateSimple' },
     },
 
@@ -24,7 +23,6 @@ export const Service = {
       restore: { code: 'Auth/Foo.restore', url: '/Foo/restore' },
       select: { code: 'Auth/Foo.select', url: '/Foo/select' },
       update: { code: 'Auth/Foo.update', url: '/Foo/update' },
-
       updateSimple: { code: 'Auth/Foo.updateSimple', url: '/Foo/updateSimple' },
     },
   },
