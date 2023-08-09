@@ -157,8 +157,7 @@ export const useForm = (
       };
     };
 
-  const getState = (code: string): DzViewStateProps =>
-    store.dom[code]?.getState();
+  const getState = (code: string): DzViewStateProps => store.dom[code]?.getState();
   const setState =
     (code: string) =>
     (state: DzViewStateProps = {}) =>
@@ -182,6 +181,12 @@ export const useForm = (
 
   const pluginDom = code => store.dom[code].pluginDom;
 
+  const FormItem = {
+    Raw: {
+      Input: 'PluginRaw/Input',
+    },
+  };
+
   return {
     bind,
 
@@ -196,5 +201,7 @@ export const useForm = (
     validate,
 
     store,
+
+    FormItem,
   };
 };
