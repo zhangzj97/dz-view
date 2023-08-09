@@ -125,11 +125,22 @@ export const useTest = () => {
     list: [],
   });
 
+  const stage = (code, func) => {
+    AssertGroup(code);
+
+    return {
+      code,
+      test: func,
+    };
+  };
+
   return {
     Assert,
 
     AssertGroup,
 
     logState,
+
+    stage,
   };
 };
