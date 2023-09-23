@@ -1,15 +1,13 @@
 <script setup lang="ts">
 const { bind, getValue, setState, setValue, validate, getState, pluginDom, FormItem } = useForm({}, { pluginSet: 'PluginRaw', state: { test: false, required: false } }); // prettier-ignore
 
-const { Assert } = useTest();
-
 import api from './swagger.json';
 import { computed, reactive } from 'vue';
 
-import { test } from './test';
+import { testMap } from './test';
 
 const apiState = reactive<any>({
-  testMode: 'api', // api | test
+  testMode: 'test', // api | test
 
   pathList: [],
   pathMap: {},
@@ -20,18 +18,11 @@ const apiState = reactive<any>({
   definitions: api.definitions,
   paths: api.paths,
 
-  testList: [
-    //
-    test,
-  ],
-
-  testMap: {
-    测试一号: test,
-  },
+  testList: Object.values(testMap),
+  testMap,
+  testCode: null,
 
   testStageStepMap: {},
-
-  testCode: null,
 });
 
 onMounted(async () => {
@@ -233,7 +224,7 @@ const apiTestState = computed(() => item => {
     <!-- stage -->
     <v v-if="apiState.testMode === 'test'" s="w-96 h-grow" w="overflow-auto" col>
       <dz-form-item s="w-full h-fit" v-bind="bind('testCode')('Input', {})({}, {})" />
-      <template v-for="(item, index) of apiState.testMap[apiState.testCode]?.stage" :key="index">
+      <template v-for="(item, index) of apiState.testMap[apiState.testCode]?.stageList" :key="index">
         <v s="w-grow h-fit" w="border-b-2" col>
           <v s="w-grow h-8" w="bg-white p-2" pointer trans="hover:bg-gray-200" @click="testStage(item)">
             <v-text :text="item.code" />
