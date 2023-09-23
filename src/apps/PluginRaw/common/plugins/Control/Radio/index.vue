@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: 'ControlCheckbox' });
+defineOptions({ name: 'ControlSqlField' });
 
 import PluginControl from '../../../components/PluginControl.vue';
 
@@ -29,23 +29,23 @@ onMounted(() => emits('update:value', null));
 <template>
   <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
     <v s="w-grow h-fit" grid w="gap-1">
-      <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
-        <label
-          class="flex flex-row"
+      <label
+        v-for="(item, index) of service.list"
+        :key="index"
+        class="flex h-fit w-fit"
+        :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
+      >
+        <input
+          type="radio"
           :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-        >
-          <input
-            type="radio"
-            :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-            :name="code"
-            :value="String(item.value)"
-            :checked="modelValue === String(item.value)"
-            :disabled="item.disabled"
-            @input="CommonEvent.onInput"
-          />
-          <v-text :text="item.title" />
-        </label>
-      </v>
+          :name="code"
+          :value="String(item.value)"
+          :checked="modelValue === String(item.value)"
+          :disabled="item.disabled"
+          @input="CommonEvent.onInput"
+        />
+        <v-text :text="item.title" />
+      </label>
     </v>
 
     <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.refreshService">

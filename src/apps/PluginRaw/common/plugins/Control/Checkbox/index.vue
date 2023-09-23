@@ -43,24 +43,24 @@ onMounted(() => emits('update:value', null));
 <template>
   <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
     <v s="w-grow h-fit" grid w="gap-1">
-      <v v-for="(item, index) of service.list" :key="index" s="w-fit h-8">
-        <label
-          class="flex"
+      <label
+        v-for="(item, index) of service.list"
+        :key="index"
+        class="flex w-fit h-fit"
+        :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
+      >
+        <input
+          type="checkbox"
           :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-        >
-          <input
-            type="checkbox"
-            :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"
-            :name="code"
-            :value="String(item.value)"
-            :checked="modelValue?.includes(String(item.value))"
-            :disabled="item.disabled"
-            @input="onInput"
-          />
+          :name="code"
+          :value="String(item.value)"
+          :checked="modelValue?.includes(String(item.value))"
+          :disabled="item.disabled"
+          @input="onInput"
+        />
 
-          {{ item.title }}
-        </label>
-      </v>
+        <v-text :text="item.title" />
+      </label>
     </v>
 
     <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.refreshService">

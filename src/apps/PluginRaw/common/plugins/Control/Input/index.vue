@@ -31,7 +31,7 @@ onMounted(() => emits('update:value', null));
     <input
       ref="pluginDom"
       :class="[
-        'w-full h-fit',
+        'w-full h-8',
         'dz-plugin-control-input',
         state?.error && 'dz-plugin-control-input--error',
         state?.disabled && 'dz-plugin-control-input--disabled',
