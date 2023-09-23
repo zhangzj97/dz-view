@@ -6,7 +6,7 @@ export interface Dispatch {
 }
 
 type R<T> = {
-  message: string;
+  msg: string;
   code: string;
   data: T;
 };
