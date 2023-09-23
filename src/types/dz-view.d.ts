@@ -35,16 +35,7 @@ interface DzViewFlexProps {
  * DzView [Position] 定位模块
  */
 interface DzViewPositionProps {
-  absolute?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'tl'
-    | 'tr'
-    | 'bl'
-    | 'br'
-    | string;
+  absolute?: 'top' | 'bottom' | 'left' | 'right' | 'tl' | 'tr' | 'bl' | 'br' | string;
   fixed?: string;
 }
 
@@ -94,17 +85,12 @@ export type DzViewSpaceComponentProps = DzViewBaseProps & DzViewAssetProps;
 /**
  * DzView VText 组件 Props
  */
-export type DzViewTextComponentProps = DzViewBaseProps &
-  DzViewTextProps &
-  DzViewCursorProps &
-  DzViewAssetProps;
+export type DzViewTextComponentProps = DzViewBaseProps & DzViewTextProps & DzViewCursorProps & DzViewAssetProps;
 
 /**
  * DzView VIcon 组件 Props
  */
-export type DzViewIconComponentProps = DzViewBaseProps &
-  DzViewCursorProps &
-  DzViewAssetProps;
+export type DzViewIconComponentProps = DzViewBaseProps & DzViewCursorProps & DzViewAssetProps;
 
 /**
  * DzBtn 组件 Props
@@ -114,9 +100,7 @@ export type DzBtnComponentProps = DzViewBaseProps & DzEntityBase;
 /**
  * DzCard 组件 Props
  */
-export type DzCardComponentProps = DzViewBaseProps &
-  DzViewFlexProps &
-  DzEntityBase;
+export type DzCardComponentProps = DzViewBaseProps & DzViewFlexProps & DzEntityBase;
 
 /**
  * DzDrawer 组件 Props
@@ -168,3 +152,9 @@ export type DzPluginControlEmits = {
   beforeBlur: [];
   afterBlur: [];
 };
+
+type a = {};
+
+type b = (a & { name: string })[];
+
+interface bbb extends DzViewTextProps {}
