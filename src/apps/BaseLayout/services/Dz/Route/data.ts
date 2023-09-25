@@ -201,4 +201,25 @@ export const menuList = [
     path: '/Demo02/T2',
     component: '/AdminApp/pages/Demo02/T2',
   },
+  // Test Route
+  {
+    id: '52',
+    parentId: '0',
+    avatar: 'el:address-book',
+    title: 'User系统',
+    appName: 'AdminApp',
+    code: 'AdminApp.Demo02/T2',
+    path: '/Demo02/T2',
+    component: '/AdminApp/pages/Demo02/T2',
+  },
+  {
+    id: '521',
+    parentId: '52',
+    avatar: 'el:address-book',
+    title: 'User/User',
+    appName: 'AdminApp',
+    code: 'AdminApp.User/User',
+    path: '/User/User',
+    component: '/AdminApp/pages/User/User',
+  },
 ];
