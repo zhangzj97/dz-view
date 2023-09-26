@@ -31,9 +31,9 @@ withDefaults(defineProps<DzViewIconComponentProps & Props>(), {});
 </template>
 
 <style scoped lang="scss">
-@import url(../../assets/styles/dz-view.scss);
+@import url(../../../assets/styles/dz-view.scss);
 </style>
 
 <style scoped lang="scss">
-@import url(../../assets/styles/dz-view-icon.scss);
+@import url(../../../assets/styles/dz-view-icon.scss);
 </style>

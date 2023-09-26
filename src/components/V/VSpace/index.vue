@@ -6,14 +6,11 @@ withDefaults(defineProps<DzViewSpaceComponentProps>(), {});
 </script>
 
 <template>
-  <div
-    class="dz-view dz-view-space v202301"
-    :class="[s, w, t, trans, trans ? 'dz-view-transition' : '']"
-  >
+  <div class="dz-view dz-view-space v202301" :class="[s, w, t, trans, trans ? 'dz-view-transition' : '']">
     <slot></slot>
   </div>
 </template>
 
 <style scoped lang="scss">
-@import url(../../assets/styles/dz-view.scss);
+@import url(../../../assets/styles/dz-view.scss);
 </style>

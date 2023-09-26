@@ -8,19 +8,12 @@ withDefaults(defineProps<DzViewTextComponentProps>(), {});
 <template>
   <div
     class="dz-view dz-view-text v202301"
-    :class="[
-      s,
-      w,
-      t,
-      trans,
-      trans ? 'dz-view-transition' : '',
-      pointer && 'dz-view-pointer',
-    ]"
+    :class="[s, w, t, trans, trans ? 'dz-view-transition' : '', pointer && 'dz-view-pointer']"
   >
     <slot>{{ text }}</slot>
   </div>
 </template>
 
 <style scoped lang="scss">
-@import url(../../assets/styles/dz-view.scss);
+@import url(../../../assets/styles/dz-view.scss);
 </style>
