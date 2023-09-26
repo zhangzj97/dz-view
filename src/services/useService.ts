@@ -1,30 +1,10 @@
-import { useStore as useStoreDzRoute } from '@/apps/BaseLayout/services/Dz/Route/index';
-import { useStore as useStoreAuthBar } from '@/apps/AdminApp/services/Auth/Bar/index';
-import type { Dispatch as DispatchAuth } from '@/apps/AdminApp/services/Auth/types/dispatch';
-import type { Dispatch as DispatchDz } from '@/apps/BaseLayout/services/Dz/types/dispatch';
-import type { Dispatch as DispatchUser } from '@/apps/AdminApp/services/User/types/dispatch';
-import { Service as ServiceAuth } from '@/apps/AdminApp/services/Auth/types/service';
-import { Service as ServiceDz } from '@/apps/BaseLayout/services/Dz/types/service';
-import { Service as ServiceUser } from '@/apps/AdminApp/services/User/types/service';
-
 import { Service, store, type Dispatch } from '@/services/data';
 
 const { post } = useRequest();
 
-// type Dispatch = DispatchDz & DispatchAuth & DispatchUser;
-
-// const service = {
-//   ...ServiceAuth,
-//   ...ServiceDz,
-//   ...ServiceUser,
-// };
-
 // useService
 export const useService = () => {
-  const serviceState = reactive({
-    'Dz/Route': useStoreDzRoute,
-    'Auth/Bar': useStoreAuthBar,
-  });
+  const serviceState = reactive(store);
 
   // dispatch
   const dispatch: Dispatch = (service: any) => async (payload: any) => {

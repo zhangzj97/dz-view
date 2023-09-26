@@ -1,7 +1,7 @@
 export const store = {
-  'Dz/Route': await import('./Dz/Route'),
-  'Auth/Bar': await import('./Auth/Bar'),
-  'Auth/Foo': await import('./Auth/Foo'),
+  'Dz/Route': (await import('./Dz/Route')).useStore,
+  'Auth/Bar': (await import('./Auth/Bar')).useStore,
+  'Auth/Foo': (await import('./Auth/Foo')).useStore,
 };
 
 export const Service = {
