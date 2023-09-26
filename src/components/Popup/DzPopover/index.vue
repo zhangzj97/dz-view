@@ -1,9 +1,10 @@
 <script setup lang="ts">
 defineOptions({ name: 'DzPopover' });
 
-import { Popover, Tooltip } from '@arco-design/web-vue';
+import { Popconfirm, Popover, Tooltip } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/popover/style/css';
 import '@arco-design/web-vue/es/tooltip/style/css';
+import '@arco-design/web-vue/es/popconfirm/style/css';
 
 import type { DzPopoverComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
   state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
   tooltip?: string;
+  confirm?: string;
   trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
 }
 const props = withDefaults(defineProps<DzPopoverComponentProps & Props>(), {});
@@ -21,13 +23,38 @@ const emit = defineEmits<{
 
 const { setState, getState } = useComponentState({ props, emit });
 defineExpose({ setState, getState });
+
+const updateVisible = visible => {
+  emit('update:state', props.bindId, { visible });
+};
 </script>
 
 <template>
-  <Tooltip v-if="tooltip" class="dz-tooltip v202301" :content="tooltip">
+  <Tooltip
+    v-if="tooltip"
+    class="dz-tooltip v202301"
+    :content="tooltip"
+    :popupVisible="state?.visible"
+    @update:popupVisible="updateVisible"
+  >
     <slot></slot>
   </Tooltip>
-  <Popover v-else class="dz-popover v202301" :trigger="trigger">
+  <Popconfirm
+    v-else-if="confirm"
+    class="dz-popconfirm v202301"
+    :content="confirm"
+    :popupVisible="state?.visible"
+    @update:popupVisible="updateVisible"
+  >
+    <slot></slot>
+  </Popconfirm>
+  <Popover
+    v-else
+    class="dz-popover v202301"
+    :trigger="trigger"
+    :popupVisible="state?.visible"
+    @update:popupVisible="updateVisible"
+  >
     <slot></slot>
 
     <template #content>

@@ -7,7 +7,7 @@ import '@arco-design/web-vue/es/modal/style/css';
 import type { DzModalComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
   bindId?: string;
-  state: DzViewStateProps;
+  state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzModalComponentProps & Props>(), {});
@@ -28,6 +28,10 @@ const store = reactive({
   close: () => setState({ visible: false, fullscreen: false }),
   toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
 });
+
+const updateVisible = visible => {
+  emit('update:state', props.bindId, { visible });
+};
 </script>
 
 <template>
@@ -35,16 +39,16 @@ const store = reactive({
     class="dz-modal v202301"
     :visible="state.visible"
     :fullscreen="state.fullscreen"
-    :defaultVisible="state.visible"
-    :mask="true"
     titleAlign="start"
     :unmountOnClose="true"
+    :mask="true"
     :maskClosable="true"
+    :escToClose="true"
     :closable="false"
     :header="false"
     :footer="false"
     :draggable="true"
-    :escToClose="true"
+    @update:visible="updateVisible"
   >
     <template #title>
       <v s="w-grow h-fit">

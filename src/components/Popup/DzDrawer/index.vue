@@ -7,7 +7,7 @@ import '@arco-design/web-vue/es/drawer/style/css';
 import type { DzDrawerComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
   bindId?: string;
-  state: DzViewStateProps;
+  state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});
@@ -28,26 +28,31 @@ const store = reactive({
   close: () => setState({ visible: false, fullscreen: false }),
   toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
 });
+
+const updateVisible = visible => {
+  emit('update:state', props.bindId, { visible });
+};
 </script>
 
 <template>
   <Drawer
     class="dz-drawer v202301"
     :class="[`dz-drawer-${position}`]"
-    :visible="state.visible"
-    :fullscreen="state.fullscreen"
-    :defaultVisible="state.visible"
+    :visible="state?.visible"
+    :fullscreen="state?.fullscreen"
+    :defaultVisible="state?.visible"
     :placement="position"
     width="auto"
     height="auto"
-    :mask="true"
     titleAlign="start"
     :unmountOnClose="false"
+    :mask="true"
     :maskClosable="true"
+    :escToClose="true"
     :closable="false"
     :header="false"
     :footer="false"
-    :escToClose="true"
+    @update:visible="updateVisible"
   >
     <!-- 关于为什么会有 flex-shrink -->
     <!-- 1. max-height max-width 无法放在 body 上面否则 calc(100vh - footerheight - headerheight) -->
