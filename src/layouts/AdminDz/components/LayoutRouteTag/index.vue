@@ -8,7 +8,7 @@ const { routeTagState, menuState, versionState } = getState('Dz/Route');
 const router: any = useRouter();
 
 const findMenuByPath = (path: string) => {
-  return menuState.list.find(item => item.path === path);
+  return menuState.list.find((item: any) => item.path === path);
 };
 
 watch(
@@ -61,7 +61,7 @@ const openList = computed(() => routeTagState.open);
 const activeId = computed(() => {
   const path = router.currentRoute?.value.path;
   const menu = findMenuByPath(path);
-  return menu.id;
+  return menu?.id;
 });
 </script>
 

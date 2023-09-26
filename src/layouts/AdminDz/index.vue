@@ -4,6 +4,13 @@ import LayoutLogo from './components/LayoutLogo/index.vue';
 import LayoutRouteTag from './components/LayoutRouteTag/index.vue';
 import LayoutMenu from './components/LayoutMenu/index.vue';
 import LayoutMenuLevelTop from './components/LayoutMenuLevelTop/index.vue';
+
+// layout 数据
+const { dispatch, Service } = useService();
+
+onMounted(async () => {
+  await dispatch(Service.Dz.Route.RefreshMenu)({});
+});
 </script>
 
 <template>
