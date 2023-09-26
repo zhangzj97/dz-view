@@ -34,10 +34,10 @@ const clickRouteTag = ({ id }: any) => {
 };
 
 const removeRouteTag = async ({ id }: any) => {
+  await dispatch(Service.Dz.Route.RemoveRouteTag)({ id });
+
   const path = router.currentRoute?.value.path;
   const menu = findMenuByPath(path);
-  await dispatch(Service.Dz.Route.RemoveRouteTag)({ id: menu.id });
-
   if (menu.id === id) {
     const id2 = routeTagState.fixed[0];
     const path2 = menuState.map[id2]?.path;
