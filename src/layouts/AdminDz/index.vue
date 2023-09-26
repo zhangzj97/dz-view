@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import LayoutUserProfile from '@/apps/BaseLayout/common/components/LayoutUserProfile/index.vue';
-import LayoutLogo from '@/apps/BaseLayout/common/components/LayoutLogo/index.vue';
-import LayoutRouteTag from '@/apps/BaseLayout/common/components/LayoutRouteTag/index.vue';
-import LayoutMenu from '@/apps/BaseLayout/common/components/LayoutMenu/index.vue';
-import LayoutMenuLevelTop from '@/apps/BaseLayout/common/components/LayoutMenuLevelTop/index.vue';
+import LayoutUserProfile from './components/LayoutUserProfile/index.vue';
+import LayoutLogo from './components/LayoutLogo/index.vue';
+import LayoutRouteTag from './components/LayoutRouteTag/index.vue';
+import LayoutMenu from './components/LayoutMenu/index.vue';
+import LayoutMenuLevelTop from './components/LayoutMenuLevelTop/index.vue';
 </script>
 
 <template>
@@ -11,7 +11,6 @@ import LayoutMenuLevelTop from '@/apps/BaseLayout/common/components/LayoutMenuLe
     <v s="w-grow h-grow" text="body">
       <v s="w-fit h-grow" col w="overflow-visible">
         <LayoutLogo />
-
         <LayoutMenu class="z-[999]" />
       </v>
       <v s="w-grow h-grow" col text="body">

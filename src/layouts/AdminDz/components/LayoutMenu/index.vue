@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useService } from '@/hooks/useService';
 import MenuLevel1 from './components/MenuLevel1.vue';
 import MenuLevel2 from './components/MenuLevel2.vue';
 import MenuLevel3 from './components/MenuLevel3.vue';
@@ -32,10 +31,7 @@ const clickMenu = ({ id }: any) => {
 
 const menuTree = computed(() => {
   if (menuState.levelTopMode) {
-    return (
-      menuState.tree.find(item => item.id === menuState.levelTopMenuId)
-        ?.children || []
-    );
+    return menuState.tree.find(item => item.id === menuState.levelTopMenuId)?.children || [];
   } else {
     return menuState.tree;
   }

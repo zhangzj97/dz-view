@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useService } from '@/hooks/useService';
 import RouteTag from './components/RouteTag.vue';
 
 const { dispatch, getState, Service } = useService();

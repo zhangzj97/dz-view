@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useService } from '@/hooks/useService';
-
 const { getState } = useService();
 
 const { menuState } = getState('Dz/Route');
@@ -24,9 +22,7 @@ const clickMenu = ({ id }: any) => {
         :key="index"
         s="w-fit h-grow"
         v="mouse-gray"
-        :class="[
-          menuState.levelTopMenuId === item.id && 'border-blue-500 border-b-2',
-        ]"
+        :class="[menuState.levelTopMenuId === item.id && 'border-blue-500 border-b-2']"
         trans="hover:border-blue-500 hover:border-b-2"
         @click="clickMenu(item)"
       >
