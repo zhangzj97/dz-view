@@ -7,6 +7,7 @@ import '@arco-design/web-vue/es/button/style/css';
 import type { DzBtnComponentProps, DzViewStateProps } from '@/types/dz-view';
 
 interface Props {
+  bindId?: string;
   state?: DzViewStateProps;
   type?: 'primary' | 'secondary' | 'outline' | 'dashed' | 'text';
   status?: 'normal' | 'warning' | 'success' | 'danger';
