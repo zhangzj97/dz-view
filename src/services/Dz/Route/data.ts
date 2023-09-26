@@ -1,40 +1,3 @@
-const AdminAppPageTest = ['ApiTest/Bar', 'ApiTest/Foo'].map((item, index) => ({
-  id: `AdminAppPageTest${index}`,
-  parentId: 'AdminAppPageTest',
-  avatar: 'el:address-book',
-  title: `${item}`,
-
-  appName: 'AdminApp',
-
-  code: `AdminApp.${item}`,
-  path: `/${item}`,
-  component: `/AdminApp/pages/${item}`,
-}));
-
-const AdminAppPageDemoCard = [
-  'PageDemo/Card01',
-  'PageDemo/Card02',
-  'PageDemo/Card03',
-  'PageDemo/Card04',
-  'PageDemo/Card05',
-  'PageDemo/Card06',
-  'PageDemo/Card07',
-  'PageDemo/Card08',
-  'PageDemo/Card09',
-  'PageDemo/Card10',
-].map((item, index) => ({
-  id: `AdminAppPageDemoCard${index}`,
-  parentId: 'AdminAppPageDemoCard',
-  avatar: 'el:address-book',
-  title: `${item}`,
-
-  appName: 'AdminApp',
-
-  code: `AdminApp.${item}`,
-  path: `/${item}`,
-  component: `/AdminApp/pages/${item}`,
-}));
-
 const AdminAppPageDemoForm = [
   'PageDemo/Form01',
   'PageDemo/Form02',
@@ -59,167 +22,23 @@ const AdminAppPageDemoForm = [
   component: `/AdminApp/pages/${item}`,
 }));
 
+const avatar = 'el:address-book';
+
 export const menuList = [
-  {
-    id: 'AdminAppPageTest',
-    parentId: '0',
-    avatar: 'el:adjust-alt',
-    title: 'Api',
-    path: '',
-  },
-  {
-    id: 'AdminAppPageDemoCard',
-    parentId: '0',
-    avatar: 'el:adjust-alt',
-    title: 'Card',
-    path: '',
-  },
+  // Tree Test
+  { id: 't-100', title: 't-100', type: 'route', path: '/Tree/Tree100', avatar, parentId: '0' },
+  { id: 't-200', title: 't-200', type: 'node', path: '/Tree/Tree200', avatar, parentId: '0' },
+  { id: 't-210', title: 't-210', type: 'route', path: '/Tree/Tree210', avatar, parentId: 't-200' },
+  { id: 't-220', title: 't-220', type: 'route', path: '/Tree/Tree220', avatar, parentId: 't-200' },
+  { id: 't-300', title: 't-300', type: 'node', path: '/Tree/Tree300', avatar, parentId: '0' },
+  { id: 't-310', title: 't-310', type: 'node', path: '/Tree/Tree310', avatar, parentId: 't-300' },
+  { id: 't-320', title: 't-320', type: 'node', path: '/Tree/Tree320', avatar, parentId: 't-300' },
+  { id: 't-311', title: 't-311', type: 'route', path: '/Tree/Tree311', avatar, parentId: 't-310' },
+  { id: 't-312', title: 't-312', type: 'route', path: '/Tree/Tree312', avatar, parentId: 't-310' },
+  { id: 't-321', title: 't-321', type: 'route', path: '/Tree/Tree321', avatar, parentId: 't-320' },
+  { id: 't-322', title: 't-322', type: 'route', path: '/Tree/Tree322', avatar, parentId: 't-320', fixedTag: true },
 
-  {
-    id: 'AdminAppPageDemoForm',
-    parentId: '0',
-    avatar: 'el:adjust-alt',
-    title: 'Form',
-    path: '',
-  },
-
-  ...AdminAppPageTest,
-  ...AdminAppPageDemoForm,
-  ...AdminAppPageDemoCard,
-
-  {
-    id: '2221',
-    parentId: '222',
-    avatar: 'el:address-book',
-    title: 't2-2-2-1 Demo/T2',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp.Demo/T2',
-    path: '/Demo/T2',
-    component: '/AdminApp/pages/Demo/T2',
-  },
-
-  ///
-  {
-    id: '1',
-    parentId: '0',
-    avatar: 'el:adjust-alt',
-    title: 't1',
-    path: '',
-  },
-  {
-    id: '2',
-    parentId: '0',
-    type: 'node',
-    avatar: 'el:adjust-alt',
-    title: 't2',
-    path: '',
-  },
-  {
-    id: '21',
-    parentId: '2',
-    type: 'node',
-    avatar: 'el:address-book',
-    title: 't2-1',
-    path: '',
-  },
-  {
-    id: '22',
-    parentId: '2',
-    avatar: 'el:address-book',
-    title: 't2-2',
-    path: '',
-  },
-  {
-    id: '221',
-    parentId: '22',
-    avatar: 'el:address-book',
-    title: '221 Demo/T1 Fixed',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp.Demo/T1',
-    path: '/Demo/T1',
-    component: '/AdminApp/pages/Demo/T1',
-
-    fixedTag: true,
-  },
-  {
-    id: '222',
-    parentId: '22',
-    avatar: 'el:address-book',
-    title: 't2-2-2',
-  },
-  {
-    id: '2221',
-    parentId: '222',
-    avatar: 'el:address-book',
-    title: 't2-2-2-1 Demo/T2',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp.Demo/T2',
-    path: '/Demo/T2',
-    component: '/AdminApp/pages/Demo/T2',
-  },
-  {
-    id: '3',
-    parentId: '0',
-    avatar: 'el:adjust-alt',
-    title: 't3',
-    path: '',
-  },
-  {
-    id: '4',
-    parentId: '0',
-    avatar: 'el:adjust-alt',
-    title: 't4',
-    path: '',
-  },
-  {
-    id: '41',
-    parentId: '4',
-    avatar: 'el:address-book',
-    title: 't4-1',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp/Demo02/T1',
-    path: '/Demo02/T1',
-    component: '/AdminApp/pages/Demo02/T1',
-  },
-  {
-    id: '42',
-    parentId: '4',
-    avatar: 'el:address-book',
-    title: 't4-2',
-
-    appName: 'AdminApp',
-
-    code: 'AdminApp.Demo02/T2',
-    path: '/Demo02/T2',
-    component: '/AdminApp/pages/Demo02/T2',
-  },
-  // Test Route
-  {
-    id: '52',
-    parentId: '0',
-    avatar: 'el:address-book',
-    title: 'User系统',
-    appName: 'AdminApp',
-    code: 'AdminApp.Demo02/T2',
-    path: '/Demo02/T2',
-    component: '/AdminApp/pages/Demo02/T2',
-  },
-  {
-    id: '521',
-    parentId: '52',
-    avatar: 'el:address-book',
-    title: 'User/User',
-    appName: 'AdminApp',
-    code: 'AdminApp.User/User',
-    path: '/User/User',
-    component: '/AdminApp/pages/User/User',
-  },
+  // TEst
+  { id: 'test-btn', title: 'btn', type: 'route', path: '/Test/Btn', avatar, parentId: '0', fixedTag: true },
+  { id: 'test-popup', title: 'popup', type: 'route', path: '/Test/Popup', avatar, parentId: '0', fixedTag: true },
 ];

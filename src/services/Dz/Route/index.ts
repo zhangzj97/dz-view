@@ -27,6 +27,10 @@ export const useStore = defineStore('Dz/Route', () => {
     open: [], // [展示列表] 非固定
   });
 
+  const versionState = reactive<any>({
+    version: { value: Date.now() },
+  });
+
   const Test = payload => {
     return new Promise(resolve => {
       resolve({ data: payload });
@@ -44,6 +48,9 @@ export const useStore = defineStore('Dz/Route', () => {
 
       debug('routeTagState 更新 展示列表固定 fixed 的数据', 'RefreshMenu');
       routeTagState.fixed = list.filter((item: any) => item.fixedTag).map((item: any) => item.id);
+
+      // 更新
+      versionState.version.value = Date.now();
 
       resolve({ data: { menu: list } });
     });
@@ -69,7 +76,7 @@ export const useStore = defineStore('Dz/Route', () => {
   const RemoveRouteTag = payload => {
     const { id } = payload;
     return new Promise(resolve => {
-      routeTagState.open = routeTagState.open.filter((item: any) => item != id);
+      routeTagState.open = routeTagState.open.filter((item: any) => item !== id);
 
       resolve({ data: {} });
     });
@@ -83,11 +90,12 @@ export const useStore = defineStore('Dz/Route', () => {
     });
   };
 
-  const GetState = () => ({ menuState, routeTagState });
+  const GetState = () => ({ menuState, routeTagState, versionState });
 
   return {
     routeTagState,
     menuState,
+    versionState,
 
     Test,
     RefreshMenu,
