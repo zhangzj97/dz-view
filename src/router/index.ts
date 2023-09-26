@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { beforeEach, routes } from '@/resources/routes';
+import { beforeEach, routes } from './route';
 import { buildRoute } from './tools';
 
 const { debug } = useLog({ module: 'SrcRouter', color: 'blue' });
