@@ -22,7 +22,7 @@ const clickMenu = (item: any) => {
 </script>
 
 <template>
-  <v s="w-fit h-10" pointer class="bg-gray-600 border-b-[1px] border-gray-500">
+  <v s="w-fit h-10" pointer class="bg-gray-600 border-b-[1px] border-gray-500" trans>
     <v s="w-fit h-fit" @click="clickMenu({ id })">
       <v-space s="w-0 h-grow" />
       <v-icon v="10-50" t="text-gray-300" :icon="avatar" />
@@ -41,12 +41,7 @@ const clickMenu = (item: any) => {
           <v-space s="w-grow h-10" />
         </v>
         <v s="w-10 h-grow" :class="[collapse ? 'rotate-90' : '']" trans>
-          <v-icon
-            v-if="showRightIcon"
-            v="10-50"
-            t="text-gray-500"
-            icon="el:chevron-right"
-          />
+          <v-icon v-if="showRightIcon" v="10-50" t="text-gray-500" icon="el:chevron-right" />
         </v>
       </v>
     </v>

@@ -41,12 +41,7 @@ const clickMenu = (item: any) => {
           <v-space s="w-grow h-10" />
         </v>
         <v s="w-10 h-grow" :class="[collapse ? 'rotate-90' : '']" trans>
-          <v-icon
-            v-if="showRightIcon"
-            v="10-50"
-            t="text-gray-200"
-            icon="el:chevron-right"
-          />
+          <v-icon v-if="showRightIcon" v="10-50" t="text-gray-200" icon="el:chevron-right" />
         </v>
       </v>
     </v>

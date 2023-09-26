@@ -5,14 +5,35 @@ import MenuLevel3 from './components/MenuLevel3.vue';
 
 const { getState } = useService();
 
-const { menuState } = getState('Dz/Route');
+const { menuState, versionState } = getState('Dz/Route');
 
 const router = useRouter();
-const route = useRoute();
+
+onBeforeRouteUpdate(async (to, form, next) => {
+  const path = to.matched.slice(-1)[0]?.path;
+  const menu = findMenuByPath(path);
+  menuState.collapse = {};
+  menu.treePath.split(',').forEach((item: string) => {
+    menuState.collapse[item] = true;
+  });
+  next();
+});
+
+watch(
+  () => versionState.version.value,
+  () => {
+    const path = router.currentRoute?.value.path;
+    const menu = findMenuByPath(path);
+    menuState.collapse = {};
+    menu.treePath.split(',').forEach((item: string) => {
+      menuState.collapse[item] = true;
+    });
+  }
+);
 
 const clickMenu = ({ id }: any) => {
   const item = menuState.map[id];
-  const { treePath, path } = item;
+  const { treePath, path, type } = item;
 
   if (menuState.collapse[id] === true) {
     menuState.collapse[id] = false;
@@ -24,6 +45,10 @@ const clickMenu = ({ id }: any) => {
     menuState.collapse[item] = true;
   });
 
+  if (type === 'node') {
+    return;
+  }
+
   if (path) {
     router.push({ path });
   }
@@ -31,10 +56,20 @@ const clickMenu = ({ id }: any) => {
 
 const menuTree = computed(() => {
   if (menuState.levelTopMode) {
-    return menuState.tree.find(item => item.id === menuState.levelTopMenuId)?.children || [];
+    return menuState.tree.find((item: any) => item.id === menuState.levelTopMenuId)?.children || [];
   } else {
     return menuState.tree;
   }
+});
+
+const findMenuByPath = (path: string) => {
+  return menuState.list.find((item: any) => item.path === path);
+};
+
+const activeId = computed(() => {
+  const path = router.currentRoute?.value.path;
+  const menu = findMenuByPath(path);
+  return menu?.id;
 });
 </script>
 
@@ -47,7 +82,7 @@ const menuTree = computed(() => {
       :avatar="item.avatar"
       :title="item.title"
       :collapse="!!menuState.collapse[item.id]"
-      :active="!!menuState.active[item.id]"
+      :active="activeId === item.id"
       :showRightIcon="item.children?.length > 0"
       :iconMode="menuState.iconMode"
       @clickMenu="clickMenu(item)"
@@ -59,7 +94,7 @@ const menuTree = computed(() => {
         :avatar="item2.avatar"
         :title="item2.title"
         :collapse="!!menuState.collapse[item2.id]"
-        :active="!!menuState.active[item2.id]"
+        :active="activeId === item2.id"
         :showRightIcon="item2.children?.length > 0"
         :iconMode="menuState.iconMode"
         @clickMenu="clickMenu(item2)"
@@ -71,7 +106,7 @@ const menuTree = computed(() => {
           :avatar="item3.avatar"
           :title="item3.title"
           :collapse="!!menuState.collapse[item3.id]"
-          :active="!!menuState.active[item3.id]"
+          :active="activeId === item3.id"
           :showRightIcon="item3.children?.length > 0"
           :iconMode="menuState.iconMode"
           @clickMenu="clickMenu(item3)"
