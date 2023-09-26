@@ -15,12 +15,12 @@ export default defineConfig({
       dts: './types/unplugin-auto-import.d.ts',
       imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
       resolvers: [],
-      dirs: ['./src/hooks/*'],
+      dirs: ['./src/hooks/*', './src/services/*'],
     }),
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
       dts: './types/unplugin-vue-components.d.ts',
-      globs: ['./src/components/*/index.vue'],
+      globs: ['./src/components/*/index.vue', './src/components/V/*/index.vue', './src/components/Popup/*/index.vue'],
       resolvers: [],
       directoryAsNamespace: false,
       globalNamespaces: [],
@@ -42,7 +42,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:7002',
+        target: 'http://localhost:32906',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api\//, '/'),
       },

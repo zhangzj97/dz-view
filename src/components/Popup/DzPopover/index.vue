@@ -1,15 +1,13 @@
-<script setup lang="ts" name="view">
+<script setup lang="ts">
 defineOptions({ name: 'DzPopover' });
 
 import { Popover, Tooltip } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/popover/style/css';
 import '@arco-design/web-vue/es/tooltip/style/css';
 
-import type {
-  DzPopoverComponentProps,
-  DzViewStateProps,
-} from '@/types/dz-view';
+import type { DzPopoverComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
+  bindId?: string;
   state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
   tooltip?: string;
