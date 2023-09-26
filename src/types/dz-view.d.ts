@@ -120,7 +120,7 @@ export type DzModalComponentProps = DzViewBaseProps & DzEntityBase;
 /**
  * DzTable 组件 Props
  */
-export type DzTableComponentProps = DzViewBaseProps;
+export type DzTableComponentProps = DzViewBaseProps & DzEntityBase;
 
 /**
  * DzFromItem 组件 Props
