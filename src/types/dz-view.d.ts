@@ -124,27 +124,29 @@ export type DzTableComponentProps = DzViewBaseProps & DzEntityBase;
 
 /**
  * DzFromItem 组件 Props
+ * @deprecated
  */
 export type DzFromItemComponentProps = DzViewBaseProps;
 
 /**
- * DzPluginControl 组件 Props
+ * DzControl 组件 Props
  */
-export type DzPluginControlProps<T> = {
-  state: DzViewStateProps;
+export type DzControlComponentProps = DzViewBaseProps;
+
+/**
+ * Control 组件 Props
+ */
+export type ControlProps<T> = {
   code: string;
-  field: any;
+  state: DzViewStateProps;
   option: T;
   value?: any;
-  service?: any;
-  validator?: any;
-  formStyle?: any;
-  data?: any;
 };
 
-export type DzPluginControlEmits = {
-  'update:value': [value: string | null];
-  'update:option': [value: string | null];
+export type ControlEmits = {
+  'update:value': [value: any];
+  'update:state': [value: any];
+  'update:option': [value: any];
   beforeInput: [];
   afterInput: [];
   beforeFocus: [];
@@ -152,9 +154,3 @@ export type DzPluginControlEmits = {
   beforeBlur: [];
   afterBlur: [];
 };
-
-type a = {};
-
-type b = (a & { name: string })[];
-
-interface bbb extends DzViewTextProps {}
