@@ -5,13 +5,13 @@ import ControlWrapper from '../ControlWrapper.vue';
 
 import type {ControlProps, ControlEmits } from '@/types/dz-view'; // prettier-ignore
 import { isNull } from 'lodash';
-type Option = {};
+type Option = any;
 type Event = {};
 const props = withDefaults(defineProps<ControlProps<Option>>(), {});
 const emits = defineEmits<ControlEmits & Event>();
 
 const { isArray } = useValidate();
-const getValue = (): string | null => props.value;
+const getValue = (): any => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
   if (isArray(value)) {
@@ -24,7 +24,7 @@ const { pluginDom, ExposeMethod, CommonEvent, modelValue } = usePluginControl({ 
 
 defineExpose({ ...ExposeMethod });
 
-const onInput = async el => {
+const onInput = async (el: any) => {
   if (isNull(getValue())) {
     await emits('update:value', []);
   }
@@ -41,10 +41,10 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :validator="option.validator" v-bind="ExposeMethod">
     <v s="w-grow h-fit" grid w="gap-1">
       <label
-        v-for="(item, index) of service.list"
+        v-for="(item, index) of option.service.list"
         :key="index"
         class="flex w-fit h-fit"
         :class="[item.disabled ? 'cursor-not-allowed' : 'cursor-pointer']"

@@ -38,7 +38,7 @@ const input02 = el => {
 </script>
 
 <template>
-  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :option="option" v-bind="ExposeMethod">
     <input
       :class="['dz-plugin-control-input', 'w-32 h-6']"
       type="text"

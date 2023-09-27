@@ -2,7 +2,6 @@
 defineOptions({ name: 'ControlInput' });
 
 import ControlWrapper from '../ControlWrapper.vue';
-
 import type { ControlProps, ControlEmits } from '@/types/dz-view'; // prettier-ignore
 type Option = {};
 type Event = {};
@@ -27,7 +26,7 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :option="option" v-bind="ExposeMethod">
     <input
       ref="pluginDom"
       :class="[

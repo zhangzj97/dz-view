@@ -39,7 +39,7 @@ const onChange = e => {
 </script>
 
 <template>
-  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :option="option" v-bind="ExposeMethod">
     <json-editor-vue
       :class="[option.bodyClass]"
       class="plugin-raw-control-json"

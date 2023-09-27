@@ -27,7 +27,7 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :option="option" v-bind="ExposeMethod">
     <v s="w-fit h-fit" v="mouse-gray" @click="pluginDom.showPicker()">
       <v-icon v="8-50" icon="mdi:calendar-month-outline" />
     </v>
