@@ -8,7 +8,7 @@ import '@arco-design/web-vue/es/popconfirm/style/css';
 
 import type { DzPopoverComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  bindId?: string;
+  code?: string;
   state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
   tooltip?: string;
@@ -18,14 +18,14 @@ interface Props {
 const props = withDefaults(defineProps<DzPopoverComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [value: DzViewStateProps];
+  'update:state': [state: DzViewStateProps, code?: string];
 }>();
 
 const { setState, getState } = useComponentState({ props, emit });
 defineExpose({ setState, getState });
 
-const updateVisible = visible => {
-  emit('update:state', props.bindId, { visible });
+const updateVisible = (visible: boolean) => {
+  emit('update:state', { visible }, props.code);
 };
 </script>
 

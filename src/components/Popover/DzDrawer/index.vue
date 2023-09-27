@@ -6,14 +6,14 @@ import '@arco-design/web-vue/es/drawer/style/css';
 
 import type { DzDrawerComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  bindId?: string;
+  code?: string;
   state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [value: DzViewStateProps];
+  'update:state': [state: DzViewStateProps, code?: string];
 }>();
 
 const { setState, getState } = useComponentState({ props, emit });
@@ -29,8 +29,8 @@ const store = reactive({
   toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
 });
 
-const updateVisible = visible => {
-  emit('update:state', props.bindId, { visible });
+const updateVisible = (visible: boolean) => {
+  emit('update:state', { visible }, props.code);
 };
 </script>
 

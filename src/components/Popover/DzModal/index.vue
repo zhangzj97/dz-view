@@ -6,14 +6,14 @@ import '@arco-design/web-vue/es/modal/style/css';
 
 import type { DzModalComponentProps, DzViewStateProps } from '@/types/dz-view';
 interface Props {
-  bindId?: string;
+  code?: string;
   state?: DzViewStateProps;
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 const props = withDefaults(defineProps<DzModalComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [value: DzViewStateProps];
+  'update:state': [state: DzViewStateProps, code?: string];
 }>();
 
 const { setState, getState } = useComponentState({ props, emit });
@@ -29,16 +29,16 @@ const store = reactive({
   toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
 });
 
-const updateVisible = visible => {
-  emit('update:state', props.bindId, { visible });
+const updateVisible = (visible: boolean) => {
+  emit('update:state', { visible }, props.code);
 };
 </script>
 
 <template>
   <Modal
     class="dz-modal v202301"
-    :visible="state.visible"
-    :fullscreen="state.fullscreen"
+    :visible="state?.visible"
+    :fullscreen="state?.fullscreen"
     titleAlign="start"
     :unmountOnClose="true"
     :mask="true"
@@ -59,7 +59,7 @@ const updateVisible = visible => {
         <v-text s="w-fit h-fit" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
         <v s="w-10 h-grow" v="mouse-gray" @click="store.toggleFullscreen">
-          <v-icon v="10-50" :icon="!state.fullscreen ? store.iconFullscreen : store.iconExitFullscreen" />
+          <v-icon v="10-50" :icon="!state?.fullscreen ? store.iconFullscreen : store.iconExitFullscreen" />
         </v>
         <v s="w-10 h-grow" v="mouse-gray" @click="store.close">
           <v-icon v="10-50" :icon="store.iconClose" />
