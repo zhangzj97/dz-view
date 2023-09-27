@@ -7,7 +7,7 @@ import '@arco-design/web-vue/es/button/style/css';
 import type { DzBtnComponentProps, DzViewStateProps } from '@/types/dz-view';
 
 interface Props {
-  bindId?: string;
+  code?: string;
   state?: DzViewStateProps;
   type?: 'primary' | 'secondary' | 'outline' | 'dashed' | 'text';
   status?: 'normal' | 'warning' | 'success' | 'danger';
@@ -16,7 +16,7 @@ interface Props {
 const props = withDefaults(defineProps<DzBtnComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [value: DzViewStateProps];
+  'update:state': [code?: string, value?: DzViewStateProps];
 }>();
 
 const { setState, getState } = useComponentState({ props, emit });

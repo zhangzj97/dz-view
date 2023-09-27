@@ -18,14 +18,14 @@ interface Props {
 const props = withDefaults(defineProps<DzPopoverComponentProps & Props>(), {});
 
 const emit = defineEmits<{
-  'update:state': [state: DzViewStateProps, code?: string];
+  'update:state': [code?: string, state?: DzViewStateProps];
 }>();
 
 const { setState, getState } = useComponentState({ props, emit });
 defineExpose({ setState, getState });
 
 const updateVisible = (visible: boolean) => {
-  emit('update:state', { visible }, props.code);
+  emit('update:state', props.code, { visible });
 };
 </script>
 

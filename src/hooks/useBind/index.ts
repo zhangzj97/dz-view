@@ -1,43 +1,50 @@
+import { Service } from '@/config/service';
+import { Control } from '@/config/control';
+
 export const useBind = () => {
   const store = reactive({
-    state: {},
     value: {},
+    state: {},
     el: {},
   });
 
-  const bind = (bindId: string, isBindEl: boolean = false) => {
-    if (isBindEl) {
-      if (!store.state[bindId]) {
-        store.state[bindId] = {};
+  const bind = (code: string, state: any = null) => {
+    if (state) {
+      if (!store.state[code]) {
+        store.state[code] = state;
       }
 
       return {
-        bindId: bindId,
-        state: store.state[bindId],
-        ref: el => (store.el[bindId] = el),
-        'onUpdate:value': (bindId: string, value: any) => setValue(bindId, value),
-        'onUpdate:state': (bindId: string, state: any) => setState(bindId, state),
+        code,
+        state: store.state[code],
+        ref: el => (store.el[code] = el),
+        'onUpdate:value': (code: string, value: any) => setValue(code, value),
+        'onUpdate:state': (code: string, state: any) => setState(code, state),
       };
     }
 
-    if (store.el[bindId]) {
-      return store.el[bindId];
+    if (store.el[code]) {
+      return store.el[code];
     }
   };
 
-  const setValue = (bindId, value) => {
-    store.value[bindId] = value;
+  const setValue = (code, value) => {
+    store.value[code] = value;
   };
 
-  const setState = (bindId, state) => {
+  const setState = (code, state) => {
+    console.log(code, state);
     Object.entries(state).forEach(([k, v]) => {
       if (v != null) {
-        store.state[bindId][k] = v;
+        store.state[code][k] = v;
       }
     });
   };
 
   return {
     bind,
+
+    Service,
+    Control,
   };
 };
