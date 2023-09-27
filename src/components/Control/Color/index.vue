@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineOptions({ name: 'ControlColor' });
 
-import PluginControl from '../../../components/PluginControl.vue';
+import ControlWrapper from '../ControlWrapper.vue';
 
-import type { DzPluginControlProps, DzPluginControlEmits } from '@/types/dz-view'; // prettier-ignore
+import type { ControlProps, ControlEmits } from '@/types/dz-view'; // prettier-ignore
 type Option = {};
 type Event = {};
-const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
-const emits = defineEmits<DzPluginControlEmits & Event>();
+const props = withDefaults(defineProps<ControlProps<Option>>(), {});
+const emits = defineEmits<ControlEmits & Event>();
 
 const { isString, isNumber, isBoolean } = useValidate();
 const getValue = (): string | null => props.value;
@@ -27,7 +27,7 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
     <input
       ref="pluginDom"
       :class="[
@@ -46,5 +46,5 @@ onMounted(() => emits('update:value', null));
     <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
       <v-icon v="8-50" icon="mdi:close-circle-outline" />
     </v>
-  </PluginControl>
+  </ControlWrapper>
 </template>

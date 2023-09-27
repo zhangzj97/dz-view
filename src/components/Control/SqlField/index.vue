@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineOptions({ name: 'ControlInput' });
 
-import PluginControl from '../../../components/PluginControl.vue';
+import ControlWrapper from '../ControlWrapper.vue';
 
-import type { DzPluginControlProps, DzPluginControlEmits } from '@/types/dz-view'; // prettier-ignore
+import type { ControlProps, ControlEmits } from '@/types/dz-view'; // prettier-ignore
 type Option = {};
 type Event = {};
-const props = withDefaults(defineProps<DzPluginControlProps<Option>>(), {});
-const emits = defineEmits<DzPluginControlEmits & Event>();
+const props = withDefaults(defineProps<ControlProps<Option>>(), {});
+const emits = defineEmits<ControlEmits & Event>();
 
 const { isNull, isNumber, isBoolean } = useValidate();
 const getValue = (): string | null => props.value;
@@ -38,7 +38,7 @@ const input02 = el => {
 </script>
 
 <template>
-  <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
     <input
       :class="['dz-plugin-control-input', 'w-32 h-6']"
       type="text"
@@ -59,12 +59,10 @@ const input02 = el => {
       :key="index"
       s="w-fit h-fit"
       v="mouse-gray"
-      :class="[
-        String(modelValue?.type) === String(item.value) && 'bg-blue-500',
-      ]"
+      :class="[String(modelValue?.type) === String(item.value) && 'bg-blue-500']"
       @click="setValue({ type: String(item.value) })"
     >
       <v-icon v="8-50" :icon="item.data.icon" />
     </v>
-  </PluginControl>
+  </ControlWrapper>
 </template>

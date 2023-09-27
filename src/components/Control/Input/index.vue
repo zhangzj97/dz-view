@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({ name: 'ControlInput' });
 
-import PluginControl from '../../../components/PluginControl.vue';
+import ControlWrapper from '../ControlWrapper.vue';
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view'; // prettier-ignore
 type Option = {};
@@ -27,7 +27,7 @@ onMounted(() => emits('update:value', null));
 </script>
 
 <template>
-  <PluginControl :state="state" :validator="validator" v-bind="ExposeMethod">
+  <ControlWrapper :state="state" :validator="validator" v-bind="ExposeMethod">
     <input
       ref="pluginDom"
       :class="[
@@ -47,5 +47,5 @@ onMounted(() => emits('update:value', null));
     <v s="w-fit h-fit" v="mouse-gray" @click="ExposeMethod.reset">
       <v-icon v="8-50" icon="mdi:close-circle-outline" />
     </v>
-  </PluginControl>
+  </ControlWrapper>
 </template>
