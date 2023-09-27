@@ -82,5 +82,5 @@ const { bind } = useStateStore();
 </template>
 
 <style lang="scss">
-@import url(../assets/index.scss);
+@import url(../../assets/index.scss);
 </style>
