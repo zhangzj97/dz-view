@@ -3,11 +3,11 @@ import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits & {}>();
 
-const { isString, isNumber, isBoolean } = useValidate();
+const { is } = useValidate();
 const getValue = (): string | null => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
-  if (isString(value) || isNumber(value) || isBoolean(value)) {
+  if (is.String(value) || is.Number(value) || is.Boolean(value)) {
     newValue = String(value);
   }
   emits('update:value', newValue);
