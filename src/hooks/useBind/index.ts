@@ -12,11 +12,13 @@ export const useBind = () => {
     if (state) {
       if (!store.state[code]) {
         store.state[code] = state;
+        store.value[code] = null;
       }
 
       return {
         code,
         state: store.state[code],
+        value: store.value[code],
         ref: el => (store.el[code] = el),
         'onUpdate:value': (code: string, value: any) => setValue(code, value),
         'onUpdate:state': (code: string, state: any) => setState(code, state),
