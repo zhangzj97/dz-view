@@ -4,24 +4,24 @@ import { Control } from '@/config/control';
 export const useBind = () => {
   const store = reactive({
     value: {},
-    state: {},
+    payload: {},
     el: {},
   });
 
-  const bind = (code: string, state: any = null) => {
-    if (state) {
-      if (!store.state[code]) {
-        store.state[code] = state;
+  const bind = (code: string, payload: any = null) => {
+    if (payload) {
+      if (!store.payload[code]) {
+        store.payload[code] = payload;
         store.value[code] = null;
       }
 
       return {
         code,
-        state: store.state[code],
         value: store.value[code],
+        payload: store.payload[code],
         ref: el => (store.el[code] = el),
         'onUpdate:value': (code: string, value: any) => setValue(code, value),
-        'onUpdate:state': (code: string, state: any) => setState(code, state),
+        'onUpdate:payload': (code: string, payload: any) => setPayload(code, payload),
       };
     }
 
@@ -34,11 +34,14 @@ export const useBind = () => {
     store.value[code] = value;
   };
 
-  const setState = (code, state) => {
-    console.log(code, state);
-    Object.entries(state).forEach(([k, v]) => {
+  const setPayload = (code, payload) => {
+    if (payload === null) {
+      store.payload[code] = {};
+      return;
+    }
+    Object.entries(payload).forEach(([k, v]) => {
       if (v != null) {
-        store.state[code][k] = v;
+        store.payload[code][k] = v;
       }
     });
   };
