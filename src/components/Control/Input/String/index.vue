@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
-const emits = defineEmits<ControlEmits & {}>();
+const emits = defineEmits<ControlEmits>();
 
-const { is } = useValidate();
+const { el, exposeMethod, commonEvent, is } = usePluginControl({ props, emits });
+
 const getValue = (): string | null => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
@@ -13,7 +14,6 @@ const setValue = (value: unknown) => {
   emits('update:value', newValue);
 };
 
-const { el, exposeMethod, commonEvent } = usePluginControl({ props, emits });
 defineExpose({ ...exposeMethod, getValue, setValue });
 
 onMounted(() => setValue(null));
