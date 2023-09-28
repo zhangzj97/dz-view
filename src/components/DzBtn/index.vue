@@ -1,27 +1,27 @@
 <script setup lang="ts">
-defineOptions({ name: 'DzBtn' });
-
 import { Button } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/button/style/css';
 
 import type { DzBtnComponentProps, DzViewStateProps } from '@/types/dz-view';
-
-interface Props {
-  code?: string;
-  state?: DzViewStateProps;
+type Payload = {
   type?: 'primary' | 'secondary' | 'outline' | 'dashed' | 'text';
   status?: 'normal' | 'warning' | 'success' | 'danger';
   shape?: 'round' | 'circle' | 'square';
+};
+interface Props {
+  code?: string;
+  payload: Payload;
 }
-const props = withDefaults(defineProps<DzBtnComponentProps & Props>(), {});
+const props = withDefaults(defineProps<DzBtnComponentProps & Props>(), { payload: () => ({}) });
 
-const emit = defineEmits<{
-  'update:state': [code?: string, value?: DzViewStateProps];
+const emits = defineEmits<{
+  'update:payload': [code?: string, payload?: Payload];
+  'update:value': [code?: string, value?: unknown];
 }>();
 
-const getState = (): DzViewStateProps => props.state || {};
-const setState = (state: DzViewStateProps) => emit('update:state', props.code, state);
-defineExpose({ setState, getState });
+const getPayload = (): Payload => props.payload;
+const setPayload = (payload: Payload) => emits('update:payload', props.code, payload);
+defineExpose({ setPayload, getPayload });
 </script>
 
 <template>

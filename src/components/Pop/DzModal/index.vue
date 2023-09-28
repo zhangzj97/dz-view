@@ -6,7 +6,7 @@ import type { DzPopEmits, DzPopProps, DzPopPayload } from '@/types/dz-view';
 const props = withDefaults(defineProps<DzPopProps>(), { payload: () => ({}) });
 const emits = defineEmits<DzPopEmits>();
 
-const getPayload = (): DzPopPayload => props.payload || {};
+const getPayload = (): DzPopPayload => props.payload;
 const setPayload = (payload: DzPopPayload) => emits('update:payload', props.code, payload);
 defineExpose({ setPayload, getPayload });
 
