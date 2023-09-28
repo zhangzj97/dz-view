@@ -4,14 +4,8 @@ const { debug } = useLog({ module: 'usePluginControl', color: 'blue' });
 
 const { isUndefined, isNull, isArrayExist } = useValidate();
 
-export const usePluginControl = <T>({
-  props,
-  emits,
-  getValue = null as any,
-  setValue = null as any,
-  validate = null as any,
-}) => {
-  const pluginDom = ref<HTMLInputElement | null>(null);
+export const usePluginControl = <T>({ props, emits, validate = null as any }) => {
+  const el = ref<HTMLInputElement | null>(null);
 
   const onUpdateValue = () => {
     debug('onUpdateValue');
@@ -40,8 +34,8 @@ export const usePluginControl = <T>({
     Object.assign(props.state, state);
   };
 
-  if (!getValue) getValue = (): unknown => props.value;
-  if (!setValue) setValue = (value: unknown) => emits('update:value', value);
+  const getValue = (): unknown => props.value;
+  const setValue = (value: unknown) => emits('update:value', value);
 
   const getOption = (): T => props.option;
   const setOption = (option: T) => {
@@ -53,6 +47,10 @@ export const usePluginControl = <T>({
       const { state, value, validator } = props;
       const { required } = state;
       const { error, failFast } = option;
+
+      if (!validator) {
+        return [];
+      }
 
       validator.result = {
         error: false,
@@ -87,8 +85,8 @@ export const usePluginControl = <T>({
       return validator.result;
     };
 
-  const focus = () => pluginDom?.value?.focus();
-  const blur = () => pluginDom?.value?.blur();
+  const focus = () => el?.value?.focus();
+  const blur = () => el?.value?.blur();
   const reset = () => {
     emits('update:value', null);
     validate({ error: false });
@@ -120,7 +118,7 @@ export const usePluginControl = <T>({
   };
 
   return {
-    pluginDom,
+    el,
 
     modelValue,
     ExposeMethod,
