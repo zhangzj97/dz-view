@@ -1,21 +1,20 @@
-// Todo
-const SourceApiUrl = {
-  SourceAccessFind: '/Auth/FindSourceAccess',
-  SourceAccessMenuFind: '/Auth/FindSourceAccessMenu',
-  SourceAccessPermissionFind: '/Auth/FindSourceAccessPermission',
-  SourceAccessRouteFind: '/Auth/FindSourceAccessRoute',
-  SourceAccessRouteTagFind: '/Auth/FindSourceAccessRouteTag',
-  SourceApiFind: '/Auth/FindSourceApi',
-  SourceApiServiceFind: '/Auth/FindSourceApiService',
-  SourceEnumFind: '/Auth/FindSourceEnum',
-  SourceAuthFind: '/Auth/FindSourceAuth',
-  SourceAuthLogin: '/Auth/Login',
-  SourceAuthLogout: '/Auth/Logout',
-  SourcePluginFind: '/Auth/FindSourcePlugin',
-  SourceRouteFind: '/Auth/FindSourceRoute',
-  SourceThemeFind: '/Auth/FindSourceTheme',
+const ViewName = 'AdminApp';
+const ScopeCode = 'AdminApp';
+const RouteHomePageName = 'PAGEHOME';
+const logoTitle = 'AdminApp';
+
+const layout = {
+  logo: {
+    icon1: '',
+    icon2: '',
+    text: '',
+  },
 };
 
 export const config = {
-  SourceApiUrl,
+  ViewName,
+  ScopeCode,
+  RouteHomePageName,
+  logoTitle,
+  layout,
 };
