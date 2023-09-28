@@ -1,48 +1,35 @@
-<script setup lang="ts" name="view">
-defineOptions({ name: 'DzDrawer' });
-
+<script setup lang="ts">
 import { Drawer } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/drawer/style/css';
 
-import type { DzDrawerComponentProps, DzViewStateProps } from '@/types/dz-view';
-interface Props {
-  code?: string;
-  state?: DzViewStateProps;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-}
-const props = withDefaults(defineProps<DzDrawerComponentProps & Props>(), {});
+import type { DzPopEmits, DzPopProps, DzPopPayload } from '@/types/dz-view';
+const props = withDefaults(defineProps<DzPopProps>(), {});
+const emits = defineEmits<DzPopEmits>();
 
-const emit = defineEmits<{
-  'update:state': [code?: string, state?: DzViewStateProps];
-}>();
+const getPayload = (): DzPopPayload => props.payload || {};
+const setPayload = (payload: DzPopPayload) => emits('update:payload', props.code, payload);
+defineExpose({ setPayload, getPayload });
 
-const getState = (): DzViewStateProps => props.state || {};
-const setState = (state: DzViewStateProps) => emit('update:state', props.code, state);
-defineExpose({ setState, getState });
+const updateVisible = (visible: boolean) => emits('update:payload', props.code, { visible });
 
 const store = reactive({
   iconClose: 'mdi:close',
   iconFullscreen: 'mdi:fullscreen',
   iconExitFullscreen: 'mdi:fullscreen-exit',
   textCancle: 'Cancle',
-
-  close: () => setState({ visible: false, fullscreen: false }),
-  toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
+  close: () => setPayload({ visible: false, fullscreen: false }),
+  toggleFullscreen: () => setPayload({ fullscreen: !getPayload().fullscreen }),
 });
-
-const updateVisible = (visible: boolean) => {
-  emit('update:state', props.code, { visible });
-};
 </script>
 
 <template>
   <Drawer
     class="dz-drawer v202301"
-    :class="[`dz-drawer-${position}`]"
-    :visible="state?.visible"
-    :fullscreen="state?.fullscreen"
-    :defaultVisible="state?.visible"
-    :placement="position"
+    :class="[`dz-drawer-${payload?.position}`]"
+    :visible="payload?.visible"
+    :fullscreen="payload?.fullscreen"
+    :defaultVisible="payload?.visible"
+    :placement="payload?.position"
     width="auto"
     height="auto"
     titleAlign="start"
