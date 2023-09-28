@@ -12,7 +12,8 @@ const emit = defineEmits<{
   'update:state': [value: DzViewStateProps];
 }>();
 
-const { setState, getState } = useComponentState({ props, emit });
+const getState = (): DzViewStateProps => props.state || {};
+const setState = (state: DzViewStateProps) => emit('update:state', props.code, state);
 defineExpose({ setState, getState });
 </script>
 
