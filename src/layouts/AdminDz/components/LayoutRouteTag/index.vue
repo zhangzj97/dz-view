@@ -16,7 +16,8 @@ watch(
   async () => {
     const path = router.currentRoute?.value.path;
     const menu = findMenuByPath(path);
-    if (menu.fixedTag) return;
+    if (!menu) return;
+    if (menu?.fixedTag) return;
     await dispatch(Service.Dz.Route.AddRouteTag)({ id: menu.id });
   }
 );

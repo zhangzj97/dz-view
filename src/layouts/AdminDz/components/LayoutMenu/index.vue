@@ -12,6 +12,7 @@ const router = useRouter();
 onBeforeRouteUpdate(async (to, form, next) => {
   const path = to.matched.slice(-1)[0]?.path;
   const menu = findMenuByPath(path);
+  if (!menu) return;
   menuState.collapse = {};
   menu.treePath.split(',').forEach((item: string) => {
     menuState.collapse[item] = true;
@@ -24,6 +25,7 @@ watch(
   () => {
     const path = router.currentRoute?.value.path;
     const menu = findMenuByPath(path);
+    if (!menu) return;
     menuState.collapse = {};
     menu.treePath.split(',').forEach((item: string) => {
       menuState.collapse[item] = true;
