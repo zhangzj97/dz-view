@@ -4,7 +4,18 @@ const { debug } = useLog({ module: 'usePluginControl', color: 'blue' });
 
 const { isUndefined, isNull, isArrayExist } = useValidate();
 
-export const usePluginControl = <T>({ props, emits, validate = null as any }) => {
+export const usePluginControl = <T>({
+  props,
+  emits,
+  validate = null as any,
+
+  getState = null as any,
+  setState = null as any,
+  getValue = null as any,
+  setValue = null as any,
+  getOption = null as any,
+  setOption = null as any,
+}) => {
   const el = ref<HTMLInputElement | null>(null);
 
   const onUpdateValue = () => {
@@ -29,20 +40,22 @@ export const usePluginControl = <T>({ props, emits, validate = null as any }) =>
     emits('afterBlur');
   };
 
-  const getState = (): DzViewStateProps => props.state;
-  const setState = (state: DzViewStateProps) => {
-    Object.assign(props.state, state);
-  };
+  if (getState == null) getState = (): DzViewStateProps => props.state;
+  if (setState == null)
+    setState = (state: DzViewStateProps) => {
+      Object.assign(props.state, state);
+    };
 
-  const getValue = (): unknown => props.value;
-  const setValue = (value: unknown) => emits('update:value', value);
+  if (getValue == null) getValue = (): unknown => props.value;
+  if (setValue == null) setValue = (value: unknown) => emits('update:value', value);
 
-  const getOption = (): T => props.option;
-  const setOption = (option: T) => {
-    Object.assign(props.option, option);
-  };
+  if (getOption == null) getOption = (): T => props.option;
+  if (setOption == null)
+    setOption = (option: T) => {
+      Object.assign(props.option, option);
+    };
 
-  if (!validate)
+  if (validate == null)
     validate = (option = { error: true, failFast: true }) => {
       const { state, value, validator } = props;
       const { required } = state;
@@ -96,6 +109,9 @@ export const usePluginControl = <T>({ props, emits, validate = null as any }) =>
 
   const modelValue = computed(() => getValue());
 
+  /**
+   * @deprecated
+   */
   const ExposeMethod = {
     getState,
     setState,
@@ -110,7 +126,31 @@ export const usePluginControl = <T>({ props, emits, validate = null as any }) =>
     refreshService,
   };
 
+  /**
+   * @deprecated
+   */
   const CommonEvent = {
+    onUpdateValue,
+    onInput,
+    onFocus,
+    onBlur,
+  };
+
+  const exposeMethod = {
+    getState,
+    setState,
+    getValue,
+    setValue,
+    getOption,
+    setOption,
+    validate,
+    focus,
+    blur,
+    reset,
+    refreshService,
+  };
+
+  const commonEvent = {
     onUpdateValue,
     onInput,
     onFocus,
@@ -121,6 +161,10 @@ export const usePluginControl = <T>({ props, emits, validate = null as any }) =>
     el,
 
     modelValue,
+
+    exposeMethod,
+    commonEvent,
+
     ExposeMethod,
     CommonEvent,
   };
