@@ -20,7 +20,12 @@ export default defineConfig({
     // Doc: https://www.npmjs.com/package/unplugin-vue-components
     Components({
       dts: './types/unplugin-vue-components.d.ts',
-      globs: ['./src/components/*/index.vue', './src/components/V/*/index.vue', './src/components/Popup/*/index.vue'],
+      globs: [
+        './src/components/*/index.vue',
+        './src/components/V/*/index.vue',
+        './src/components/Pop/*/index.vue',
+        './src/components/Trigger/*/index.vue',
+      ],
       resolvers: [],
       directoryAsNamespace: false,
       globalNamespaces: [],
