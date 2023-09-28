@@ -3,7 +3,7 @@ import { Drawer } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/drawer/style/css';
 
 import type { DzPopEmits, DzPopProps, DzPopPayload } from '@/types/dz-view';
-const props = withDefaults(defineProps<DzPopProps>(), {});
+const props = withDefaults(defineProps<DzPopProps>(), { payload: () => ({}) });
 const emits = defineEmits<DzPopEmits>();
 
 const getPayload = (): DzPopPayload => props.payload || {};
@@ -25,11 +25,11 @@ const store = reactive({
 <template>
   <Drawer
     class="dz-drawer v202301"
-    :class="[`dz-drawer-${payload?.position}`]"
-    :visible="payload?.visible"
-    :fullscreen="payload?.fullscreen"
-    :defaultVisible="payload?.visible"
-    :placement="payload?.position"
+    :class="[`dz-drawer-${payload.position}`]"
+    :visible="payload.visible"
+    :fullscreen="payload.fullscreen"
+    :defaultVisible="payload.visible"
+    :placement="payload.position"
     width="auto"
     height="auto"
     titleAlign="start"

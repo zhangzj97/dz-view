@@ -1,45 +1,32 @@
-<script setup lang="ts" name="view">
-defineOptions({ name: 'DzModal' });
-
+<script setup lang="ts">
 import { Modal } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/modal/style/css';
 
-import type { DzModalComponentProps, DzViewStateProps } from '@/types/dz-view';
-interface Props {
-  code?: string;
-  state?: DzViewStateProps;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-}
-const props = withDefaults(defineProps<DzModalComponentProps & Props>(), {});
+import type { DzPopEmits, DzPopProps, DzPopPayload } from '@/types/dz-view';
+const props = withDefaults(defineProps<DzPopProps>(), { payload: () => ({}) });
+const emits = defineEmits<DzPopEmits>();
 
-const emit = defineEmits<{
-  'update:state': [code?: string, state?: DzViewStateProps];
-}>();
+const getPayload = (): DzPopPayload => props.payload || {};
+const setPayload = (payload: DzPopPayload) => emits('update:payload', props.code, payload);
+defineExpose({ setPayload, getPayload });
 
-const getState = (): DzViewStateProps => props.state || {};
-const setState = (state: DzViewStateProps) => emit('update:state', props.code, state);
-defineExpose({ setState, getState });
+const updateVisible = (visible: boolean) => emits('update:payload', props.code, { visible });
 
 const store = reactive({
   iconClose: 'mdi:close',
   iconFullscreen: 'mdi:fullscreen',
   iconExitFullscreen: 'mdi:fullscreen-exit',
   textCancle: 'Cancle',
-
-  close: () => setState({ visible: false, fullscreen: false }),
-  toggleFullscreen: () => setState({ fullscreen: !getState().fullscreen }),
+  close: () => setPayload({ visible: false, fullscreen: false }),
+  toggleFullscreen: () => setPayload({ fullscreen: !getPayload().fullscreen }),
 });
-
-const updateVisible = (visible: boolean) => {
-  emit('update:state', props.code, { visible });
-};
 </script>
 
 <template>
   <Modal
     class="dz-modal v202301"
-    :visible="state?.visible"
-    :fullscreen="state?.fullscreen"
+    :visible="payload.visible"
+    :fullscreen="payload.fullscreen"
     titleAlign="start"
     :unmountOnClose="true"
     :mask="true"
@@ -60,7 +47,7 @@ const updateVisible = (visible: boolean) => {
         <v-text s="w-fit h-fit" :t="t" :text="title" />
         <v-space s="w-grow h-grow" />
         <v s="w-10 h-grow" v="mouse-gray" @click="store.toggleFullscreen">
-          <v-icon v="10-50" :icon="!state?.fullscreen ? store.iconFullscreen : store.iconExitFullscreen" />
+          <v-icon v="10-50" :icon="!payload.fullscreen ? store.iconFullscreen : store.iconExitFullscreen" />
         </v>
         <v s="w-10 h-grow" v="mouse-gray" @click="store.close">
           <v-icon v="10-50" :icon="store.iconClose" />

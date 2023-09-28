@@ -1,50 +1,35 @@
 <script setup lang="ts">
-defineOptions({ name: 'DzPopover' });
-
 import { Popconfirm, Popover, Tooltip } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/popover/style/css';
 import '@arco-design/web-vue/es/tooltip/style/css';
 import '@arco-design/web-vue/es/popconfirm/style/css';
 
-import type { DzPopoverComponentProps, DzViewStateProps } from '@/types/dz-view';
-interface Props {
-  code?: string;
-  state?: DzViewStateProps;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  tooltip?: string;
-  confirm?: string;
-  trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
-}
-const props = withDefaults(defineProps<DzPopoverComponentProps & Props>(), {});
+import type { DzPopEmits, DzPopProps, DzPopPayload } from '@/types/dz-view';
+const props = withDefaults(defineProps<DzPopProps>(), { payload: () => ({}) });
+const emits = defineEmits<DzPopEmits>();
 
-const emit = defineEmits<{
-  'update:state': [code?: string, state?: DzViewStateProps];
-}>();
+const getPayload = (): DzPopPayload => props.payload || {};
+const setPayload = (payload: DzPopPayload) => emits('update:payload', props.code, payload);
+defineExpose({ setPayload, getPayload });
 
-const getState = (): DzViewStateProps => props.state || {};
-const setState = (state: DzViewStateProps) => emit('update:state', props.code, state);
-defineExpose({ setState, getState });
-
-const updateVisible = (visible: boolean) => {
-  emit('update:state', props.code, { visible });
-};
+const updateVisible = (visible: boolean) => emits('update:payload', props.code, { visible });
 </script>
 
 <template>
   <Tooltip
-    v-if="tooltip"
+    v-if="payload.tooltip"
     class="dz-tooltip v202301"
-    :content="tooltip"
-    :popupVisible="state?.visible"
+    :content="payload.tooltip"
+    :popupVisible="payload.visible"
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
   </Tooltip>
   <Popconfirm
-    v-else-if="confirm"
+    v-else-if="payload.confirm"
     class="dz-popconfirm v202301"
-    :content="confirm"
-    :popupVisible="state?.visible"
+    :content="payload.confirm"
+    :popupVisible="payload.visible"
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
@@ -52,8 +37,8 @@ const updateVisible = (visible: boolean) => {
   <Popover
     v-else
     class="dz-popover v202301"
-    :trigger="trigger"
-    :popupVisible="state?.visible"
+    :trigger="payload.trigger"
+    :popupVisible="payload.visible"
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
