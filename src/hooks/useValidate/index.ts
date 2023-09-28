@@ -6,12 +6,31 @@ export const useValidate = () => {
   const isBoolean = (v: unknown): v is boolean => typeof v === 'boolean';
 
   const isArray = (v: unknown): v is unknown[] => Array.isArray(v);
-  const isArrayExist = (v: unknown): v is unknown[] =>
-    Array.isArray(v) && v.length > 0;
+  /**
+   * @deprecate
+   */
+  const isArrayExist = (v: unknown): v is unknown[] => Array.isArray(v) && v.length > 0;
+
+  const isEmpty = (v: unknown): v is unknown[] => {
+    if (!Array.isArray(v)) return true;
+    if (v.length === 0) return true;
+    return false;
+  };
 
   const findDefined = (list: unknown[]) => {
     return list.find(item => !isUndefined(item));
   };
+
+  const is = {
+    Undefined: isUndefined,
+    Null: isNull,
+    String: isString,
+    Boolean: isBoolean,
+    Number: isNumber,
+    Array: isArray,
+    Empty: isEmpty,
+  };
+
   return {
     isUndefined,
     isNull,
@@ -19,7 +38,14 @@ export const useValidate = () => {
     isBoolean,
     isNumber,
     isArray,
+    /**
+     * @deprecate
+     */
     isArrayExist,
+
+    isEmpty,
+
+    is,
 
     findDefined,
   };
