@@ -41,4 +41,13 @@ export const menuList = [
   // TEst
   { id: 'test-btn', title: 'btn', type: 'route', path: '/Test/Btn', avatar, parentId: '0', fixedTag: true },
   { id: 'test-popup', title: 'popup', type: 'route', path: '/Test/Popup', avatar, parentId: '0', fixedTag: true },
+  {
+    id: 'form-control',
+    title: 'form-control',
+    type: 'route',
+    path: '/Form/Control',
+    avatar,
+    parentId: '0',
+    fixedTag: true,
+  },
 ];
