@@ -21,9 +21,8 @@ import SelectMul from '@/components/Control/SelectMul/index.vue';
 import SqlField from '@/components/Control/SqlField/index.vue';
 import Json from '@/components/Control/Json/index.vue';
 
-const build = component => option => {
-  option.component = () => component;
-  return option;
+const build = component => payload => {
+  return { payload, component: () => component };
 };
 
 export const Control = {
