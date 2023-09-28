@@ -87,6 +87,7 @@ const store = reactive({
 <style lang="scss">
 .dz-modal.v202301.arco-modal-container {
   & > .arco-modal-mask {
+    /* arco-modal-mask */
   }
 
   & > .arco-modal-wrapper {

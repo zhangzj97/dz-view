@@ -88,6 +88,7 @@ const store = reactive({
 <style lang="scss">
 .dz-drawer.v202301.arco-drawer-container {
   .arco-drawer-mask {
+    /* arco-drawer-mask */
   }
   .arco-drawer {
     .arco-drawer-body {
