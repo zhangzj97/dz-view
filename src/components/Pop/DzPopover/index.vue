@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'DzPopover' });
+
 import { Popconfirm, Popover, Tooltip } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/popover/style/css';
 import '@arco-design/web-vue/es/tooltip/style/css';

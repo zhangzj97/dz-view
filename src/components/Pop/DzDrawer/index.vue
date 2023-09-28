@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'DzDrawer' });
+
 import { Drawer } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/drawer/style/css';
 

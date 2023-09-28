@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'DzModal' });
+
 import { Modal } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/modal/style/css';
 

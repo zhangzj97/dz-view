@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'DzBtn' });
+
 import { Button } from '@arco-design/web-vue';
 import '@arco-design/web-vue/es/button/style/css';
 
@@ -14,7 +16,7 @@ type Payload = {
 };
 type Props = {
   code?: string;
-  payload: Payload;
+  payload?: Payload;
 };
 const props = withDefaults(defineProps<DzBtnComponentProps & Props>(), { payload: () => ({}) });
 const emits = defineEmits<{
