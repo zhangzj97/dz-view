@@ -1,9 +1,10 @@
-import Hidden from '@/components/Control/Hidden/index.vue';
-import Text from '@/components/Control/Text/index.vue';
-import Textarea from '@/components/Control/Textarea/index.vue';
-import String from '@/components/Control/String/index.vue';
-import Number from '@/components/Control/Number/index.vue';
-import Password from '@/components/Control/Password/index.vue';
+import Hidden from '@/components/Control/Input/Hidden/index.vue';
+import Text from '@/components/Control/Input/Text/index.vue';
+import Textarea from '@/components/Control/Input/Textarea/index.vue';
+import String from '@/components/Control/Input/String/index.vue';
+import Number from '@/components/Control/Input/Number/index.vue';
+import Password from '@/components/Control/Input/Password/index.vue';
+
 import Date from '@/components/Control/Date/index.vue';
 import Time from '@/components/Control/Time/index.vue';
 import Datetime from '@/components/Control/Datetime/index.vue';
