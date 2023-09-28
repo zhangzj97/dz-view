@@ -103,9 +103,39 @@ export type DzBtnComponentProps = DzViewBaseProps & DzEntityBase;
 export type DzCardComponentProps = DzViewBaseProps & DzViewFlexProps & DzEntityBase;
 
 /**
+ * Dz Pop 组件 Props Interface
+ */
+export type DzPopPayload = {
+  visible?: boolean;
+  fullscreen?: boolean;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+
+  tooltip?: string;
+  confirm?: string;
+  trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
+};
+export type DzPopProps = DzViewBaseProps &
+  DzEntityBase & {
+    code?: string;
+    payload?: DzPopPayload;
+  };
+export type DzPopEmits = {
+  'update:payload': [code?: string, payload?: DzPopPayload];
+  'update:value': [code?: string, value?: unknown];
+};
+
+/**
  * DzDrawer 组件 Props
  */
-export type DzDrawerComponentProps = DzViewBaseProps & DzEntityBase;
+export type DzDrawerPayload = {
+  visible?: boolean;
+  fullscreen?: boolean;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+};
+export type DzDrawerProps = DzViewBaseProps & {
+  code?: string;
+  payload?: DzDrawerPayload;
+};
 
 /**
  * DzPopover 组件 Props
@@ -136,7 +166,7 @@ export type DzControlComponentProps = DzViewBaseProps;
 /**
  * Control 组件 Props
  */
-export type ControlProps<T> = {
+export type ControlProps<T = {}> = {
   code: string;
   state: DzViewStateProps;
   option: T;
