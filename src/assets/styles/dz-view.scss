@@ -35,29 +35,8 @@
   position: fixed;
 }
 
-.dz-view.v202301.dz-view-absolute-top {
-  @apply absolute top-0;
-}
-.dz-view.v202301.dz-view-absolute-bottom {
-  @apply absolute bottom-0;
-}
-.dz-view.v202301.dz-view-absolute-left {
-  @apply absolute left-0;
-}
-.dz-view.v202301.dz-view-absolute-right {
-  @apply absolute right-0;
-}
-.dz-view.v202301.dz-view-absolute-tl {
-  @apply absolute top-0 left-0;
-}
-.dz-view.v202301.dz-view-absolute-tr {
-  @apply absolute top-0 right-0;
-}
-.dz-view.v202301.dz-view-absolute-bl {
-  @apply absolute bottom-0 left-0;
-}
-.dz-view.v202301.dz-view-absolute-br {
-  @apply absolute bottom-0 right-0;
+.dz-view.v202301.absolute {
+  position: absolute;
 }
 
 .dz-view.v202301.flex-shrink {
