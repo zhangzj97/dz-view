@@ -1,81 +1,75 @@
 <script setup lang="ts">
-withDefaults(
-  defineProps<
-    { code: string; value: any; payload: any } & {
-      validate?: any;
-      reset?: any;
-      getState?: any;
-      setState?: any;
-      setValue?: any;
-      getValue?: any;
-      getOption?: any;
-      setOption?: any;
-      refreshService?: any;
-    }
-  >(),
-  { payload: () => ({}) }
-);
+import type { ControlProps, ControlEmits } from '@/types/dz-view';
+const props = withDefaults(defineProps<ControlProps<{}>>(), {});
+const emits = defineEmits<ControlEmits>();
 
-const { bind } = useStateStore();
+const { methods } = usePluginControl({ props, emits });
+const getValue = (): string => props.value;
+
+const { bind } = useBind();
 </script>
 
 <template>
   <v s="w-grow h-grow" col>
     <v s="w-grow h-fit">
+      <dz-popover
+        v-if="payload.error"
+        v-bind="bind('Error', { trigger: 'click', maskClosable: false, visibleArrow: false })"
+        class="animate-[shakeX_1s_ease-in-out_1]"
+      >
+        <v s="w-0 h-0" />
+        <template #body>
+          <v
+            s="w-grow h-fit"
+            class="p-2 bg-red-500 rounded-sm"
+            pointer
+            @click="bind('Error').setPayload({ visible: false })"
+          >
+            <v-text class="text-sm text-white" :text="payload.validator?.result?.message" />
+          </v>
+        </template>
+      </dz-popover>
       <slot></slot>
 
-      <template v-if="payload.test">
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[payload.required && 'bg-blue-400']"
-          @click="setState({ required: !payload.required })">
-          <v-text text="必" />
-        </v>
+      <dz-popover v-if="payload.test" v-bind="bind('Test', { trigger: 'click' })">
+        <dz-btn icon="mdi:test-tube" />
 
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[payload.disabled && 'bg-blue-400']"
-          @click="setState({ disabled: !payload.disabled })">
-          <v-text text="禁" />
-        </v>
+        <template #body>
+          <v s="w-fit h-fit" col>
+            <v s="w-grow h-fit" row>
+              <dz-btn
+                title="必填"
+                :payload="{ type: payload.required ? 'primary' : 'text' }"
+                @click="methods.setPayload({ required: !payload.required })"
+              />
+              <dz-btn
+                title="禁用"
+                :payload="{ type: payload.disabled ? 'primary' : 'text' }"
+                @click="methods.setPayload({ disabled: !payload.disabled })"
+              />
+              <dz-btn
+                title="错误"
+                :payload="{ type: payload.error ? 'primary' : 'text' }"
+                @click="
+                  methods.setPayload({ error: !payload.error });
+                  bind('Error').setPayload({ visible: true });
+                "
+              />
+            </v>
 
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[payload.error && 'bg-blue-400']"
-          @click="setState({ error: !payload.error })">
-          <v-text text="错" />
-        </v>
+            <v s="w-grow h-fit" row>
+              <dz-btn title="{}" @click="methods.setValue({})" />
+              <dz-btn title="null" @click="methods.setValue(null)" />
+              <dz-btn title="false" @click="methods.setValue(false)" />
+              <dz-btn title="[]" @click="methods.setValue([])" />
+              <dz-btn title="''" @click="methods.setValue('')" />
+            </v>
 
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="validate({ error: true })"><v-text text="验" /></v>
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue('')"><v-text text="''" /></v>
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue(null)"><v-text text="Nu" /></v>
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue([])"><v-text text="[]" /></v>
-        <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" @click="setValue({})"><v-text text="{}" /></v>
-
-        <dz-popover v-bind="bind('P1')()" trigger="hover">
-          <v s="w-fit h-fit" v="mouse-gray">
-            <v-icon v="8-50" icon="mdi:test-tube" />
+            <v s="w-72 h-fit"> | => {{ getValue() }}</v>
+            <v s="w-72 h-fit"> | => {{ String(getValue()) }}</v>
           </v>
-          <template #body>
-            <slot name="test">
-              <v s="w-fit h-fit" w="p-2">
-                {{ getValue() }}
-              </v>
-            </slot>
-          </template>
-        </dz-popover>
-      </template>
-    </v>
-
-    <v s="w-grow h-fit" w="min-h-[4px]" :trans="payload.error ? 'max-h-[20px]' : 'max-h-[4px]'">
-      <v-text
-        v-if="payload?.error"
-        t="text-red-500 text-sm"
-        class="animate-[shakeX_1s_ease-in-out_1]"
-        :text="payload?.validator?.result?.message"
-      />
+        </template>
+      </dz-popover>
     </v>
   </v>
 </template>
