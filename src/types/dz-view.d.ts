@@ -90,7 +90,7 @@ export type DzViewTextComponentProps = DzViewBaseProps & DzViewTextProps & DzVie
 /**
  * DzView VIcon 组件 Props
  */
-export type DzViewIconComponentProps = DzViewBaseProps & DzViewCursorProps & DzViewAssetProps;
+export type DzViewIconComponentProps = DzViewBaseProps & DzViewTextProps & DzViewCursorProps & DzViewAssetProps;
 
 /**
  * DzBtn 组件 Props
@@ -113,6 +113,9 @@ export type DzPopPayload = {
   tooltip?: string;
   confirm?: string;
   trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
+
+  maskClosable?: boolean;
+  visibleArrow?: boolean;
 };
 export type DzPopProps = DzViewBaseProps &
   DzEntityBase & {
@@ -168,15 +171,29 @@ export type DzControlComponentProps = DzViewBaseProps;
  */
 export type ControlProps<T = {}> = {
   code: string;
-  state: DzViewStateProps;
-  option: T;
-  value?: any;
+  /**
+   * @deprecated
+   */
+  state?: DzViewStateProps;
+  /**
+   * @deprecated
+   */
+  option?: T;
+  payload: T & any;
+  value: any;
 };
 
 export type ControlEmits = {
   'update:value': [value: any];
+  /**
+   * @deprecated
+   */
   'update:state': [value: any];
+  /**
+   * @deprecated
+   */
   'update:option': [value: any];
+  'update:payload': [value: any];
   beforeInput: [];
   afterInput: [];
   beforeFocus: [];
