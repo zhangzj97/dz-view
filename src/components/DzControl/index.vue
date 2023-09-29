@@ -5,8 +5,8 @@ import type { DzControlComponentProps } from '@/types/dz-view';
 interface Props {
   code: string;
   value: any;
-  payload: any;
-  component: any;
+  payload?: any;
+  component?: any;
 }
 const props = withDefaults(defineProps<DzControlComponentProps & Props>(), { payload: () => ({}) });
 const emits = defineEmits<{
@@ -65,7 +65,7 @@ defineExpose({
         @update:payload="onUpdatePayload"
       >
         <Component
-          :is="component"
+          :is="component()"
           ref="el"
           :code="code"
           :value="value"
