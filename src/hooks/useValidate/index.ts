@@ -12,8 +12,8 @@ export const useValidate = () => {
   const isArrayExist = (v: unknown): v is unknown[] => Array.isArray(v) && v.length > 0;
 
   const isEmpty = (v: unknown): v is unknown[] => {
-    if (!Array.isArray(v)) return true;
-    if (v.length === 0) return true;
+    if (v === '' || v === undefined || v === null) return true;
+    if (typeof v === 'object' && Object.keys(v).length === 0) return true;
     return false;
   };
 
