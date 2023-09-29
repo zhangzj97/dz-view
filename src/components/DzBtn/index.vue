@@ -30,7 +30,11 @@ defineExpose({ setPayload, getPayload });
 </script>
 
 <template>
+  <v v-if="icon && !title" s="w-fit h-fit" class="mouse-gray">
+    <v-icon :s="s || 'w-8 h-8'" :icon="icon" class="scale-75" :style="{ borderRadius: 'var(--border-radius-small)' }" />
+  </v>
   <Button
+    v-else
     :size="payload.size"
     :type="payload.type"
     :shape="payload.shape"
@@ -41,7 +45,7 @@ defineExpose({ setPayload, getPayload });
   >
     <template v-if="icon" #icon>
       <slot name="icon">
-        <v-icon v="4-100" :icon="icon" class="translate-y-[2px]" />
+        <v-icon s="w-4 h-4" :icon="icon" class="translate-y-[2px]" />
       </slot>
     </template>
     <slot>
