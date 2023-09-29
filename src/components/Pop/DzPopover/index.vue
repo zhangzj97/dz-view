@@ -39,8 +39,10 @@ const updateVisible = (visible: boolean) => emits('update:payload', props.code, 
   <Popover
     v-else
     class="dz-popover v202301"
+    :class="[payload.visibleArrow === false ? 'dz-pop-arrow--hidden' : '']"
     :trigger="payload.trigger"
     :popupVisible="payload.visible"
+    :clickOutsideToClose="payload.maskClosable"
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
@@ -56,14 +58,22 @@ const updateVisible = (visible: boolean) => emits('update:payload', props.code, 
   & > .arco-trigger-popup-wrapper {
     & > .arco-trigger-content {
       @apply p-0 m-0;
+      @apply border-0;
 
       & > .arco-popover-content {
         @apply p-0 m-0 relative flex flex-row;
         @apply w-fit h-fit;
+
         & > .dz-view {
           flex-grow: 1;
         }
       }
+    }
+  }
+
+  &.dz-pop-arrow--hidden {
+    & > .arco-trigger-popup-wrapper > .arco-trigger-arrow {
+      opacity: 0;
     }
   }
 }
