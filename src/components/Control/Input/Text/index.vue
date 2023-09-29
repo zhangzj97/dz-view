@@ -16,30 +16,41 @@ const setValue = (value: unknown) => {
   emits('update:value', newValue);
 };
 
-onMounted(() => setValue(null));
-
 defineExpose({ ...methods, getValue, setValue });
+
+onMounted(() => setValue(null));
 </script>
 
 <template>
-  <input
-    ref="el"
-    :class="[
-      'w-full h-8',
-      'dz-plugin-control-input',
-      payload.error && 'dz-plugin-control-input--error',
-      payload.disabled && 'dz-plugin-control-input--disabled',
-    ]"
-    type="text"
-    :disabled="payload.disabled"
-    :readonly="true"
-    :value="getValue()"
-    @input="events.onInput"
-    @focus="events.onFocus"
-    @blur="events.onBlur"
-  />
+  <v s="w-grow h-fit" class="group">
+    <textarea
+      ref="el"
+      :class="[
+        'transition-none',
+        'w-grow h-fit',
+        'dz-plugin-control-textarea',
+        payload.error && 'dz-plugin-control-textarea--error',
+        payload.disabled && 'dz-plugin-control-textarea--disabled',
+        'focus:outline-none',
+        'pr-8',
+      ]"
+      :style="{ backgroundColor: 'rgb(var(--gray-1))' }"
+      type="text"
+      :disabled="true"
+      :value="getValue()"
+      :placeholder="payload.placeholder"
+      @input="events.onInput"
+      @focus="events.onFocus"
+      @blur="events.onBlur"
+    ></textarea>
 
-  <v s="w-fit h-fit" v="mouse-gray" @click="methods.reset">
-    <v-icon v="8-50" icon="mdi:close-circle-outline" />
+    <v s="w-fit h-fit" class="absolute top-0 right-0">
+      <dz-btn
+        v-if="false"
+        :class="['scale-90', 'opacity-0 group-hover:opacity-80', getValue() && 'opacity-50']"
+        icon="mdi:close-circle-outline"
+        @click="methods.reset"
+      />
+    </v>
   </v>
 </template>

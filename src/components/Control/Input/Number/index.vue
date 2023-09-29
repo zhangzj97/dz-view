@@ -32,30 +32,34 @@ const step02 = async () => {
 </script>
 
 <template>
-  <input
-    ref="el"
-    :class="[
-      'w-full h-8',
-      'dz-plugin-control-input',
-      payload.error && 'dz-plugin-control-input--error',
-      payload.disabled && 'dz-plugin-control-input--disabled',
-    ]"
-    type="number"
-    :disabled="payload.disabled"
-    :value="getValue()"
-    @input="events.onInput"
-    @focus="events.onFocus"
-    @blur="events.onBlur"
-  />
+  <v s="w-grow h-fit" class="group">
+    <dz-btn class="scale-90" icon="mdi:minus-circle-outline" @click="step01" />
 
-  <v s="w-fit h-fit" v="mouse-gray" @click="step01">
-    <v-icon v="8-50" icon="mdi:minus-circle-outline" />
-  </v>
-  <v s="w-fit h-fit" v="mouse-gray" @click="step02">
-    <v-icon v="8-50" icon="mdi:plus-circle-outline" />
-  </v>
+    <input
+      ref="el"
+      :class="[
+        'w-20 h-8',
+        'dz-plugin-control-input',
+        payload.error && 'dz-plugin-control-input--error',
+        payload.disabled && 'dz-plugin-control-input--disabled',
+        'focus:outline-none',
+        'pr-3',
+      ]"
+      type="number"
+      :disabled="payload.disabled"
+      :value="getValue()"
+      :placeholder="payload.placeholder"
+      @input="events.onInput"
+      @focus="events.onFocus"
+      @blur="events.onBlur"
+    />
 
-  <v s="w-fit h-fit" v="mouse-gray" @click="methods.reset">
-    <v-icon v="8-50" icon="mdi:close-circle-outline" />
+    <dz-btn class="scale-90" icon="mdi:plus-circle-outline" @click="step02" />
+
+    <dz-btn
+      :class="['scale-90', 'opacity-0 scale-0', getValue() && 'opacity-50 scale-100']"
+      icon="mdi:close-circle-outline"
+      @click="methods.reset"
+    />
   </v>
 </template>
