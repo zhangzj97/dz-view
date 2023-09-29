@@ -22,7 +22,7 @@ import SqlField from '@/components/Control/SqlField/index.vue';
 import Json from '@/components/Control/Json/index.vue';
 
 const build = component => payload => {
-  return { payload, component: () => component };
+  return { ...payload, component: () => component };
 };
 
 export const Control = {
