@@ -5,20 +5,24 @@ export const useBind = () => {
   const store = reactive({
     value: {},
     payload: {},
+    component: {},
     el: {},
   });
 
   const bind = (code: string, payload: any = null) => {
     if (payload) {
       if (!store.payload[code]) {
-        store.payload[code] = payload;
+        const { component, ...payload2 } = payload;
         store.value[code] = null;
+        store.payload[code] = payload2;
+        store.component[code] = component;
       }
 
       return {
         code,
         value: store.value[code],
         payload: store.payload[code],
+        component: store.component[code],
         ref: el => (store.el[code] = el),
         'onUpdate:value': (code: string, value: any) => setValue(code, value),
         'onUpdate:payload': (code: string, payload: any) => setPayload(code, payload),
