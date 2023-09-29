@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'ControlText' });
+
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
@@ -25,11 +27,11 @@ defineExpose({ ...methods, getValue, setValue });
     :class="[
       'w-full h-8',
       'dz-plugin-control-input',
-      state?.error && 'dz-plugin-control-input--error',
-      state?.disabled && 'dz-plugin-control-input--disabled',
+      payload.error && 'dz-plugin-control-input--error',
+      payload.disabled && 'dz-plugin-control-input--disabled',
     ]"
     type="text"
-    :disabled="state?.disabled"
+    :disabled="payload.disabled"
     :readonly="true"
     :value="getValue()"
     @input="events.onInput"

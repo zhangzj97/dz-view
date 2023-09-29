@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'ControlHidden' });
+
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
@@ -25,11 +27,11 @@ onMounted(() => setValue(null));
     :class="[
       'w-full h-fit',
       'dz-plugin-control-input',
-      state?.error && 'dz-plugin-control-input--error',
-      state?.disabled && 'dz-plugin-control-input--disabled',
+      payload.error && 'dz-plugin-control-input--error',
+      payload.disabled && 'dz-plugin-control-input--disabled',
     ]"
     type="hidden"
-    :disabled="state?.disabled"
+    :disabled="true"
     :value="getValue()"
     @input="events.onInput"
     @focus="events.onFocus"

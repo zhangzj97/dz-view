@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'ControlNumber' });
+
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
@@ -35,11 +37,11 @@ const step02 = async () => {
     :class="[
       'w-full h-8',
       'dz-plugin-control-input',
-      state?.error && 'dz-plugin-control-input--error',
-      state?.disabled && 'dz-plugin-control-input--disabled',
+      payload.error && 'dz-plugin-control-input--error',
+      payload.disabled && 'dz-plugin-control-input--disabled',
     ]"
     type="number"
-    :disabled="state?.disabled"
+    :disabled="payload.disabled"
     :value="getValue()"
     @input="events.onInput"
     @focus="events.onFocus"

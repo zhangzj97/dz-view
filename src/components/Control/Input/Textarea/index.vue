@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'ControlTextarea' });
+
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();

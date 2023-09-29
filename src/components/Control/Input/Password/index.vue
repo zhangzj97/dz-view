@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'ControlPassword' });
+
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{ isText: boolean }>>(), {});
 const emits = defineEmits<ControlEmits>();
@@ -25,22 +27,22 @@ onMounted(() => setValue(null));
     :class="[
       'w-full h-8',
       'dz-plugin-control-input',
-      state?.error && 'dz-plugin-control-input--error',
-      state?.disabled && 'dz-plugin-control-input--disabled',
+      payload.error && 'dz-plugin-control-input--error',
+      payload.disabled && 'dz-plugin-control-input--disabled',
     ]"
-    :type="option?.isText ? 'text' : 'password'"
-    :disabled="state?.disabled"
+    :type="payload.isText ? 'text' : 'password'"
+    :disabled="payload.disabled"
     :value="getValue()"
     @input="events.onInput"
     @focus="events.onFocus"
     @blur="events.onBlur"
   />
 
-  <v v-if="option?.isText" s="w-fit h-fit" v="mouse-gray" @click="methods.setOption({ isText: false })">
+  <v v-if="payload.isText" s="w-fit h-fit" v="mouse-gray" @click="methods.setPayload({ isText: false })">
     <v-icon v="8-50" icon="mdi:eye-off-outline" />
   </v>
 
-  <v v-else s="w-fit h-fit" v="mouse-gray" @click="methods.setOption({ isText: true })">
+  <v v-else s="w-fit h-fit" v="mouse-gray" @click="methods.setPayload({ isText: true })">
     <v-icon v="8-50" icon="mdi:eye-outline" />
   </v>
 
