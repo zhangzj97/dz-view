@@ -31,7 +31,7 @@ const { bind } = useBind();
       </dz-popover>
       <slot></slot>
 
-      <dz-popover v-if="payload.test" v-bind="bind('Test', { trigger: 'click' })">
+      <dz-popover v-if="payload.test" v-bind="bind('Test', { trigger: 'click', maskClosable: false })">
         <dz-btn icon="mdi:test-tube" />
 
         <template #body>
@@ -67,6 +67,10 @@ const { bind } = useBind();
 
             <v s="w-72 h-fit"> | => {{ getValue() }}</v>
             <v s="w-72 h-fit"> | => {{ String(getValue()) }}</v>
+
+            <v s="w-fit h-fit" row>
+              <dz-btn @click="bind('Test').setPayload({ visible: false })" icon="mdi:close-circle-outline" />
+            </v>
           </v>
         </template>
       </dz-popover>
