@@ -1,3 +1,7 @@
 .dz-view.v-view-mouse-gray {
   @apply hover:bg-gray-100 active:bg-gray-200  transition-all cursor-pointer;
 }
+
+.dz-view.mouse-gray {
+  @apply hover:bg-gray-100 active:bg-gray-200  transition-all cursor-pointer;
+}
