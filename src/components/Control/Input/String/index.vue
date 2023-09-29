@@ -3,9 +3,9 @@ import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
-const { el, exposeMethod, commonEvent, is } = usePluginControl({ props, emits });
+const { is, el, methods, events } = usePluginControl({ props, emits });
 
-const getValue = (): string | null => props.value;
+const getValue = (): string => (!is.Empty(props.value) ? props.value : '');
 const setValue = (value: unknown) => {
   let newValue = null;
   if (is.String(value) || is.Number(value) || is.Boolean(value)) {
@@ -14,7 +14,7 @@ const setValue = (value: unknown) => {
   emits('update:value', newValue);
 };
 
-defineExpose({ ...exposeMethod, getValue, setValue });
+defineExpose({ ...methods, getValue, setValue });
 
 onMounted(() => setValue(null));
 </script>
@@ -31,12 +31,12 @@ onMounted(() => setValue(null));
     type="text"
     :disabled="state?.disabled"
     :value="getValue()"
-    @input="commonEvent.onInput"
-    @focus="commonEvent.onFocus"
-    @blur="commonEvent.onBlur"
+    @input="events.onInput"
+    @focus="events.onFocus"
+    @blur="events.onBlur"
   />
 
-  <v s="w-fit h-fit" v="mouse-gray" @click="exposeMethod.reset">
+  <v s="w-fit h-fit" v="mouse-gray" @click="methods.reset">
     <v-icon v="8-50" icon="mdi:close-circle-outline" />
   </v>
 </template>

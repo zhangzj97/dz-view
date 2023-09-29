@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
-const emits = defineEmits<ControlEmits & {}>();
+const emits = defineEmits<ControlEmits>();
 
-const { is } = useValidate();
+const { is, el, methods, events } = usePluginControl({ props, emits });
+
 const getValue = (): string | null => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
@@ -13,19 +14,18 @@ const setValue = (value: unknown) => {
   emits('update:value', newValue);
 };
 
-const { el, exposeMethod, commonEvent } = usePluginControl({ props, emits });
-defineExpose({ ...exposeMethod, getValue, setValue });
+defineExpose({ ...methods, getValue, setValue });
 
 onMounted(() => setValue(null));
 
 const step01 = async () => {
   await emits('update:value', !is.Null(getValue()) ? String(Number(getValue()) - 1) : String(-1));
-  exposeMethod.validate({ error: true });
+  methods.validate({ error: true });
 };
 
 const step02 = async () => {
   await emits('update:value', !is.Null(getValue()) ? String(Number(getValue()) + 1) : String(+1));
-  exposeMethod.validate({ error: true });
+  methods.validate({ error: true });
 };
 </script>
 
@@ -41,19 +41,19 @@ const step02 = async () => {
     type="number"
     :disabled="state?.disabled"
     :value="getValue()"
-    @input="commonEvent.onInput"
-    @focus="commonEvent.onFocus"
-    @blur="commonEvent.onBlur"
+    @input="events.onInput"
+    @focus="events.onFocus"
+    @blur="events.onBlur"
   />
 
   <v s="w-fit h-fit" v="mouse-gray" @click="step01">
-    <v-icon v="8-50" icon="mdi:minus-box-outline" />
+    <v-icon v="8-50" icon="mdi:minus-circle-outline" />
   </v>
   <v s="w-fit h-fit" v="mouse-gray" @click="step02">
-    <v-icon v="8-50" icon="mdi:plus-box-outline" />
+    <v-icon v="8-50" icon="mdi:plus-circle-outline" />
   </v>
 
-  <v s="w-fit h-fit" v="mouse-gray" @click="exposeMethod.reset">
+  <v s="w-fit h-fit" v="mouse-gray" @click="methods.reset">
     <v-icon v="8-50" icon="mdi:close-circle-outline" />
   </v>
 </template>

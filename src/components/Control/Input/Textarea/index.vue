@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
-const emits = defineEmits<ControlEmits & {}>();
+const emits = defineEmits<ControlEmits>();
 
-const { is } = useValidate();
-const getValue = (): string | null => props.value;
+const { is, el, methods, events } = usePluginControl({ props, emits });
+
+const getValue = (): string => (!is.Empty(props.value) ? props.value : '');
 const setValue = (value: unknown) => {
   let newValue = null;
   if (is.String(value) || is.Number(value) || is.Boolean(value)) {
@@ -13,10 +14,9 @@ const setValue = (value: unknown) => {
   emits('update:value', newValue);
 };
 
-const { el, exposeMethod, commonEvent } = usePluginControl({ props, emits });
-defineExpose({ ...exposeMethod, getValue, setValue });
-
 onMounted(() => setValue(null));
+
+defineExpose({ ...methods, getValue, setValue });
 </script>
 
 <template>
@@ -26,17 +26,17 @@ onMounted(() => setValue(null));
       'transition-none',
       'w-full h-fit',
       'dz-plugin-control-textarea',
-      state?.error && 'dz-plugin-control-textarea--error',
-      state?.disabled && 'dz-plugin-control-textarea--disabled',
+      payload.error && 'dz-plugin-control-textarea--error',
+      payload.disabled && 'dz-plugin-control-textarea--disabled',
     ]"
     type="text"
-    :disabled="state?.disabled"
+    :disabled="payload.disabled"
     :value="getValue()"
-    @input="commonEvent.onInput"
-    @focus="commonEvent.onFocus"
-    @blur="commonEvent.onBlur"
+    @input="events.onInput"
+    @focus="events.onFocus"
+    @blur="events.onBlur"
   />
-  <v s="w-fit h-fit" v="mouse-gray" @click="exposeMethod.reset">
+  <v s="w-fit h-fit" v="mouse-gray" @click="methods.reset">
     <v-icon v="8-50" icon="mdi:close-circle-outline" />
   </v>
 </template>
