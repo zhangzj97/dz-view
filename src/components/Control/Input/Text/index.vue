@@ -33,6 +33,7 @@ onMounted(() => setValue(null));
         payload.disabled && 'dz-plugin-control-textarea--disabled',
         'focus:outline-none',
         'pr-8',
+        'opacity-80',
       ]"
       :style="{ backgroundColor: 'rgb(var(--gray-1))' }"
       type="text"
