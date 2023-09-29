@@ -13,6 +13,7 @@ type Payload = {
   long?: boolean;
   loading?: boolean;
   disabled?: boolean;
+  iconClass?: string;
 };
 type Props = {
   code?: string;
@@ -31,7 +32,12 @@ defineExpose({ setPayload, getPayload });
 
 <template>
   <v v-if="icon && !title" s="w-fit h-fit" class="mouse-gray">
-    <v-icon :s="s || 'w-8 h-8'" :icon="icon" class="scale-75" :style="{ borderRadius: 'var(--border-radius-small)' }" />
+    <v-icon
+      :s="s || 'w-8 h-8'"
+      :icon="icon"
+      :class="payload.iconClass || 'scale-50'"
+      :style="{ borderRadius: 'var(--border-radius-small)' }"
+    />
   </v>
   <Button
     v-else
