@@ -38,29 +38,16 @@ const check = (value: string) => {
   setValue(newValue);
 };
 
-const getValueTitle = computed(() => {
+const valueTitle = computed(() => {
   const value = checkStore.value;
   if (!value) return null;
   if (!getService().map[value]) return null;
   return getService().map[value].title;
 });
 
-const test1 = () => {
-  // setInterval(() => {
-  const length = Math.random() * 10;
-  setService(Array.from({ length }).map((i, index) => ({ id: String(index), title: index + 'p' })));
-  // }, 1000);
-};
-
-const test2 = () => {
-  const id = String(Date.now());
-  setValue(id);
-};
-
 const isExistOption = computed(() => {
   const value = checkStore.value;
   if (!value) return true;
-
   if (!getService().map[value]) return false;
   return true;
 });
@@ -85,7 +72,7 @@ const isExistOption = computed(() => {
         type="text"
         :readonly="true"
         :disabled="payload.disabled"
-        :value="getValueTitle"
+        :value="valueTitle"
         :placeholder="payload.placeholder || '请选择'"
         @input="events.onInput"
         @focus="events.onFocus"
@@ -118,8 +105,6 @@ const isExistOption = computed(() => {
       />
 
       <dz-btn :class="['scale-90']" icon="mdi:refresh" @click="methods.reset" />
-      <dz-btn :class="['scale-90']" icon="mdi:dice-1-outline" @click="test1" />
-      <dz-btn :class="['scale-90']" icon="mdi:dice-2-outline" @click="test2" />
     </v>
   </v>
 </template>
