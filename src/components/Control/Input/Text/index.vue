@@ -7,10 +7,11 @@ const emits = defineEmits<ControlEmits>();
 
 const { is, el, methods, events } = usePluginControl({ props, emits });
 
-const getValue = (): string => (!is.Empty(props.value) ? props.value : '');
+const defaultValue: string = '';
+const getValue = (): string => props.value;
 const setValue = (value: unknown) => {
-  let newValue = null;
-  if (is.String(value) || is.Number(value) || is.Boolean(value)) {
+  let newValue = defaultValue;
+  if (is.String(value) || is.Number(value)) {
     newValue = String(value);
   }
   emits('update:value', newValue);
@@ -18,7 +19,7 @@ const setValue = (value: unknown) => {
 
 defineExpose({ ...methods, getValue, setValue });
 
-onMounted(() => setValue(null));
+onMounted(() => setValue(defaultValue));
 </script>
 
 <template>
@@ -37,8 +38,9 @@ onMounted(() => setValue(null));
       ]"
       :style="{ backgroundColor: 'rgb(var(--gray-1))' }"
       type="text"
-      :disabled="true"
-      :value="getValue()"
+      :readonly="true"
+      :disabled="payload.disabled"
+      :value="value"
       :placeholder="payload.placeholder"
       @input="events.onInput"
       @focus="events.onFocus"
