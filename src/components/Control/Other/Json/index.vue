@@ -9,10 +9,9 @@ const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
 const { is, el, methods, events } = useControlBase({ props, emits });
-const getValue = (): string => props.value;
+const getValue = (): string | null => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
-
   newValue = value;
   emits('update:value', newValue);
 };
