@@ -92,10 +92,6 @@ const valueWithoutService = computed(() => {
 
       <template #body>
         <v s="w-fit h-fit" w="p-2 gap-1 overflow-auto" col>
-          <v s="w-grow h-fit" class="overflow-auto">
-            <v-text class="text-xs" text="单选" />
-            <dz-btn :class="['scale-90']" icon="mdi:refresh" @click="methods.reset" />
-          </v>
           <v s="w-grow h-fit" w="gap-1 min-w-[256px] max-w-[512px]" grid>
             <template v-for="(item, index) of getService().list" :key="index">
               <dz-btn
