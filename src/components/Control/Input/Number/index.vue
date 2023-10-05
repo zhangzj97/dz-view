@@ -5,12 +5,11 @@ import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
-const { is, el, methods, events } = usePluginControl({ props, emits });
+const { is, el, methods, events } = useControlBase({ props, emits });
 
-const defaultValue: number | null = null;
-const getValue = (): string | null => props.value;
+const getValue = (): string | null | any => props.value;
 const setValue = (value: unknown) => {
-  let newValue = String(defaultValue);
+  let newValue = null;
   if (is.String(value) || is.Number(value)) {
     newValue = String(value);
   }
@@ -19,7 +18,7 @@ const setValue = (value: unknown) => {
 
 defineExpose({ ...methods, getValue, setValue });
 
-onMounted(() => setValue(defaultValue));
+onMounted(() => setValue(null));
 
 const step01 = async () => {
   await emits('update:value', !is.Null(getValue()) ? String(Number(getValue()) - 1) : String(-1));
@@ -48,7 +47,7 @@ const step02 = async () => {
       ]"
       type="number"
       :disabled="payload.disabled"
-      :value="value"
+      :value="getValue()"
       :placeholder="payload.placeholder"
       @input="events.onInput"
       @focus="events.onFocus"
