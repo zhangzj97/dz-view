@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({ name: 'ControlSelect' });
+defineOptions({ name: 'ControlPopPickerList' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
