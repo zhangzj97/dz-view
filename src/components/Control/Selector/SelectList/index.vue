@@ -5,51 +5,63 @@ import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
-const { is, el, methods, events } = usePluginControl({ props, emits });
+const { is, el, methods, events } = useControlBase({ props, emits });
 
-const getValue = (): string => (!is.Empty(props.value) ? props.value : '');
+const getValue = (): string | string[] | null | any => props.value;
 const setValue = (value: unknown) => {
   let newValue = null;
-  if (is.String(value) || is.Number(value) || is.Boolean(value)) {
+  if (is.String(value) || is.Number(value)) {
     newValue = String(value);
   }
   emits('update:value', newValue);
-  setCheck(newValue);
 };
 
-const { serviceStore, setService, checkStore, setCheck } = useControlService({ props, emits });
+const { getService, setServiceData } = useControlService({ props, emits });
 
-const getService = () => {
-  return serviceStore;
+const { getPicker, pick } = useControlPicker({ props, emits });
+
+defineExpose({ ...methods, getValue, setValue, getService, pick, getPicker });
+
+const reset = () => {
+  methods.reset();
+  pick.set([]);
 };
 
-defineExpose({ ...methods, getValue, setValue, getService });
+const mock1 = () => {
+  const length = Math.random() * 10;
+  return Array.from({ length }).map(item => {
+    const a = String(~(Math.random() * 10000));
+    return {
+      id: a,
+      title: `id-${a}`,
+      data: {},
+    };
+  });
+};
 
 onMounted(() => {
   setValue(null);
-  setService([
-    { id: '1', title: 't1', data: { id: 1, name: 't1' } },
-    { id: '2', title: 't2', data: { id: 2, name: 't2' } },
-  ]);
+  setServiceData(mock1());
 });
 
-const check = (value: string) => {
-  const newValue = checkStore.value === value ? null : value;
-  setValue(newValue);
+const pickClick = (value: string) => {
+  pick.toggle(value);
+  setValue(value);
 };
 
-const valueTitle = computed(() => {
-  const value = checkStore.value;
-  if (!value) return null;
-  if (!getService().map[value]) return null;
-  return getService().map[value].title;
+const valueText = computed(() => {
+  const value = getPicker().value;
+  if (is.Empty(value)) return '';
+  return value
+    .map((item: string) => {
+      const item2 = getService().map[item];
+      return item2 ? item2.title : `${value}(无匹配)`;
+    })
+    .join(',');
 });
 
-const isExistOption = computed(() => {
-  const value = checkStore.value;
-  if (!value) return true;
-  if (!getService().map[value]) return false;
-  return true;
+const valueWithoutService = computed(() => {
+  return getPicker().value.find((item: string) => !getService().map[item]);
 });
 </script>
 
@@ -66,13 +78,10 @@ const isExistOption = computed(() => {
           'focus:outline-none',
           'pr-8',
         ]"
-        :style="{
-          cursor: 'pointer',
-        }"
-        type="text"
+        :style="{ cursor: 'pointer' }"
         :readonly="true"
         :disabled="payload.disabled"
-        :value="valueTitle"
+        :value="valueText"
         :placeholder="payload.placeholder || '请选择'"
         @input="events.onInput"
         @focus="events.onFocus"
@@ -80,31 +89,35 @@ const isExistOption = computed(() => {
       ></textarea>
 
       <template #body>
-        <v s="w-grow h-fit" w="gap-1 p-2 min-w-[256px]" grid>
-          <template v-for="(item, index) of serviceStore.list" :key="index">
-            <dz-btn
-              :title="item.title"
-              :payload="{ type: getValue() === item.id ? 'primary' : 'outline' }"
-              @click="check(item.id)"
-            />
-          </template>
+        <v s="w-fit h-fit" w="p-2 gap-1 overflow-auto" class="overflow-auto" col>
+          <v s="w-grow h-fit" class="overflow-auto">
+            <v-text class="text-xs" text="多选" />
+            <dz-btn :class="['scale-90']" icon="mdi:refresh" @click="methods.reset" />
+          </v>
+          <v s="w-grow h-fit" w="gap-1 min-w-[256px] max-w-[512px]" grid>
+            <template v-for="(item, index) of getService().list" :key="index">
+              <dz-btn
+                :title="item.title"
+                :payload="{ type: getPicker().value.includes(item.id) ? 'primary' : 'outline' }"
+                @click="pickClick(item.id)"
+              />
+            </template>
+          </v>
         </v>
       </template>
     </dz-popover>
 
-    <v s="w-grow h-fit">
+    <v s="w-fit h-fit" class="absolute top-0 right-2">
       <v-space s="w-grow h-fit" />
-      <dz-popover v-if="!isExistOption" :payload="{ tooltip: `[不存在选项] value : ${getValue()}` }">
-        <dz-btn :class="['text-red-500', 'opacity-50 scale-90']" icon="mdi:alert" @click="methods.reset" />
+      <dz-popover v-if="valueWithoutService" :payload="{ tooltip: `[无匹配选项] value : ${valueWithoutService}` }">
+        <dz-btn :class="['text-red-500', 'opacity-50 scale-90']" icon="mdi:alert" />
       </dz-popover>
 
       <dz-btn
         :class="[getValue() ? 'opacity-50 scale-90' : 'opacity-0 scale-0']"
         icon="mdi:close-circle-outline"
-        @click="methods.reset"
+        @click="reset"
       />
-
-      <dz-btn :class="['scale-90']" icon="mdi:refresh" @click="methods.reset" />
     </v>
   </v>
 </template>
