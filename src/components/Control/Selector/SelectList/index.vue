@@ -30,7 +30,7 @@ const reset = () => {
 const mock1 = () => {
   const length = Math.random() * 10;
   return Array.from({ length }).map(item => {
-    const a = String(~(Math.random() * 10000));
+    const a = String(~~(Math.random() * 10000));
     return {
       id: a,
       title: `id-${a}`,
