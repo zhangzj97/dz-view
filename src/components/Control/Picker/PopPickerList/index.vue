@@ -89,7 +89,7 @@ const valueWithoutService = computed(() => {
       ></textarea>
 
       <template #body>
-        <v s="w-fit h-fit" w="p-2 gap-1 overflow-auto" class="overflow-auto" col>
+        <v s="w-fit h-fit" w="p-2 gap-1 overflow-auto" col>
           <v s="w-grow h-fit" class="overflow-auto">
             <v-text class="text-xs" text="多选" />
             <dz-btn :class="['scale-90']" icon="mdi:refresh" @click="methods.reset" />
@@ -99,6 +99,7 @@ const valueWithoutService = computed(() => {
               <dz-btn
                 :title="item.title"
                 :payload="{ type: getPicker().value.includes(item.id) ? 'primary' : 'outline' }"
+                :icon="getPicker().value.includes(item.id) ? 'mdi:checkbox-marked' : 'mdi:checkbox-blank-outline'"
                 @click="pickClick(item.id)"
               />
             </template>
