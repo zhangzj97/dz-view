@@ -23,6 +23,7 @@ const updateVisible = (visible: boolean) => emits('update:payload', props.code, 
     class="dz-tooltip v202301"
     :content="payload.tooltip"
     :popupVisible="payload.visible"
+    :position="payload.position"
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
@@ -32,6 +33,7 @@ const updateVisible = (visible: boolean) => emits('update:payload', props.code, 
     class="dz-popconfirm v202301"
     :content="payload.confirm"
     :popupVisible="payload.visible"
+    :position="payload.position"
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
@@ -42,6 +44,7 @@ const updateVisible = (visible: boolean) => emits('update:payload', props.code, 
     :class="[payload.visibleArrow === false ? 'dz-pop-arrow--hidden' : '']"
     :trigger="payload.trigger"
     :popupVisible="payload.visible"
+    :position="payload.position"
     :clickOutsideToClose="payload.maskClosable"
     @update:popupVisible="updateVisible"
   >
