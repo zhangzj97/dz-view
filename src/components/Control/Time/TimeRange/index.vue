@@ -22,7 +22,7 @@ const { service, handleService } = useControlService({ props, emits });
 
 defineExpose({ ...methods });
 
-const { rangePickerEvents } = useRangePicker();
+const { rangePickerEvents } = useRangePicker({ props });
 
 onMounted(() => {
   emits('update:value', props.payload.defaultValue ?? null);

@@ -11,7 +11,7 @@ import '@arco-design/web-vue/dist/arco.css';
 defineOptions({ name: 'ControlDatetime' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
-import { document } from 'postcss';
+
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
@@ -22,7 +22,7 @@ const { service, handleService } = useControlService({ props, emits });
 
 defineExpose({ ...methods });
 
-const { datePickerEvents } = useDatePicker();
+const { datePickerEvents } = useDatePicker({ props });
 
 onMounted(() => {
   emits('update:value', props.payload.defaultValue ?? null);
