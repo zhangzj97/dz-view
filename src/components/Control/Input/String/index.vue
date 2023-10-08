@@ -63,7 +63,7 @@ const computedInputType = computed(() => {
           <input
             ref="el"
             :class="[
-              'w-fit h-8',
+              'w-grow h-8',
               'dz-plugin-control-input',
               payload.error && 'dz-plugin-control-input--error',
               payload.disabled && 'dz-plugin-control-input--disabled',
