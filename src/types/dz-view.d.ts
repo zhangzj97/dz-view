@@ -108,11 +108,12 @@ export type DzCardComponentProps = DzViewBaseProps & DzViewFlexProps & DzEntityB
 export type DzPopPayload = {
   visible?: boolean;
   fullscreen?: boolean;
-  position?: 'top' | 'bottom' | 'left' | 'right';
+  position?: 'top' | 'bottom' | 'left' | 'right' | 'tl' | 'tr' | 'bl' | 'br' | 'rt' | 'lt' | 'lb' | 'rb' | undefined;
 
   tooltip?: string;
   confirm?: string;
   trigger?: 'hover' | 'click' | 'focus' | 'contextMenu';
+  embed?: boolean | 'row' | 'col';
 
   maskClosable?: boolean;
   visibleArrow?: boolean;
