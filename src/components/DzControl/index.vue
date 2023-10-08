@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import ControlWrapper from './ControlWrapper.vue';
+import PaneError from './PaneError.vue';
+import PaneTest from './PaneTest.vue';
 
 import type { DzControlComponentProps } from '@/types/dz-view';
 interface Props {
@@ -20,7 +21,11 @@ const onUpdatePayload = (payload: any) => emits('update:payload', props.code, pa
 const el = ref<HTMLLIElement | null | any>(null);
 
 const getValue = () => el?.value?.getValue();
-const setValue = (v: unknown) => el?.value?.setValue(v);
+const setValue = (v: unknown) => {
+  // 其实 这个是 refresh 行为
+  el?.value?.setValue(v);
+  console.log('发生了 refresh 行为');
+};
 const getPayload = () => el?.value?.getPayload();
 const setPayload = (option: any) => el?.value?.setPayload(option);
 const validate = (option: any) => el?.value?.validate(option);
@@ -56,24 +61,37 @@ defineExpose({
       <v-space s="w-2 h-grow" />
     </v>
     <!-- control -->
-    <v s="w-grow h-fit">
-      <ControlWrapper
+    <v s="w-grow h-fit" row>
+      <v s="w-2 h-grow">
+        <v
+          s="w-2 h-grow"
+          class="bg-blue-300"
+          :class="[value !== payload.defaultValue ? 'max-w-0' : 'max-w-[8px]']"
+          trans
+        ></v>
+      </v>
+
+      <v s="w-fit h-grow" col>
+        <PaneError :code="code" :value="value" :payload="payload" />
+      </v>
+      <Component
+        :is="component()"
+        ref="el"
         :code="code"
         :value="value"
         :payload="payload"
         @update:value="onUpdateValue"
         @update:payload="onUpdatePayload"
-      >
-        <Component
-          :is="component()"
-          ref="el"
+      />
+      <v s="w-fit h-grow" col>
+        <PaneTest
           :code="code"
           :value="value"
           :payload="payload"
           @update:value="onUpdateValue"
           @update:payload="onUpdatePayload"
         />
-      </ControlWrapper>
+      </v>
     </v>
   </v>
 </template>
