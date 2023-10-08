@@ -16,7 +16,7 @@ withDefaults(
       payload.error && 'dz-plugin-control-input--error',
       payload.disabled && 'dz-plugin-control-input--disabled',
       'focus:outline-none',
-      'pr-8',
+      'pr-4',
     ]"
     :disabled="payload.disabled"
     :readonly="true"
