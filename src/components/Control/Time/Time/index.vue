@@ -72,7 +72,7 @@ const ok = () => {
 </script>
 
 <template>
-  <dz-popover :payload="{ embed: 'col' }">
+  <dz-popover :payload="{ embed: payload.embed, position: 'bl' }">
     <TriggerText
       :payload="payload"
       :text="computedTriggerText"
