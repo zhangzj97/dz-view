@@ -5,30 +5,26 @@ import String from '@/components/Control/Input/String/index.vue';
 import Number from '@/components/Control/Input/Number/index.vue';
 import Password from '@/components/Control/Input/Password/index.vue';
 
-import Date from '@/components/Control/TimePicker/Date/index.vue';
-import Time from '@/components/Control/TimePicker/Time/index.vue';
-import Datetime from '@/components/Control/TimePicker/Datetime/index.vue';
-import Week from '@/components/Control/TimePicker/Week/index.vue';
-import Month from '@/components/Control/TimePicker/Month/index.vue';
+import Time from '@/components/Control/Time/Time/index.vue';
+import TimeRange from '@/components/Control/Time/TimeRange/index.vue';
 
 import Picker from '@/components/Control/Picker/Picker/index.vue';
 import PickerList from '@/components/Control/Picker/PickerList/index.vue';
-import PopPicker from '@/components/Control/Picker/PopPicker/index.vue';
-import PopPickerList from '@/components/Control/Picker/PopPickerList/index.vue';
+import PickerPop from '@/components/Control/Picker/PopPicker/index.vue';
+import PickerListPop from '@/components/Control/Picker/PopPickerList/index.vue';
 
 import File from '@/components/Control/File/index.vue';
 import Range from '@/components/Control/Range/index.vue';
 import Color from '@/components/Control/Color/index.vue';
-// import Checkbox from '@/components/Control/Checkbox/index.vue';
-// import Radio from '@/components/Control/Radio/index.vue';
-// import SelectMul from '@/components/Control/SelectMul/index.vue';
 
 // import SqlField from '@/components/Control/SqlField/index.vue';
 import Json from '@/components/Control/Other/Json/index.vue';
 
-const build = component => payload => {
-  return { ...payload, component: () => component };
-};
+const build =
+  (component, payload1 = {}) =>
+  payload2 => {
+    return { ...payload2, ...payload1, component: () => component };
+  };
 
 export const Control = {
   Base: {
@@ -38,18 +34,21 @@ export const Control = {
     String: build(String),
     Number: build(Number),
     Password: build(Password),
-    Date: build(Date),
-    Time: build(Time),
-    Datetime: build(Datetime),
-    Week: build(Week),
-    Month: build(Month),
     File: build(File),
+
     Range: build(Range),
+
     Color: build(Color),
+
+    Time: build(Time),
+    TimePop: build(Time, { embed: 'col' }),
+    TimeRange: build(TimeRange),
+    TimeRangePop: build(TimeRange, { embed: 'col' }),
+
     Picker: build(Picker),
+    PickerPop: build(PickerPop),
     PickerList: build(PickerList),
-    PopPicker: build(PopPicker),
-    PopPickerList: build(PopPickerList),
+    PickerListPop: build(PickerListPop),
   },
 
   Json: {
