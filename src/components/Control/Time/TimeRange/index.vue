@@ -3,15 +3,15 @@ import TriggerText from '../../TriggerText.vue';
 import CacheText from '../../CacheText.vue';
 import dayjs from 'dayjs';
 
-import { useDatePicker } from './useDatePicker';
+import { useRangePicker } from './useRangePicker';
 
-import { DatePicker } from '@arco-design/web-vue';
+import { RangePicker } from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.css';
 
 defineOptions({ name: 'ControlDatetime' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
-import { document } from 'postcss';
+
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
@@ -22,13 +22,13 @@ const { service, handleService } = useControlService({ props, emits });
 
 defineExpose({ ...methods });
 
-const { datePickerEvents } = useDatePicker();
+const { rangePickerEvents } = useRangePicker();
 
 onMounted(() => {
   emits('update:value', props.payload.defaultValue ?? null);
   handleService.set([
-    { id: 1, title: '现在', data: { value: () => dayjs() } },
-    { id: 2, title: 'a week later', data: { value: () => dayjs().add(1, 'week') } },
+    { id: 1, title: 'next 7 days', data: { value: () => [dayjs(), dayjs().add(1, 'week')] } },
+    { id: 2, title: 'next 30 days', data: { value: () => [dayjs(), dayjs().add(1, 'month')] } },
   ]);
 });
 
@@ -39,12 +39,12 @@ watch(
 
 const computedTriggerText = computed(() => {
   const v = props.value;
-  return v ? dayjs(Number(v)).format('YYYY-MM-DD HH:mm:ss') : '';
+  return v ? v.map((item: any) => dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ') : '';
 });
 
 const computedCacheText = computed(() => {
   const v = cache.value[0];
-  return v ? dayjs(Number(v)).format('YYYY-MM-DD HH:mm:ss') : '';
+  return v ? v.map((item: any) => dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ') : '';
 });
 
 const computedServiceList = computed(() => {
@@ -52,16 +52,16 @@ const computedServiceList = computed(() => {
   return service.list.map(func);
 });
 
-const datePickerEventsOk = (_dateStr: string, date: Date) => {
-  const v = String(date.valueOf());
-  emits('update:value', v);
-};
-const datePickerEventsSelect = (_dateStr: string, date: Date) => {
-  const v = String(date.valueOf());
+const rangePickerEventsSelect = (_dateStr: any[], date: any[]): void => {
+  const v = date.sort((a, b) => a - b).map(item => String(item.valueOf()));
   handleCache.set([v]);
 };
-const datePickerEventsSelectShortcut = (shortcut: any) => {
-  const v = String(dayjs(shortcut.value()).valueOf());
+const rangePickerEventsSelectShortcut = (shortcut: any) => {
+  const v = shortcut
+    .value()
+    // TODO 可能有问题
+    .sort((a: any, b: any) => a - b)
+    .map((item: any) => String(item.valueOf()));
   emits('update:value', v);
 };
 
@@ -93,7 +93,7 @@ const ok = () => {
           </dz-popover>
         </v>
 
-        <DatePicker
+        <RangePicker
           ref="el"
           :showTime="!payload.hiddenTime"
           :allowClear="false"
@@ -101,25 +101,25 @@ const ok = () => {
           :hide-trigger="true"
           shortcutsPosition="right"
           :shortcuts="computedServiceList"
-          :modelValue="Number(value)"
-          @update:pickerValue="datePickerEvents.updatePickerValue"
-          @update:modelValue="datePickerEvents.updateModelValue"
-          @change="datePickerEvents.change"
-          @select="datePickerEventsSelect"
-          @popupVisibleChange="datePickerEvents.popupVisibleChange"
-          @ok="datePickerEventsOk"
-          @clear="datePickerEvents.clear"
-          @selectShortcut="datePickerEventsSelectShortcut"
-          @pickerValueChange="datePickerEvents.pickerValueChange"
+          :modelValue="value && [Number(value[0]), Number(value[1])]"
+          @update:pickerValue="rangePickerEvents.updatePickerValue"
+          @update:modelValue="rangePickerEvents.updateModelValue"
+          @change="rangePickerEvents.change"
+          @select="rangePickerEventsSelect"
+          @popupVisibleChange="rangePickerEvents.popupVisibleChange"
+          @ok="rangePickerEvents.ok"
+          @clear="rangePickerEvents.clear"
+          @selectShortcut="rangePickerEventsSelectShortcut"
+          @pickerValueChange="rangePickerEvents.pickerValueChange"
         >
-        </DatePicker>
+        </RangePicker>
       </v>
     </template>
   </dz-popover>
 </template>
 
 <style lang="scss" scoped>
-:deep(.arco-picker-panel-wrapper > .arco-picker-footer) {
+:deep(.arco-picker-range-panel-wrapper > .arco-picker-footer) {
   height: 0px;
 }
 </style>

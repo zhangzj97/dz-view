@@ -1,31 +1,31 @@
 export const useDatePicker = () => {
   const datePickerEvents = {
-    updateModelValue: () => {
-      console.log('updateModelValue');
+    updateModelValue: (a, b, c, d) => {
+      console.log('updateModelValue', console.log({ a, b, c, d }));
     },
-    updatePickerValue: () => {
-      console.log('updatePickerValue');
+    updatePickerValue: (a, b, c, d) => {
+      console.log('updatePickerValue', console.log({ a, b, c, d }));
     },
-    change: () => {
-      console.log('change');
+    change: (a, b, c, d) => {
+      console.log('change', console.log({ a, b, c, d }));
     },
-    select: () => {
-      console.log('select');
+    select: (a, b, c, d) => {
+      console.log('select', console.log({ a, b, c, d }));
     },
-    popupVisibleChange: () => {
-      console.log('popupVisibleChange');
+    popupVisibleChange: (a, b, c, d) => {
+      console.log('popupVisibleChange', console.log({ a, b, c, d }));
     },
-    ok: () => {
-      console.log('ok');
+    ok: (a, b, c, d) => {
+      console.log('ok', console.log({ a, b, c, d }));
     },
-    clear: () => {
-      console.log('clear');
+    clear: (a, b, c, d) => {
+      console.log('clear', console.log({ a, b, c, d }));
     },
-    selectShortcut: () => {
-      console.log('selectShortcut');
+    selectShortcut: (a, b, c, d) => {
+      console.log('selectShortcut', console.log({ a, b, c, d }));
     },
-    pickerValueChange: () => {
-      console.log('pickerValueChange');
+    pickerValueChange: (a, b, c, d) => {
+      console.log('pickerValueChange', console.log({ a, b, c, d }));
     },
   };
 

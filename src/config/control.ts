@@ -13,10 +13,6 @@ import PickerList from '@/components/Control/Picker/PickerList/index.vue';
 import PickerPop from '@/components/Control/Picker/PopPicker/index.vue';
 import PickerListPop from '@/components/Control/Picker/PopPickerList/index.vue';
 
-import File from '@/components/Control/File/index.vue';
-import Range from '@/components/Control/Range/index.vue';
-import Color from '@/components/Control/Color/index.vue';
-
 // import SqlField from '@/components/Control/SqlField/index.vue';
 import Json from '@/components/Control/Other/Json/index.vue';
 
@@ -34,16 +30,11 @@ export const Control = {
     String: build(String),
     Number: build(Number),
     Password: build(Password),
-    File: build(File),
 
-    Range: build(Range),
-
-    Color: build(Color),
-
-    Time: build(Time),
-    TimePop: build(Time, { embed: 'col' }),
-    TimeRange: build(TimeRange),
-    TimeRangePop: build(TimeRange, { embed: 'col' }),
+    Time: build(Time, { embed: 'col' }),
+    TimePop: build(Time, { embed: false }),
+    TimeRange: build(TimeRange, { embed: 'col' }),
+    TimeRangePop: build(TimeRange, { embed: false }),
 
     Picker: build(Picker),
     PickerPop: build(PickerPop),
