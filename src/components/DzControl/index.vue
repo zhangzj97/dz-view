@@ -15,6 +15,8 @@ const emits = defineEmits<{
   'update:value': [code: string, value: any];
 }>();
 
+const { is } = useValidate();
+
 const onUpdateValue = (value: any) => emits('update:value', props.code, value);
 const onUpdatePayload = (payload: any) => emits('update:payload', props.code, payload);
 
@@ -62,11 +64,15 @@ defineExpose({
     </v>
     <!-- control -->
     <v s="w-grow h-fit" row>
-      <v s="w-2 h-grow">
+      <v s="w-3 h-grow">
         <v
           s="w-2 h-grow"
-          class="bg-blue-300"
-          :class="[value !== payload.defaultValue ? 'max-w-0' : 'max-w-[8px]']"
+          class=""
+          :class="[
+            !is.Undefined(payload.defaultValue) && value !== payload.defaultValue ? 'scale-100' : 'scale-0',
+            'bg-blue-300',
+            'rounded-lg',
+          ]"
           trans
         ></v>
       </v>
