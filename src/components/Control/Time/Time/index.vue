@@ -11,6 +11,7 @@ import '@arco-design/web-vue/dist/arco.css';
 defineOptions({ name: 'ControlDatetime' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
+import { document } from 'postcss';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
@@ -24,7 +25,7 @@ defineExpose({ ...methods });
 const { datePickerEvents } = useDatePicker();
 
 onMounted(() => {
-  emits('update:value', null);
+  emits('update:value', props.payload.defaultValue ?? null);
   handleService.set([
     { id: 1, title: '现在', data: { value: () => dayjs() } },
     { id: 2, title: 'a week later', data: { value: () => dayjs().add(1, 'week') } },
@@ -63,41 +64,62 @@ const datePickerEventsSelectShortcut = (shortcut: any) => {
   const v = String(dayjs(shortcut.value()).valueOf());
   emits('update:value', v);
 };
+
+const ok = () => {
+  const v = cache.value[0];
+  emits('update:value', v);
+};
 </script>
 
 <template>
-  <dz-popover :payload="{ embed: true }">
-    <TriggerText :payload="{ ...payload }" :text="computedTriggerText" :value="value" @reset="methods.reset" />
+  <dz-popover :payload="{ embed: 'col' }">
+    <TriggerText
+      :payload="payload"
+      :text="computedTriggerText"
+      :value="value"
+      :warning="null"
+      @reset="methods.reset"
+      @undo="methods.undo"
+    />
 
     <template #body>
-      <v s="w-grow h-fit">
-        <CacheText :payload="{ ...payload }" :value="computedCacheText" />
-        <dz-popover :payload="{ tooltip: '自定义选择时间后 需要点击确认' }">
-          <dz-btn v-if="!value && !cache.value[0]" icon="mdi:information-outline" />
-          <dz-btn v-else-if="value !== cache.value[0]" class="text-red-500" icon="mdi:information-outline" />
-          <dz-btn v-else icon="mdi:check" />
-        </dz-popover>
-      </v>
+      <v s="w-grow h-fit" w="py-2 gap-1" col>
+        <v s="w-grow h-fit">
+          <CacheText :payload="payload" :value="computedCacheText" />
+          <dz-popover :payload="{ tooltip: '自定义选择时间后 需要点击确认' }">
+            <dz-btn v-if="!value && !cache.value[0]" icon="mdi:information-outline" />
+            <dz-btn v-else-if="value !== cache.value[0]" title="确认" :payload="{ type: 'primary' }" @click="ok" />
+            <dz-btn v-else icon="mdi:check" />
+          </dz-popover>
+        </v>
 
-      <DatePicker
-        ref="el"
-        :showTime="!payload.hiddenTime"
-        :allowClear="false"
-        :popupVisible="true /* bug : 时间滚动效果 */"
-        :hide-trigger="true"
-        shortcutsPosition="right"
-        :shortcuts="computedServiceList"
-        :modelValue="Number(value)"
-        @update:pickerValue="datePickerEvents.updatePickerValue"
-        @update:modelValue="datePickerEvents.updateModelValue"
-        @change="datePickerEvents.change"
-        @select="datePickerEventsSelect"
-        @popupVisibleChange="datePickerEvents.popupVisibleChange"
-        @ok="datePickerEventsOk"
-        @clear="datePickerEvents.clear"
-        @selectShortcut="datePickerEventsSelectShortcut"
-        @pickerValueChange="datePickerEvents.pickerValueChange"
-      />
+        <DatePicker
+          ref="el"
+          :showTime="!payload.hiddenTime"
+          :allowClear="false"
+          :popupVisible="true /* bug : 时间滚动效果 */"
+          :hide-trigger="true"
+          shortcutsPosition="right"
+          :shortcuts="computedServiceList"
+          :modelValue="Number(value)"
+          @update:pickerValue="datePickerEvents.updatePickerValue"
+          @update:modelValue="datePickerEvents.updateModelValue"
+          @change="datePickerEvents.change"
+          @select="datePickerEventsSelect"
+          @popupVisibleChange="datePickerEvents.popupVisibleChange"
+          @ok="datePickerEventsOk"
+          @clear="datePickerEvents.clear"
+          @selectShortcut="datePickerEventsSelectShortcut"
+          @pickerValueChange="datePickerEvents.pickerValueChange"
+        >
+        </DatePicker>
+      </v>
     </template>
   </dz-popover>
 </template>
+
+<style lang="scss" scoped>
+:deep(.arco-picker-panel-wrapper > .arco-picker-footer) {
+  height: 0px;
+}
+</style>
