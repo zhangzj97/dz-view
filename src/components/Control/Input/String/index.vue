@@ -32,6 +32,13 @@ const computedCacheText = computed(() => {
   const v = cache.value[0];
   return v ? props.value : '';
 });
+
+const computedInputType = computed(() => {
+  if (!props.payload.inputType) return 'text';
+  if (props.payload.inputType === 'password' && props.payload.isPasswordText) return 'password';
+  if (props.payload.inputType === 'password' && !props.payload.isPasswordText) return 'text';
+  return props.payload.inputType;
+});
 </script>
 
 <template>
@@ -47,7 +54,7 @@ const computedCacheText = computed(() => {
     />
 
     <template #body>
-      <v s="w-grow h-fit" w="py-2 gap-1" col>
+      <v s="w-grow h-fit" col>
         <v v-if="false" s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
         </v>
@@ -56,14 +63,14 @@ const computedCacheText = computed(() => {
           <input
             ref="el"
             :class="[
-              'w-full h-8',
+              'w-fit h-8',
               'dz-plugin-control-input',
               payload.error && 'dz-plugin-control-input--error',
               payload.disabled && 'dz-plugin-control-input--disabled',
               'focus:outline-none',
               'pr-8',
             ]"
-            :type="payload.inputType"
+            :type="computedInputType"
             :disabled="payload.disabled"
             :readonly="payload.readonly"
             :value="value"
@@ -74,6 +81,21 @@ const computedCacheText = computed(() => {
           />
 
           <v s="w-fit h-fit" class="absolute top-0 right-0">
+            <dz-popover v-if="payload.inputType === 'password' && value" :payload="{ tooltip: '切换明文' }">
+              <dz-btn
+                v-if="!payload.isPasswordText"
+                :class="['scale-90 opacity-0', 'group-hover/panel:opacity-50']"
+                icon="mdi:eye-off-outline"
+                @click="methods.setPayload({ isPasswordText: true })"
+              />
+              <dz-btn
+                v-else
+                :class="['scale-90 opacity-0', 'group-hover/panel:opacity-50']"
+                icon="mdi:eye-outline"
+                @click="methods.setPayload({ isPasswordText: false })"
+              />
+            </dz-popover>
+
             <dz-popover
               v-if="
                 (!value && payload.defaultValue) || (value && payload.defaultValue && value !== payload.defaultValue)
@@ -85,7 +107,7 @@ const computedCacheText = computed(() => {
             <dz-popover v-else :payload="{ tooltip: '清空 字段内容' }">
               <dz-btn
                 v-if="value"
-                :class="['group-hover/panel:opacity-50 scale-90 opacity-0']"
+                :class="['scale-90 opacity-0', 'group-hover/panel:opacity-50']"
                 icon="mdi:close-circle-outline"
                 @click="methods.reset"
               />
