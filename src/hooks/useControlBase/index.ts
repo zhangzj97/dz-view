@@ -1,10 +1,10 @@
 import type { DzViewStateProps } from '@/types/dz-view';
 
-const { debug } = useLog({ module: 'usePluginControl', color: 'blue' });
+const { debug } = useLog({ module: 'useControlBase', color: 'blue' });
 
 const { is } = useValidate();
 
-export const usePluginControl = <T>({
+export const useControlBase = <T>({
   props,
   emits,
   validate = null as any,
@@ -115,6 +115,12 @@ export const usePluginControl = <T>({
     validate({ error: false });
   };
 
+  const undo = () => {
+    console.log(props.payload.defaultValue);
+    emits('update:value', props.payload.defaultValue);
+    validate({ error: false });
+  };
+
   const refreshService = () => {};
 
   /**
@@ -131,6 +137,7 @@ export const usePluginControl = <T>({
     focus,
     blur,
     reset,
+    undo,
     refreshService,
   };
 
@@ -146,6 +153,9 @@ export const usePluginControl = <T>({
     el,
     methods,
     events,
+
+    getValue,
+    setValue,
 
     /**Todo
      * @deprecated
