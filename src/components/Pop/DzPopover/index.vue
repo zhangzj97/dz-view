@@ -8,18 +8,29 @@ import '@arco-design/web-vue/es/popconfirm/style/css';
 
 import type { DzPopEmits, DzPopProps, DzPopPayload } from '@/types/dz-view';
 const props = withDefaults(defineProps<DzPopProps>(), { payload: () => ({}) });
-const emits = defineEmits<DzPopEmits>();
+const emits = defineEmits<
+  DzPopEmits & {
+    visibleChange: [code?: string, visible?: boolean];
+  }
+>();
 
 const getPayload = (): DzPopPayload => props.payload;
 const setPayload = (payload: DzPopPayload) => emits('update:payload', props.code, payload);
 defineExpose({ setPayload, getPayload });
 
-const updateVisible = (visible: boolean) => emits('update:payload', props.code, { visible });
+const updateVisible = (visible: boolean) => {
+  emits('visibleChange', props.code, visible);
+  emits('update:payload', props.code, { visible });
+};
 </script>
 
 <template>
+  <v v-if="payload.embed" s="w-fit h-fit" :col="payload.embed === 'col'" :row="payload.embed === 'row'">
+    <slot></slot>
+    <slot name="body"></slot>
+  </v>
   <Tooltip
-    v-if="payload.tooltip"
+    v-else-if="payload.tooltip"
     class="dz-tooltip v202301"
     :content="payload.tooltip"
     :popupVisible="payload.visible"
@@ -49,7 +60,6 @@ const updateVisible = (visible: boolean) => emits('update:payload', props.code, 
     @update:popupVisible="updateVisible"
   >
     <slot></slot>
-
     <template #content>
       <slot name="body"></slot>
     </template>
