@@ -11,7 +11,6 @@ import '@arco-design/web-vue/dist/arco.css';
 defineOptions({ name: 'ControlDatetime' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
-
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
@@ -83,7 +82,7 @@ const ok = () => {
     />
 
     <template #body>
-      <v s="w-grow h-fit" w="py-2 gap-1" col>
+      <v s="w-grow h-fit" col>
         <v s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
           <dz-popover :payload="{ tooltip: '自定义选择时间后 需要点击确认' }">
