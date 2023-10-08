@@ -1,20 +1,18 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<
-    { state: any; option: any } & {
+    { value: any; code: string; payload?: any } & {
       validate?: any;
       reset?: any;
-      getState?: any;
-      setState?: any;
+
       setValue?: any;
       getValue?: any;
-
-      getOption?: any;
-      setOption?: any;
+      getPayload?: any;
+      setPayload?: any;
       refreshService?: any;
     }
   >(),
-  {}
+  { payload: () => ({}) }
 );
 
 const { bind } = useStateStore();
@@ -25,22 +23,22 @@ const { bind } = useStateStore();
     <v s="w-grow h-fit">
       <slot></slot>
 
-      <template v-if="state.test">
+      <template v-if="payload.test">
         <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.required && 'bg-blue-400']"
-          @click="setState({ required: !state.required })">
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[payload.required && 'bg-blue-400']"
+          @click="setPayload({ required: !payload.required })">
           <v-text text="必" />
         </v>
 
         <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.disabled && 'bg-blue-400']"
-          @click="setState({ disabled: !state.disabled })">
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[payload.disabled && 'bg-blue-400']"
+          @click="setPayload({ disabled: !payload.disabled })">
           <v-text text="禁" />
         </v>
 
         <!-- prettier-ignore -->
-        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[state.error && 'bg-blue-400']"
-          @click="setState({ error: !state.error })">
+        <v s="w-fit h-8" w="px-1" v="mouse-gray" :class="[payload.error && 'bg-blue-400']"
+          @click="setPayload({ error: !payload.error })">
           <v-text text="错" />
         </v>
 
@@ -70,12 +68,12 @@ const { bind } = useStateStore();
       </template>
     </v>
 
-    <v s="w-grow h-fit" w="min-h-[4px]" :trans="state.error ? 'max-h-[20px]' : 'max-h-[4px]'">
+    <v s="w-grow h-fit" w="min-h-[4px]" :trans="payload.error ? 'max-h-[20px]' : 'max-h-[4px]'">
       <v-text
-        v-if="state?.error"
+        v-if="payload.error"
         t="text-red-500 text-sm"
         class="animate-[shakeX_1s_ease-in-out_1]"
-        :text="option?.validator?.result?.message"
+        :text="payload.validator?.result?.message"
       />
     </v>
   </v>
