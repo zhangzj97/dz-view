@@ -25,7 +25,7 @@ const updateVisible = (visible: boolean) => {
 </script>
 
 <template>
-  <v v-if="payload.embed" s="w-fit h-fit" :col="payload.embed === 'col'" :row="payload.embed === 'row'">
+  <v v-if="payload.embed" s="w-grow h-fit" :col="payload.embed === 'col'" :row="payload.embed === 'row'">
     <slot></slot>
     <slot name="body"></slot>
   </v>
