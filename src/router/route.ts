@@ -1,6 +1,4 @@
-import { beforeEnter } from './guards';
-
-export { beforeEach } from './guards';
+export { beforeEnter, beforeEach } from './guards';
 
 export const routes = [
   {
