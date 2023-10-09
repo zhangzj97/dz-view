@@ -1,5 +1,5 @@
 <script setup lang="ts" name="App">
-import LayoutPage from '@/layouts/AdminDz/index.vue';
+import { LayoutProvider } from '../__components';
 import { config } from '@/config';
 
 // 处理layout相关
@@ -12,7 +12,7 @@ provide('config', config);
 </script>
 
 <template>
-  <LayoutPage>
+  <LayoutProvider>
     <RouterView v-slot="{ Component, route }">
       <Transition name="fade-slide" mode="out-in" appear>
         <KeepAlive :include="[]">
@@ -20,5 +20,5 @@ provide('config', config);
         </KeepAlive>
       </Transition>
     </RouterView>
-  </LayoutPage>
+  </LayoutProvider>
 </template>
