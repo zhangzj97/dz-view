@@ -175,6 +175,19 @@ export const useControlBase = <T>({
         await emits('update:value', []);
       }
     },
+    diff: () => {
+      const { defaultValue } = props.payload;
+      const value = props.value;
+
+      if (is.Undefined(defaultValue)) return false;
+      if (!is.Array(defaultValue)) return false;
+      if (!is.Array(value)) return false;
+
+      const v1 = defaultValue.sort().join(',');
+      const v2 = value.sort().join(',');
+
+      return v1 !== v2;
+    },
   };
 
   return {
