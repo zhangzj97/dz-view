@@ -3,8 +3,6 @@ import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
-const { methods } = usePluginControl({ props, emits });
-
 const { bind } = useBind();
 </script>
 
