@@ -1,4 +1,3 @@
-import { Service } from '@/config/service';
 import { Control } from '@/config/control';
 
 export const useBind = () => {
@@ -54,7 +53,6 @@ export const useBind = () => {
   return {
     bind,
 
-    Service,
     Control,
   };
 };
