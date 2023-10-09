@@ -5,68 +5,68 @@ import { AgGridVue } from 'ag-grid-vue3'; // the AG Grid Vue Component
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 
-defineProps<{
-  // Size Css
-  // size: string;
-  s?: string;
-  // Wrap Css
-  w?: string;
-  // Text Css
-  t?: string;
-
-  // Text
-  text?: string;
-
-  // Flex Css
-  // row?: boolean;
-  // col?: boolean;
-
-  // Hover Css
-  hover?: string;
-
-  // Position Css
-  // absolute?: boolean;
-
-  // Cursor Css
-  pointer?: boolean;
-
-  // Test and demo
-  desc?: string;
+import type { DzTableComponentProps, DzViewStateProps } from '@/types/dz-view';
+interface Props {
+  state?: DzViewStateProps;
+  schema: any;
+  data: any;
+}
+const props = withDefaults(defineProps<DzTableComponentProps & Props>(), {});
+const emits = defineEmits<{
+  'ready:table': [value: any];
 }>();
 
-const schema = reactive({
-  list: [{ field: 'make' }, { field: 'model' }, { field: 'price' }],
+const schemaListRead = computed(() => {
+  return props.schema?.list || [];
+});
 
-  config: {
+const dataListRead = computed(() => {
+  return props.data?.list || [];
+});
+
+const schemaConfigRead = computed(() => {
+  const defaultColDef = {
+    initialWidth: 100,
     sortable: true,
+    resizable: true,
     filter: true,
-    flex: 1,
-  },
+  };
+  return (
+    props.schema?.cofig && {
+      ...props.schema?.cofig,
+      ...defaultColDef,
+    }
+  );
 });
 
-const data = reactive({
-  list: [
-    { make: 1, model: 2, price: '123' },
-    { make: 11, model: 2, price: '123' },
-    { make: 12, model: 2, price: '123' },
-    { make: 13, model: 2, price: '123' },
-  ],
-});
+const columnTypes = {
+  editable: { editable: true },
+};
 
-// DefaultColDef sets props common to all Columns
-const schemaConfigState = reactive();
+const onGridReady = ({ api }: any) => {
+  console.log(props.schema);
+  props.schema.api = api;
+  console.log(api.selectAll);
+};
+
+const onRowSelected = event => {
+  console.log('row ' + event.node.data.id + ' selected = ' + event.node.isSelected());
+};
 </script>
 
 <template>
   <v :s="s" :w="w">
     <AgGridVue
-      class="ag-theme-alpine"
+      class="dz-tabl ag-theme-alpine"
       :class="['w-full h-full']"
-      :columnDefs="schema.list"
-      :rowData="data.list"
-      :defaultColDef="schema.config"
+      :columnDefs="schemaListRead"
+      :rowData="dataListRead"
+      :defaultColDef="schemaConfigRead"
       rowSelection="multiple"
       animateRows="true"
+      :columnTypes="columnTypes"
+      @gridReady="onGridReady"
+      @row-selected="onRowSelected"
     >
     </AgGridVue>
   </v>
