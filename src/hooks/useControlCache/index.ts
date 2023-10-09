@@ -1,3 +1,5 @@
+const { is } = useValidate();
+
 export const useControlCache = ({ props, emits }) => {
   const cacheStore = reactive<any>({
     value: [],
@@ -5,8 +7,15 @@ export const useControlCache = ({ props, emits }) => {
   });
 
   const handleCache = {
-    set: (value: unknown[]) => {
-      cacheStore.value = value;
+    set: (value: any) => {
+      if (is.Array(value)) {
+        cacheStore.value = value;
+      } else if (!is.Undefined(value)) {
+        cacheStore.value = [value];
+      } else {
+        cacheStore.value = [];
+      }
+
       cacheStore.version.value = Date.now();
     },
   };
