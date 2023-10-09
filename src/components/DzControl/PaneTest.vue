@@ -45,6 +45,7 @@ const { bind } = useBind();
 
         <v s="w-72 h-fit"> | => {{ value }}</v>
         <v s="w-72 h-fit"> | => {{ String(value) }}</v>
+        <v s="w-72 h-fit"> | => {{ payload.defaultValue }}</v>
         <v s="w-72 h-fit"> | => {{ String(payload.defaultValue) }}</v>
 
         <v s="w-fit h-fit" row>
