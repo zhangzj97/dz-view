@@ -26,8 +26,6 @@ Object.entries(files2).forEach(([key, value]) => {
   });
 });
 
-console.log({ files1, files2 });
-
 export const routes = [
   {
     name: 'Root',
@@ -49,4 +47,3 @@ export const routes = [
 
   ...Object.values(routeMap1),
 ];
-console.log([...Object.values(routeMap1)]);
