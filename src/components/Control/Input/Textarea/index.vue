@@ -69,7 +69,7 @@ const computedCacheValueFirst = computed(() => cache.value?.[0]);
           ></textarea>
 
           <v s="w-fit h-fit" class="absolute top-0 right-2">
-            <dz-popover v-if="handleValue.diff()" :payload="{ tooltip: '撤销 字段修改' }">
+            <dz-popover v-if="handleValue.diff(payload.defaultValue)" :payload="{ tooltip: '撤销 字段修改' }">
               <dz-btn :class="['scale-90 opacity-50']" icon="mdi:undo-variant" @click="methods.undo" />
             </dz-popover>
             <dz-popover v-else :payload="{ tooltip: '清空 字段内容' }">
