@@ -37,20 +37,23 @@ watch(
 );
 
 const computedTriggerText = computed(() => {
-  return props.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
+  return props.value.map((item: any) => item && dayjs(Number(item)).format(props.payload.format)).join(' - ');
 });
 
 const computedCacheText = computed(() => {
-  return cache.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
+  return cache.value.map((item: any) => item && dayjs(Number(item)).format(props.payload.format)).join(' - ');
 });
 
-const computedCacheValueFirst = computed(() => Number(cache.value[0]));
+const computedCacheValueFirst = computed(() => cache.value[0] && Number(cache.value[0]));
 
 const computedServiceList = computed(() => {
   const func = ({ id, title, data }: any) => ({ id, label: title, value: data.value });
   return service.list.map(func);
 });
 
+const datePickerEventsChange = (_dateStr: string, date: Date) => {
+  handleValue.set(String(date.valueOf()));
+};
 const datePickerEventsOk = (_dateStr: string, date: Date) => {
   handleValue.set(String(date.valueOf()));
 };
@@ -80,11 +83,10 @@ const ok = () => {
 
     <template #body>
       <v s="w-grow h-fit" col>
-        <v s="w-grow h-fit">
+        <v v-if="!payload.hiddenTime" s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
           <dz-popover :payload="{ tooltip: '自定义选择时间后 需要点击确认' }">
-            <dz-btn v-if="!value && !cache.value[0]" icon="mdi:information-outline" />
-            <dz-btn v-else-if="value !== cache.value[0]" title="确认" :payload="{ type: 'primary' }" @click="ok" />
+            <dz-btn v-if="handleValue.diff(cache.value)" title="确认" :payload="{ type: 'primary' }" @click="ok" />
             <dz-btn v-else icon="mdi:check" />
           </dz-popover>
         </v>
@@ -98,9 +100,10 @@ const ok = () => {
           shortcutsPosition="right"
           :shortcuts="computedServiceList"
           :modelValue="computedCacheValueFirst"
+          :pickerValue="computedCacheValueFirst"
           @update:pickerValue="datePickerEvents.updatePickerValue"
           @update:modelValue="datePickerEvents.updateModelValue"
-          @change="datePickerEvents.change"
+          @change="datePickerEventsChange"
           @select="datePickerEventsSelectWithCache"
           @popupVisibleChange="datePickerEvents.popupVisibleChange"
           @ok="datePickerEventsOk"

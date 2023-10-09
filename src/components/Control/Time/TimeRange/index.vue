@@ -37,11 +37,11 @@ watch(
 );
 
 const computedTriggerText = computed(() => {
-  return props.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
+  return props.value.map((item: any) => item && dayjs(Number(item)).format(props.payload.format)).join(' - ');
 });
 
 const computedCacheText = computed(() => {
-  return cache.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
+  return cache.value.map((item: any) => item && dayjs(Number(item)).format(props.payload.format)).join(' - ');
 });
 
 const computedCacheValue = computed(() => cache.value.map((item: any) => item && Number(item)));
@@ -51,8 +51,19 @@ const computedServiceList = computed(() => {
   return service.list.map(func);
 });
 
+const rangePickerEventsChange = (_dateStr: any | any[], date: any | any[]): void => {
+  const v = date
+    // TODO 可能有问题
+    .sort((a: any, b: any) => a - b)
+    .map((item: any) => String(item.valueOf()));
+  handleValue.set(v);
+};
+
 const rangePickerEventsSelectWithCache = (_dateStr: any[], date: any[]): void => {
-  const v = date.sort((a, b) => a - b).map(item => String(item.valueOf()));
+  const v = date
+    // TODO 可能有问题
+    .sort((a: any, b: any) => a - b)
+    .map(item => String(item.valueOf()));
   handleCache.set(v);
 };
 const rangePickerEventsSelectShortcut = (shortcut: any) => {
@@ -82,11 +93,10 @@ const ok = () => {
 
     <template #body>
       <v s="w-grow h-fit" col>
-        <v s="w-grow h-fit">
+        <v v-if="!payload.hiddenTime" s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
           <dz-popover :payload="{ tooltip: '自定义选择时间后 需要点击确认' }">
-            <dz-btn v-if="!value && !cache.value[0]" icon="mdi:information-outline" />
-            <dz-btn v-else-if="value !== cache.value[0]" title="确认" :payload="{ type: 'primary' }" @click="ok" />
+            <dz-btn v-if="handleValue.diff(cache.value)" title="确认" :payload="{ type: 'primary' }" @click="ok" />
             <dz-btn v-else icon="mdi:check" />
           </dz-popover>
         </v>
@@ -99,10 +109,10 @@ const ok = () => {
           :hide-trigger="true"
           shortcutsPosition="right"
           :shortcuts="computedServiceList"
-          :modelValue="computedCacheValue"
+          :modelValue="computedCacheValue /** bug: pickerValue */"
           @update:pickerValue="rangePickerEvents.updatePickerValue"
           @update:modelValue="rangePickerEvents.updateModelValue"
-          @change="rangePickerEvents.change"
+          @change="rangePickerEventsChange"
           @select="rangePickerEventsSelectWithCache"
           @popupVisibleChange="rangePickerEvents.popupVisibleChange"
           @ok="rangePickerEvents.ok"
