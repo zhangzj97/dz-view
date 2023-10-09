@@ -1,17 +1,11 @@
-import Hidden from '@/components/Control/Input/Hidden/index.vue';
-import Text from '@/components/Control/Input/Text/index.vue';
 import Textarea from '@/components/Control/Input/Textarea/index.vue';
 import String from '@/components/Control/Input/String/index.vue';
 import Number from '@/components/Control/Input/Number/index.vue';
-import Password from '@/components/Control/Input/Password/index.vue';
 
 import Time from '@/components/Control/Time/Time/index.vue';
 import TimeRange from '@/components/Control/Time/TimeRange/index.vue';
 
 import Picker from '@/components/Control/Picker/Picker/index.vue';
-import PickerList from '@/components/Control/Picker/PickerList/index.vue';
-import PickerPop from '@/components/Control/Picker/PopPicker/index.vue';
-import PickerListPop from '@/components/Control/Picker/PopPickerList/index.vue';
 
 // import SqlField from '@/components/Control/SqlField/index.vue';
 import Json from '@/components/Control/Other/Json/index.vue';
@@ -24,22 +18,21 @@ const build =
 
 export const Control = {
   Base: {
-    Hidden: build(Hidden),
-    Text: build(Text),
-    Textarea: build(Textarea),
-    String: build(String),
-    Number: build(Number),
-    Password: build(Password),
+    Text: build(Textarea, { embed: 'col', readonly: true }),
+    Textarea: build(Textarea, { embed: 'col' }),
+    String: build(String, { embed: 'col' }),
+    Number: build(Number, { embed: 'col' }),
+    Password: build(String, { embed: 'col', inputType: 'password' }),
 
-    Time: build(Time, { embed: 'col' }),
-    TimePop: build(Time, { embed: false }),
-    TimeRange: build(TimeRange, { embed: 'col' }),
-    TimeRangePop: build(TimeRange, { embed: false }),
+    Time: build(Time, { embed: false }),
+    TimeRange: build(TimeRange, { embed: false }),
+    Date: build(Time, { embed: false, hiddenTime: true }),
+    DateRange: build(TimeRange, { embed: false, hiddenTime: true }),
 
-    Picker: build(Picker),
-    PickerPop: build(PickerPop),
-    PickerList: build(PickerList),
-    PickerListPop: build(PickerListPop),
+    Picker: build(Picker, { embed: false }),
+    PickerPanel: build(Picker, { embed: 'col' }),
+    PickerList: build(Picker, { embed: false, multiple: true }),
+    PickerListPanel: build(Picker, { embed: 'col', multiple: true }),
   },
 
   Json: {
