@@ -23,7 +23,7 @@ export const useControlBase = <T>({
   const onInput = async el => {
     emits('beforeInput');
     debug('onInput');
-    await emits('update:value', el.target.value);
+    await handleValue.set(el.target.value);
     validate({ error: false });
     emits('afterInput');
   };
@@ -46,7 +46,10 @@ export const useControlBase = <T>({
     };
 
   if (getValue == null) getValue = (): unknown => props.value;
-  if (setValue == null) setValue = (value: unknown) => emits('update:value', value);
+  if (setValue == null)
+    setValue = (value: unknown) => {
+      emits('update:value', value);
+    };
 
   if (getPayload === null) getPayload = (): T => props.payload;
   if (setPayload === null) setPayload = (payload: any) => emits('update:payload', payload);
@@ -110,14 +113,18 @@ export const useControlBase = <T>({
 
   const focus = () => el?.value?.focus();
   const blur = () => el?.value?.blur();
-  const reset = () => {
-    emits('update:value', null);
+  const clearNull = async () => {
+    await handleValue.set(null);
     validate({ error: false });
   };
 
-  const undo = () => {
-    console.log(props.payload.defaultValue);
-    emits('update:value', props.payload.defaultValue);
+  const clearArray = async () => {
+    await handleValue.set([]);
+    validate({ error: false });
+  };
+
+  const undo = async () => {
+    await handleValue.set(props.payload.defaultValue);
     validate({ error: false });
   };
 
@@ -136,7 +143,12 @@ export const useControlBase = <T>({
     validate,
     focus,
     blur,
-    reset,
+    /**
+     * @deprecated
+     */
+    reset: clearNull,
+    clearNull,
+    clearArray,
     undo,
     refreshService,
   };
@@ -146,6 +158,23 @@ export const useControlBase = <T>({
     onInput,
     onFocus,
     onBlur,
+
+    updateValue: onUpdateValue,
+    input: onInput,
+    focus: onFocus,
+    blur: onBlur,
+  };
+
+  const handleValue = {
+    set: async (value: unknown) => {
+      if (is.Array(value)) {
+        await emits('update:value', value);
+      } else if (!is.Undefined(value)) {
+        await emits('update:value', [value]);
+      } else {
+        await emits('update:value', []);
+      }
+    },
   };
 
   return {
@@ -156,6 +185,8 @@ export const useControlBase = <T>({
 
     getValue,
     setValue,
+
+    handleValue,
 
     /**Todo
      * @deprecated
