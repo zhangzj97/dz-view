@@ -96,6 +96,7 @@ const computedCacheValue = computed(() => cache.value);
 <template>
   <dz-popover :payload="{ embed: payload.embed, position: 'bl' }">
     <TriggerText
+      v-if="!payload.embed"
       :payload="payload"
       :text="computedTriggerText"
       :value="value"
@@ -106,12 +107,12 @@ const computedCacheValue = computed(() => cache.value);
 
     <template #body>
       <v s="w-grow h-fit" col>
-        <v s="w-grow h-fit">
+        <v v-if="false" s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
         </v>
 
         <v s="w-grow h-fit" class="group/panel">
-          <v s="w-fit h-fit" w="pl-2 pr-8 gap-1 overflow-auto" col>
+          <v s="w-fit h-fit" w="pl-2 pr-8 gap-1 overflow-auto" :class="['max-w-[400px]']" col>
             <v v-if="payload.multiple" s="w-grow h-fit" w="gap-1" grid>
               <template v-for="(item, index) of service.list" :key="index">
                 <dz-btn
