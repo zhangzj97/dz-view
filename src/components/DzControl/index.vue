@@ -45,18 +45,18 @@ defineExpose({
   validate,
 });
 
-const isDiff = computed(() => {
-  const defaultValue = props.payload.defaultValue;
+const computedIsDiff = computed(() => {
+  const { defaultValue } = props.payload;
+  const value = props.value;
+
   if (is.Undefined(defaultValue)) return false;
+  if (!is.Array(defaultValue)) return false;
+  if (!is.Array(value)) return false;
 
-  if (is.Array(defaultValue) && !is.Array(props.value)) return false;
-  if (is.Array(defaultValue) && is.Array(props.value)) {
-    const t1 = [...defaultValue].sort().toString();
-    const t2 = [...props.value].sort().toString();
-    return t1 !== t2;
-  }
+  const v1 = [...defaultValue].sort().join(',');
+  const v2 = [...value].sort().join(',');
 
-  return defaultValue !== props.value;
+  return v1 !== v2;
 });
 </script>
 
@@ -83,7 +83,7 @@ const isDiff = computed(() => {
     <!-- control -->
     <v s="w-grow h-fit" row>
       <v s="w-3 h-grow">
-        <v s="w-2 h-grow" class="" :class="[isDiff ? 'scale-100' : 'scale-0', 'bg-blue-300', 'rounded-lg']" trans></v>
+        <v s="w-2 h-grow" :class="[computedIsDiff ? 'scale-100' : 'scale-0', 'bg-blue-300', 'rounded-lg']" trans></v>
       </v>
 
       <v s="w-fit h-grow" col>
@@ -100,6 +100,7 @@ const isDiff = computed(() => {
       />
       <v s="w-fit h-grow" col>
         <PaneTest
+          v-if="payload.test"
           :code="code"
           :value="value"
           :payload="payload"
