@@ -13,7 +13,7 @@ export const useBind = () => {
     if (payload) {
       if (!store.payload[code]) {
         const { component, ...payload2 } = payload;
-        store.value[code] = null;
+        store.value[code] = [];
         store.payload[code] = payload2;
         store.component[code] = component;
       }
@@ -35,6 +35,7 @@ export const useBind = () => {
   };
 
   const setValue = (code, value) => {
+    console.log('useBind', value);
     store.value[code] = value;
   };
 

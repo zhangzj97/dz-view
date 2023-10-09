@@ -17,7 +17,11 @@ const emits = defineEmits<{
 
 const { is } = useValidate();
 
-const onUpdateValue = (value: any) => emits('update:value', props.code, value);
+const onUpdateValue = async (value: any) => {
+  console.log(' DzControl', value);
+  await emits('update:value', props.code, value);
+  console.log(' DzControl', props.value);
+};
 const onUpdatePayload = (payload: any) => emits('update:payload', props.code, payload);
 
 const el = ref<HTMLLIElement | null | any>(null);
@@ -39,6 +43,20 @@ defineExpose({
   getPayload,
   setPayload,
   validate,
+});
+
+const isDiff = computed(() => {
+  const defaultValue = props.payload.defaultValue;
+  if (is.Undefined(defaultValue)) return false;
+
+  if (is.Array(defaultValue) && !is.Array(props.value)) return false;
+  if (is.Array(defaultValue) && is.Array(props.value)) {
+    const t1 = [...defaultValue].sort().toString();
+    const t2 = [...props.value].sort().toString();
+    return t1 !== t2;
+  }
+
+  return defaultValue !== props.value;
 });
 </script>
 
@@ -65,16 +83,7 @@ defineExpose({
     <!-- control -->
     <v s="w-grow h-fit" row>
       <v s="w-3 h-grow">
-        <v
-          s="w-2 h-grow"
-          class=""
-          :class="[
-            !is.Undefined(payload.defaultValue) && value !== payload.defaultValue ? 'scale-100' : 'scale-0',
-            'bg-blue-300',
-            'rounded-lg',
-          ]"
-          trans
-        ></v>
+        <v s="w-2 h-grow" class="" :class="[isDiff ? 'scale-100' : 'scale-0', 'bg-blue-300', 'rounded-lg']" trans></v>
       </v>
 
       <v s="w-fit h-grow" col>
