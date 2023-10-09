@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
 const { is } = useValidate();
-const { el, methods, events } = useControlBase({ props, emits });
+const { el, methods, events, handleValue } = useControlBase({ props, emits });
 const { cache, handleCache } = useControlCache({ props, emits });
 const { service, handleService } = useControlService({ props, emits });
 
@@ -23,8 +23,8 @@ defineExpose({ ...methods });
 
 const { rangePickerEvents } = useRangePicker({ props });
 
-onMounted(() => {
-  emits('update:value', props.payload.defaultValue ?? null);
+onBeforeMount(async () => {
+  await handleValue.set(props.payload.defaultValue || null);
   handleService.set([
     { id: 1, title: 'next 7 days', data: { value: () => [dayjs(), dayjs().add(1, 'week')] } },
     { id: 2, title: 'next 30 days', data: { value: () => [dayjs(), dayjs().add(1, 'month')] } },
@@ -33,27 +33,27 @@ onMounted(() => {
 
 watch(
   () => props.value,
-  v => handleCache.set([v])
+  v => handleCache.set(v)
 );
 
 const computedTriggerText = computed(() => {
-  const v = props.value;
-  return v ? v.map((item: any) => dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ') : '';
+  return props.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
 });
 
 const computedCacheText = computed(() => {
-  const v = cache.value[0];
-  return v ? v.map((item: any) => dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ') : '';
+  return cache.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
 });
+
+const computedCacheValue = computed(() => cache.value.map((item: any) => item && Number(item)));
 
 const computedServiceList = computed(() => {
   const func = ({ id, title, data }: any) => ({ id, label: title, value: data.value });
   return service.list.map(func);
 });
 
-const rangePickerEventsSelect = (_dateStr: any[], date: any[]): void => {
+const rangePickerEventsSelectWithCache = (_dateStr: any[], date: any[]): void => {
   const v = date.sort((a, b) => a - b).map(item => String(item.valueOf()));
-  handleCache.set([v]);
+  handleCache.set(v);
 };
 const rangePickerEventsSelectShortcut = (shortcut: any) => {
   const v = shortcut
@@ -61,12 +61,11 @@ const rangePickerEventsSelectShortcut = (shortcut: any) => {
     // TODO 可能有问题
     .sort((a: any, b: any) => a - b)
     .map((item: any) => String(item.valueOf()));
-  emits('update:value', v);
+  handleValue.set(v);
 };
 
 const ok = () => {
-  const v = cache.value[0];
-  emits('update:value', v);
+  handleValue.set(cache.value);
 };
 </script>
 
@@ -77,7 +76,7 @@ const ok = () => {
       :text="computedTriggerText"
       :value="value"
       :warning="null"
-      @reset="methods.reset"
+      @reset="methods.clearArray"
       @undo="methods.undo"
     />
 
@@ -100,11 +99,11 @@ const ok = () => {
           :hide-trigger="true"
           shortcutsPosition="right"
           :shortcuts="computedServiceList"
-          :modelValue="value && [Number(value[0]), Number(value[1])]"
+          :modelValue="computedCacheValue"
           @update:pickerValue="rangePickerEvents.updatePickerValue"
           @update:modelValue="rangePickerEvents.updateModelValue"
           @change="rangePickerEvents.change"
-          @select="rangePickerEventsSelect"
+          @select="rangePickerEventsSelectWithCache"
           @popupVisibleChange="rangePickerEvents.popupVisibleChange"
           @ok="rangePickerEvents.ok"
           @clear="rangePickerEvents.clear"

@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
 const { is } = useValidate();
-const { el, methods, events } = useControlBase({ props, emits });
+const { el, methods, events, handleValue } = useControlBase({ props, emits });
 const { cache, handleCache } = useControlCache({ props, emits });
 const { service, handleService } = useControlService({ props, emits });
 
@@ -23,8 +23,8 @@ defineExpose({ ...methods });
 
 const { datePickerEvents } = useDatePicker({ props });
 
-onMounted(() => {
-  emits('update:value', props.payload.defaultValue ?? null);
+onBeforeMount(async () => {
+  await handleValue.set(props.payload.defaultValue || null);
   handleService.set([
     { id: 1, title: '现在', data: { value: () => dayjs() } },
     { id: 2, title: 'a week later', data: { value: () => dayjs().add(1, 'week') } },
@@ -33,18 +33,18 @@ onMounted(() => {
 
 watch(
   () => props.value,
-  v => handleCache.set([v])
+  v => handleCache.set(v)
 );
 
 const computedTriggerText = computed(() => {
-  const v = props.value;
-  return v ? dayjs(Number(v)).format('YYYY-MM-DD HH:mm:ss') : '';
+  return props.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
 });
 
 const computedCacheText = computed(() => {
-  const v = cache.value[0];
-  return v ? dayjs(Number(v)).format('YYYY-MM-DD HH:mm:ss') : '';
+  return cache.value.map((item: any) => item && dayjs(Number(item)).format('YYYY-MM-DD HH:mm:ss')).join(' - ');
 });
+
+const computedCacheValueFirst = computed(() => Number(cache.value[0]));
 
 const computedServiceList = computed(() => {
   const func = ({ id, title, data }: any) => ({ id, label: title, value: data.value });
@@ -52,21 +52,18 @@ const computedServiceList = computed(() => {
 });
 
 const datePickerEventsOk = (_dateStr: string, date: Date) => {
-  const v = String(date.valueOf());
-  emits('update:value', v);
+  handleValue.set(String(date.valueOf()));
 };
-const datePickerEventsSelect = (_dateStr: string, date: Date) => {
-  const v = String(date.valueOf());
-  handleCache.set([v]);
+const datePickerEventsSelectWithCache = (_dateStr: string, date: Date) => {
+  handleCache.set(String(date.valueOf()));
 };
+
 const datePickerEventsSelectShortcut = (shortcut: any) => {
-  const v = String(dayjs(shortcut.value()).valueOf());
-  emits('update:value', v);
+  handleValue.set(String(dayjs(shortcut.value()).valueOf()));
 };
 
 const ok = () => {
-  const v = cache.value[0];
-  emits('update:value', v);
+  handleValue.set(cache.value);
 };
 </script>
 
@@ -77,7 +74,7 @@ const ok = () => {
       :text="computedTriggerText"
       :value="value"
       :warning="null"
-      @reset="methods.reset"
+      @reset="methods.clearNull"
       @undo="methods.undo"
     />
 
@@ -100,11 +97,11 @@ const ok = () => {
           :hide-trigger="true"
           shortcutsPosition="right"
           :shortcuts="computedServiceList"
-          :modelValue="Number(value)"
+          :modelValue="computedCacheValueFirst"
           @update:pickerValue="datePickerEvents.updatePickerValue"
           @update:modelValue="datePickerEvents.updateModelValue"
           @change="datePickerEvents.change"
-          @select="datePickerEventsSelect"
+          @select="datePickerEventsSelectWithCache"
           @popupVisibleChange="datePickerEvents.popupVisibleChange"
           @ok="datePickerEventsOk"
           @clear="datePickerEvents.clear"
