@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PaneError from './PaneError.vue';
-import PaneTest from './PaneTest.vue';
+import PaneError from './components/PaneError.vue';
+import PaneTest from './components/PaneTest.vue';
 
 import type { DzControlComponentProps } from '@/types/dz-view';
 interface Props {

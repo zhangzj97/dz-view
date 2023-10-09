@@ -1,14 +1,14 @@
-import Textarea from '@/components/Control/Input/Textarea/index.vue';
-import String from '@/components/Control/Input/String/index.vue';
-import Number from '@/components/Control/Input/Number/index.vue';
+import Textarea from '@/components/Control/Textarea/index.vue';
+import String from '@/components/Control/String/index.vue';
+import Number from '@/components/Control/Number/index.vue';
 
-import Time from '@/components/Control/Time/Time/index.vue';
-import TimeRange from '@/components/Control/Time/TimeRange/index.vue';
+import Time from '@/components/Control/Time/index.vue';
+import TimeRange from '@/components/Control/TimeRange/index.vue';
 
-import Picker from '@/components/Control/Picker/Picker/index.vue';
+import Picker from '@/components/Control/Picker/index.vue';
 
 // import SqlField from '@/components/Control/SqlField/index.vue';
-import Json from '@/components/Control/Other/Json/index.vue';
+// import Json from '@/components/Control/Other/Json/index.vue';
 
 const build =
   (component, payload1 = {}) =>
@@ -35,9 +35,9 @@ export const Control = {
     PickerListPanel: build(Picker, { embed: 'col', multiple: true }),
   },
 
-  Json: {
-    Json: build(Json),
-  },
+  // Json: {
+  //   Json: build(Json),
+  // },
 
   // Sql: {
   //   SqlField: build(SqlField),
