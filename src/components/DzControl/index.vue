@@ -113,5 +113,5 @@ const computedIsDiff = computed(() => {
 </template>
 
 <style>
-@import url(./index.scss);
+@import url(./assets/index.scss);
 </style>
