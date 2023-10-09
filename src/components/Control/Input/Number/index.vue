@@ -25,7 +25,7 @@ watch(
 
 const computedTriggerText = computed(() => props.value.join(','));
 const computedCacheText = computed(() => cache.value.join(','));
-const computedCacheFirst = computed(() => {
+const computedCacheValueFirst = computed(() => {
   const v = cache.value[0];
   return !is.Null(v) ? Number(cache.value?.[0]) : v;
 });
@@ -46,6 +46,7 @@ const step02 = async () => {
 <template>
   <dz-popover :payload="{ embed: payload.embed, position: 'bl' }">
     <TriggerText
+      v-if="false"
       :payload="payload"
       :text="computedTriggerText"
       :value="value"
@@ -56,7 +57,7 @@ const step02 = async () => {
 
     <template #body>
       <v s="w-grow h-fit" col>
-        <v s="w-grow h-fit">
+        <v v-if="false" s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
         </v>
 
@@ -76,7 +77,7 @@ const step02 = async () => {
             type="number"
             :disabled="payload.disabled"
             :readonly="payload.readonly"
-            :value="computedCacheFirst"
+            :value="computedCacheValueFirst"
             :placeholder="payload.placeholder"
             @input="events.input"
             @focus="events.focus"
@@ -86,17 +87,11 @@ const step02 = async () => {
           <dz-btn class="scale-90" icon="mdi:plus-circle-outline" @click="step02" />
 
           <v s="w-fit h-fit" class="absolute top-0 right-0">
-            <dz-popover
-              v-if="
-                (!value && payload.defaultValue) || (value && payload.defaultValue && value !== payload.defaultValue)
-              "
-              :payload="{ tooltip: '撤销 字段修改' }"
-            >
+            <dz-popover v-if="handleValue.diff(payload.defaultValue)" :payload="{ tooltip: '撤销 字段修改' }">
               <dz-btn :class="['scale-90 opacity-50']" icon="mdi:undo-variant" @click="methods.undo" />
             </dz-popover>
             <dz-popover v-else :payload="{ tooltip: '清空 字段内容' }">
               <dz-btn
-                v-if="value"
                 :class="['scale-90 opacity-0', 'group-hover/panel:opacity-50']"
                 icon="mdi:close-circle-outline"
                 @click="methods.clearNull"

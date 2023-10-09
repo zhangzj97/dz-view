@@ -1,6 +1,6 @@
 import { Control } from '@/config/control';
 
-export const useBind = () => {
+export const useBind = ({ payload }: any = { payload: {} }) => {
   const store = reactive({
     value: {},
     payload: {},
@@ -8,12 +8,12 @@ export const useBind = () => {
     el: {},
   });
 
-  const bind = (code: string, payload: any = null) => {
-    if (payload) {
+  const bind = (code: string, payload2: any = null) => {
+    if (payload2) {
       if (!store.payload[code]) {
-        const { component, ...payload2 } = payload;
+        const { component, ...payload3 } = payload2;
         store.value[code] = [];
-        store.payload[code] = payload2;
+        store.payload[code] = Object.assign(payload3, payload);
         store.component[code] = component;
       }
 

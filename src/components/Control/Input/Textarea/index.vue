@@ -25,12 +25,13 @@ watch(
 
 const computedTriggerText = computed(() => props.value.join(','));
 const computedCacheText = computed(() => cache.value.join(','));
-const computedCacheFirst = computed(() => cache.value?.[0]);
+const computedCacheValueFirst = computed(() => cache.value?.[0]);
 </script>
 
 <template>
   <dz-popover :payload="{ embed: payload.embed, position: 'bl' }">
     <TriggerText
+      v-if="false"
       :payload="payload"
       :text="computedTriggerText"
       :value="value"
@@ -41,7 +42,7 @@ const computedCacheFirst = computed(() => cache.value?.[0]);
 
     <template #body>
       <v s="w-grow h-fit" col>
-        <v s="w-grow h-fit">
+        <v v-if="false" s="w-grow h-fit">
           <CacheText :payload="payload" :value="computedCacheText" />
         </v>
 
@@ -60,25 +61,19 @@ const computedCacheFirst = computed(() => cache.value?.[0]);
             type="text"
             :disabled="payload.disabled"
             :readonly="payload.readonly"
-            :value="computedCacheFirst"
+            :value="computedCacheValueFirst"
             :placeholder="payload.placeholder"
             @input="events.input"
             @focus="events.focus"
             @blur="events.blur"
           ></textarea>
 
-          <v s="w-fit h-fit" class="absolute top-0 right-0">
-            <dz-popover
-              v-if="
-                (!value && payload.defaultValue) || (value && payload.defaultValue && value !== payload.defaultValue)
-              "
-              :payload="{ tooltip: '撤销 字段修改' }"
-            >
+          <v s="w-fit h-fit" class="absolute top-0 right-2">
+            <dz-popover v-if="handleValue.diff(payload.defaultValue)" :payload="{ tooltip: '撤销 字段修改' }">
               <dz-btn :class="['scale-90 opacity-50']" icon="mdi:undo-variant" @click="methods.undo" />
             </dz-popover>
             <dz-popover v-else :payload="{ tooltip: '清空 字段内容' }">
               <dz-btn
-                v-if="value"
                 :class="['scale-90 opacity-0', 'group-hover/panel:opacity-50']"
                 icon="mdi:close-circle-outline"
                 @click="methods.clearNull"

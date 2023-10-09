@@ -12,7 +12,7 @@ import Json from '@/components/Control/Other/Json/index.vue';
 
 const build =
   (component, payload1 = {}) =>
-  payload2 => {
+  (payload2 = {}) => {
     return { ...payload2, ...payload1, component: () => component };
   };
 
@@ -22,12 +22,12 @@ export const Control = {
     Textarea: build(Textarea, { embed: 'col' }),
     String: build(String, { embed: 'col' }),
     Number: build(Number, { embed: 'col' }),
-    Password: build(String, { embed: 'col', inputType: 'password' }),
+    Password: build(String, { embed: 'col', inputType: 'password', isPasswordText: 'true' }),
 
-    Time: build(Time, { embed: false }),
-    TimeRange: build(TimeRange, { embed: false }),
-    Date: build(Time, { embed: false, hiddenTime: true }),
-    DateRange: build(TimeRange, { embed: false, hiddenTime: true }),
+    Time: build(Time, { embed: false, format: 'YYYY-MM-DD HH:mm:ss' }),
+    TimeRange: build(TimeRange, { embed: false, format: 'YYYY-MM-DD HH:mm:ss' }),
+    Date: build(Time, { embed: false, hiddenTime: true, format: 'YYYY-MM-DD' }),
+    DateRange: build(TimeRange, { embed: false, hiddenTime: true, format: 'YYYY-MM-DD' }),
 
     Picker: build(Picker, { embed: false }),
     PickerPanel: build(Picker, { embed: 'col' }),
