@@ -175,16 +175,15 @@ export const useControlBase = <T>({
         await emits('update:value', []);
       }
     },
-    diff: () => {
-      const { defaultValue } = props.payload;
+    diff: (diffValue: any) => {
       const value = props.value;
 
-      if (is.Undefined(defaultValue)) return false;
-      if (!is.Array(defaultValue)) return false;
+      if (is.Undefined(diffValue)) return false;
+      if (!is.Array(diffValue)) return false;
       if (!is.Array(value)) return false;
 
-      const v1 = defaultValue.sort().join(',');
-      const v2 = value.sort().join(',');
+      const v1 = [...diffValue].sort().join(',');
+      const v2 = [...value].sort().join(',');
 
       return v1 !== v2;
     },
