@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TriggerText from '../../TriggerText.vue';
-import CacheText from '../../CacheText.vue';
-defineOptions({ name: 'ControlTextarea' });
+import TriggerText from '../__components/TriggerText.vue';
+import CacheText from '../__components/CacheText.vue';
+defineOptions({ name: 'ControlNumber' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
@@ -25,7 +25,22 @@ watch(
 
 const computedTriggerText = computed(() => props.value.join(','));
 const computedCacheText = computed(() => cache.value.join(','));
-const computedCacheValueFirst = computed(() => cache.value?.[0]);
+const computedCacheValueFirst = computed(() => {
+  const v = cache.value[0];
+  return !is.Null(v) ? Number(cache.value?.[0]) : v;
+});
+
+const step01 = async () => {
+  const v = props.value[0];
+  await handleValue.set(!is.Null(v) ? String(Number(v) - 1) : String(-1));
+  methods.validate({ error: true });
+};
+
+const step02 = async () => {
+  const v = props.value[0];
+  await handleValue.set(!is.Null(v) ? String(Number(v) + 1) : String(+1));
+  methods.validate({ error: true });
+};
 </script>
 
 <template>
@@ -47,18 +62,19 @@ const computedCacheValueFirst = computed(() => cache.value?.[0]);
         </v>
 
         <v s="w-grow h-fit" class="group/panel">
-          <textarea
+          <dz-btn class="scale-90" icon="mdi:minus-circle-outline" @click="step01" />
+
+          <input
             ref="el"
             :class="[
-              'transition-none',
-              'w-grow h-fit',
-              'dz-plugin-control-textarea',
-              payload.error && 'dz-plugin-control-textarea--error',
-              payload.disabled && 'dz-plugin-control-textarea--disabled',
+              'w-20 h-8',
+              'dz-plugin-control-input',
+              payload.error && 'dz-plugin-control-input--error',
+              payload.disabled && 'dz-plugin-control-input--disabled',
               'focus:outline-none',
-              'pr-8',
+              'pr-3',
             ]"
-            type="text"
+            type="number"
             :disabled="payload.disabled"
             :readonly="payload.readonly"
             :value="computedCacheValueFirst"
@@ -66,9 +82,11 @@ const computedCacheValueFirst = computed(() => cache.value?.[0]);
             @input="events.input"
             @focus="events.focus"
             @blur="events.blur"
-          ></textarea>
+          />
 
-          <v s="w-fit h-fit" class="absolute top-0 right-2">
+          <dz-btn class="scale-90" icon="mdi:plus-circle-outline" @click="step02" />
+
+          <v s="w-fit h-fit" class="absolute top-0 right-0">
             <dz-popover v-if="handleValue.diff(payload.defaultValue)" :payload="{ tooltip: '撤销 字段修改' }">
               <dz-btn :class="['scale-90 opacity-50']" icon="mdi:undo-variant" @click="methods.undo" />
             </dz-popover>

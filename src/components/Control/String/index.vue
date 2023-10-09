@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TriggerText from '../../TriggerText.vue';
-import CacheText from '../../CacheText.vue';
+import TriggerText from '../__components/TriggerText.vue';
+import CacheText from '../__components/CacheText.vue';
 defineOptions({ name: 'ControlString' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
