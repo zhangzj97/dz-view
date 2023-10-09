@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const { bind, getValue, setState, setValue, validate, getState, pluginDom, FormItem } = useForm({}, { pluginSet: 'PluginRaw', state: { test: false, required: false } }); // prettier-ignore
+const { bind, getValue, setState, setValue, validate, getState, pluginDom, FormItem } = useForm(
+  {},
+  { pluginSet: 'PluginRaw', state: { test: false, required: false } }
+);
 
 import api from './swagger.json';
 import { computed, reactive } from 'vue';

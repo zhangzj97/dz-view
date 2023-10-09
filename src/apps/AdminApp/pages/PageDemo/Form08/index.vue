@@ -6,10 +6,7 @@ const { bind0, setState0, getState0, store } = useStateStore();
 <template>
   <v s="w-grow h-grow" text="Demo0713">
     <!-- 所有带内部state, -->
-    <dz-modal
-      title="被注册成 P1"
-      v-bind="bind0('P1')(/** 显式修改初始状态  */ { fullscreen: false })"
-    />
+    <dz-modal title="被注册成 P1" v-bind="bind0('P1')(/** 显式修改初始状态  */ { fullscreen: false })" />
 
     <dz-drawer title="被注册成 P2" v-bind="bind0('P2')({})" />
 
@@ -17,10 +14,7 @@ const { bind0, setState0, getState0, store } = useStateStore();
       title="把 P1 变成 visible-true fullscreen-true"
       @click="setState0('P1')({ visible: true, fullscreen: true })"
     />
-    <dz-btn
-      title="切换 P1 visibl"
-      @click="setState0('P1')({ visible: !getState0('P1').visible })"
-    />
+    <dz-btn title="切换 P1 visibl" @click="setState0('P1')({ visible: !getState0('P1').visible })" />
 
     <!-- 照这个思路  -->
     <!-- 问题 1 , 是否该认为 page 信息 是 state, 是追加 还是 重新取个空间 -->
