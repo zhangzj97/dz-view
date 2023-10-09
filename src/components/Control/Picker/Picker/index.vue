@@ -1,31 +1,18 @@
 <script setup lang="ts">
+import TriggerText from '../../TriggerText.vue';
+import CacheText from '../../CacheText.vue';
 defineOptions({ name: 'ControlPicker' });
 
 import type { ControlProps, ControlEmits } from '@/types/dz-view';
 const props = withDefaults(defineProps<ControlProps<{}>>(), {});
 const emits = defineEmits<ControlEmits>();
 
-const { is, el, methods, events } = useControlBase({ props, emits });
+const { is } = useValidate();
+const { el, methods, events, handleValue } = useControlBase({ props, emits });
+const { cache, handleCache } = useControlCache({ props, emits });
+const { service, handleService } = useControlService({ props, emits });
 
-const getValue = (): string | string[] | null | any => props.value;
-const setValue = (value: unknown) => {
-  let newValue = null;
-  if (is.String(value) || is.Number(value)) {
-    newValue = String(value);
-  }
-  emits('update:value', newValue);
-};
-
-const { getService, setServiceData } = useControlService({ props, emits });
-
-const { getPicker, pick } = useControlPicker({ props, emits });
-
-defineExpose({ ...methods, getValue, setValue, getService, pick, getPicker });
-
-const reset = () => {
-  methods.reset();
-  pick.set([]);
-};
+defineExpose({ ...methods });
 
 const mock1 = () => {
   const length = Math.random() * 10;
@@ -39,58 +26,116 @@ const mock1 = () => {
   });
 };
 
-onMounted(() => {
-  setValue(null);
-  setServiceData([{ id: 1, title: 't1', data: {} }, ...mock1()]);
+onBeforeMount(async () => {
+  await handleValue.set(props.payload.defaultValue || []);
+  handleService.set([
+    { id: '1', title: 't1', data: {} },
+    { id: '2', title: 't2', data: {} },
+    { id: '3', title: 't3', data: {} },
+    ...mock1(),
+  ]);
 });
 
-const pickClick = (value: string) => {
-  pick.set([value]);
-  setValue(value);
+watch(
+  () => props.value,
+  v => handleCache.set(v)
+);
+
+const selectItem = (item: any, option: any = {}) => {
+  const funct = (
+    value: any,
+    list: any[],
+    option: { cancle?: boolean; multiple?: boolean; withoutCache?: boolean } = {}
+  ) => {
+    const { cancle, multiple } = option;
+    const isExist = list.includes(value);
+    const listWithoutValue = list.filter((item: string) => item !== value);
+    let result: any[] = [];
+
+    if (isExist && cancle) {
+      result = [...listWithoutValue];
+    } else {
+      result = [...listWithoutValue, value];
+    }
+
+    if (!multiple && isExist && cancle) {
+      result = [];
+    } else if (!multiple) {
+      result = [value];
+    }
+
+    return result;
+  };
+
+  const value = funct(item.id, cache.value || [], option);
+
+  handleValue.set(value);
 };
 
-const valueText = computed(() => {
-  const value = getPicker().value;
-  if (is.Empty(value)) return '';
-  return value
+const computedTriggerText = computed(() => {
+  return props.value
     .map((item: string) => {
-      const item2 = getService().map[item];
-      return item2 ? item2.title : `${value}(无匹配)`;
+      const item2 = service.map[item];
+      return item2 ? item2.title : `${item}(!无匹配)`;
     })
     .join(',');
 });
 
-const valueWithoutService = computed(() => {
-  return getPicker().value.find((item: string) => !getService().map[item]);
+const computedCacheText = computed(() => {
+  return cache.value
+    .map((item: string) => {
+      const item2 = service.map[item];
+      return item2 ? item2.title : `${item}(!无匹配)`;
+    })
+    .join(',');
 });
+
+const computedCacheValue = computed(() => cache.value);
 </script>
 
 <template>
-  <v s="w-grow h-fit" w="gap-1" col>
-    <v s="w-fit h-fit" w="pl-2 pr-8 gap-1 overflow-auto" col>
-      <v s="w-grow h-fit" w="gap-1" grid>
-        <template v-for="(item, index) of getService().list" :key="index">
-          <dz-btn
-            :title="item.title"
-            :payload="{ type: getPicker().value.includes(item.id) ? 'primary' : 'outline' }"
-            :icon="getPicker().value.includes(item.id) ? 'mdi:radiobox-marked' : 'mdi:radiobox-blank'"
-            @click="pickClick(item.id)"
-          />
-        </template>
+  <dz-popover :payload="{ embed: payload.embed, position: 'bl' }">
+    <TriggerText
+      :payload="payload"
+      :text="computedTriggerText"
+      :value="value"
+      :warning="null"
+      @reset="methods.clearArray"
+      @undo="methods.undo"
+    />
+
+    <template #body>
+      <v s="w-grow h-fit" col>
+        <v s="w-grow h-fit">
+          <CacheText :payload="payload" :value="computedCacheText" />
+        </v>
+
+        <v s="w-grow h-fit" class="group/panel">
+          <v s="w-fit h-fit" w="pl-2 pr-8 gap-1 overflow-auto" col>
+            <v v-if="payload.multiple" s="w-grow h-fit" w="gap-1" grid>
+              <template v-for="(item, index) of service.list" :key="index">
+                <dz-btn
+                  :title="item.title"
+                  :payload="{ size: 'small', type: computedCacheValue.includes(item.id) ? 'primary' : 'outline' }"
+                  :icon="computedCacheValue.includes(item.id) ? 'mdi:checkbox-marked' : 'mdi:checkbox-blank-outline'"
+                  @click="selectItem(item, { cancle: true, multiple: true })"
+                />
+              </template>
+            </v>
+
+            <v v-else s="w-grow h-fit" w="gap-1" grid>
+              <template v-for="(item, index) of service.list" :key="index">
+                <dz-btn
+                  :title="item.title"
+                  :payload="{ size: 'small', type: computedCacheValue.includes(item.id) ? 'primary' : 'outline' }"
+                  :icon="computedCacheValue.includes(item.id) ? 'mdi:radiobox-marked' : 'mdi:radiobox-blank'"
+                  @click="selectItem(item, { cancle: true, multiple: false })"
+                />
+              </template>
+            </v>
+          </v>
+        </v>
       </v>
-    </v>
-
-    <v s="w-fit h-fit" class="absolute top-0 right-2">
-      <v-space s="w-grow h-fit" />
-      <dz-popover v-if="valueWithoutService" :payload="{ tooltip: `[无匹配选项] value : ${valueWithoutService}` }">
-        <dz-btn :class="['text-red-500', 'opacity-50 scale-90']" icon="mdi:alert" />
-      </dz-popover>
-
-      <dz-btn
-        :class="[getValue() ? 'opacity-50 scale-90' : 'opacity-0 scale-0']"
-        icon="mdi:close-circle-outline"
-        @click="reset"
-      />
-    </v>
-  </v>
+    </template>
+  </dz-popover>
 </template>
