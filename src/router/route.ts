@@ -57,6 +57,9 @@ export const routes = [
     component: () => import('@/pages/Form/index.vue'),
     children: [
       { name: 'Form/Control', path: '/Form/Control', component: () => import('@/pages/Form/Control/index.vue') },
+      { name: 'Form/Time', path: '/Form/Time', component: () => import('@/pages/Form/Time/index.vue') },
+      { name: 'Form/String', path: '/Form/String', component: () => import('@/pages/Form/String/index.vue') },
+      { name: 'Form/Picker', path: '/Form/Picker', component: () => import('@/pages/Form/Picker/index.vue') },
     ],
   },
   {
