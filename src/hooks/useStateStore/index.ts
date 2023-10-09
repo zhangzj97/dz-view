@@ -1,6 +1,9 @@
 const { findDefined } = useValidate();
 import type { DzViewStateProps } from '@/types/dz-view';
 
+/**
+ * @deprecated
+ */
 export const useStateStore = () => {
   const store = reactive<{
     state: { [index: string]: DzViewStateProps };
@@ -41,14 +44,13 @@ export const useStateStore = () => {
       };
     };
 
-  const getState = (code: BindCode): DzViewStateProps =>
-    store.dom[code]?.getState();
+  const getState = (code: BindCode): DzViewStateProps => store.dom[code]?.getState();
   const setState =
     (code: BindCode) =>
     (state: DzViewStateProps = {}) =>
       store.dom[code]?.setState(state);
 
-  return { bind0: bind, setState0: setState, getState0: getState, store };
+  return { bind, setState, getState, store };
 };
 
 // prettier-ignore
