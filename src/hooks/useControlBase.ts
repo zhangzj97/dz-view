@@ -130,11 +130,6 @@ export const useControlBase = <T>({
 
   const refreshService = () => {};
 
-  /**
-   * @deprecated
-   */
-  const modelValue = computed(() => getValue());
-
   const methods = {
     getValue,
     setValue,
@@ -143,10 +138,6 @@ export const useControlBase = <T>({
     validate,
     focus,
     blur,
-    /**
-     * @deprecated
-     */
-    reset: clearNull,
     clearNull,
     clearArray,
     undo,
@@ -199,28 +190,5 @@ export const useControlBase = <T>({
     setValue,
 
     handleValue,
-
-    /**Todo
-     * @deprecated
-     */
-    modelValue,
-
-    /**Todo
-     * @deprecated
-     */
-    exposeMethod: methods,
-    /**Todo
-     * @deprecated
-     */
-    commonEvent: events,
-
-    /**Todo
-     * @deprecated
-     */
-    ExposeMethod: methods,
-    /**Todo
-     * @deprecated
-     */
-    CommonEvent: events,
   };
 };
