@@ -43,19 +43,27 @@ const { bind, Control } = useBind();
     </v>
     <v-space s="w-grow h-2" class="bg-red-500" />
 
+    <!-- <dz-btn
+      :title="'1'"
+      @click="
+        bind('Time').setValue(String(Date.now()));
+        bind('Time').setPayload({ defaultValue: String(Date.now()) });
+      "
+    />
+    <dz-btn :title="'2'" @click="bind('Time').setValue(String(Date.now()))" /> -->
     <v s="w-grow h-fit" grid w="px-4">
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker1', Control.Base.Picker({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker2', Control.Base.PickerList({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker3', Control.Base.PopPicker({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker4', Control.Base.PopPickerList({ test: true }))" />
+      <dz-control s="w-1/2 h-fit" v-bind="bind('TimeRange', Control.Base.TimeRange({ test: true }))" />
+      <dz-control s="w-1/2 h-fit" v-bind="bind('TimeRangePop', Control.Base.TimeRangePop({ test: true }))" />
+      <dz-control s="w-1/2 h-fit" v-bind="bind('Time', Control.Base.Time({ test: true }))" />
+      <dz-control s="w-1/2 h-fit" v-bind="bind('TimePop', Control.Base.TimePop({ test: true }))" />
     </v>
     <v-space s="w-grow h-2" class="bg-red-500" />
 
     <v s="w-grow h-fit" grid w="px-4">
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Date', Control.Base.Date({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Datetime', Control.Base.Datetime({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Week', Control.Base.Week({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Month', Control.Base.Month({ test: true }))" />
+      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker1', Control.Base.Picker({ test: true }))" />
+      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker2', Control.Base.PickerList({ test: true }))" />
+      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker3', Control.Base.PickerPop({ test: true }))" />
+      <dz-control s="w-1/4 h-fit" v-bind="bind('Picker4', Control.Base.PickerListPop({ test: true }))" />
     </v>
     <v-space s="w-grow h-2" class="bg-red-500" />
 
@@ -65,7 +73,6 @@ const { bind, Control } = useBind();
       <dz-control s="w-1/4 h-fit" v-bind="bind('Password', Control.Base.Password({ test: true }))" />
       <dz-control s="w-1/4 h-fit" v-bind="bind('Textarea', Control.Base.Textarea({ test: true }))" />
       <dz-control s="w-1/4 h-fit" v-bind="bind('Text', Control.Base.Text({ test: true }))" />
-      <dz-control s="w-1/4 h-fit" v-bind="bind('Hidden', Control.Base.Hidden({ test: true }))" />
     </v>
     <v-space s="w-grow h-2" class="bg-red-500" />
 

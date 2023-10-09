@@ -14,7 +14,7 @@ const a = ref();
       <dz-btn title="visible1" @click="() => bind('b1').setState({ visible: true })"></dz-btn>
       <dz-btn title="visible2" @click="() => bind('b1').setState({ visible: false })"></dz-btn>
 
-      <dz-drawer v-bind="bind('b1', true)" />
+      <dz-drawer v-bind="bind('b1', {})" />
     </v>
 
     <v s="w-grow h-grow" text="modal">
@@ -26,7 +26,7 @@ const a = ref();
       <dz-btn title="visible2" @click="() => bind('b2').setState({ visible: false })"></dz-btn>
       <dz-btn title="visible2" @click="a = true"></dz-btn>
 
-      <dz-modal v-bind="bind('b2', true)" />
+      <dz-modal v-bind="bind('b2', {})" />
     </v>
 
     <v s="w-grow h-grow" text="tooltip">
@@ -45,27 +45,27 @@ const a = ref();
       <dz-btn title="33-v1" @click="() => bind('b33').setState({ visible: true })"></dz-btn>
       <dz-btn title="33-v2" @click="() => bind('b33').setState({ visible: false })"></dz-btn>
 
-      <dz-popover v-bind="bind('b31', true)">
+      <dz-popover v-bind="bind('b31', {})">
         <v s="w-fit h-fit" v="mouse-gray">
           <v-icon v="8-75" icon="mdi:ab-testing" />
         </v>
         <template #body> 123</template>
       </dz-popover>
 
-      <dz-popover trigger="click" v-bind="bind('b32', true)">
+      <dz-popover trigger="click" v-bind="bind('b32', {})">
         <v s="w-fit h-fit" v="mouse-gray">
           <v-icon v="8-75" icon="mdi:ab-testing" />
         </v>
         <template #body> 123</template>
       </dz-popover>
 
-      <dz-popover tooltip="0000" v-bind="bind('b33', true)">
+      <dz-popover tooltip="0000" v-bind="bind('b33', {})">
         <v s="w-fit h-fit" v="mouse-gray">
           <v-icon v="8-75" icon="mdi:ab-testing" />
         </v>
       </dz-popover>
 
-      <dz-popover confirm="0000" v-bind="bind('b41', true)">
+      <dz-popover confirm="0000" v-bind="bind('b41', {})">
         <v s="w-fit h-fit" v="mouse-gray">
           <v-icon v="8-75" icon="mdi:ab-testing" />
         </v>
